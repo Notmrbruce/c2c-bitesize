@@ -1,182 +1,182 @@
 {
-    "id": "policies",
-    "title": "Policies",
-    "description": "Learn about important company policies, responsibilities and regulations",
-    "methods": ["flashcards", "quiz", "match"],
-    "content": {
-        "flashcards": [
-            {
-                "question": "What are your responsibilities in relation to drugs and alcohol policy?",
-                "answer": "Do not drink less than 12hrs before duty. Do not take drugs. Do not attempt to sign on for duty if under influence of drink or drugs. If caught drink driving tell depot manager immediately. Do not come to work with any alcohol or drugs with you. Report prescribed drugs to depot manager as soon as possible."
-            },
-            {
-                "question": "How much time is needed for alcohol to leave your system?",
-                "answer": "1hr per unit for men, 1.5hrs per unit for women, although everyone is different."
-            },
-            {
-                "question": "How many units are in different alcoholic drinks?",
-                "answer": "Spirits (shot) - 1 unit, Alcopop - 1.5 units, Normal larger - 2 units, Bitter - 2 units, Cider - 2 units, 175ml wine - 2 units, Strong larger - 3 units."
-            },
-            {
-                "question": "What are the limits on working hours?",
-                "answer": "No more than 12 hrs per shift. No more than 72 hrs in 7 consecutive days. Minimum 12 hrs rest between shifts (safety critical). Must not work more than 13 days in a row (must have 14th day off)."
-            },
-            {
-                "question": "What is personal sickness reporting procedure?",
-                "answer": "Must inform the depot supervisor at earliest opportunity if sick and not coming into work, do not wait until you are about to sign on for duty."
-            },
-            {
-                "question": "What are the reasons for having rules and regulations?",
-                "answer": "To ensure everybody is working to a safe standard and to minimise risk of accidents, derailments or injuries."
-            },
-            {
-                "question": "What is an error?",
-                "answer": "Error - genuine mistake did not mean for it to happen e.g. misread stopping pattern, speeding etc."
-            },
-            {
-                "question": "What is a violation?",
-                "answer": "Violation - where you know you have made a mistake and try to cover it up or you know the rules and deliberately break them."
-            },
-            {
-                "question": "What are your responsibilities in relation to mobile phone policy?",
-                "answer": "Ensure your phone is switched off in an active cab. If using mobile phone for you duty ensure that you are in a position of safety and do not become distracted by the call. Do not use your phone if it could distract others in whilst caring out their duties."
-            },
-            {
-                "question": "What are your responsibilities in relation to the use of personal electrical equipment?",
-                "answer": "No personal electrical equipment should be used in the cab while driving, includes radios mp3 players, earphones, headphones, computers, ipads, mobile phones. Managers can use Ipads to assess but ensure that you do not become distracted by them. Once trained on company Ipads then they can be used for your duties only while driving e.g. using T.A.S. ensure you do not become distracted."
-            },
-            {
-                "question": "What are the risks of using personal electrical equipment?",
-                "answer": "Risk of distraction - not looking what you are doing, walking into unsafe areas, tripping / falling over, if using headphones / earphones will not be able to hear any warnings shouted or calls on GSMR."
-            },
-            {
-                "question": "What are the requirements of the MFA policy?",
-                "answer": "If you are off 5 days (total) or 2 instances in a 13 week period. Or 10 days total or 5 instances in a 52 week period. Stage 1 - Informal chat with driver manager. Stage 2 - Formal chat with driver manager and union rep. Stage 3 - Formal chat with senior driver manager and union rep, (final warning). Stage 4 - Dismissal. Stage 5- Appeal."
-            },
-            {
-                "question": "Describe the care first policy?",
-                "answer": "Free phone number to offer counselling, information and advice on anything that is troubling you e.g. home life stress money issues bullying. Treated in confidence."
-            }
+  "id": "policies",
+  "title": "Policies",
+  "description": "Essential company policies, responsibility requirements, and regulations for safe operations",
+  "methods": ["flashcards", "quiz", "match"],
+  "content": {
+    "flashcards": [
+      {
+        "question": "What are your responsibilities in relation to drugs and alcohol policy?",
+        "answer": "Do not drink less than 12hrs before duty. Do not take drugs. Do not attempt to sign on for duty if under influence of drink or drugs. If caught drink driving tell depot manager immediately. Do not come to work with any alcohol or drugs with you. Report prescribed drugs to depot manager as soon as possible."
+      },
+      {
+        "question": "How long does it take for alcohol to leave your system?",
+        "answer": "Time for alcohol to leave system - 1hr per unit for men, 1.5hrs per unit for women although everyone is different."
+      },
+      {
+        "question": "How many units of alcohol are in different drinks?",
+        "answer": "Spirits (shot) - 1 unit, Alcopop - 1.5 units, Normal larger - 2 units, Bitter - 2 units, Cider - 2 units, 175ml wine - 2 units, Strong larger - 3 units."
+      },
+      {
+        "question": "What are the limits on working hours?",
+        "answer": "No more than 12 hrs per shift. No more than 72 hrs in 7 consecutive days. Minimum 12 hrs rest between shifts (safety critical). Must not work more than 13 days in a row (must have 14th day off)."
+      },
+      {
+        "question": "What is personal sickness reporting procedure?",
+        "answer": "Must inform the depot supervisor at earliest opportunity if sick and not coming into work, do not wait until you are about to sign on for duty."
+      },
+      {
+        "question": "What are the reasons for having rules and regulations?",
+        "answer": "To ensure everybody is working to a safe standard and to minimise risk of accidents, derailments or injuries."
+      },
+      {
+        "question": "What is an error?",
+        "answer": "Error - genuine mistake, did not mean for it to happen e.g. misread stopping pattern, speeding etc."
+      },
+      {
+        "question": "What is a violation?",
+        "answer": "Violation - where you know you have made a mistake and try to cover it up or you know the rules and deliberately break them."
+      },
+      {
+        "question": "What are your responsibilities in relation to mobile phone policy?",
+        "answer": "Ensure your phone is switched off in an active cab. If using mobile phone for your duty ensure that you are in a position of safety and do not become distracted by the call. Do not use your phone if it could distract others whilst carrying out their duties."
+      },
+      {
+        "question": "What are your responsibilities in relation to the use of personal electrical equipment?",
+        "answer": "No personal electrical equipment should be used in the cab while driving, includes radios mp3 players, earphones, headphones, computers, ipads, mobile phones. Managers can use Ipads to assess but ensure that you do not become distracted by them. Once trained on company Ipads then they can be used for your duties only while driving e.g. using T.A.S. ensure you do not become distracted."
+      },
+      {
+        "question": "What are the risks of using personal electrical equipment?",
+        "answer": "Risk of distraction - not looking what you are doing, walking into unsafe areas, tripping / falling over, if using headphones / earphones will not be able to hear any warnings shouted or calls on GSMR."
+      },
+      {
+        "question": "What are the requirements of the MFA policy?",
+        "answer": "If you are off 5 days (total) or 2 instances in a 13 week period. Or 10 days total or 5 instances in a 52 week period. Stage 1 - Informal chat with driver manager. Stage 2 - Formal chat with driver manager and union rep. Stage 3 - Formal chat with senior driver manager and union rep, (final warning). Stage 4 - Dismissal. Stage 5 - Appeal."
+      },
+      {
+        "question": "Describe the care first policy?",
+        "answer": "Free phone number to offer counselling, information and advice on anything that is troubling you e.g. home life stress, money issues, bullying. Treated in confidence."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "What are the reasons for having rules and regulations?",
+        "options": [
+          "To prevent employees from making their own decisions",
+          "To ensure everybody is working to a safe standard and to minimise risk of accidents, derailments or injuries",
+          "To give management control over employees",
+          "To create documentation for legal purposes"
         ],
-        "quiz": [
-            {
-                "question": "What are the reasons for having rules and regulations?",
-                "options": [
-                    "To prevent employees from making their own decisions",
-                    "To ensure everybody is working to a safe standard and to minimise risk of accidents, derailments or injuries",
-                    "To give management control over employees",
-                    "To create documentation for legal purposes"
-                ],
-                "correctAnswer": 1
-            },
-            {
-                "question": "What is an error?",
-                "options": [
-                    "A deliberate violation of the rules",
-                    "A genuine mistake that did not mean for it to happen",
-                    "A policy decision made by management",
-                    "A formal written warning"
-                ],
-                "correctAnswer": 1
-            },
-            {
-                "question": "What is a violation?",
-                "options": [
-                    "A genuine mistake",
-                    "An equipment failure",
-                    "Where you know you have made a mistake and try to cover it up or you know the rules and deliberately break them",
-                    "An incident report"
-                ],
-                "correctAnswer": 2
-            },
-            {
-                "question": "How many units of alcohol are in a pint of normal lager?",
-                "options": [
-                    "1 unit",
-                    "1.5 units",
-                    "2 units",
-                    "3 units"
-                ],
-                "correctAnswer": 2
-            },
-            {
-                "question": "What is the maximum number of consecutive days you can work?",
-                "options": [
-                    "7 days",
-                    "10 days",
-                    "13 days",
-                    "14 days"
-                ],
-                "correctAnswer": 2
-            },
-            {
-                "question": "What is the minimum rest period between shifts?",
-                "options": [
-                    "8 hours",
-                    "10 hours",
-                    "12 hours",
-                    "14 hours"
-                ],
-                "correctAnswer": 2
-            },
-            {
-                "question": "What is the maximum working hours in a single shift?",
-                "options": [
-                    "8 hours",
-                    "10 hours",
-                    "12 hours",
-                    "14 hours"
-                ],
-                "correctAnswer": 2
-            },
-            {
-                "question": "What is the maximum working hours in 7 consecutive days?",
-                "options": [
-                    "48 hours",
-                    "60 hours",
-                    "72 hours",
-                    "84 hours"
-                ],
-                "correctAnswer": 2
-            },
-            {
-                "question": "What stage of the MFA policy involves a formal chat with the senior driver manager?",
-                "options": [
-                    "Stage 1",
-                    "Stage 2",
-                    "Stage 3",
-                    "Stage 4"
-                ],
-                "correctAnswer": 2
-            },
-            {
-                "question": "What should you do if caught drink driving?",
-                "options": [
-                    "Do not tell anyone at work",
-                    "Tell your colleagues but not management",
-                    "Tell depot manager immediately",
-                    "Only tell if questioned about it"
-                ],
-                "correctAnswer": 2
-            }
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is an error?",
+        "options": [
+          "A deliberate violation of the rules",
+          "A genuine mistake that did not mean for it to happen",
+          "A policy decision made by management",
+          "A formal written warning"
         ],
-        "match": [
-            { "term": "Error", "definition": "Genuine mistake, did not mean for it to happen" },
-            { "term": "Violation", "definition": "Knowing you broke a rule or covering up a mistake" },
-            { "term": "MFA Policy", "definition": "Applies after 5 days total or 2 instances in 13 weeks" },
-            { "term": "Working Hours", "definition": "Maximum 12 hours per shift" },
-            { "term": "Care First", "definition": "Free counselling and advice service" },
-            { "term": "Mobile Phone", "definition": "Must be switched off in active cab" },
-            { "term": "Rest Period", "definition": "Minimum 12 hours between shifts" },
-            { "term": "Consecutive Working", "definition": "Maximum 13 days in a row" },
-            { "term": "Strong Lager", "definition": "3 units of alcohol" },
-            { "term": "Wine (175ml)", "definition": "2 units of alcohol" },
-            { "term": "MFA Stage 3", "definition": "Final warning with senior driver manager" },
-            { "term": "Alcohol Clearance (Men)", "definition": "1 hour per unit" },
-            { "term": "Alcohol Clearance (Women)", "definition": "1.5 hours per unit" },
-            { "term": "Weekly Hours Limit", "definition": "72 hours in 7 consecutive days" },
-            { "term": "Personal Sickness", "definition": "Inform depot supervisor at earliest opportunity" },
-            { "term": "Personal Electrical Equipment", "definition": "Not permitted in cab while driving" }
-        ]
-    }
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is a violation?",
+        "options": [
+          "A genuine mistake",
+          "An equipment failure",
+          "Where you know you have made a mistake and try to cover it up or you know the rules and deliberately break them",
+          "An incident report"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the minimum rest period between shifts for safety critical staff?",
+        "options": [
+          "8 hours",
+          "10 hours",
+          "12 hours",
+          "14 hours"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the maximum number of consecutive days you can work before requiring a day off?",
+        "options": [
+          "7 days",
+          "10 days",
+          "13 days",
+          "15 days"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "How many units of alcohol are in a standard pint of beer?",
+        "options": [
+          "1 unit",
+          "2 units",
+          "3 units",
+          "4 units"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What should you do if caught drink driving?",
+        "options": [
+          "Do not inform anyone at work",
+          "Inform your colleagues but not management",
+          "Tell depot manager immediately",
+          "Call in sick until your court date"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What action should you take with prescribed medications?",
+        "options": [
+          "Keep it private as it's personal medical information",
+          "Only inform management if the medication makes you drowsy",
+          "Report prescribed drugs to depot manager as soon as possible",
+          "Only take medications on your days off"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is the maximum hours you can work in 7 consecutive days?",
+        "options": [
+          "48 hours",
+          "60 hours",
+          "72 hours",
+          "84 hours"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "At what stage of the MFA policy would dismissal occur?",
+        "options": [
+          "Stage 2",
+          "Stage 3",
+          "Stage 4",
+          "Stage 5"
+        ],
+        "correctAnswer": 2
+      }
+    ],
+    "match": [
+      { "term": "Error", "definition": "Genuine mistake, did not mean for it to happen" },
+      { "term": "Violation", "definition": "Knowing you broke a rule or covering up a mistake" },
+      { "term": "MFA Policy", "definition": "Applies after 5 days total or 2 instances in 13 weeks" },
+      { "term": "Working Hours", "definition": "Maximum 12 hours per shift" },
+      { "term": "Rest Period", "definition": "Minimum 12 hours between shifts" },
+      { "term": "Care First", "definition": "Free counselling and advice service" },
+      { "term": "Mobile Phone", "definition": "Must be switched off in active cab" },
+      { "term": "Consecutive Working", "definition": "Maximum 13 days in a row" },
+      { "term": "Weekly Hours Limit", "definition": "72 hours in 7 consecutive days" },
+      { "term": "Strong Lager", "definition": "3 units of alcohol" },
+      { "term": "Wine (175ml)", "definition": "2 units of alcohol" },
+      { "term": "MFA Stage 3", "definition": "Final warning with senior driver manager" },
+      { "term": "Personal Sickness", "definition": "Inform depot supervisor at earliest opportunity" },
+      { "term": "Alcohol Clearance (Men)", "definition": "1 hour per unit" },
+      { "term": "Alcohol Clearance (Women)", "definition": "1.5 hours per unit" },
+      { "term": "Personal Electrical Equipment", "definition": "Not permitted in cab while driving" }
+    ]
+  }
 }

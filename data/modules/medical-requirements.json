@@ -1,0 +1,178 @@
+{
+  "id": "medical-requirements",
+  "title": "Medical Requirements",
+  "description": "Medical standards, requirements for glasses/medication, and drug screening procedures",
+  "methods": ["flashcards", "quiz", "match"],
+  "content": {
+    "flashcards": [
+      {
+        "question": "What are requirements for wearing glasses, contact lenses and sunglasses?",
+        "answer": "Must have a spare pair of glasses. Sunglasses must be railway approved."
+      },
+      {
+        "question": "What procedure should you follow when required to take prescribed or over the counter medicine?",
+        "answer": "Show medication advice card and tell them you work in a safety critical role, ask if there are any side effects which would affect your job or breach drugs and alcohol policy. As soon as you receive the drugs call depot manager and inform them of what you have been prescribed so they can check with BUPA if you are ok to work. Do not tell them as you sign on for duty, give as much notice as possible."
+      },
+      {
+        "question": "What is a medication advice card?",
+        "answer": "A card provided to safety critical workers that informs healthcare professionals about your safety critical role and requests consideration of side effects that might impact your duties."
+      },
+      {
+        "question": "Why would you be asked to undergo drug screening?",
+        "answer": "Random - percentage of staff need to be tested picked at random. For cause - after an incident to ensure free of drugs and alcohol. Behavioural - if smelling of alcohol or appearing drunk or under the influence of drugs."
+      },
+      {
+        "question": "What is 'random' drug screening?",
+        "answer": "A percentage of staff are selected at random for testing as part of the company's drugs and alcohol policy enforcement."
+      },
+      {
+        "question": "What is 'for cause' drug screening?",
+        "answer": "Testing conducted after an incident to ensure the individual was not under the influence of drugs or alcohol at the time."
+      },
+      {
+        "question": "What is 'behavioral' drug screening?",
+        "answer": "Testing conducted if an individual is smelling of alcohol or appearing drunk or under the influence of drugs based on their behavior or appearance."
+      },
+      {
+        "question": "How often would you be required to attend a medical for an EU license if under 55 years old?",
+        "answer": "Every 3 years."
+      },
+      {
+        "question": "How often would you be required to attend a medical for an EU license if over 55 years old?",
+        "answer": "Every year."
+      },
+      {
+        "question": "Why must you inform your depot manager about prescribed medication?",
+        "answer": "To ensure that any medication you're taking doesn't have side effects that could impact safety or breach the drugs and alcohol policy."
+      },
+      {
+        "question": "Who checks if you are safe to work while taking prescribed medication?",
+        "answer": "BUPA checks if you are safe to work with the prescribed medication after you inform your depot manager."
+      },
+      {
+        "question": "What are railway approved sunglasses?",
+        "answer": "Sunglasses that meet railway safety standards regarding tint level and peripheral vision requirements."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "What must you have if you wear glasses?",
+        "options": [
+          "A certified prescription",
+          "A spare pair of glasses",
+          "A letter from your optician",
+          "Only safety glasses are permitted"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How often must staff under 55 attend a medical for an EU license?",
+        "options": [
+          "Every year",
+          "Every 2 years",
+          "Every 3 years",
+          "Every 5 years"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "How often must staff over 55 attend a medical for an EU license?",
+        "options": [
+          "Every year",
+          "Every 2 years",
+          "Every 3 years",
+          "Every 5 years"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What procedure should you follow when prescribed medication?",
+        "options": [
+          "Take the medication as directed without informing management",
+          "Only inform management if the medication makes you drowsy",
+          "Show medication advice card, tell them you work in a safety critical role, and call depot manager as soon as you receive the drugs",
+          "Wait until your next shift to inform your supervisor"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Who checks if you are safe to work with prescribed medication?",
+        "options": [
+          "Your doctor",
+          "The pharmacy",
+          "BUPA",
+          "Your direct supervisor"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What is 'for cause' drug screening?",
+        "options": [
+          "Testing conducted at random intervals",
+          "Testing conducted after an incident",
+          "Testing conducted prior to employment",
+          "Testing conducted as part of routine medical exams"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What type of drug screening is conducted if someone appears to be under the influence?",
+        "options": [
+          "Random screening",
+          "For cause screening",
+          "Behavioral screening",
+          "Mandatory screening"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What must be railway approved?",
+        "options": [
+          "All glasses",
+          "Contact lenses",
+          "Sunglasses",
+          "Reading glasses"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "When should you inform management about prescribed medication?",
+        "options": [
+          "Only if the medication causes drowsiness",
+          "As soon as you receive the drugs, before taking them",
+          "When you sign on for your next duty",
+          "Only if the medication might affect your performance"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Why is it important to show your medication advice card when getting prescription medication?",
+        "options": [
+          "To get a discount on medication",
+          "To ensure the healthcare professional knows you work in a safety critical role",
+          "To have a record of all medications taken",
+          "To comply with company policy regarding medical records"
+        ],
+        "correctAnswer": 1
+      }
+    ],
+    "match": [
+      { "term": "Glasses", "definition": "Must have a spare pair" },
+      { "term": "Sunglasses", "definition": "Must be railway approved" },
+      { "term": "Medication Advice Card", "definition": "Show when getting prescription" },
+      { "term": "Random Drug Screening", "definition": "Percentage of staff tested at random" },
+      { "term": "For Cause Drug Screening", "definition": "Testing after an incident" },
+      { "term": "Behavioral Drug Screening", "definition": "Testing based on suspected influence" },
+      { "term": "Medical (under 55)", "definition": "Every 3 years" },
+      { "term": "Medical (over 55)", "definition": "Every year" },
+      { "term": "BUPA", "definition": "Checks if safe to work with medication" },
+      { "term": "Prescribed Drugs", "definition": "Inform depot manager immediately" },
+      { "term": "OTC Medication", "definition": "Same reporting procedure as prescription" },
+      { "term": "Side Effects", "definition": "Must be checked for impact on duties" },
+      { "term": "EU License", "definition": "Requires age-dependent medical frequency" },
+      { "term": "Safety Critical Role", "definition": "Must disclose when getting medication" },
+      { "term": "Depot Manager", "definition": "Must be informed about prescribed drugs" },
+      { "term": "Medical Notice", "definition": "Give as much advance warning as possible" }
+    ]
+  }
+}

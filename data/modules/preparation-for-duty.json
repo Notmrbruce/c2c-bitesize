@@ -1,0 +1,194 @@
+{
+  "id": "preparation-for-duty",
+  "title": "Preparation for Duty",
+  "description": "Requirements for attending duty including documents, equipment, fitness standards, and roster management",
+  "methods": ["flashcards", "quiz", "match"],
+  "content": {
+    "flashcards": [
+      {
+        "question": "What are the requirements for attending duty at the correct time?",
+        "answer": "You must attend duty at the scheduled time as per your roster."
+      },
+      {
+        "question": "What correct uniform should be worn?",
+        "answer": "You must wear the correct company uniform when reporting for duty."
+      },
+      {
+        "question": "What correct documents should you have in possession?",
+        "answer": "Relevant W.O.N, P.O.N, S.T.N, W.T.T, Section appendix, Schedule book, altered workings, Drivers licence. Drivers report form, RT3185 Signalling / AWS TPWS irregularity, RT3177 modified working, DOO defect form, 357 Aide memoir."
+      },
+      {
+        "question": "What do the document abbreviations stand for?",
+        "answer": "W.O.N - Weekly Operating Notice, P.O.N - Periodical Operating Notice, S.T.N - Special Traffic Notice, W.T.T - Working Time Table."
+      },
+      {
+        "question": "What correct PPE should you have for duty?",
+        "answer": "Clean high vis, Safety footwear, Full uniform, Hand lamp, Watch, PTS card / licence, Carriage key 'T' key, BR21 key, Master key, Sunglasses, Spare pair of glasses (if wear glasses) Drivers bag."
+      },
+      {
+        "question": "What does PPE stand for?",
+        "answer": "Personal Protective Equipment."
+      },
+      {
+        "question": "What are the roster notice case and abbreviations in diagrams?",
+        "answer": "Contains daily sheets which must be checked prior to leaving duty. MOB - Mobilise unit (put the key in) IMM - Immobilise unit (take the key out), DISP - Dispose unit (aux off) DP - Detach portion (uncouple), AP - Attach portion (couple up) P.N.B - Physical needs break, REL - Relieve driver (take over their train), RELD - Relieved by driver (driver takes over your train) PASS - Passenger on that train, TAXI - Pre booked taxi from - to destination, PU - Prepare unit (prep train for service)."
+      },
+      {
+        "question": "What actions should you take if unable to attend duty at correct time?",
+        "answer": "Contact depot manager as soon as you can to allow them to try to arrange for cover."
+      },
+      {
+        "question": "What are the fitness for duty requirements?",
+        "answer": "Must not be under influence of drugs or alcohol, had sufficient rest before duty, not breaking hidden."
+      },
+      {
+        "question": "What are the lifestyle factors which could affect your performance at work?",
+        "answer": "Not enough sleep, Money problems, Alcohol problems, Depression, Family problems, Death of family / friend."
+      },
+      {
+        "question": "How would you replace uniform?",
+        "answer": "Uniform order forms at depot fill out and give to depot manager. Contact driver manager or depot manager if equipment is lost or defective as soon as possible. Sign for new uniform and equipment."
+      },
+      {
+        "question": "What is the purpose of the driver's report form?",
+        "answer": "To report any incidents, defects, or irregularities encountered during your duty."
+      },
+      {
+        "question": "What do you need to do if you lose your PTS card/license?",
+        "answer": "Report it to your SPM and request a temporary paper copy of your license as soon as possible."
+      },
+      {
+        "question": "What is the procedure if your safety footwear becomes damaged?",
+        "answer": "Contact driver manager or depot manager as soon as possible. You must not report for duty without the appropriate safety footwear."
+      },
+      {
+        "question": "What does MOB stand for in the roster abbreviations?",
+        "answer": "Mobilise unit (put the key in)."
+      },
+      {
+        "question": "What does IMM stand for in the roster abbreviations?",
+        "answer": "Immobilise unit (take the key out)."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "What should you do if you cannot attend duty at the correct time?",
+        "options": [
+          "Wait until your next shift to inform management",
+          "Ask a colleague to cover your shift",
+          "Contact depot manager as soon as you can",
+          "Send an email to HR department"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What are the fitness for duty requirements?",
+        "options": [
+          "Must not be under influence of drugs or alcohol, had sufficient rest, not breaking hidden",
+          "Having at least 4 hours sleep before duty",
+          "Passing an annual fitness test",
+          "Completing all mandatory training courses"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What does PNB stand for in the roster abbreviations?",
+        "options": [
+          "Passenger Notice Board",
+          "Physical Needs Break",
+          "Pass Not Booked",
+          "Pre-Notification Briefing"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What does MOB stand for in the roster abbreviations?",
+        "options": [
+          "Mobile On Board",
+          "Move Out Briskly",
+          "Mobilise unit (put the key in)",
+          "Maintenance Operations Brief"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What does W.O.N stand for?",
+        "options": [
+          "Work Order Number",
+          "Weekly Operating Notice",
+          "Written Operations Note",
+          "Worker's Official Notification"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What does S.T.N stand for?",
+        "options": [
+          "Special Track Notice",
+          "Safety Training Notice",
+          "Special Traffic Notice",
+          "Staff Training Network"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What does W.T.T stand for?",
+        "options": [
+          "Weekly Train Tracker",
+          "Working Time Table",
+          "Work Task Tracking",
+          "Written Train Timetable"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What does PPE stand for?",
+        "options": [
+          "Personal Protective Equipment",
+          "Professional Performance Evaluation",
+          "Personal Position Equipment",
+          "Passenger Protection Equipment"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What does RELD stand for in the roster abbreviations?",
+        "options": [
+          "Reliable Driver",
+          "Reloaded Driver",
+          "Related Driver",
+          "Relieved by driver"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "How would you replace lost or defective equipment?",
+        "options": [
+          "Purchase your own replacement",
+          "Borrow from a colleague until next payday",
+          "Contact driver manager or depot manager as soon as possible",
+          "Write a formal request to the operations director"
+        ],
+        "correctAnswer": 2
+      }
+    ],
+    "match": [
+      { "term": "MOB", "definition": "Mobilise unit (put the key in)" },
+      { "term": "IMM", "definition": "Immobilise unit (take the key out)" },
+      { "term": "DISP", "definition": "Dispose unit (aux off)" },
+      { "term": "DP", "definition": "Detach portion (uncouple)" },
+      { "term": "AP", "definition": "Attach portion (couple up)" },
+      { "term": "P.N.B", "definition": "Physical needs break" },
+      { "term": "REL", "definition": "Relieve driver (take over their train)" },
+      { "term": "RELD", "definition": "Relieved by driver (driver takes over your train)" },
+      { "term": "PASS", "definition": "Passenger on that train" },
+      { "term": "TAXI", "definition": "Pre booked taxi from-to destination" },
+      { "term": "PU", "definition": "Prepare unit (prep train for service)" },
+      { "term": "W.O.N", "definition": "Weekly Operating Notice" },
+      { "term": "P.O.N", "definition": "Periodical Operating Notice" },
+      { "term": "S.T.N", "definition": "Special Traffic Notice" },
+      { "term": "W.T.T", "definition": "Working Time Table" },
+      { "term": "PPE", "definition": "Personal Protective Equipment" }
+    ]
+  }
+}
