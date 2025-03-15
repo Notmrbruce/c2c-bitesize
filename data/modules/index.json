@@ -1,32 +1,17 @@
 [
-    {
-        "id": "policies",
-        "title": "Policies",
-        "description": "Learn about important company policies, responsibilities and regulations"
-    },
-    {
-        "id": "medical-requirements",
-        "title": "Medical Requirements",
-        "description": "Understanding medical requirements, medication procedures, and screening protocols"
-    },
-    {
-        "id": "preparation-for-duty",
-        "title": "Preparation for Duty",
-        "description": "Procedures and requirements for preparing for duty including documents, equipment, uniform and fitness"
-    },
-    {
-        "id": "signing-on",
-        "title": "Signing On For Duty",
-        "description": "Procedures and requirements for signing on for duty including safety critical license, document checks, and readiness requirements"
-    },
-    {
-        "id": "leaving-duty",
-        "title": "Leaving Duty",
-        "description": "Procedures and requirements for ending your shift including reports submission and checking next duty"
-    },
-    {
-        "id": "safety-security",
-        "title": "Safety and Security",
-        "description": "Critical safety and security procedures including reporting accidents, dealing with incidents, and responding to suspicious activities"
-    }
+  {
+    "id": "policies",
+    "title": "Policies",
+    "description": "Essential company policies, responsibility requirements, and regulations for safe operations"
+  },
+  {
+    "id": "medical-requirements",
+    "title": "Medical Requirements",
+    "description": "Medical standards, requirements for glasses/medication, and drug screening procedures"
+  },
+  {
+    "id": "preparation-for-duty",
+    "title": "Preparation for Duty",
+    "description": "Requirements for attending duty including documents, equipment, fitness standards, and roster management"
+  }
 ]
