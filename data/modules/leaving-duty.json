@@ -1,0 +1,178 @@
+{
+  "id": "leaving-duty",
+  "title": "Leaving Duty",
+  "description": "Procedures for ending your shift including reports submission and checking next duty",
+  "methods": ["flashcards", "quiz", "match"],
+  "content": {
+    "flashcards": [
+      {
+        "question": "At the end of your duty, what reports are you required to complete and why?",
+        "answer": "If you have been involved in any incident that requires you to submit any kind of report form, it must be handed in by the end of your turn of duty so that details can be acted upon as soon as possible."
+      },
+      {
+        "question": "What are the different ways of submitting reports?",
+        "answer": "Handed to your SPM, emailed or faxed."
+      },
+      {
+        "question": "How do you find out what your next turn of duty is?",
+        "answer": "Before you leave duty you must ascertain your next turn of duty by either looking at the daily sheet for your next turn of duty or by contacting the SPM."
+      },
+      {
+        "question": "Why is it important to hand in report forms by the end of your turn of duty?",
+        "answer": "So that details can be acted upon as soon as possible."
+      },
+      {
+        "question": "What should you check on the daily sheet before leaving duty?",
+        "answer": "Check your next turn of duty, and any changes to your roster."
+      },
+      {
+        "question": "What types of reports might you need to submit at the end of duty?",
+        "answer": "Incident reports, defect reports, irregularity reports, or any other required operational reports."
+      },
+      {
+        "question": "What should you do if you're unsure about your next turn of duty?",
+        "answer": "Contact the SPM to confirm your next turn of duty before leaving."
+      },
+      {
+        "question": "Why is it important to check your next turn of duty before leaving?",
+        "answer": "To ensure you know when you are next required to report for duty and can plan accordingly."
+      },
+      {
+        "question": "Why should you check the daily sheet for your next duty rather than relying on memory?",
+        "answer": "Duties may change or be altered, so checking the current daily sheet ensures you have the most up-to-date information."
+      },
+      {
+        "question": "What is the role of the SPM regarding your next duty?",
+        "answer": "The SPM can provide information about your next turn of duty if you cannot access the daily sheet."
+      },
+      {
+        "question": "What happens if you fail to check your next duty and miss a shift?",
+        "answer": "This could lead to disciplinary action and operational disruption as no driver would be available for that service."
+      },
+      {
+        "question": "What is your responsibility regarding checking roster changes?",
+        "answer": "It is your responsibility to check for any changes to the roster that might affect your next duty before leaving your current shift."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "What must you do with any incident reports at the end of your duty?",
+        "options": [
+          "Keep them until your next shift",
+          "Hand them in by the end of your turn of duty",
+          "Submit them within 48 hours",
+          "File them with your personal records"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What are the different ways of submitting reports?",
+        "options": [
+          "Only by post",
+          "Only in person to your manager",
+          "Handed to your SPM, emailed or faxed",
+          "Through the company app only"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "How do you find out your next turn of duty?",
+        "options": [
+          "Wait for a text message from management",
+          "It's always the same pattern every week",
+          "Look at the daily sheet or contact the SPM",
+          "Check the company website"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Why should reports be handed in by the end of your duty?",
+        "options": [
+          "To avoid a penalty",
+          "So that details can be acted upon as soon as possible",
+          "Because it's a contractual requirement",
+          "To ensure you get paid for the shift"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What should you do if you cannot find your next duty on the daily sheet?",
+        "options": [
+          "Assume you have a day off",
+          "Ask a colleague to tell you",
+          "Contact the SPM",
+          "Come in at your usual time"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Who should you hand your report forms to at the end of duty?",
+        "options": [
+          "Human Resources",
+          "Your direct supervisor only",
+          "SPM (Station Platform Manager)",
+          "The driver taking over from you"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What information should you check on the daily sheet before leaving duty?",
+        "options": [
+          "Your pay details",
+          "Your performance review",
+          "Your next turn of duty and any changes to your roster",
+          "Your annual leave balance"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What can you do if you cannot access the daily sheet?",
+        "options": [
+          "Skip checking your next duty",
+          "Contact the SPM for the information",
+          "Wait until your next scheduled duty",
+          "Ask another driver what they know"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Why is it important to know your next turn of duty before leaving?",
+        "options": [
+          "It's a company rule with no practical purpose",
+          "To ensure you know when you are next required to report for duty",
+          "Only important for part-time staff",
+          "Only necessary during holiday periods"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What should you do if your roster has been changed but you weren't informed?",
+        "options": [
+          "Refuse to accept the change",
+          "Follow the original roster",
+          "Confirm the changes with SPM before leaving duty",
+          "Report management to the union"
+        ],
+        "correctAnswer": 2
+      }
+    ],
+    "match": [
+      { "term": "Report Forms", "definition": "Must be submitted by end of duty" },
+      { "term": "SPM", "definition": "Can receive report forms" },
+      { "term": "Daily Sheet", "definition": "Shows your next turn of duty" },
+      { "term": "End of Duty", "definition": "Time to submit any incident reports" },
+      { "term": "Next Turn", "definition": "Must be checked before leaving" },
+      { "term": "Email", "definition": "One way to submit reports" },
+      { "term": "Fax", "definition": "Alternative method for report submission" },
+      { "term": "Incident Report", "definition": "Must be acted upon quickly" },
+      { "term": "Roster Change", "definition": "Should be checked on daily sheet" },
+      { "term": "Duty Confirmation", "definition": "Important before leaving shift" },
+      { "term": "SPM Contact", "definition": "Alternative source for duty information" },
+      { "term": "Defect Reports", "definition": "Type of report that may need submission" },
+      { "term": "Irregularity Reports", "definition": "Should be submitted before leaving" },
+      { "term": "Report Timeliness", "definition": "Allows for prompt action on incidents" },
+      { "term": "Roster Alterations", "definition": "Changes that affect your next duty" },
+      { "term": "Daily Sheet Check", "definition": "Required before completing shift" }
+    ]
+  }
+}

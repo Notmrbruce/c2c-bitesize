@@ -1,0 +1,194 @@
+{
+  "id": "notices",
+  "title": "Notices",
+  "description": "Various notice cases, their contents, importance, and durations",
+  "methods": ["flashcards", "quiz", "match"],
+  "content": {
+    "flashcards": [
+      {
+        "question": "When signing on what notice cases must you check and why?",
+        "answer": "Roster notice case - to check you are on the right job and to see if your job has AW and your next shift. Late notice case - to check for any speed restrictions, ice mode, and safety of the line notices. Train crew notice case - to check for any traction notices or any notices moved from late notice case and any no safety of the line notices. Incident notice case - to check on any latest operational incidents. Low adhesion notice case to check colour and areas treated by RHTT."
+      },
+      {
+        "question": "What information would you find in the late notice case?",
+        "answer": "Emergency speed restrictions, ice mode activation any other safety of the line notices e.g. colour of low adhesion day, register."
+      },
+      {
+        "question": "How long will a notice be posted in late notice case?",
+        "answer": "Posted for 72hrs (ESR's can be re-issued or entered in WON then they become TSR's)."
+      },
+      {
+        "question": "What information would you find in the train crew notice case?",
+        "answer": "Notices moved from late notice case, Traction notices, any other non safety of the line notices, register."
+      },
+      {
+        "question": "How long will the notice be posted in the train crew notice case?",
+        "answer": "4 weeks."
+      },
+      {
+        "question": "What information would you find in the incident notice case?",
+        "answer": "Recent operational incidents, list of multi SPAD signals, register."
+      },
+      {
+        "question": "How long will a notice be posted in the incident notice case?",
+        "answer": "4 weeks, multi SPAD signal list stays in there permanently."
+      },
+      {
+        "question": "What information would you find in the health and safety notice case?",
+        "answer": "First aid arrangements, authorised walking routes, H&S policy statement, care first policy, phone numbers."
+      },
+      {
+        "question": "How long will a notice be posted in the health and safety notice case?",
+        "answer": "Stays in permanently or until updated."
+      },
+      {
+        "question": "What is the purpose of the register in notice cases?",
+        "answer": "The register records which notices have been posted and when they were added or removed from the notice case."
+      },
+      {
+        "question": "What does ESR stand for?",
+        "answer": "Emergency Speed Restriction - found in the late notice case."
+      },
+      {
+        "question": "What does TSR stand for?",
+        "answer": "Temporary Speed Restriction - once an ESR is entered in the WON it becomes a TSR."
+      },
+      {
+        "question": "What is a Multi SPAD signal?",
+        "answer": "A signal that has been passed at danger more than once and is listed permanently in the incident notice case."
+      },
+      {
+        "question": "What is the low adhesion notice case used for?",
+        "answer": "To check the current color status for low adhesion and areas treated by Rail Head Treatment Trains (RHTT)."
+      },
+      {
+        "question": "What does RHTT stand for in the low adhesion notice case?",
+        "answer": "Rail Head Treatment Train - used to treat areas of low adhesion on the track."
+      },
+      {
+        "question": "What does AW stand for in the roster notice case?",
+        "answer": "Altered Working - indicates that there are changes to your scheduled work."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "How long will a notice be posted in the late notice case?",
+        "options": [
+          "24 hours",
+          "48 hours",
+          "72 hours",
+          "1 week"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "How long will a notice be posted in the train crew notice case?",
+        "options": [
+          "1 week",
+          "2 weeks",
+          "3 weeks",
+          "4 weeks"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What information would you find in the late notice case?",
+        "options": [
+          "Traction notices",
+          "Emergency speed restrictions and safety of the line notices",
+          "First aid arrangements",
+          "Recent operational incidents"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What information would you find in the incident notice case?",
+        "options": [
+          "Emergency speed restrictions",
+          "Traction notices",
+          "Recent operational incidents and multi SPAD signals",
+          "First aid arrangements"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What happens to an ESR after it is entered in the WON?",
+        "options": [
+          "It remains an ESR",
+          "It becomes a TSR",
+          "It is removed immediately",
+          "It is moved to the train crew notice case"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How long does the multi SPAD signal list remain in the incident notice case?",
+        "options": [
+          "4 weeks",
+          "8 weeks",
+          "3 months",
+          "Permanently"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What is the purpose of checking the roster notice case?",
+        "options": [
+          "To check emergency speed restrictions",
+          "To check for operational incidents",
+          "To check you are on the right job, see if your job has altered workings, and check your next shift",
+          "To check first aid arrangements"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What should you check in the low adhesion notice case?",
+        "options": [
+          "First aid arrangements",
+          "Recent operational incidents",
+          "Traction notices",
+          "Color status and areas treated by RHTT"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "What does AW stand for in the roster notice case?",
+        "options": [
+          "All Week",
+          "Altered Working",
+          "Available Worker",
+          "Advance Warning"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How long is information kept in the health and safety notice case?",
+        "options": [
+          "72 hours",
+          "4 weeks",
+          "3 months",
+          "Permanently or until updated"
+        ],
+        "correctAnswer": 3
+      }
+    ],
+    "match": [
+      { "term": "Late Notice Case", "definition": "Contains emergency speed restrictions" },
+      { "term": "Train Crew Notice Case", "definition": "Contains notices for 4 weeks" },
+      { "term": "Incident Notice Case", "definition": "Contains recent operational incidents" },
+      { "term": "Health & Safety Notice Case", "definition": "Contains first aid arrangements" },
+      { "term": "Roster Notice Case", "definition": "Shows your job and next shift" },
+      { "term": "Low Adhesion Notice Case", "definition": "Shows color and areas treated by RHTT" },
+      { "term": "ESR", "definition": "Emergency Speed Restriction" },
+      { "term": "TSR", "definition": "Temporary Speed Restriction" },
+      { "term": "72 Hours", "definition": "Duration notices remain in late notice case" },
+      { "term": "4 Weeks", "definition": "Duration notices remain in train crew notice case" },
+      { "term": "Multi SPAD Signal", "definition": "Signal passed at danger multiple times" },
+      { "term": "Register", "definition": "Records notices posted in each case" },
+      { "term": "RHTT", "definition": "Rail Head Treatment Train" },
+      { "term": "AW", "definition": "Altered Working on roster notice" },
+      { "term": "Ice Mode", "definition": "Found in late notice case when activated" },
+      { "term": "Safety Of The Line", "definition": "Critical notices found in late notice case" }
+    ]
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "id": "publications",
+  "title": "Publications",
+  "description": "Essential operational publications, their contents, and when they should be consulted by staff",
+  "methods": ["flashcards", "quiz", "match"],
+  "content": {
+    "flashcards": [
+      {
+        "question": "How are you kept up-to-date with publication changes?",
+        "answer": "The PON updates the sectional appendix and any changes to the rule book. Also receive briefings from managers and STUD days."
+      },
+      {
+        "question": "How can you access information regarding the rule book and c2c appendices?",
+        "answer": "Rule books are kept in driver managers offices. Rule books and appendices can be found on the c2c intranet, RSSB website."
+      },
+      {
+        "question": "Explain contents of the WTT and when you would need to refer to it?",
+        "answer": "Check passing time if fast service to ensure you are not late or too early and could get held at red signals, check for train departure / arrival times. 1- Fast train, Arr - arrival time [2] engineering time extra allowance. 2- All stations, Dep - departure time (2) pathing time. 3- Freight / staff train, + - ECS time <2> performance time. 5 - ECS, 9 - Special service."
+      },
+      {
+        "question": "Explain the principle sections of the STN and when you would need to refer to it?",
+        "answer": "Alterations to WTT, planned sporting / music events, planned engineering works, closures of other lines, ticket acceptance from other lines, additional dispatch requirements."
+      },
+      {
+        "question": "Explain the principle sections of the WON and when you would need to refer to it?",
+        "answer": "Safety notices, Section A - Temporary speed restrictions, Section B - Engineering arrangements, Section C - Signalling and permanent way alterations, Section D - General instructions and notices, Multi SPAD signals."
+      },
+      {
+        "question": "Explain the sections of the PON and when you would need to refer to it?",
+        "answer": "Part 1 items new to PON, (not posted before in WON have thick black line in margin). Part 2 items previously published in the PON but still current, (items published for the last time marked with 3 * if relevant take note). AR2 updates to sectional appendix."
+      },
+      {
+        "question": "What publication can you find information on line speed?",
+        "answer": "Sectional appendix."
+      },
+      {
+        "question": "What is the purpose of the Weekly Operating Notice (WON)?",
+        "answer": "To provide weekly updates about temporary speed restrictions, engineering arrangements, signaling changes, and other important operational information."
+      },
+      {
+        "question": "What is the purpose of the Periodical Operating Notice (PON)?",
+        "answer": "To provide updates to the sectional appendix, publish rule book changes, and maintain a record of instructions that remain in effect longer than the weekly notices."
+      },
+      {
+        "question": "What is the purpose of the Special Traffic Notice (STN)?",
+        "answer": "To provide information about special events, engineering works, line closures, and other temporary arrangements that affect normal operations."
+      },
+      {
+        "question": "What is the purpose of the Working Time Table (WTT)?",
+        "answer": "To provide the scheduled times for trains including departure, arrival, and passing times at stations and timing points."
+      },
+      {
+        "question": "How is new information indicated in the PON?",
+        "answer": "Items new to the PON (not posted before in WON) have a thick black line in the margin."
+      },
+      {
+        "question": "How are items that are being published for the last time in the PON indicated?",
+        "answer": "Items published for the last time are marked with 3 asterisks (*)."
+      },
+      {
+        "question": "What does the code '[2]' indicate in the WTT?",
+        "answer": "Engineering time extra allowance."
+      },
+      {
+        "question": "What does the code '(2)' indicate in the WTT?",
+        "answer": "Pathing time."
+      },
+      {
+        "question": "What does the code '<2>' indicate in the WTT?",
+        "answer": "Performance time."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Where can you find information on line speed?",
+        "options": [
+          "Weekly Operating Notice (WON)",
+          "Periodical Operating Notice (PON)",
+          "Working Time Table (WTT)",
+          "Sectional Appendix"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Which publication contains information about temporary speed restrictions?",
+        "options": [
+          "Weekly Operating Notice (WON)",
+          "Special Traffic Notice (STN)",
+          "Periodical Operating Notice (PON)",
+          "Working Time Table (WTT)"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "Which publication contains information about planned sporting or music events?",
+        "options": [
+          "Weekly Operating Notice (WON)",
+          "Special Traffic Notice (STN)",
+          "Periodical Operating Notice (PON)",
+          "Working Time Table (WTT)"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What does Section A of the WON contain?",
+        "options": [
+          "Engineering arrangements",
+          "Temporary speed restrictions",
+          "Signalling and permanent way alterations",
+          "General instructions and notices"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What does Section B of the WON contain?",
+        "options": [
+          "Engineering arrangements",
+          "Temporary speed restrictions",
+          "Signalling and permanent way alterations",
+          "General instructions and notices"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "What does Section C of the WON contain?",
+        "options": [
+          "Engineering arrangements",
+          "Temporary speed restrictions",
+          "Signalling and permanent way alterations",
+          "General instructions and notices"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What does Section D of the WON contain?",
+        "options": [
+          "Engineering arrangements",
+          "Temporary speed restrictions",
+          "Signalling and permanent way alterations",
+          "General instructions and notices"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Where would you find updates to the sectional appendix?",
+        "options": [
+          "Weekly Operating Notice (WON)",
+          "Special Traffic Notice (STN)",
+          "Periodical Operating Notice (PON) - AR2 section",
+          "Working Time Table (WTT)"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What train type is indicated by code '1' in the WTT?",
+        "options": [
+          "All stations",
+          "Fast train",
+          "Freight/staff train",
+          "ECS"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What train type is indicated by code '2' in the WTT?",
+        "options": [
+          "All stations",
+          "Fast train",
+          "Freight/staff train",
+          "ECS"
+        ],
+        "correctAnswer": 0
+      }
+    ],
+    "match": [
+      { "term": "WON", "definition": "Weekly Operating Notice" },
+      { "term": "PON", "definition": "Periodical Operating Notice" },
+      { "term": "STN", "definition": "Special Traffic Notice" },
+      { "term": "WTT", "definition": "Working Time Table" },
+      { "term": "Section A (WON)", "definition": "Temporary speed restrictions" },
+      { "term": "Section B (WON)", "definition": "Engineering arrangements" },
+      { "term": "Section C (WON)", "definition": "Signalling and permanent way alterations" },
+      { "term": "Section D (WON)", "definition": "General instructions and notices" },
+      { "term": "AR2", "definition": "Updates to sectional appendix in PON" },
+      { "term": "Sectional Appendix", "definition": "Contains information on line speed" },
+      { "term": "Code 1 (WTT)", "definition": "Fast train" },
+      { "term": "Code 2 (WTT)", "definition": "All stations train" },
+      { "term": "Code 3 (WTT)", "definition": "Freight/staff train" },
+      { "term": "Code 5 (WTT)", "definition": "Empty Coaching Stock (ECS)" },
+      { "term": "Code 9 (WTT)", "definition": "Special service" },
+      { "term": "Thick black line (PON)", "definition": "Indicates new items not previously in WON" }
+    ]
+  }
+}

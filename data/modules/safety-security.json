@@ -1,0 +1,206 @@
+{
+  "id": "safety-security",
+  "title": "Safety and Security",
+  "description": "Essential protocols for handling accidents, incidents, suspicious activities, and maintaining operational safety",
+  "methods": ["flashcards", "quiz", "match"],
+  "content": {
+    "flashcards": [
+      {
+        "question": "What is the reporting procedure for Accidents and Incidents?",
+        "answer": "All accidents and near misses at the depot must be reported in the first instance to the SPM who will arrange for all movements to be stopped if required, arrange for any medical attention to be provided and record the incident in the accident book, kept in the front office. Report to signaller if on mainline, report to depot manager if in depot, fill out accident book and report form."
+      },
+      {
+        "question": "How should you deal with a person acting in an unsafe manner?",
+        "answer": "Challenge them if you feel it's safe to do so. Call the Signaller if on track or SPM/Depot Manager in the depot (block lines if needed) and advise them to call British Transport Police (BTP)."
+      },
+      {
+        "question": "How should you deal with a person violating the rules?",
+        "answer": "Challenge them if you feel it's safe to do so. Call the Signaller if on track or SPM/Depot Manager in the depot (block lines if needed) and advise them to call British Transport Police (BTP)."
+      },
+      {
+        "question": "What would you do if you saw a person acting suspiciously?",
+        "answer": "Challenge them if you feel it's safe to do so. Call the Signaller if on track or SPM/Depot Manager in the depot (block lines if needed) and advise them to call British Transport Police (BTP)."
+      },
+      {
+        "question": "What is understood by acronym H.O.T?",
+        "answer": "Used to determine if item is lost property or a suspicious package. H - Is object Hidden e.g. behind chair vending machine etc. O - Is object Obvious e.g. has wires coming out a timer attached to it etc. T - Is object Typical of everyday lost property e.g. shopping, etc."
+      },
+      {
+        "question": "Who would you report a suspicious object to?",
+        "answer": "The SPM, the signaller, the police, the driver (if found on a train)."
+      },
+      {
+        "question": "How would you deal with trespass?",
+        "answer": "If on the tracks stop train immediately and make emergency call to signaller. If not any danger to trains make urgent call to signaller. Give location and as much information as possible. The discovery of unauthorised persons / over-carried passengers on trains must be reported immediately to the SPM. Arrangements must be made for them to be escorted from the train to the exit gate by the safest possible means. It is essential that they are dealt with immediately and are not left alone at any point."
+      },
+      {
+        "question": "Where would you find information regarding COSHH safety data sheets?",
+        "answer": "East Ham depot in shed near buffer stops of 5 road."
+      },
+      {
+        "question": "Where would you find first aid equipment located?",
+        "answer": "First Aid Room, SPM office, Fringe boxes, train cabs."
+      },
+      {
+        "question": "Where would you find a list of first aiders?",
+        "answer": "Health & Safety Notice Case (Yellow Border)."
+      },
+      {
+        "question": "Where would you find a list of authorised walking routes?",
+        "answer": "Health & Safety Notice Case (Yellow Border)."
+      },
+      {
+        "question": "How would you recognise an authorised walking route?",
+        "answer": "Within the shed are marked out in green. Outside the shed marked out in yellow or have raised wooden edges."
+      },
+      {
+        "question": "What actions would you take if you saw any hazards on an authorised walking route?",
+        "answer": "Any hazards found blocking your walking route, station or fire exits are to be removed and/or reported to the SPM."
+      },
+      {
+        "question": "What actions would you take if you saw any hazards within the depot sidings?",
+        "answer": "Report it IMMEDIATELY to the SPM."
+      },
+      {
+        "question": "What is the procedure for retrieving articles from the track?",
+        "answer": "Dropped items on the track can ONLY be removed if: - The line is blocked by the relevant signaller (Workstation 1). If it is outside of peak times: The person retrieving the item must have a current and in date PTS card. Litter pickers can be used if the item is within reach and you have EXPRESS PERMISSION from the signaller."
+      },
+      {
+        "question": "What actions would you take if you saw anything amiss on a passing train?",
+        "answer": "Inform the signaller/SPM giving as much information as possible. What was amiss, head code, time, location, direction."
+      },
+      {
+        "question": "Where can you find the safety instructions for the area that you are required to work?",
+        "answer": "Health & Safety Notice Case (Yellow Border), sectional appendix, depot safety instructions, intranet."
+      },
+      {
+        "question": "What are the signing in requirements for areas that you are required to work?",
+        "answer": "That you sign the statement or readiness for duty on time and that you are fit for duty. You are wearing your issued uniform and correct PPE. That you have all the relevant equipment, licenses and documents needed for duty. You read late notice case, train crew notice case, check for altered workings."
+      },
+      {
+        "question": "What can you do to record any details of perishable evidence?",
+        "answer": "Photograph, Bag up or secure evidence, Sketching, Taking notes, CCTV Recording, Train downloads, Eye witness accounts."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "What is understood by acronym H.O.T?",
+        "options": [
+          "High Observation Techniques",
+          "Hidden, Obvious, Typical - used to determine if an item is suspicious",
+          "Hazard Operation Training",
+          "Health Observation Test"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How would you deal with trespass?",
+        "options": [
+          "Ignore it unless it affects your train",
+          "Try to apprehend the trespasser yourself",
+          "Stop train immediately and make emergency call to signaller if on the tracks",
+          "Always continue your journey and report later"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What should you do if you see someone violating the rules?",
+        "options": [
+          "Ignore it if it doesn't affect safety",
+          "Tell them to stop and report immediately to appropriate authority",
+          "Make a note and report at the end of your shift",
+          "Only report if it happens more than once"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Where would you find first aid equipment?",
+        "options": [
+          "Only at major stations",
+          "First Aid Room, SPM office, Fringe boxes, train cabs",
+          "Only in the driver's bag",
+          "Only at signal boxes"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What is the procedure for retrieving items from the track?",
+        "options": [
+          "Retrieve it immediately to prevent delays",
+          "The line must be blocked by the relevant signaller and the person must have a current PTS card",
+          "Report it as lost and continue your journey",
+          "Only station staff can retrieve items from the track"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "What should you do if you see a suspicious object?",
+        "options": [
+          "Open it to check if it's dangerous",
+          "Move it to a safer location",
+          "Report it to the SPM, signaller, or police",
+          "Make an announcement asking whose it is"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "How would you recognize an authorized walking route in the shed?",
+        "options": [
+          "Marked out in red",
+          "Marked out in blue",
+          "Marked out in green",
+          "Marked out in black and white stripes"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What should you do if you see a hazard on a walking route?",
+        "options": [
+          "Walk around it and continue",
+          "Place a warning sign near it",
+          "Remove it if possible and/or report it to the SPM",
+          "Only report it if someone could get seriously injured"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Where would you find a list of first aiders?",
+        "options": [
+          "In the staff room",
+          "In the train cab",
+          "Health & Safety Notice Case (Yellow Border)",
+          "Only available online"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "What can you do to record details of perishable evidence?",
+        "options": [
+          "Only written reports are accepted",
+          "Photograph, secure evidence, take notes, CCTV recording",
+          "Only CCTV footage is acceptable",
+          "Only management can record evidence"
+        ],
+        "correctAnswer": 1
+      }
+    ],
+    "match": [
+      { "term": "H.O.T", "definition": "Hidden, Obvious, Typical" },
+      { "term": "Trespass", "definition": "Report immediately, stop train if on tracks" },
+      { "term": "First Aid Equipment", "definition": "Located in SPM office and Fringe boxes" },
+      { "term": "COSHH Data", "definition": "East Ham depot near buffer stops of 5 road" },
+      { "term": "Authorized Routes in Shed", "definition": "Marked out in green" },
+      { "term": "Authorized Routes Outside", "definition": "Marked out in yellow or raised edges" },
+      { "term": "Retrieving Track Items", "definition": "Only with blocked line and valid PTS" },
+      { "term": "Suspicious Person", "definition": "Challenge if safe, then call signaller/SPM" },
+      { "term": "Rule Violation", "definition": "Report immediately to appropriate authority" },
+      { "term": "Hazards in Sidings", "definition": "Report immediately to SPM" },
+      { "term": "Suspicious Package", "definition": "Report to signaller or BTP" },
+      { "term": "Safety Instructions", "definition": "Found in Health & Safety Notice Case" },
+      { "term": "Perishable Evidence", "definition": "Photograph, secure, take notes" },
+      { "term": "First Aiders List", "definition": "Health & Safety Notice Case (Yellow Border)" },
+      { "term": "Walking Routes List", "definition": "Health & Safety Notice Case (Yellow Border)" },
+      { "term": "Passing Train Issues", "definition": "Report head code, time, location, direction" }
+    ]
+  }
+}
