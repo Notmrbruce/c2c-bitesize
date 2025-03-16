@@ -56,6 +56,26 @@
       {
         "question": "Describe the care first policy?",
         "answer": "Free phone number to offer counselling, information and advice on anything that is troubling you e.g. home life stress, money issues, bullying. Treated in confidence."
+      },
+      {
+        "question": "If you consumed 4 pints of normal lager (2 units each) as a man, how long should you wait before reporting for duty?",
+        "answer": "8 hours minimum (4 pints × 2 units = 8 units, 8 units × 1 hour/unit = 8 hours). However, the policy requires waiting at least 12 hours before duty after drinking, so you must wait 12 hours."
+      },
+      {
+        "question": "You are prescribed medication that may cause drowsiness. What actions must you take?",
+        "answer": "Report the prescribed medication to your depot manager as soon as possible, even before taking it. Discuss possible impacts on your duties and follow any additional safety instructions provided."
+      },
+      {
+        "question": "What is the difference between an error and a violation in terms of potential consequences?",
+        "answer": "An error is a genuine mistake and may be treated with corrective measures and additional training. A violation (knowingly breaking rules or covering up mistakes) is treated more seriously and may lead to disciplinary action including potential dismissal."
+      },
+      {
+        "question": "You've worked 12 consecutive days. Can you work tomorrow, and what considerations apply?",
+        "answer": "You can work one more day (13th consecutive day), but must take the 14th day off. You must also ensure you've had minimum 12-hour rest periods between shifts and haven't exceeded 72 hours in any 7 consecutive day period."
+      },
+      {
+        "question": "If you reach Stage 3 of the MFA policy, what happens and what are the implications?",
+        "answer": "Stage 3 involves a formal chat with the senior driver manager and union representative, resulting in a final warning. Any further absence issues could lead directly to Stage 4, which is dismissal."
       }
     ],
     "quiz": [
@@ -158,6 +178,106 @@
           "Stage 5"
         ],
         "correctAnswer": 2
+      },
+      {
+        "question": "A female colleague has consumed 3 glasses of wine (175ml each) at 10pm. When is the earliest she can safely sign on for duty according to company policy?",
+        "options": [
+          "6am the next morning",
+          "10am the next morning",
+          "1pm the next day",
+          "10pm the next day"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "You have completed 11 consecutive days of work. Your manager asks you to work for 4 more days without a break due to staff shortages. What is the correct response?",
+        "options": [
+          "Agree to work all 4 days as requested by management",
+          "Agree to work 2 more days only, then take a day off",
+          "Refuse immediately as you've already worked too many consecutive days",
+          "Work for all 4 days but request overtime payment"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "You notice a colleague using earphones while in the cab. What is the most appropriate action?",
+        "options": [
+          "Ignore it as it's not your responsibility",
+          "Take a photo as evidence and report them",
+          "Remind them of the policy on personal electrical equipment and the safety risks",
+          "Report them to management without speaking to them first"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "You accidentally missed a scheduled station stop. What type of incident is this and what should you do?",
+        "options": [
+          "It's a violation - try to make up time and don't mention it",
+          "It's an error - report it immediately and follow procedures",
+          "It's neither an error nor violation - just continue your route",
+          "It's an error - but only report it if passengers complain"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "You've been off sick for 4 days in the last 12 weeks with a single illness. You now feel sick again. What are the implications if you take another sick day?",
+        "options": [
+          "No implications as it's a new illness",
+          "You would reach 5 days total in a 13-week period, triggering Stage 1 of the MFA policy",
+          "You would need a doctor's note but no MFA implications",
+          "You would automatically move to Stage 2 of the MFA policy"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "You have worked 70 hours over the past 6 days. Your manager asks you to work a 4-hour shift tomorrow. Is this permissible under company policy?",
+        "options": [
+          "Yes, because the total would be 74 hours which is under the daily limit of 12 hours",
+          "No, because you need at least one day off per week",
+          "Yes, because 4 hours is a short shift",
+          "No, because the total would exceed 72 hours in 7 consecutive days"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Which combination of alcoholic drinks would result in the highest number of units?",
+        "options": [
+          "1 pint of normal lager and 1 glass of wine",
+          "2 shots of spirits and 1 alcopop",
+          "1 pint of strong lager and 1 alcopop",
+          "2 pints of cider"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "If you finished a 12-hour shift at 8pm, what is the earliest time you could legally start your next shift?",
+        "options": [
+          "4am the next day",
+          "6am the next day",
+          "8am the next day",
+          "12pm the next day"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Your company-issued iPad battery dies while you're performing duties. Using your personal tablet would:",
+        "options": [
+          "Be acceptable as long as you're using it for work purposes only",
+          "Be acceptable because the company equipment failed",
+          "Not be permitted under the personal electrical equipment policy",
+          "Be acceptable as long as you report it afterward"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which scenario represents a violation rather than an error?",
+        "options": [
+          "Misreading a signal due to poor visibility and stopping late",
+          "Exceeding speed limits because you weren't monitoring speed indicators",
+          "Using a personal phone in the cab because you needed to check the time",
+          "Missing a station stop because the automatic announcement system failed"
+        ],
+        "correctAnswer": 2
       }
     ],
     "time-trial": [
@@ -176,7 +296,21 @@
       { "term": "Personal Sickness", "definition": "Inform depot supervisor at earliest opportunity" },
       { "term": "Alcohol Clearance (Men)", "definition": "1 hour per unit" },
       { "term": "Alcohol Clearance (Women)", "definition": "1.5 hours per unit" },
-      { "term": "Personal Electrical Equipment", "definition": "Not permitted in cab while driving" }
+      { "term": "Personal Electrical Equipment", "definition": "Not permitted in cab while driving" },
+      { "term": "Duty Sign-on", "definition": "Must be free from alcohol influence" },
+      { "term": "Drink Driving", "definition": "Must inform depot manager immediately" },
+      { "term": "Prescribed Drugs", "definition": "Must be reported to depot manager ASAP" },
+      { "term": "MFA Stage 1", "definition": "Informal chat with driver manager" },
+      { "term": "MFA Stage 2", "definition": "Formal chat with driver manager and union rep" },
+      { "term": "MFA Stage 4", "definition": "Dismissal" },
+      { "term": "MFA Stage 5", "definition": "Appeal" },
+      { "term": "MFA 52-week Trigger", "definition": "10 days total or 5 instances" },
+      { "term": "Alcopop", "definition": "1.5 units of alcohol" },
+      { "term": "Spirits", "definition": "1 unit of alcohol per shot" },
+      { "term": "Company iPad", "definition": "Can be used for duties after training" },
+      { "term": "GSMR Calls", "definition": "May not be heard if using headphones" },
+      { "term": "Minimum Pre-duty Sobriety", "definition": "12 hours after last drink" },
+      { "term": "Policy Purpose", "definition": "Safe standards to minimize accidents/injuries" }
     ]
   }
 }
