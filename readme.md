@@ -1,6 +1,6 @@
 # C2C Bitesize Learning Platform
 
-A modular web-based learning platform for C2C training materials.
+A modular web-based learning platform for C2C training materials with multiple interactive learning methods.
 
 ## Project Structure
 
@@ -20,6 +20,15 @@ c2c-bitesize/
         └── etc...
 ```
 
+## Features
+
+- **Flashcards**: Flip through digital cards to test your recall of key information.
+- **Quiz**: Test your knowledge with multiple-choice questions and get immediate feedback.
+- **Time Trial**: Race against the clock to match terms with their definitions.
+- **True & False**: Determine whether statements are true or false to test your understanding.
+- **Progress Tracking**: See your position in each learning method and track your scores.
+- **Method Descriptions**: Get a brief explanation of each learning method before you start.
+
 ## How to Add New Modules
 
 1. Create a new JSON file in the `data/modules/` directory with the module's ID as the filename (e.g., `fire-safety.json`)
@@ -33,7 +42,7 @@ c2c-bitesize/
   "id": "module-id",
   "title": "Module Title",
   "description": "Brief description of the module content",
-  "methods": ["flashcards", "quiz", "match"],
+  "methods": ["flashcards", "quiz", "time-trial", "true-false"],
   "content": {
     "flashcards": [
       {
@@ -55,9 +64,22 @@ c2c-bitesize/
       },
       // More quiz questions...
     ],
-    "match": [
+    "time-trial": [
       { "term": "Term", "definition": "Definition" },
-      // More match pairs...
+      // More term-definition pairs...
+    ],
+    "true-false": [
+      {
+        "statement": "This is a true statement.",
+        "isTrue": true,
+        "explanation": "Explanation of why the statement is true."
+      },
+      {
+        "statement": "This is a false statement.",
+        "isTrue": false,
+        "explanation": "Explanation of why the statement is false."
+      },
+      // More true/false statements...
     ]
   }
 }
@@ -68,6 +90,14 @@ c2c-bitesize/
 1. Locate the module's JSON file in `data/modules/`
 2. Edit the file to update content
 3. Save the file and reload the application
+
+## Adding New Learning Methods
+
+To add a new learning method to a module:
+
+1. Add the method name to the `methods` array (e.g., `"methods": ["flashcards", "quiz", "time-trial", "true-false", "your-new-method"]`)
+2. Add the corresponding content under the `content` object
+3. Implement the method in app.js and add appropriate styling in styles.css
 
 ## Working with GitHub
 
@@ -117,5 +147,28 @@ When creating module content:
 1. Keep questions clear and concise
 2. Provide comprehensive answers
 3. For quizzes, make sure the correct answer is clearly defined
-4. For match pairs, keep terms and definitions reasonably short
-5. Include 10-15 items per learning method for optimal learning experience
+4. For time trial, keep terms and definitions reasonably short
+5. For true/false, include explanations that help reinforce learning
+6. Include 10-15 items per learning method for optimal learning experience
+
+## Learning Methods Guide
+
+### Flashcards
+- Front: Clear, concise question
+- Back: Comprehensive answer
+- Best for: Key facts, definitions, procedures
+
+### Quiz
+- Multiple choice questions with 4 options
+- One correct answer per question
+- Best for: Testing recall and application of knowledge
+
+### Time Trial
+- Term and definition pairs
+- User selects matching term against a 7-second timer
+- Best for: Quick recall and memorization
+
+### True & False
+- Statement that can be evaluated as true or false
+- Include explanation for both correct and incorrect responses
+- Best for: Testing understanding of rules and policies
