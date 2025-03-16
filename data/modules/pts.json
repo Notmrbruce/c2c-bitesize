@@ -1,358 +1,1162 @@
 {
-  "id": "pts",
-  "title": "Personal Track Safety (PTS)",
-  "description": "Essential safety procedures, requirements, and protocols for working on or near the railway",
-  "methods": ["flashcards", "quiz", "match"],
-  "content": {
-    "flashcards": [
-      {
-        "question": "Define 'on or near the line'?",
-        "answer": "If you are on the line itself or within 3 meters (10 foot) of the running line and there are no fences or permanent structures between you and the running line."
-      },
-      {
-        "question": "Define 'on the line side'?",
-        "answer": "Within the boundary fence and the point that is 'on or near the line' and can be seen by approaching drivers."
-      },
-      {
-        "question": "Define 'position of safety'?",
-        "answer": "When you are at least the minimum required distance away from the passing train at the maximum line speed it is permitted to travel."
-      },
-      {
-        "question": "What is understood by 4 foot, 6 foot, 10 foot and the cess?",
-        "answer": "4 foot - the running line itself, 6 foot - the space between the 2 running lines, 10 foot - the space between 2 sets of running lines, Cess - the space between the running line and the boundary fence."
-      },
-      {
-        "question": "Define the additional risks of reversible and SIMBIDS lines?",
-        "answer": "Trains can be signalled to approach from any direction."
-      },
-      {
-        "question": "When are you permitted to be on or near the line?",
-        "answer": "If it is part of your duty with signaller's permission, to inspect your train for faults or damage, to lay emergency protection, laying assistance protection when carrying out a controlled or emergency evacuation."
-      },
-      {
-        "question": "What should you take into consideration before going on or near the line?",
-        "answer": "Line speeds, Direction trains normally approach from, areas of limited clearance."
-      },
-      {
-        "question": "What protective equipment do you need when on or near the line?",
-        "answer": "Clean high vis, safety footwear, hand lamp."
-      },
-      {
-        "question": "What must you not wear when on or near the line?",
-        "answer": "Anything that would affect your vision or ability to hear approaching trains."
-      },
-      {
-        "question": "What must you do if walking on or near the line and a train approaches?",
-        "answer": "M - Move to a position of safety, A - Acknowledge approaching train, P - Place any tools down on the floor, S - Stay in a position of safety until train has passed and you are sure no other trains are approaching."
-      },
-      {
-        "question": "What must you do if you are caught between adjacent lines and a train approaches?",
-        "answer": "Lay face down in the 6 foot, 10 foot or CESS, NOT IN THE 4 FOOT, gather any loose clothing underneath you, do not move until train has passed and you are sure no other trains are approaching."
-      },
-      {
-        "question": "What are the limited clearance signs and their meanings?",
-        "answer": "Red and white squares 'warning limited clearance' written on it - No position of safety for the length of this structure must not attempt to pass while a train is approaching. Blue and white squares 'warning no refuges' written on it - No position of safety for the length of this structure, However there ARE positions of safety or refuges ON OPPOSITE SIDE OF RAILWAY LINE. Man in red circle with red line through - Prohibition notice - You must not pass this sign while trains are running, YOU WILL NOT BE ABLE TO REACH A POSITION OF SAFETY, IF CARRYING OUT EMERGENCY PROTECTION TAKE EXTREME CARE."
-      },
-      {
-        "question": "What actions must you take if you are required to walk in the vicinity of a limited clearance sign?",
-        "answer": "Do not attempt to pass while train is approaching, know where nearest refuge or position of safety is, take extreme care."
-      },
-      {
-        "question": "How and where to cross a line safely?",
-        "answer": "Authorised walking route, Level crossing, Bridge, Underpass. Look for a position of safety before crossing, ensure you can see as far as possible before attempting to cross, cross at 90 degree angle, walk ballast to ballast, avoid stepping on sleepers rails and points."
-      },
-      {
-        "question": "What is the role of a COSS?",
-        "answer": "A COSS is a Controller of Site Safety they will set up a safe system of work and are there to ensure everyone's safety."
-      },
-      {
-        "question": "How would you identify a COSS, Lookout and Site Warden?",
-        "answer": "COSS - BLUE ARMBAND, COSS written in WHITE LETTERS. LOOKOUT - WHITE ARMBAND, LOOKOUT written in RED LETTERS. SITE WARDEN - WHITE ARMBAND, SITE WARDEN written in BLUE LETTERS."
-      },
-      {
-        "question": "What are the principles of Red Zone working?",
-        "answer": "Trains are still running. COSS will appoint a 'Lookout' to lookout for trains approaching the work area. The 'Lookout' is identified by a white armband with red lettering and carries a blue and white chequered flag, horn."
-      },
-      {
-        "question": "What are the principles of Green Zone working?",
-        "answer": "Safeguarded = All lines blocked. Fenced = Trains are running but the workforce has a barrier between it and a running line. Ridged 0-100 mph 1.25 meters (4 foot) 101-125 mph 2 meters (6 foot 6in) over 125 mph no safe distance. Tape 0-40 mph 1.25 meters (4 foot) 41-125 mph 2 meters (6 foot 6in) over 125 mph no safe distance. Separated = Trains are running but the workforce has a human barrier (Site Warden) between it and a running line appointed by the COSS/ SWL. 6 feet 6 inches between the site of work and the nearest running line."
-      },
-      {
-        "question": "Name the different parts of the OHL structures?",
-        "answer": "Portal, Cantilever (with registration arm) or Head span type. Catenary wire - top wire, Contact wire - wire pantograph touches to draw electricity. Dropper - connects catenary wire to contact wire. Head span wire - top wire running between 2 adjacent structures. Cross span wire - lower wire between 2 adjacent structures. Mast or Structure - metal pole either side of tracks which OHL are attached. Structure plate - ID plate used to identify location of over head wires / structures. Insulators - used between OHL and structures to ensure structure is insulated from 25,000volts. Structure bond - Attached to bottom of structure and track to complete the circuit. Along-Track Conductors - Earth return wire."
-      },
-      {
-        "question": "What is a Red bond and what action must be carried out if one is found unsecured?",
-        "answer": "Red bond is Structure bond with red cable, Do not touch, if found unsecured report immediately to signaller or ECO."
-      },
-      {
-        "question": "What is the minimum safe distance that must be maintained from the OHL?",
-        "answer": "2.75 meters (9foot)."
-      },
-      {
-        "question": "What is the purpose of the orange line at cab roof height?",
-        "answer": "CANT line - cannot go above the line if OHL are still live."
-      },
-      {
-        "question": "How do you get an emergency isolation of overhead power, including identification of location?",
-        "answer": "Contact signaller or ECO and give structure plate ID."
-      },
-      {
-        "question": "What types of telephone may you use, how to identify them and usage restrictions?",
-        "answer": "Mobile phone - use in position of safety, do not become distracted do not use in an active cab. Lineside telephone. Lineside telephone with red / white limited clearance sign - use your train as protection. Lineside telephone with yellow circle - only use in emergency. Signal post telephone. Signal post telephone with red / white limited clearance sign - use your train as protection. Signal post telephone with yellow circle - only use in an emergency. Signal post telephone with white / yellow diamond with 'x' only use in emergency. Signal with white diamond telephone number underneath - no telephone, signaller aware of presence by track circuit use GSMR or mobile phone to contact signaller."
-      },
-      {
-        "question": "On adjacent TFL infrastructure, which rails are electrified by DC current and the risks associated with these if required to work at ground level?",
-        "answer": "Third rail is electrified, do not use track circuit operating clips on TFL infrastructure, danger of electrocution if areas near third rail are flooded."
-      },
-      {
-        "question": "In which section of the rule book can more information on PTS be found?",
-        "answer": "Section G1."
-      },
-      {
-        "question": "What environmental conditions will affect ability to undertake duties safely and why?",
-        "answer": "Poor visibility due to darkness, heavy rain, fog, snow fall. High winds or background noise affecting ability to hear trains coming. Slippery underfoot conditions caused by ice / snow or rain."
-      },
-      {
-        "question": "How frequently should you look up?",
-        "answer": "Every 5 seconds."
-      },
-      {
-        "question": "For how many seconds should you be in a position of safety prior to a train arriving?",
-        "answer": "10 seconds before train arrives."
-      },
-      {
-        "question": "What must you ensure before leaving a position of safety?",
-        "answer": "Ensure train has passed and no other trains are approaching."
-      },
-      {
-        "question": "When crossing a line what can and cannot be stepped on?",
-        "answer": "Walk ballast to ballast, do not step on sleepers, rail, or points."
-      },
-      {
-        "question": "Where would you find information about authorised walking routes?",
-        "answer": "Health and safety notice case."
-      },
-      {
-        "question": "What is the voltage of the OHLE and what must you consider it to be at all times?",
-        "answer": "25,000 volts AC, live at all times."
-      },
-      {
-        "question": "What information is to be found on an OHL structure plate ID?",
-        "answer": "Top letter - route. Middle number(s) - miles from London or start of route. Bottom number(s) - number of structure in that mile."
-      },
-      {
-        "question": "What is the minimum distance that must be maintained from the OHLE in an emergency situation and what additional measures must be taken?",
-        "answer": "2.75 meters (9 foot), ensure OHLE is isolated before getting any closer, ensure you are wearing non conductive, dry clothing if attempting to move anyone that has been in contact with OHLE, do not stand in any water, do not use anything metal near OHLE."
-      },
-      {
-        "question": "After an OHLE tripping, how long will it be before the ECO attempts to re-energise?",
-        "answer": "OHLE will try to re-energise IMMEDIATELY."
-      },
-      {
-        "question": "What must you do if you have been granted an emergency isolation and your relief turns up?",
-        "answer": "Contact the ECO and tell them who you are and your relief has turned up, pass the phone over to your relief who will then be taking over the emergency isolation. DO NOT LEAVE BEFORE YOU ARE RELIEVED."
-      },
-      {
-        "question": "What actions should be taken if you notice any faults with the OHLE?",
-        "answer": "Report immediately to the ECO can be via signaller, do not go near any faults or anything that may be in contact with the OHLE."
-      },
-      {
-        "question": "What is the location for the ECO and what is the number?",
-        "answer": "Romford, internal number 175, external 01708 743545."
-      },
-      {
-        "question": "Who do you report OHLE faults to within the depot?",
-        "answer": "S.P.M."
-      },
-      {
-        "question": "In which section of the rule book can more information regarding AC Electrified Lines be found?",
-        "answer": "AC Electrified Lines."
-      },
-      {
-        "question": "What is the speed of trains past fenced zones?",
-        "answer": "Line speed, unless ESR (emergency speed restrictions) or TSR (temporary speed restrictions) have been introduced."
-      },
-      {
-        "question": "What is the position of safety for the following speeds, 110mph, 75mph, and 130mph?",
-        "answer": "0-100mph - 1.25 meters (4 foot). 101mph-125mph - 2 meters (6 foot 6in). Over 125mph -- No safe working distance."
-      },
-      {
-        "question": "What should you take with you in a tunnel or at night?",
-        "answer": "Hand lamp."
-      },
-      {
-        "question": "If you cross the line in advance of a level crossing and the gates are open to road traffic, or a signal at danger, is it safe to assume there is no train approaching?",
-        "answer": "No, barriers could be faulty, train could have had a SPAD, could be a runaway train."
-      },
-      {
-        "question": "Do trains always approach from the direction they are signalled?",
-        "answer": "No could be train making a wrong direction move, Single line working, runaway train, engineering train in a possession."
-      },
-      {
-        "question": "Name at least 4 hazards that you would look out for on a passing train?",
-        "answer": "Door(s) open, Fire on train, Insecure load, Headlight not lit, Hot axle box, Tail light not lit/missing, Damage/anything wrapped around pantograph, Driver sounding distress horn, Hazard warning lights flashing."
-      },
-      {
-        "question": "List at least 3 things that you would consider to be dangerous to a passing train?",
-        "answer": "Trespassers, Large animals on the track, Fire, Floods, Track defects, Obstruction on the line."
-      },
-      {
-        "question": "What 3 environmental conditions must you take into account when walking line side?",
-        "answer": "Visibility - strong sunlight may affect vision, fog, darkness, falling snow and heavy rain. Ability to hear oncoming trains - high winds, background noise from industrial estates ECT. Underfoot conditions - heavy rainfall, ice and snow can make ground slippery."
-      },
-      {
-        "question": "When walking on the operational railway where should you walk if possible?",
-        "answer": "In the CESS."
-      },
-      {
-        "question": "When walking line side between Shoeburyness and Barking, where should you walk?",
-        "answer": "Safe CESS."
-      },
-      {
-        "question": "How often should you look up when 'on or near the line' and how many seconds should you be in a position of safety prior to a train arriving?",
-        "answer": "Look up every 5 seconds, be in a position of safety 10 seconds before train arrives."
-      },
-      {
-        "question": "What does a signal post telephone, line side telephone look like?",
-        "answer": "Signal post telephone - white background with black stripes running diagonally from top right to bottom left, Lineside telephone - white background with black cross on it."
-      },
-      {
-        "question": "What does a yellow roundel mean on a SPT or line side telephone?",
-        "answer": "Limited clearance on use if an emergency."
-      },
-      {
-        "question": "If you came across a line side fire what would be your immediate reaction?",
-        "answer": "Report immediately to signaller."
-      },
-      {
-        "question": "If you sighted a trespasser on the railway and were unable to stop your train what would be your reactions?",
-        "answer": "Report it immediately to signaller, if on running lines make emergency group call."
-      },
-      {
-        "question": "What is a 'PICEI' in regard to overhead lines?",
-        "answer": "Person In Charge of Electrical Isolation."
-      }
+    "id": "personal-track-safety",
+    "title": "Personal Track Safety",
+    "description": "This comprehensive module covers essential knowledge and procedures for working safely on or near railway tracks, including track terminology, hazard awareness, emergency protocols, electrical safety considerations, and proper procedures for various scenarios that railway workers may encounter.",
+    "methods": [
+        "flashcards",
+        "quiz",
+        "time-trial",
+        "true-false"
     ],
-    "quiz": [
-      {
-        "question": "What is understood by 'on or near the line'?",
-        "options": [
-          "Within sight of the railway line",
-          "Within the boundary fence of the railway",
-          "On the line itself or within 3 meters of the running line with no fences/structures between",
-          "Any location where a train can be seen approaching"
+    "content": {
+        "flashcards": [
+            {
+                "question": "What does 'on or near the line' mean?",
+                "answer": "You are considered 'on or near the line' if you are on the line itself or within 3 meters (10 feet) of the running line and there are no fences or permanent structures between you and the running line."
+            },
+            {
+                "question": "What is meant by 'on the line side'?",
+                "answer": "Being 'on the line side' means you are within the boundary fence and at a point that is 'on or near the line' and can be seen by approaching drivers."
+            },
+            {
+                "question": "What constitutes a 'position of safety'?",
+                "answer": "A 'position of safety' is when you are at least the minimum required distance away from a passing train at the maximum line speed it is permitted to travel."
+            },
+            {
+                "question": "Explain the terms '4 foot', '6 foot', '10 foot', and 'cess'.",
+                "answer": "4 foot - the running line itself\n6 foot - the space between 2 running lines\n10 foot - the space between 2 sets of running lines\nCess - the space between the running line and the boundary fence"
+            },
+            {
+                "question": "What are the additional risks associated with reversible and SIMBIDS lines?",
+                "answer": "On reversible and SIMBIDS lines, trains can be signalled to approach from any direction, increasing the risk of unexpected train movements."
+            },
+            {
+                "question": "Under what circumstances are you permitted to be on or near the line?",
+                "answer": "You are permitted to be on or near the line if it is part of your duty with signaller's permission, to inspect your train for faults or damage, to lay emergency protection, or to lay assistance protection when carrying out a controlled or emergency evacuation."
+            },
+            {
+                "question": "What should you consider before going on or near the line?",
+                "answer": "Before going on or near the line, you should consider line speeds, directions trains normally approach from, and areas of limited clearance."
+            },
+            {
+                "question": "What protective equipment is required when on or near the line?",
+                "answer": "When on or near the line, you need clean high visibility clothing, safety footwear, and a hand lamp."
+            },
+            {
+                "question": "What must you avoid wearing when on or near the line?",
+                "answer": "When on or near the line, you must not wear anything that would affect your vision or ability to hear approaching trains."
+            },
+            {
+                "question": "What is the MAPS procedure when a train approaches?",
+                "answer": "MAPS procedure:\nM - Move to a position of safety\nA - Acknowledge approaching train\nP - Place any tools down on the floor\nS - Stay in a position of safety until train has passed and you are sure no other trains are approaching"
+            },
+            {
+                "question": "What should you do if caught between adjacent lines when a train approaches?",
+                "answer": "If caught between adjacent lines when a train approaches, lay face down in the 6 foot, 10 foot, or CESS (NOT IN THE 4 FOOT), gather any loose clothing underneath you, and do not move until the train has passed and you are sure no other trains are approaching."
+            },
+            {
+                "question": "Describe the red and white squares limited clearance sign and its meaning.",
+                "answer": "Red and white squares with 'warning limited clearance' written on it means there is no position of safety for the length of this structure and you must not attempt to pass while a train is approaching."
+            },
+            {
+                "question": "Describe the blue and white squares limited clearance sign and its meaning.",
+                "answer": "Blue and white squares with 'warning no refuges' written on it means there is no position of safety for the length of this structure. However, there ARE positions of safety or refuges ON THE OPPOSITE SIDE OF THE RAILWAY LINE."
+            },
+            {
+                "question": "What does the prohibition notice (man in red circle with red line through) signify?",
+                "answer": "The prohibition notice means you must not pass this sign while trains are running as YOU WILL NOT BE ABLE TO REACH A POSITION OF SAFETY. If carrying out emergency protection, take extreme care."
+            },
+            {
+                "question": "How should you safely cross a railway line?",
+                "answer": "To safely cross a line:\n- Use an authorised walking route, level crossing, bridge, or underpass\n- Look for a position of safety before crossing\n- Ensure you can see as far as possible before attempting to cross\n- Cross at a 90-degree angle\n- Walk ballast to ballast\n- Avoid stepping on sleepers, rails, and points"
+            },
+            {
+                "question": "What is the role of a COSS (Controller of Site Safety)?",
+                "answer": "A COSS (Controller of Site Safety) sets up a safe system of work and ensures everyone's safety while working on or near the line."
+            },
+            {
+                "question": "How would you identify a COSS?",
+                "answer": "A COSS can be identified by a BLUE ARMBAND with COSS written in WHITE LETTERS."
+            },
+            {
+                "question": "How would you identify a Lookout?",
+                "answer": "A Lookout can be identified by a WHITE ARMBAND with LOOKOUT written in RED LETTERS."
+            },
+            {
+                "question": "How would you identify a Site Warden?",
+                "answer": "A Site Warden can be identified by a WHITE ARMBAND with SITE WARDEN written in BLUE LETTERS."
+            },
+            {
+                "question": "What are the principles of Red Zone working?",
+                "answer": "In Red Zone working, trains are still running. The COSS will appoint a 'Lookout' to look out for trains approaching the work area. The 'Lookout' is identified by a white armband with red lettering and carries a blue and white chequered flag and horn."
+            },
+            {
+                "question": "What are the principles of Green Zone working?",
+                "answer": "Green Zone working principles include:\n- Safeguarded: All lines blocked\n- Fenced: Trains are running but the workforce has a barrier between it and a running line\n- Separated: Trains are running but the workforce has a human barrier (Site Warden) between it and a running line, appointed by the COSS/SWL"
+            },
+            {
+                "question": "What are the minimum distance requirements for a rigid fence in Green Zone working at different train speeds?",
+                "answer": "For rigid fences in Green Zone working:\n- 0-100 mph: 1.25 meters (4 foot)\n- 101-125 mph: 2 meters (6 foot 6 inches)\n- Over 125 mph: no safe distance"
+            },
+            {
+                "question": "What are the minimum distance requirements for a tape fence in Green Zone working at different train speeds?",
+                "answer": "For tape fences in Green Zone working:\n- 0-40 mph: 1.25 meters (4 foot)\n- 41-125 mph: 2 meters (6 foot 6 inches)\n- Over 125 mph: no safe distance"
+            },
+            {
+                "question": "What are the different parts of the OHL (Overhead Line Equipment) structures?",
+                "answer": "OHL structure parts include:\n- Portal, Cantilever (with registration arm) or Head span type\n- Catenary wire (top wire)\n- Contact wire (wire pantograph touches to draw electricity)\n- Dropper (connects catenary wire to contact wire)\n- Head span wire (top wire running between 2 adjacent structures)\n- Cross span wire (lower wire between 2 adjacent structures)\n- Mast or Structure (metal pole either side of tracks which OHL are attached)\n- Structure plate (ID plate used to identify location of overhead wires/structures)\n- Insulators (used between OHL and structures to ensure structure is insulated from 25,000 volts)\n- Structure bond (attached to bottom of structure and track to complete the circuit)\n- Along-Track Conductors (Earth return wire)"
+            },
+            {
+                "question": "What is a Red bond and what action must be taken if one is found unsecured?",
+                "answer": "A Red bond is a structure bond with red cable. If found unsecured, do not touch it and report immediately to the signaller or ECO (Electrical Control Operator)."
+            },
+            {
+                "question": "What is the minimum safe distance that must be maintained from the OHL?",
+                "answer": "The minimum safe distance that must be maintained from the OHL is 2.75 meters (9 feet)."
+            },
+            {
+                "question": "What is the purpose of the orange line at cab roof height?",
+                "answer": "The orange line at cab roof height is the CANT line - you cannot go above this line if OHL are still live."
+            },
+            {
+                "question": "How do you get an emergency isolation of overhead power?",
+                "answer": "To get an emergency isolation of overhead power, contact the signaller or ECO and provide the structure plate ID for location identification."
+            },
+            {
+                "question": "What are the different types of lineside telephones and their usage restrictions?",
+                "answer": "Types of telephones include:\n- Mobile phone: Use in position of safety, don't become distracted, don't use in an active cab\n- Lineside telephone: Standard use\n- Lineside telephone with red/white limited clearance sign: Use your train as protection\n- Lineside telephone with yellow circle: Only use in emergency\n- Signal post telephone: Standard use\n- Signal post telephone with red/white limited clearance sign: Use your train as protection\n- Signal post telephone with yellow circle: Only use in emergency\n- Signal post telephone with white/yellow diamond with 'x': Only use in emergency\n- Signal with white diamond telephone number underneath: No telephone, signaller aware of presence by track circuit, use GSMR or mobile phone to contact signaller"
+            },
+            {
+                "question": "How would you identify a signal post telephone?",
+                "answer": "A signal post telephone has a white background with black stripes running diagonally from top right to bottom left."
+            },
+            {
+                "question": "How would you identify a lineside telephone?",
+                "answer": "A lineside telephone has a white background with a black cross on it."
+            },
+            {
+                "question": "On adjacent TFL infrastructure, which rails are electrified by DC current and what are the associated risks?",
+                "answer": "On TFL infrastructure, the third rail is electrified by DC current. The risks include: do not use track circuit operating clips on TFL infrastructure, and danger of electrocution if areas near the third rail are flooded."
+            },
+            {
+                "question": "In which section of the rule book can more information on PTS be found?",
+                "answer": "More information on PTS (Personal Track Safety) can be found in Section G1 of the rule book."
+            },
+            {
+                "question": "What environmental conditions will affect your ability to undertake duties safely and why?",
+                "answer": "Environmental conditions affecting safety include:\n- Poor visibility due to darkness, heavy rain, fog, or snowfall\n- High winds or background noise affecting ability to hear approaching trains\n- Slippery underfoot conditions caused by ice, snow, or rain"
+            },
+            {
+                "question": "How frequently should you look up when on or near the line?",
+                "answer": "You should look up every 5 seconds when on or near the line."
+            },
+            {
+                "question": "For how many seconds should you be in a position of safety prior to a train arriving?",
+                "answer": "You should be in a position of safety for at least 10 seconds before a train arrives."
+            },
+            {
+                "question": "What must you ensure before leaving a position of safety?",
+                "answer": "Before leaving a position of safety, you must ensure that the train has passed and no other trains are approaching."
+            },
+            {
+                "question": "When crossing a line, what can and cannot be stepped on?",
+                "answer": "When crossing a line, walk ballast to ballast. Do not step on sleepers, rail, or points."
+            },
+            {
+                "question": "Where would you find information about authorised walking routes?",
+                "answer": "Information about authorised walking routes can be found in the Health and Safety notice case."
+            },
+            {
+                "question": "What is the voltage of the OHLE and what must you consider it to be at all times?",
+                "answer": "The OHLE carries 25,000 volts AC and must be considered live at all times."
+            },
+            {
+                "question": "What information is found on an OHL structure plate ID?",
+                "answer": "An OHL structure plate ID contains:\n- Top letter: route\n- Middle number(s): miles from London or start of route\n- Bottom number(s): number of structure in that mile"
+            },
+            {
+                "question": "What is the minimum distance that must be maintained from the OHLE in an emergency situation and what additional measures must be taken?",
+                "answer": "The minimum distance from OHLE in an emergency is 2.75 meters (9 feet). Additional measures include: ensure OHLE is isolated before getting any closer, ensure you are wearing non-conductive, dry clothing if attempting to move anyone who has been in contact with OHLE, do not stand in any water, and do not use anything metal near OHLE."
+            },
+            {
+                "question": "After an OHLE tripping, how long will it be before the ECO attempts to re-energise?",
+                "answer": "After an OHLE tripping, the ECO will try to re-energise IMMEDIATELY."
+            },
+            {
+                "question": "What must you do if you have been granted an emergency isolation and your relief turns up?",
+                "answer": "If granted an emergency isolation and your relief arrives, contact the ECO, identify yourself, state that your relief has arrived, and pass the phone to your relief who will be taking over the emergency isolation. DO NOT LEAVE BEFORE YOU ARE RELIEVED."
+            },
+            {
+                "question": "What actions should be taken if you notice any faults with the OHLE?",
+                "answer": "If you notice any faults with the OHLE, report immediately to the ECO (this can be via the signaller). Do not go near any faults or anything that may be in contact with the OHLE."
+            },
+            {
+                "question": "What is the location and contact information for the ECO?",
+                "answer": "The ECO is located in Romford. Contact via internal number 175 or external 01708 743545."
+            },
+            {
+                "question": "Who do you report OHLE faults to within the depot?",
+                "answer": "Within the depot, report OHLE faults to the S.P.M. (Shift Production Manager)."
+            },
+            {
+                "question": "In which section of the rule book can more information regarding AC Electrified Lines be found?",
+                "answer": "More information regarding AC Electrified Lines can be found in the AC Electrified Lines section of the rule book."
+            },
+            {
+                "question": "What is the speed of trains past fenced zones?",
+                "answer": "Trains pass fenced zones at line speed, unless ESR (emergency speed restrictions) or TSR (temporary speed restrictions) have been introduced."
+            },
+            {
+                "question": "What is the position of safety for trains running at 110mph?",
+                "answer": "For trains running at 110mph (between 101-125mph), the position of safety is 2 meters (6 foot 6 inches) from the running line."
+            },
+            {
+                "question": "What is the position of safety for trains running at 75mph?",
+                "answer": "For trains running at 75mph (between 0-100mph), the position of safety is 1.25 meters (4 feet) from the running line."
+            },
+            {
+                "question": "What is the position of safety for trains running at 130mph?",
+                "answer": "For trains running over 125mph (including 130mph), there is no safe working distance defined."
+            },
+            {
+                "question": "What should you take with you in a tunnel or at night?",
+                "answer": "When in a tunnel or at night, you should take a hand lamp with you."
+            },
+            {
+                "question": "If you cross the line in advance of a level crossing and the gates are open to road traffic, or a signal is at danger, is it safe to assume there is no train approaching?",
+                "answer": "No, it is not safe to assume there is no train approaching. Barriers could be faulty, a train could have had a SPAD (Signal Passed At Danger), or there could be a runaway train."
+            },
+            {
+                "question": "Do trains always approach from the direction they are signalled?",
+                "answer": "No, trains do not always approach from the direction they are signalled. They could be making a wrong direction move, operating under Single Line Working, be a runaway train, or an engineering train in a possession."
+            },
+            {
+                "question": "What hazards should you look out for on a passing train?",
+                "answer": "Hazards to look for on a passing train include: door(s) open, fire on train, insecure load, headlight not lit, hot axle box, tail light not lit/missing, damage/anything wrapped around pantograph, driver sounding distress horn, and hazard warning lights flashing."
+            },
+            {
+                "question": "What would you consider to be dangerous to a passing train?",
+                "answer": "Dangers to passing trains include: trespassers, large animals on the track, fire, floods, track defects, and obstructions on the line."
+            },
+            {
+                "question": "What three environmental conditions must you take into account when walking line side?",
+                "answer": "When walking line side, consider these environmental conditions: visibility (affected by strong sunlight, fog, darkness, falling snow, heavy rain), ability to hear oncoming trains (affected by high winds, background noise), and underfoot conditions (affected by heavy rainfall, ice, snow)."
+            },
+            {
+                "question": "When walking on the operational railway, where should you walk if possible?",
+                "answer": "When walking on the operational railway, you should walk in the CESS if possible."
+            },
+            {
+                "question": "When walking line side between Shoeburyness and Barking, where should you walk?",
+                "answer": "When walking line side between Shoeburyness and Barking, you should walk in the safe CESS."
+            },
+            {
+                "question": "What does a yellow roundel mean on a SPT or line side telephone?",
+                "answer": "A yellow roundel on a SPT or line side telephone means it has limited clearance and should only be used in an emergency."
+            },
+            {
+                "question": "If you came across a line side fire, what would be your immediate reaction?",
+                "answer": "If you came across a line side fire, your immediate reaction should be to report it immediately to the signaller."
+            },
+            {
+                "question": "If you sighted a trespasser on the railway and were unable to stop your train, what would be your reactions?",
+                "answer": "If you sighted a trespasser on the railway and were unable to stop your train, you should report it immediately to the signaller. If the trespasser is on running lines, make an emergency group call."
+            },
+            {
+                "question": "What is a 'PICEI' in regard to overhead lines?",
+                "answer": "In regard to overhead lines, a 'PICEI' is the Person In Charge of Electrical Isolation."
+            },
+            {
+                "question": "When protecting the line because of collapse or partial collapse of OHLE, what must you be aware of when deciding what emergency equipment should be used?",
+                "answer": "When protecting the line because of collapse or partial collapse of OHLE, be aware that if any OHLE is touching rails, they could also be live. Do not place detonators or track circuit clips on any lines you believe may be in contact with OHLE."
+            },
+            {
+                "question": "Are you permitted to use a mobile phone on the operational railway?",
+                "answer": "Yes, you are permitted to use a mobile phone on the operational railway in an emergency if no other communication is available. Do not allow yourself to become distracted and stay in a position of safety. In times of disruption when detained on a running line, company mobile phone must be switched on after 5 minutes to enable SDC to pass on any messages."
+            },
+            {
+                "question": "List the 4 hand signals you could use to stop a train in an emergency.",
+                "answer": "The 4 hand signals you could use to stop a train in an emergency are:\n1. Red flag\n2. Red light\n3. Any light waved vigorously\n4. Two arms raised straight up in the air"
+            },
+            {
+                "question": "List 4 occasions when it would be necessary to place 3 additional detonators when protecting an incident.",
+                "answer": "4 occasions when it's necessary to place 3 additional detonators when protecting an incident:\n1. Train approaching\n2. Tunnel - at entrance to a tunnel\n3. Trailing points - at from the direction next train is most likely to approach from\n4. Telephone - before using telephone\n5. Signal box - before going to speak to a signaller in a signal box (not at c2c)"
+            },
+            {
+                "question": "Where would you find a first aid kit and a list of qualified first aiders?",
+                "answer": "You would find a first aid kit and a list of qualified first aiders in: Health & Safety notice cases, driving cabs, first aid room, S.P.M office, driver manager's office, west & east end hut East Ham depot, west end hut and shunters hut Shoeburyness depot."
+            }
         ],
-        "correctAnswer": 2
-      },
-      {
-        "question": "What are you required to do if walking near the line and a train approaches?",
-        "options": [
-          "Continue walking but keep a close eye on the train",
-          "Run to the nearest exit point",
-          "Move to a position of safety, acknowledge the train, place tools down, stay in position until train has passed",
-          "Wave to the driver to let them know you've seen them"
+        "quiz": [
+            {
+                "question": "What defines being 'on or near the line'?",
+                "options": [
+                    "Being within 5 meters of the running line with fences between you and the line",
+                    "Being on the line itself or within 3 meters of the running line with no fences or permanent structures between you and the line",
+                    "Being anywhere between the boundary fences regardless of distance from the track",
+                    "Being on the platform edge when a train is approaching"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "What is meant by 'on the line side'?",
+                "options": [
+                    "Being on the operational side of the railway",
+                    "Being within the boundary fence at a point that is 'on or near the line' and can be seen by approaching drivers",
+                    "Being on the side of the train where passengers disembark",
+                    "Being anywhere outside the boundary fence"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "What constitutes a 'position of safety'?",
+                "options": [
+                    "Being at least 5 meters from any track",
+                    "Standing on the ballast between sleepers",
+                    "Being at least the minimum required distance away from a passing train at maximum line speed",
+                    "Being in a designated safety zone marked with yellow lines"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "Which of the following correctly describes the '6 foot' area?",
+                "options": [
+                    "The area between the running line and the boundary fence",
+                    "The running line itself",
+                    "The space between two running lines",
+                    "The space between two sets of running lines"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "Which of the following correctly describes the 'cess' area?",
+                "options": [
+                    "The area between the running line and the boundary fence",
+                    "The running line itself",
+                    "The space between two running lines",
+                    "The space between two sets of running lines"
+                ],
+                "correctAnswer": 0
+            },
+            {
+                "question": "What additional risk is associated with reversible and SIMBIDS lines?",
+                "options": [
+                    "They operate at higher speeds than normal lines",
+                    "They are electrified with both AC and DC systems",
+                    "Trains can be signalled to approach from any direction",
+                    "They have more limited clearance areas than standard lines"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "Under which of these circumstances are you NOT permitted to be on or near the line?",
+                "options": [
+                    "When laying emergency protection",
+                    "When inspecting your train for faults or damage",
+                    "When it is part of your duty with signaller's permission",
+                    "When taking a shortcut to reach another part of the depot quickly"
+                ],
+                "correctAnswer": 3
+            },
+            {
+                "question": "What is the MAPS procedure when a train approaches?",
+                "options": [
+                    "Move to a position of safety, Alert others, Position yourself facing the train, Signal to the driver",
+                    "Monitor the train, Assess the speed, Prepare warning signals, Sound horn",
+                    "Move to a position of safety, Acknowledge approaching train, Place any tools down, Stay in position until train passes and no others are approaching",
+                    "Move quickly, Avoid the 4 foot, Position yourself in a refuge, Signal when clear"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "If you are caught between adjacent lines and a train approaches, what should you do?",
+                "options": [
+                    "Run along the track until you find a position of safety",
+                    "Lay face down in the 4 foot area until the train passes",
+                    "Wave to alert the driver to stop the train",
+                    "Lay face down in the 6 foot, 10 foot or cess, gather loose clothing underneath you, and don't move until the train passes"
+                ],
+                "correctAnswer": 3
+            },
+            {
+                "question": "What does a red and white squares sign with 'warning limited clearance' indicate?",
+                "options": [
+                    "No position of safety for the length of this structure; do not attempt to pass while a train is approaching",
+                    "No position of safety, but there are refuges on the opposite side of the railway line",
+                    "Reduced speed limit in operation for this section",
+                    "Warning of electrical hazards in this area"
+                ],
+                "correctAnswer": 0
+            },
+            {
+                "question": "What does a blue and white squares sign with 'warning no refuges' indicate?",
+                "options": [
+                    "No position of safety in any direction for the length of this structure",
+                    "No position of safety for the length of this structure, but there ARE positions of safety on the opposite side of the railway line",
+                    "No protection for workers in this area",
+                    "No train services operating in this section"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "What does a prohibition notice (man in red circle with red line through) signify?",
+                "options": [
+                    "No unauthorized personnel beyond this point",
+                    "No walking on the track at this location during engineering hours",
+                    "You must not pass this sign while trains are running as you will not be able to reach a position of safety",
+                    "No photography or recording equipment permitted"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "How would you identify a COSS on site?",
+                "options": [
+                    "White armband with red letters",
+                    "Red armband with white letters",
+                    "Blue armband with white letters",
+                    "White armband with blue letters"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "How would you identify a Lookout on site?",
+                "options": [
+                    "White armband with red letters",
+                    "Red armband with white letters",
+                    "Blue armband with white letters",
+                    "White armband with blue letters"
+                ],
+                "correctAnswer": 0
+            },
+            {
+                "question": "How would you identify a Site Warden on site?",
+                "options": [
+                    "White armband with red letters",
+                    "Red armband with white letters",
+                    "Blue armband with white letters",
+                    "White armband with blue letters"
+                ],
+                "correctAnswer": 3
+            },
+            {
+                "question": "What are the principles of Red Zone working?",
+                "options": [
+                    "All trains are stopped and the line is blocked",
+                    "Trains are still running with a COSS appointing a 'Lookout' to watch for approaching trains",
+                    "Only engineering trains are allowed to run",
+                    "Work is conducted during overnight closure periods"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "In Green Zone working, what does 'Safeguarded' mean?",
+                "options": [
+                    "Trains are running but at reduced speeds",
+                    "Trains are running but the workforce has a barrier between it and the running line",
+                    "All lines are blocked",
+                    "Trains are running but the workforce has a human barrier (Site Warden)"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "What is the minimum safe distance that must be maintained from overhead line equipment (OHLE)?",
+                "options": [
+                    "1.25 meters (4 feet)",
+                    "2 meters (6 feet 6 inches)",
+                    "2.75 meters (9 feet)",
+                    "3.25 meters (10 feet 6 inches)"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "What is the purpose of the orange CANT line at cab roof height?",
+                "options": [
+                    "Indicates the maximum loading gauge for freight",
+                    "Shows the maximum height of the pantograph",
+                    "Indicates you cannot go above this line if OHL are still live",
+                    "Marks the boundary between different electrification zones"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "What is the voltage of the OHLE?",
+                "options": [
+                    "750 volts DC",
+                    "11,000 volts AC",
+                    "25,000 volts AC",
+                    "33,000 volts AC"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "What is a Red bond and what action should be taken if one is found unsecured?",
+                "options": [
+                    "A safety bond for emergency braking systems; report it to the driver",
+                    "A structure bond with red cable; do not touch it and report immediately to signaller or ECO",
+                    "A marker for emergency exits; ensure it remains visible",
+                    "A high-voltage power indicator; secure it if you have appropriate PPE"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "After an OHLE tripping, how long before the ECO attempts to re-energise?",
+                "options": [
+                    "5 minutes",
+                    "10 minutes",
+                    "30 minutes",
+                    "Immediately"
+                ],
+                "correctAnswer": 3
+            },
+            {
+                "question": "What information is contained on an OHL structure plate ID?",
+                "options": [
+                    "Manufacturer details, inspection date, and voltage rating",
+                    "Structure type, height, and maintenance schedule",
+                    "Top letter (route), middle numbers (miles from London/start), bottom numbers (structure number in that mile)",
+                    "Warning information, emergency contact, and isolation point"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "How frequently should you look up when 'on or near the line'?",
+                "options": [
+                    "Every 5 seconds",
+                    "Every 10 seconds",
+                    "Every 15 seconds",
+                    "Every 30 seconds"
+                ],
+                "correctAnswer": 0
+            },
+            {
+                "question": "For how many seconds should you be in a position of safety prior to a train arriving?",
+                "options": [
+                    "At least 5 seconds",
+                    "At least 10 seconds",
+                    "At least 15 seconds",
+                    "At least 20 seconds"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "When crossing a line, what should you avoid stepping on?",
+                "options": [
+                    "The ballast only",
+                    "The cess area",
+                    "Sleepers, rails, and points",
+                    "Only the center of the tracks"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "What is the correct position of safety for a train traveling at 95mph?",
+                "options": [
+                    "1.25 meters (4 feet) from the running line",
+                    "2 meters (6 feet 6 inches) from the running line",
+                    "2.75 meters (9 feet) from the running line",
+                    "There is no safe working distance at this speed"
+                ],
+                "correctAnswer": 0
+            },
+            {
+                "question": "What is the correct position of safety for a train traveling at 120mph?",
+                "options": [
+                    "1.25 meters (4 feet) from the running line",
+                    "2 meters (6 feet 6 inches) from the running line",
+                    "2.75 meters (9 feet) from the running line",
+                    "There is no safe working distance at this speed"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "What is the correct position of safety for a train traveling at 130mph?",
+                "options": [
+                    "1.25 meters (4 feet) from the running line",
+                    "2 meters (6 feet 6 inches) from the running line",
+                    "2.75 meters (9 feet) from the running line",
+                    "There is no safe working distance at this speed"
+                ],
+                "correctAnswer": 3
+            },
+            {
+                "question": "Which of these is NOT a valid hand signal to stop a train in an emergency?",
+                "options": [
+                    "Red flag",
+                    "Any light waved vigorously",
+                    "Two arms raised straight up in the air",
+                    "Standing in the 4 foot waving both arms horizontally"
+                ],
+                "correctAnswer": 3
+            },
+            {
+                "question": "In a Green Zone with a fenced area, what is the minimum distance required between a rigid fence and the nearest running line for trains operating at 120mph?",
+                "options": [
+                    "1.25 meters (4 feet)",
+                    "2 meters (6 feet 6 inches)",
+                    "2.75 meters (9 feet)",
+                    "3.25 meters (10 feet 6 inches)"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "In a Green Zone with a fenced area, what is the minimum distance required between a tape fence and the nearest running line for trains operating at 35mph?",
+                "options": [
+                    "1.25 meters (4 feet)",
+                    "2 meters (6 feet 6 inches)",
+                    "2.75 meters (9 feet)",
+                    "3.25 meters (10 feet 6 inches)"
+                ],
+                "correctAnswer": 0
+            },
+            {
+                "question": "A worker notices smoke coming from underneath a passing train. What should they do first?",
+                "options": [
+                    "Contact the ECO immediately",
+                    "Try to signal to the driver to stop",
+                    "Report immediately to the signaller",
+                    "Wait to see if the situation worsens before taking action"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "You need to use a lineside telephone with a yellow circle marking. What does this indicate?",
+                "options": [
+                    "Use with caution due to limited clearance",
+                    "Use only in emergency",
+                    "Use only when train protection is in place",
+                    "Use only during daylight hours"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "When crossing railway lines, what is the correct technique?",
+                "options": [
+                    "Cross diagonally to minimize time spent on the track",
+                    "Cross at 90 degrees, stepping on the rails for stability",
+                    "Cross at 90 degrees, walking ballast to ballast, avoiding stepping on sleepers, rails, and points",
+                    "Cross running from ballast to ballast to minimize time spent on the track"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "You have been granted an emergency isolation of the OHLE and your relief arrives. What must you do?",
+                "options": [
+                    "Brief them and leave immediately",
+                    "Inform the signaller and then leave",
+                    "Contact the ECO, identify yourself, state your relief has arrived, pass the phone to your relief, and do not leave until you are officially relieved",
+                    "Sign the handover book and leave"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "Where on the operational railway should you walk if possible?",
+                "options": [
+                    "In the 4 foot",
+                    "In the 6 foot",
+                    "In the 10 foot",
+                    "In the cess"
+                ],
+                "correctAnswer": 3
+            },
+            {
+                "question": "What must you ensure before leaving a position of safety?",
+                "options": [
+                    "That your high visibility clothing is clean and visible",
+                    "That you have your hand lamp with you",
+                    "That the train has passed and no other trains are approaching",
+                    "That you have signalled to the driver that you are aware of the train"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "What is a PICEI in regard to overhead lines?",
+                "options": [
+                    "Person Investigating Circuit Electrical Issues",
+                    "Protective Insulation for Cable and Electrical Infrastructure",
+                    "Person In Charge of Electrical Isolation",
+                    "Primary Inspection of Conductors and Electrical Interfaces"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "When protecting the line due to collapsed OHLE, what must you be aware of regarding emergency equipment?",
+                "options": [
+                    "Detonators must be placed at least 2.75 meters from any fallen equipment",
+                    "Emergency equipment can only be deployed after power has been confirmed isolated",
+                    "If OHLE is touching rails, they could be live, so do not place detonators or track circuit clips on these lines",
+                    "Standard protection equipment is not effective for electrical incidents"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "Which is NOT one of the 4 hand signals you could use to stop a train in an emergency?",
+                "options": [
+                    "Red flag",
+                    "Red light",
+                    "Any light waved vigorously",
+                    "Both arms extended horizontally to the sides"
+                ],
+                "correctAnswer": 3
+            },
+            {
+                "scenario": "You are working near a railway line during foggy conditions when visibility is reduced to approximately 50 meters. What actions should you take?",
+                "options": [
+                    "Continue working as normal but look up more frequently",
+                    "Use a bright flashlight to improve visibility",
+                    "Stop work and report the hazardous conditions to your supervisor as you cannot maintain adequate lookout",
+                    "Work in pairs with one person solely dedicated to watching for trains"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "scenario": "While inspecting the track, you observe significant damage to the rail that could pose a derailment risk. There is an approaching train approximately 800 meters away. What is your immediate action?",
+                "options": [
+                    "Move to a position of safety and report the damage after the train passes",
+                    "Use emergency hand signals to warn the driver and attempt to stop the train",
+                    "Place detonators on the track if available and then make emergency hand signals",
+                    "Call the ECO for immediate assistance"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "scenario": "You are at a site where overhead line equipment (OHLE) has collapsed and is touching the track. Emergency services are at the scene. What critical information must you communicate to them?",
+                "options": [
+                    "The train timetable for the affected area",
+                    "That the OHLE carries 25,000 volts AC and should be considered live until confirmed isolated",
+                    "The location of the nearest signal box",
+                    "The structural specifications of the OHL equipment"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "scenario": "You are supervising a team working in a Green Zone with a fence separation. The fence is positioned 1.5 meters from the nearest running line where trains run at up to 110mph. Is this setup compliant with safety regulations?",
+                "options": [
+                    "Yes, the minimum distance required is 1.25 meters for speeds up to 125mph",
+                    "No, the minimum distance required is 2 meters for speeds between 101-125mph",
+                    "Yes, as long as the fence is rigid and not tape",
+                    "No, Green Zone working is not permitted for speeds over 100mph"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "scenario": "You observe a train approaching with what appears to be a door partially open. The train is traveling at approximately 70mph. What is the correct immediate action?",
+                "options": [
+                    "Report to the signaller after the train has passed",
+                    "Attempt to signal to passengers to close the door",
+                    "Use emergency hand signals to try to stop the train",
+                    "Make a note of the train number and report it at the end of your shift"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "scenario": "While walking along the cess, you notice a trespasser crossing the tracks ahead. What should you do?",
+                "options": [
+                    "Shout to warn them of the danger and continue your duties",
+                    "Approach them to escort them from the railway",
+                    "Report the trespasser immediately to the signaller",
+                    "Take a photograph as evidence and report at the end of your shift"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "scenario": "You discover a lineside fire that is beginning to spread toward wooden sleepers. What is your immediate action?",
+                "options": [
+                    "Attempt to extinguish the fire if it's small and you have appropriate equipment",
+                    "Report immediately to the signaller",
+                    "Move to a position of safety and monitor the fire's progress",
+                    "Look for the nearest water source to fight the fire"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "scenario": "You need to inspect a fault on your train while on a running line. Which of these procedures is correct?",
+                "options": [
+                    "Conduct the inspection quickly without formal authorization",
+                    "Wait until the next station or depot before inspecting",
+                    "Obtain the signaller's permission, place protection if required, and ensure a position of safety is available",
+                    "Ask another crew member to watch for approaching trains while you inspect"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "scenario": "You are working at night and your hand lamp battery dies. What should you do?",
+                "options": [
+                    "Continue working using the light from your mobile phone",
+                    "Return to a place of safety and obtain a replacement lamp before continuing",
+                    "Work only in areas with adequate ambient lighting",
+                    "Continue working but look up more frequently"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "scenario": "You notice that your colleague is wearing headphones while working near the line. What should you do?",
+                "options": [
+                    "Say nothing as it's their personal responsibility",
+                    "Tell them to turn the volume down to a reasonable level",
+                    "Inform them that they must not wear anything that would affect their ability to hear approaching trains",
+                    "Report them to the signaller immediately"
+                ],
+                "correctAnswer": 2
+            }
         ],
-        "correctAnswer": 2
-      },
-      {
-        "question": "What does MAPS stand for when a train approaches?",
-        "options": [
-          "Move, Acknowledge, Position, Signal",
-          "Move, Acknowledge, Place tools down, Stay in position of safety",
-          "Maps Are Position Signals",
-          "Monitor, Alert, Prepare, Secure"
+        "time-trial": [
+            {
+                "term": "4 foot",
+                "definition": "The running line itself"
+            },
+            {
+                "term": "6 foot",
+                "definition": "The space between two running lines"
+            },
+            {
+                "term": "10 foot",
+                "definition": "The space between two sets of running lines"
+            },
+            {
+                "term": "Cess",
+                "definition": "The space between the running line and the boundary fence"
+            },
+            {
+                "term": "COSS",
+                "definition": "Controller of Site Safety who sets up a safe system of work"
+            },
+            {
+                "term": "Position of safety",
+                "definition": "Being at least the minimum required distance from passing trains at maximum line speed"
+            },
+            {
+                "term": "Red Zone working",
+                "definition": "Working arrangement where trains are still running with lookout protection"
+            },
+            {
+                "term": "Green Zone working",
+                "definition": "Working arrangement where protection is in place through blocking, fencing, or separation"
+            },
+            {
+                "term": "Lookout",
+                "definition": "Person appointed to look out for and warn of approaching trains (white armband with red letters)"
+            },
+            {
+                "term": "Site Warden",
+                "definition": "Person providing a human barrier between workers and running line (white armband with blue letters)"
+            },
+            {
+                "term": "OHLE",
+                "definition": "Overhead Line Equipment carrying 25,000 volts AC"
+            },
+            {
+                "term": "Catenary wire",
+                "definition": "Top wire of the overhead line equipment"
+            },
+            {
+                "term": "Contact wire",
+                "definition": "Wire that the pantograph touches to draw electricity"
+            },
+            {
+                "term": "Structure bond",
+                "definition": "Attached to bottom of structure and track to complete the circuit"
+            },
+            {
+                "term": "Red bond",
+                "definition": "Structure bond with red cable that must not be touched if found unsecured"
+            },
+            {
+                "term": "CANT line",
+                "definition": "Orange line at cab roof height indicating maximum height when OHL is live"
+            },
+            {
+                "term": "ECO",
+                "definition": "Electrical Control Operator responsible for power systems"
+            },
+            {
+                "term": "PICEI",
+                "definition": "Person In Charge of Electrical Isolation"
+            },
+            {
+                "term": "MAPS",
+                "definition": "Procedure when train approaches: Move, Acknowledge, Place tools down, Stay in position"
+            },
+            {
+                "term": "Limited clearance sign",
+                "definition": "Warning indicating no position of safety for the length of a structure"
+            },
+            {
+                "term": "SPT",
+                "definition": "Signal Post Telephone for communication with signallers"
+            },
+            {
+                "term": "SIMBIDS lines",
+                "definition": "Lines where trains can be signaled to approach from any direction"
+            },
+            {
+                "term": "Authorised walking route",
+                "definition": "Designated safe pathway for walking on the operational railway"
+            },
+            {
+                "term": "Minimum safe OHLE distance",
+                "definition": "2.75 meters (9 feet)"
+            },
+            {
+                "term": "ESR",
+                "definition": "Emergency Speed Restriction"
+            },
+            {
+                "term": "TSR",
+                "definition": "Temporary Speed Restriction"
+            },
+            {
+                "term": "SPAD",
+                "definition": "Signal Passed At Danger - train proceeding beyond a stop signal"
+            },
+            {
+                "term": "Yellow circle on telephone",
+                "definition": "Indicates telephone should only be used in emergency"
+            },
+            {
+                "term": "On or near the line",
+                "definition": "On the line or within 3 meters with no fences between you and the line"
+            },
+            {
+                "term": "On the line side",
+                "definition": "Within boundary fence at a point on or near the line visible to drivers"
+            },
+            {
+                "term": "Safeguarded",
+                "definition": "Green Zone working where all lines are blocked"
+            },
+            {
+                "term": "Fenced",
+                "definition": "Green Zone working where a barrier separates workers from running line"
+            },
+            {
+                "term": "Separated",
+                "definition": "Green Zone working where a Site Warden provides human barrier"
+            },
+            {
+                "term": "S.P.M.",
+                "definition": "Shift Production Manager to whom OHLE faults are reported in depot"
+            },
+            {
+                "term": "Red and white squares sign",
+                "definition": "Warning of limited clearance with no position of safety"
+            },
+            {
+                "term": "Blue and white squares sign",
+                "definition": "Warning of no refuges but positions of safety on opposite side"
+            },
+            {
+                "term": "Prohibition notice",
+                "definition": "Sign with man in red circle meaning no passing while trains running"
+            },
+            {
+                "term": "Rigid fence minimum distances",
+                "definition": "0-100mph: 1.25m, 101-125mph: 2m, over 125mph: no safe distance"
+            },
+            {
+                "term": "Tape fence minimum distances",
+                "definition": "0-40mph: 1.25m, 41-125mph: 2m, over 125mph: no safe distance"
+            },
+            {
+                "term": "Emergency hand signals",
+                "definition": "Red flag, red light, any light waved vigorously, two arms raised straight up"
+            }
         ],
-        "correctAnswer": 1
-      },
-      {
-        "question": "What is the minimum safe distance from Overhead Line Equipment (OHLE)?",
-        "options": [
-          "1.25 meters",
-          "2.0 meters",
-          "2.75 meters",
-          "3.0 meters"
-        ],
-        "correctAnswer": 2
-      },
-      {
-        "question": "What is the voltage of the OHLE?",
-        "options": [
-          "750 volts DC",
-          "11,000 volts AC",
-          "25,000 volts AC",
-          "33,000 volts AC"
-        ],
-        "correctAnswer": 2
-      },
-      {
-        "question": "After an OHLE tripping, how quickly will the ECO attempt to re-energize?",
-        "options": [
-          "After at least 10 minutes",
-          "After checking with all trains in the area",
-          "Immediately",
-          "After the fault has been identified and fixed"
-        ],
-        "correctAnswer": 2
-      },
-      {
-        "question": "What personal protective equipment (PPE) do you need when on or near the line?",
-        "options": [
-          "Hard hat, gloves, safety boots",
-          "Clean high vis, safety footwear, hand lamp",
-          "Hard hat, high vis, safety footwear, whistle",
-          "Safety glasses, hard hat, high vis, safety boots"
-        ],
-        "correctAnswer": 1
-      },
-      {
-        "question": "How frequently should you look up when 'on or near the line'?",
-        "options": [
-          "Every 3 seconds",
-          "Every 5 seconds",
-          "Every 10 seconds",
-          "Every 30 seconds"
-        ],
-        "correctAnswer": 1
-      },
-      {
-        "question": "What is a position of safety for a line with speeds between 101-125 mph?",
-        "options": [
-          "1.25 meters (4 foot)",
-          "2 meters (6 foot 6in)",
-          "3 meters (10 foot)",
-          "No safe working distance is possible"
-        ],
-        "correctAnswer": 1
-      },
-      {
-        "question": "What is the role of a COSS?",
-        "options": [
-          "Controller of Signaling Systems",
-          "Chief Operations Safety Supervisor",
-          "Controller of Site Safety",
-          "Coordinator of Safety Standards"
-        ],
-        "correctAnswer": 2
-      }
-    ],
-    "match": [
-      { "term": "4 foot", "definition": "The running line itself" },
-      { "term": "6 foot", "definition": "Space between two running lines" },
-      { "term": "10 foot", "definition": "Space between two sets of running lines" },
-      { "term": "Cess", "definition": "Space between running line and boundary fence" },
-      { "term": "OHLE", "definition": "25,000 volts AC, live at all times" },
-      { "term": "COSS", "definition": "Controller of Site Safety" },
-      { "term": "PICEI", "definition": "Person In Charge of Electrical Isolation" },
-      { "term": "Red Zone", "definition": "Working while trains are still running" },
-      { "term": "Green Zone", "definition": "Working with all lines blocked, fenced, or separated" },
-      { "term": "Red and white squares", "definition": "Warning limited clearance sign" },
-      { "term": "Blue and white squares", "definition": "Warning no refuges sign" },
-      { "term": "Structure plate", "definition": "Identifies OHL location" },
-      { "term": "Lookout", "definition": "White armband with red letters" },
-      { "term": "Position of safety", "definition": "Minimum required distance from passing train" },
-      { "term": "Red bond", "definition": "Structure bond with red cable, do not touch if unsecured" },
-      { "term": "Orange line (CANT)", "definition": "Cannot go above if OHL still live" }
-    ]
-  }
+        "true-false": [
+            {
+                "statement": "When on or near the line, you are required to look up once every 30 seconds to check for approaching trains.",
+                "isTrue": false,
+                "explanation": "This statement is false. When on or near the line, you are required to look up every 5 seconds to check for approaching trains. This frequent checking is essential for safety due to the high speeds at which trains can approach."
+            },
+            {
+                "statement": "A position of safety for trains running at 115mph is 2 meters (6 feet 6 inches) from the running line.",
+                "isTrue": true,
+                "explanation": "This statement is true. For trains running between 101-125mph, the position of safety is 2 meters (6 feet 6 inches) from the running line. For speeds between 0-100mph, it's 1.25 meters (4 feet), and for speeds over 125mph, there is no defined safe working distance."
+            },
+            {
+                "statement": "The voltage of OHLE (Overhead Line Equipment) is 12,500 volts AC.",
+                "isTrue": false,
+                "explanation": "This statement is false. The voltage of OHLE is 25,000 volts AC (not 12,500 volts). This high voltage is extremely dangerous and the OHLE must be considered live at all times."
+            },
+            {
+                "statement": "In a situation where a train is approaching, you should be in a position of safety at least 10 seconds before the train arrives.",
+                "isTrue": true,
+                "explanation": "This statement is true. When on or near the line, you must be in a position of safety at least 10 seconds before a train arrives to ensure adequate safety margins."
+            },
+            {
+                "statement": "When crossing railway lines, it is acceptable to step on sleepers for stability if the ballast is uneven.",
+                "isTrue": false,
+                "explanation": "This statement is false. When crossing railway lines, you should walk ballast to ballast and must never step on sleepers, rails, or points regardless of underfoot conditions, as this could cause a trip hazard or risk of electrical conduction."
+            },
+            {
+                "statement": "A COSS (Controller of Site Safety) wears a white armband with blue lettering.",
+                "isTrue": false,
+                "explanation": "This statement is false. A COSS wears a BLUE armband with WHITE lettering. A Site Warden wears a white armband with blue lettering."
+            },
+            {
+                "statement": "After an OHLE tripping, the ECO will wait 5 minutes before attempting to re-energize the system.",
+                "isTrue": false,
+                "explanation": "This statement is false. After an OHLE tripping, the ECO will attempt to re-energize IMMEDIATELY. This is critical to understand as it means you should never assume the power will remain off for any period of time after a trip."
+            },
+            {
+                "statement": "If you find an unsecured red bond, you should attempt to secure it if you have the appropriate training.",
+                "isTrue": false,
+                "explanation": "This statement is false. If you find an unsecured red bond, you must not touch it under any circumstances. You should report it immediately to the signaller or ECO."
+            },
+            {
+                "statement": "In the scenario where you are caught between adjacent lines and a train approaches, you should lay face down in the 4 foot until the train passes.",
+                "isTrue": false,
+                "explanation": "This statement is false. If caught between adjacent lines when a train approaches, you should lay face down in the 6 foot, 10 foot, or CESS, but NEVER IN THE 4 FOOT. You should gather any loose clothing underneath you and not move until the train has passed and you're sure no other trains are approaching."
+            },
+            {
+                "statement": "You can use track circuit operating clips on TFL infrastructure where the third rail is electrified by DC current.",
+                "isTrue": false,
+                "explanation": "This statement is false. You must not use track circuit operating clips on TFL infrastructure where the third rail is electrified by DC current due to the danger of electrocution."
+            },
+            {
+                "statement": "A blue and white squares sign with 'warning no refuges' means there is no position of safety for the entire length of this structure in either direction.",
+                "isTrue": false,
+                "explanation": "This statement is false. A blue and white squares sign with 'warning no refuges' means there is no position of safety for the length of this structure; however, there ARE positions of safety or refuges ON THE OPPOSITE SIDE OF THE RAILWAY LINE."
+            },
+            {
+                "statement": "If a lineside telephone has a yellow circle marking, it can be used for routine communications.",
+                "isTrue": false,
+                "explanation": "This statement is false. A lineside telephone with a yellow circle marking should only be used in an emergency. Using it for routine communications could potentially block important emergency calls."
+            },
+            {
+                "statement": "It's safe to assume no train is approaching if the level crossing gates are open to road traffic.",
+                "isTrue": false,
+                "explanation": "This statement is false. You should never assume no train is approaching just because level crossing gates are open to road traffic. The barriers could be faulty, a train could have had a SPAD (Signal Passed At Danger), or there could be a runaway train."
+            },
+            {
+                "statement": "In a scenario where the OHLE has collapsed and is touching the tracks, you should place detonators on all lines to protect the area.",
+                "isTrue": false,
+                "explanation": "This statement is false. If OHLE has collapsed and is touching the tracks, do not place detonators or track circuit clips on any lines you believe may be in contact with OHLE, as the rails could be live. Report the emergency immediately to the signaller or ECO."
+            },
+            {
+                "statement": "When working in foggy conditions with visibility reduced to 50 meters, it's acceptable to continue working with increased vigilance.",
+                "isTrue": false,
+                "explanation": "This statement is false. In foggy conditions where visibility is reduced to approximately 50 meters, you should stop work and report the hazardous conditions to your supervisor, as you cannot maintain adequate lookout for approaching trains. Safety always takes priority over work completion."
+            },
+            {
+                "statement": "Trains always approach from the direction they are signaled.",
+                "isTrue": false,
+                "explanation": "This statement is false. Trains do not always approach from the direction they are signaled. They could be making a wrong direction move, operating under Single Line Working, be a runaway train, or an engineering train in a possession."
+            },
+            {
+                "statement": "In a Green Zone with a tape fence, the minimum safe distance for trains running at 35mph is 1.25 meters (4 feet).",
+                "isTrue": true,
+                "explanation": "This statement is true. In a Green Zone with a tape fence, for trains running between 0-40mph, the minimum safe distance is 1.25 meters (4 feet). For trains running between 41-125mph, the distance increases to 2 meters (6 feet 6 inches)."
+            },
+            {
+                "statement": "A mobile phone can be used on the operational railway in an emergency if no other communication is available, but you must remain in a position of safety.",
+                "isTrue": true,
+                "explanation": "This statement is true. A mobile phone can be used on the operational railway in an emergency if no other communication is available. However, you must remain in a position of safety and not allow yourself to become distracted by the phone."
+            },
+            {
+                "statement": "If you have been granted an emergency isolation of the OHLE and your relief arrives, you should immediately brief them and leave.",
+                "isTrue": false,
+                "explanation": "This statement is false. If you have been granted an emergency isolation and your relief arrives, you must contact the ECO, identify yourself, state that your relief has arrived, and pass the phone to your relief who will be taking over the emergency isolation. You must NOT LEAVE BEFORE YOU ARE OFFICIALLY RELIEVED."
+            },
+            {
+                "statement": "In a scenario where you notice a hot axle box on a passing train, it's sufficient to report this at the end of your shift.",
+                "isTrue": false,
+                "explanation": "This statement is false. If you notice a hot axle box on a passing train, this is a serious hazard that could lead to derailment. You must report it immediately to the signaller so they can take appropriate action to stop the train and have it inspected."
+            },
+            {
+                "statement": "When walking between Shoeburyness and Barking, you should walk in the 6 foot if no other position is available.",
+                "isTrue": false,
+                "explanation": "This statement is false. When walking between Shoeburyness and Barking, you should walk in the safe cess. The 6 foot area is the space between two running lines and is not a safe walking route."
+            },
+            {
+                "statement": "Being 'on or near the line' means being within 5 meters of any railway track regardless of barriers.",
+                "isTrue": false,
+                "explanation": "This statement is false. Being 'on or near the line' means being on the line itself or within 3 meters (10 feet) of the running line and there are no fences or permanent structures between you and the running line."
+            },
+            {
+                "statement": "The purpose of the MAPS procedure is to ensure your safety when a train approaches.",
+                "isTrue": true,
+                "explanation": "This statement is true. The MAPS procedure (Move to position of safety, Acknowledge approaching train, Place tools down, Stay in position until train passes and no others approaching) is designed to ensure worker safety when trains approach."
+            },
+            {
+                "statement": "When wearing high visibility clothing on or near the line, it doesn't matter if it's dirty as long as it's the correct color.",
+                "isTrue": false,
+                "explanation": "This statement is false. When on or near the line, you must wear clean high visibility clothing. Dirty high visibility clothing has reduced visibility and effectiveness, potentially making you less visible to approaching train drivers."
+            },
+            {
+                "statement": "A rigid fence in Green Zone working must be at least 2 meters from the running line for trains operating at speeds between 101-125mph.",
+                "isTrue": true,
+                "explanation": "This statement is true. For rigid fences in Green Zone working, the minimum distance from the running line is 2 meters (6 feet 6 inches) for trains operating at speeds between 101-125mph."
+            },
+            {
+                "statement": "The 'cess' is the space between two running lines.",
+                "isTrue": false,
+                "explanation": "This statement is false. The 'cess' is the space between the running line and the boundary fence. The space between two running lines is called the '6 foot'."
+            },
+            {
+                "statement": "In Red Zone working, no trains are running on any lines.",
+                "isTrue": false,
+                "explanation": "This statement is false. In Red Zone working, trains are still running. The COSS will appoint a 'Lookout' to look out for trains approaching the work area. Green Zone 'Safeguarded' working is where all lines are blocked."
+            },
+            {
+                "statement": "Raising both arms straight up in the air is an acceptable emergency hand signal to stop a train.",
+                "isTrue": true,
+                "explanation": "This statement is true. Raising two arms straight up in the air is one of the four acceptable hand signals that can be used to stop a train in an emergency, along with a red flag, a red light, or any light waved vigorously."
+            },
+            {
+                "statement": "When working in a tunnel or at night, it's optional to have a hand lamp with you.",
+                "isTrue": false,
+                "explanation": "This statement is false. When in a tunnel or at night, you must take a hand lamp with you. This is essential safety equipment to ensure visibility both for yourself and to be seen by others, including train drivers."
+            },
+            {
+                "statement": "Three additional detonators should be placed when protecting an incident if you are near a tunnel entrance.",
+                "isTrue": true,
+                "explanation": "This statement is true. It is necessary to place 3 additional detonators when protecting an incident if you are at a tunnel entrance, as this provides additional warning to approaching trains in a location where visibility may be limited."
+            },
+            {
+                "statement": "The ECO is located in Romford and can be contacted via internal number 175 or external 01708 743545.",
+                "isTrue": true,
+                "explanation": "This statement is true. The Electrical Control Operator (ECO) is located in Romford and can be contacted via internal number 175 or external 01708 743545 for reporting OHLE issues or requesting emergency isolations."
+            },
+            {
+                "statement": "A Site Warden's role is primarily to operate signal equipment in emergency situations.",
+                "isTrue": false,
+                "explanation": "This statement is false. A Site Warden provides a human barrier between workers and the running line in 'Separated' Green Zone working. They are appointed by the COSS/SWL and are identified by a white armband with SITE WARDEN written in blue letters."
+            },
+            {
+                "statement": "To get an emergency isolation of overhead power, you must contact the nearest signal box directly.",
+                "isTrue": false,
+                "explanation": "This statement is false. To get an emergency isolation of overhead power, you should contact the signaller or ECO and provide the structure plate ID for location identification."
+            },
+            {
+                "statement": "When working under a Green Zone 'Separated' arrangement, there must be at least 6 feet 6 inches (2 meters) between the site of work and the nearest running line.",
+                "isTrue": true,
+                "explanation": "This statement is true. In a Green Zone 'Separated' arrangement, there must be at least 6 feet 6 inches (2 meters) between the site of work and the nearest running line, with a Site Warden providing a human barrier."
+            },
+            {
+                "statement": "In a scenario where you observe a trespasser on the railway, you should approach them to escort them to safety.",
+                "isTrue": false,
+                "explanation": "This statement is false. If you observe a trespasser on the railway, you should not approach them but should report it immediately to the signaller. If the trespasser is on running lines and you're operating a train that cannot stop, make an emergency group call."
+            },
+            {
+                "statement": "When protecting a line due to an incident, you should place 3 additional detonators before using a telephone.",
+                "isTrue": true,
+                "explanation": "This statement is true. When protecting a line due to an incident, you should place 3 additional detonators before using a telephone. This is one of the occasions when additional detonators are required."
+            },
+            {
+                "statement": "If you detect a lineside fire, you should first attempt to extinguish it if it's small.",
+                "isTrue": false,
+                "explanation": "This statement is false. If you detect a lineside fire, your immediate reaction should be to report it to the signaller. Do not attempt to extinguish it yourself as this could place you in danger and delay the professional response."
+            },
+            {
+                "statement": "When examining the structure plate ID on OHL equipment, the middle number(s) represent miles from London or the start of the route.",
+                "isTrue": true,
+                "explanation": "This statement is true. On an OHL structure plate ID, the top letter represents the route, the middle number(s) represent miles from London or the start of the route, and the bottom number(s) represent the number of the structure in that mile."
+            },
+            {
+                "statement": "Work being conducted in a 'Safeguarded' Green Zone means that trains are still running but at reduced speed.",
+                "isTrue": false,
+                "explanation": "This statement is false. 'Safeguarded' Green Zone working means that all lines are blocked, so no trains are running. This is different from 'Fenced' or 'Separated' Green Zone working where trains are still running but protection is in place."
+            }
+        ]
+    }
 }
