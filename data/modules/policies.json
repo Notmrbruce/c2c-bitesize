@@ -2,7 +2,7 @@
   "id": "policies",
   "title": "Policies",
   "description": "Essential company policies, responsibility requirements, and regulations for safe operations",
-  "methods": ["flashcards", "quiz", "match"],
+  "methods": ["flashcards", "quiz", "time-trial"],
   "content": {
     "flashcards": [
       {
@@ -160,7 +160,7 @@
         "correctAnswer": 2
       }
     ],
-    "match": [
+    "time-trial": [
       { "term": "Error", "definition": "Genuine mistake, did not mean for it to happen" },
       { "term": "Violation", "definition": "Knowing you broke a rule or covering up a mistake" },
       { "term": "MFA Policy", "definition": "Applies after 5 days total or 2 instances in 13 weeks" },
