@@ -1,78 +1,96 @@
 {
-  "id": "notices",
-  "title": "Notices",
-  "description": "Various notice cases, their contents, importance, and durations",
-  "methods": ["flashcards", "quiz", "match"],
+  "id": "railway-notices",
+  "title": "Railway Notices and Notice Cases",
+  "description": "This module covers all aspects of railway notice cases, including what to check when signing on, the contents of different notice cases, and how long notices remain posted in each case.",
+  "methods": ["flashcards", "quiz", "time-trial", "true-false"],
   "content": {
     "flashcards": [
       {
-        "question": "When signing on what notice cases must you check and why?",
-        "answer": "Roster notice case - to check you are on the right job and to see if your job has AW and your next shift. Late notice case - to check for any speed restrictions, ice mode, and safety of the line notices. Train crew notice case - to check for any traction notices or any notices moved from late notice case and any no safety of the line notices. Incident notice case - to check on any latest operational incidents. Low adhesion notice case to check colour and areas treated by RHTT."
+        "question": "What are the five notice cases you must check when signing on?",
+        "answer": "1. Roster notice case\n2. Late notice case\n3. Train crew notice case\n4. Incident notice case\n5. Low adhesion notice case"
+      },
+      {
+        "question": "Why must you check the Roster notice case?",
+        "answer": "To check you are on the right job, to see if your job has AW (Additional Work), and to check your next shift."
+      },
+      {
+        "question": "Why must you check the Late notice case?",
+        "answer": "To check for any speed restrictions, ice mode activation, and safety of the line notices."
+      },
+      {
+        "question": "Why must you check the Train crew notice case?",
+        "answer": "To check for any traction notices, any notices moved from the late notice case, and any non-safety of the line notices."
+      },
+      {
+        "question": "Why must you check the Incident notice case?",
+        "answer": "To check on any latest operational incidents."
+      },
+      {
+        "question": "Why must you check the Low adhesion notice case?",
+        "answer": "To check the colour of the low adhesion day and areas treated by RHTT (Rail Head Treatment Train)."
       },
       {
         "question": "What information would you find in the late notice case?",
-        "answer": "Emergency speed restrictions, ice mode activation any other safety of the line notices e.g. colour of low adhesion day, register."
+        "answer": "Emergency speed restrictions (ESRs), ice mode activation, any other safety of the line notices (e.g., colour of low adhesion day), and a register."
       },
       {
-        "question": "How long will a notice be posted in late notice case?",
-        "answer": "Posted for 72hrs (ESR's can be re-issued or entered in WON then they become TSR's)."
+        "question": "How long will a notice be posted in the late notice case?",
+        "answer": "Posted for 72 hours. Emergency Speed Restrictions (ESRs) can be re-issued or entered in WON (Weekly Operating Notice), after which they become Temporary Speed Restrictions (TSRs)."
       },
       {
         "question": "What information would you find in the train crew notice case?",
-        "answer": "Notices moved from late notice case, Traction notices, any other non safety of the line notices, register."
+        "answer": "Notices moved from the late notice case, traction notices, any other non-safety of the line notices, and a register."
       },
       {
-        "question": "How long will the notice be posted in the train crew notice case?",
+        "question": "How long will a notice be posted in the train crew notice case?",
         "answer": "4 weeks."
       },
       {
         "question": "What information would you find in the incident notice case?",
-        "answer": "Recent operational incidents, list of multi SPAD signals, register."
+        "answer": "Recent operational incidents, list of multi SPAD (Signal Passed At Danger) signals, and a register."
       },
       {
         "question": "How long will a notice be posted in the incident notice case?",
-        "answer": "4 weeks, multi SPAD signal list stays in there permanently."
+        "answer": "4 weeks. However, the multi SPAD signal list stays in there permanently."
       },
       {
         "question": "What information would you find in the health and safety notice case?",
-        "answer": "First aid arrangements, authorised walking routes, H&S policy statement, care first policy, phone numbers."
+        "answer": "First aid arrangements, authorised walking routes, H&S policy statement, care first policy, and phone numbers."
       },
       {
         "question": "How long will a notice be posted in the health and safety notice case?",
         "answer": "Stays in permanently or until updated."
       },
       {
-        "question": "What is the purpose of the register in notice cases?",
-        "answer": "The register records which notices have been posted and when they were added or removed from the notice case."
+        "question": "What happens to Emergency Speed Restrictions (ESRs) after the 72-hour period in the late notice case?",
+        "answer": "They can either be re-issued for another 72 hours, or they can be entered into the Weekly Operating Notice (WON), at which point they become Temporary Speed Restrictions (TSRs)."
       },
       {
-        "question": "What does ESR stand for?",
-        "answer": "Emergency Speed Restriction - found in the late notice case."
+        "question": "If you missed checking a notice case when signing on, what should you do?",
+        "answer": "You should inform your supervisor immediately and check the missed notice case before commencing any duties. Operating without awareness of relevant notices can compromise safety."
       },
       {
-        "question": "What does TSR stand for?",
-        "answer": "Temporary Speed Restriction - once an ESR is entered in the WON it becomes a TSR."
+        "question": "What is the difference between 'safety of the line' and 'non-safety of the line' notices?",
+        "answer": "Safety of the line notices directly impact safe train operation and infrastructure (like speed restrictions, ice mode activation), while non-safety of the line notices are important operational information but don't directly impact immediate safe movement of trains."
       },
       {
-        "question": "What is a Multi SPAD signal?",
-        "answer": "A signal that has been passed at danger more than once and is listed permanently in the incident notice case."
-      },
-      {
-        "question": "What is the low adhesion notice case used for?",
-        "answer": "To check the current color status for low adhesion and areas treated by Rail Head Treatment Trains (RHTT)."
-      },
-      {
-        "question": "What does RHTT stand for in the low adhesion notice case?",
-        "answer": "Rail Head Treatment Train - used to treat areas of low adhesion on the track."
-      },
-      {
-        "question": "What does AW stand for in the roster notice case?",
-        "answer": "Altered Working - indicates that there are changes to your scheduled work."
+        "question": "What action should you take if you find a traction notice in the train crew notice case that affects your route?",
+        "answer": "You should read it thoroughly, understand how it impacts your journey, and adjust your driving technique accordingly. If you're unsure about the implications, seek clarification from a supervisor before proceeding."
       }
     ],
     "quiz": [
       {
-        "question": "How long will a notice be posted in the late notice case?",
+        "question": "Which notice case would you check to find information about ice mode activation?",
+        "options": [
+          "Roster notice case",
+          "Late notice case",
+          "Train crew notice case",
+          "Incident notice case"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "How long does a notice remain in the late notice case?",
         "options": [
           "24 hours",
           "48 hours",
@@ -82,113 +100,314 @@
         "correctAnswer": 2
       },
       {
-        "question": "How long will a notice be posted in the train crew notice case?",
-        "options": [
-          "1 week",
-          "2 weeks",
-          "3 weeks",
-          "4 weeks"
-        ],
-        "correctAnswer": 3
-      },
-      {
-        "question": "What information would you find in the late notice case?",
-        "options": [
-          "Traction notices",
-          "Emergency speed restrictions and safety of the line notices",
-          "First aid arrangements",
-          "Recent operational incidents"
-        ],
-        "correctAnswer": 1
-      },
-      {
-        "question": "What information would you find in the incident notice case?",
+        "question": "Which of the following can you find in the incident notice case?",
         "options": [
           "Emergency speed restrictions",
           "Traction notices",
-          "Recent operational incidents and multi SPAD signals",
+          "List of multi SPAD signals",
           "First aid arrangements"
         ],
         "correctAnswer": 2
       },
       {
-        "question": "What happens to an ESR after it is entered in the WON?",
+        "question": "What happens to Emergency Speed Restrictions (ESRs) after they expire in the late notice case?",
         "options": [
-          "It remains an ESR",
-          "It becomes a TSR",
-          "It is removed immediately",
-          "It is moved to the train crew notice case"
+          "They are removed completely",
+          "They can be re-issued or entered in WON to become TSRs",
+          "They automatically move to the train crew notice case",
+          "They become permanent speed restrictions"
         ],
         "correctAnswer": 1
       },
       {
-        "question": "How long does the multi SPAD signal list remain in the incident notice case?",
+        "question": "You're signing on and notice that the low adhesion notice case shows a red status. What does this indicate?",
         "options": [
-          "4 weeks",
-          "8 weeks",
-          "3 months",
-          "Permanently"
-        ],
-        "correctAnswer": 3
-      },
-      {
-        "question": "What is the purpose of checking the roster notice case?",
-        "options": [
-          "To check emergency speed restrictions",
-          "To check for operational incidents",
-          "To check you are on the right job, see if your job has altered workings, and check your next shift",
-          "To check first aid arrangements"
+          "No low adhesion issues expected",
+          "Moderate low adhesion risk in some areas",
+          "High risk of low adhesion across the network",
+          "Low adhesion notice case is closed for maintenance"
         ],
         "correctAnswer": 2
       },
       {
-        "question": "What should you check in the low adhesion notice case?",
+        "question": "You find a notice in the train crew notice case about overhead line restrictions. How long will this notice remain posted?",
         "options": [
-          "First aid arrangements",
-          "Recent operational incidents",
-          "Traction notices",
-          "Color status and areas treated by RHTT"
+          "72 hours",
+          "1 week",
+          "2 weeks",
+          "4 weeks"
         ],
         "correctAnswer": 3
       },
       {
-        "question": "What does AW stand for in the roster notice case?",
+        "question": "Which notice case would contain information about authorised walking routes?",
         "options": [
-          "All Week",
-          "Altered Working",
-          "Available Worker",
-          "Advance Warning"
+          "Roster notice case",
+          "Train crew notice case",
+          "Incident notice case",
+          "Health and safety notice case"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "You're signing on for your shift and find that the RHTT (Rail Head Treatment Train) has treated your route. Where would you have found this information?",
+        "options": [
+          "Roster notice case",
+          "Late notice case",
+          "Low adhesion notice case",
+          "Health and safety notice case"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "A severe storm has caused multiple tree falls on your route. In which notice case would you expect to find information about temporary speed restrictions related to this?",
+        "options": [
+          "Roster notice case",
+          "Late notice case",
+          "Incident notice case",
+          "Health and safety notice case"
         ],
         "correctAnswer": 1
       },
       {
-        "question": "How long is information kept in the health and safety notice case?",
+        "question": "You're driving on a route with a signal that has been identified as a multi SPAD signal. Where would you have found this information?",
         "options": [
+          "Late notice case",
+          "Train crew notice case",
+          "Incident notice case",
+          "Health and safety notice case"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Scenario: You're signing on and the Late notice case shows an Emergency Speed Restriction (ESR) of 20mph between signals R456 and R489. After how long would you expect this notice to be removed if not reissued?",
+        "options": [
+          "24 hours",
+          "48 hours",
           "72 hours",
-          "4 weeks",
-          "3 months",
-          "Permanently or until updated"
+          "1 week"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Which of these notice cases contains information that stays permanently or until updated?",
+        "options": [
+          "Late notice case",
+          "Train crew notice case",
+          "Incident notice case",
+          "Health and safety notice case"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "Scenario: You're checking the notice cases and find that an ESR from three days ago is now in the train crew notice case. What has likely happened?",
+        "options": [
+          "The ESR has been extended as a TSR in the WON",
+          "An administrative error has occurred",
+          "The notice has been moved as it's no longer safety critical",
+          "The ESR has expired but remains for reference"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "question": "You need to check if there are any updates to first aid arrangements at your depot. Which notice case would contain this information?",
+        "options": [
+          "Roster notice case",
+          "Train crew notice case",
+          "Incident notice case",
+          "Health and safety notice case"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "If you needed to find the Care First policy phone numbers, where would you look?",
+        "options": [
+          "Roster notice case",
+          "Late notice case",
+          "Incident notice case",
+          "Health and safety notice case"
         ],
         "correctAnswer": 3
       }
     ],
-    "match": [
-      { "term": "Late Notice Case", "definition": "Contains emergency speed restrictions" },
-      { "term": "Train Crew Notice Case", "definition": "Contains notices for 4 weeks" },
-      { "term": "Incident Notice Case", "definition": "Contains recent operational incidents" },
-      { "term": "Health & Safety Notice Case", "definition": "Contains first aid arrangements" },
-      { "term": "Roster Notice Case", "definition": "Shows your job and next shift" },
-      { "term": "Low Adhesion Notice Case", "definition": "Shows color and areas treated by RHTT" },
-      { "term": "ESR", "definition": "Emergency Speed Restriction" },
-      { "term": "TSR", "definition": "Temporary Speed Restriction" },
-      { "term": "72 Hours", "definition": "Duration notices remain in late notice case" },
-      { "term": "4 Weeks", "definition": "Duration notices remain in train crew notice case" },
-      { "term": "Multi SPAD Signal", "definition": "Signal passed at danger multiple times" },
-      { "term": "Register", "definition": "Records notices posted in each case" },
-      { "term": "RHTT", "definition": "Rail Head Treatment Train" },
-      { "term": "AW", "definition": "Altered Working on roster notice" },
-      { "term": "Ice Mode", "definition": "Found in late notice case when activated" },
-      { "term": "Safety Of The Line", "definition": "Critical notices found in late notice case" }
+    "time-trial": [
+      {
+        "term": "Roster notice case",
+        "definition": "Contains information about your job, additional work, and next shift"
+      },
+      {
+        "term": "Late notice case",
+        "definition": "Contains emergency speed restrictions, ice mode, and safety of the line notices"
+      },
+      {
+        "term": "Train crew notice case",
+        "definition": "Contains traction notices and non-safety of the line notices"
+      },
+      {
+        "term": "Incident notice case",
+        "definition": "Contains recent operational incidents and multi SPAD signal list"
+      },
+      {
+        "term": "Low adhesion notice case",
+        "definition": "Contains information on adhesion conditions and RHTT treatment areas"
+      },
+      {
+        "term": "ESR",
+        "definition": "Emergency Speed Restriction"
+      },
+      {
+        "term": "TSR",
+        "definition": "Temporary Speed Restriction"
+      },
+      {
+        "term": "WON",
+        "definition": "Weekly Operating Notice"
+      },
+      {
+        "term": "RHTT",
+        "definition": "Rail Head Treatment Train"
+      },
+      {
+        "term": "SPAD",
+        "definition": "Signal Passed At Danger"
+      },
+      {
+        "term": "Multi SPAD signal",
+        "definition": "A signal that has been passed at danger multiple times"
+      },
+      {
+        "term": "Ice mode",
+        "definition": "Operational mode during icy conditions"
+      },
+      {
+        "term": "Safety of the line notice",
+        "definition": "Notice directly impacting safe train operation"
+      },
+      {
+        "term": "Non-safety of the line notice",
+        "definition": "Important operational notice not directly impacting immediate safety"
+      },
+      {
+        "term": "AW",
+        "definition": "Additional Work"
+      },
+      {
+        "term": "Late notice case retention period",
+        "definition": "72 hours"
+      },
+      {
+        "term": "Train crew notice case retention period",
+        "definition": "4 weeks"
+      },
+      {
+        "term": "Incident notice case retention period",
+        "definition": "4 weeks (except multi SPAD list which is permanent)"
+      },
+      {
+        "term": "Health and safety notice case retention period",
+        "definition": "Permanent or until updated"
+      },
+      {
+        "term": "Traction notice",
+        "definition": "Notice relating to locomotives or power systems"
+      },
+      {
+        "term": "Low adhesion day colour",
+        "definition": "Indicator of adhesion conditions severity (e.g., red for high risk)"
+      },
+      {
+        "term": "Care First policy",
+        "definition": "Employee assistance program information found in H&S notice case"
+      },
+      {
+        "term": "Register",
+        "definition": "Log of notices contained within a notice case"
+      },
+      {
+        "term": "Authorised walking routes",
+        "definition": "Safe pathways for staff movement found in H&S notice case"
+      },
+      {
+        "term": "Notice case signing-on procedure",
+        "definition": "Checking all relevant notice cases before commencing duties"
+      }
+    ],
+    "true-false": [
+      {
+        "statement": "The Late notice case contains information about your next shift.",
+        "isTrue": false,
+        "explanation": "Information about your next shift is found in the Roster notice case, not the Late notice case. The Late notice case contains emergency speed restrictions, ice mode activation, and safety of the line notices."
+      },
+      {
+        "statement": "Notices in the train crew notice case remain posted for 72 hours.",
+        "isTrue": false,
+        "explanation": "Notices in the train crew notice case remain posted for 4 weeks, not 72 hours. The 72-hour posting period applies to the Late notice case."
+      },
+      {
+        "statement": "The multi SPAD signal list stays permanently in the incident notice case.",
+        "isTrue": true,
+        "explanation": "This is correct. While most notices in the incident notice case remain for 4 weeks, the multi SPAD signal list stays permanently in the incident notice case."
+      },
+      {
+        "statement": "Traction notices can be found in the Late notice case.",
+        "isTrue": false,
+        "explanation": "Traction notices are found in the Train crew notice case, not the Late notice case. The Late notice case contains emergency speed restrictions and other safety of the line notices."
+      },
+      {
+        "statement": "The Health and safety notice case contains information about authorized walking routes.",
+        "isTrue": true,
+        "explanation": "This is correct. The Health and safety notice case contains information about first aid arrangements, authorized walking routes, H&S policy statement, care first policy, and phone numbers."
+      },
+      {
+        "statement": "In a scenario where you find an Emergency Speed Restriction (ESR) notice that's been in place for 4 days, it would still be in the Late notice case.",
+        "isTrue": false,
+        "explanation": "This is false. ESRs are posted in the Late notice case for 72 hours (3 days) only. After this period, they are either re-issued or entered in the Weekly Operating Notice (WON), becoming Temporary Speed Restrictions (TSRs)."
+      },
+      {
+        "statement": "If ice mode is activated on your route, this information would be found in the Incident notice case.",
+        "isTrue": false,
+        "explanation": "Information about ice mode activation would be found in the Late notice case, not the Incident notice case. The Late notice case contains safety of the line notices including ice mode activation."
+      },
+      {
+        "statement": "When signing on, checking the Low adhesion notice case is optional if conditions appear dry.",
+        "isTrue": false,
+        "explanation": "This is false. You must check all notice cases when signing on, including the Low adhesion notice case, regardless of apparent conditions. The Low adhesion notice case provides official information about adhesion conditions and RHTT treated areas."
+      },
+      {
+        "statement": "If a section of track has been treated by the Rail Head Treatment Train (RHTT), this information would be found in the Low adhesion notice case.",
+        "isTrue": true,
+        "explanation": "This is correct. The Low adhesion notice case contains information about areas treated by the Rail Head Treatment Train (RHTT)."
+      },
+      {
+        "statement": "The register in each notice case serves as a log of all the notices currently contained within that case.",
+        "isTrue": true,
+        "explanation": "This is correct. Each notice case contains a register that serves as a log of all notices currently contained within that particular case."
+      },
+      {
+        "statement": "In a scenario where you encounter a signal marked as a multi SPAD signal, you would need to make a special report if you need to pass it at danger with authorization.",
+        "isTrue": true,
+        "explanation": "This is true. Multi SPAD signals require additional vigilance and reporting. If you need to pass such a signal at danger (with proper authorization), you would need to complete a special report as these signals have a history of being passed at danger."
+      },
+      {
+        "statement": "If you find a notice about a temporary speed restriction in the Train crew notice case, it has been there for at least 72 hours already.",
+        "isTrue": true,
+        "explanation": "This is true. Temporary speed restrictions would initially appear in the Late notice case for 72 hours. If they then appear in the Train crew notice case, they have been moved there after their time in the Late notice case expired, meaning they have been in effect for at least 72 hours."
+      },
+      {
+        "statement": "In a scenario where the Late notice case indicates 'red' low adhesion conditions but the Low adhesion notice case indicates 'amber', you should follow the red status guidance.",
+        "isTrue": true,
+        "explanation": "This is true. If there is conflicting information, you should always follow the more restrictive condition (red being higher risk than amber). Additionally, the more recent notice would take precedence, and notices in the Late notice case are more recent than those that might have been moved to other cases."
+      },
+      {
+        "statement": "After checking all notice cases when signing on, you don't need to refer to them again during your shift.",
+        "isTrue": false,
+        "explanation": "This is false. While checking notice cases when signing on is mandatory, you should refer back to them as needed, especially if your shift involves multiple routes or extends over a long period during which conditions might change."
+      },
+      {
+        "statement": "The care first policy phone numbers found in the Health and safety notice case are for reporting safety violations.",
+        "isTrue": false,
+        "explanation": "This is false. The care first policy and associated phone numbers found in the Health and safety notice case are for employee assistance and support, not for reporting safety violations. They provide access to counseling and other support services for employees."
+      }
     ]
   }
 }
