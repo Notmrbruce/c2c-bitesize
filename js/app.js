@@ -1,635 +1,640 @@
-import { loadModulesList, loadModule } from './module-loader.js';
-
-// DOM Elements
-const homeLink = document.getElementById('home-link');
-const modulesView = document.getElementById('modules-view');
-const methodsView = document.getElementById('methods-view');
-const contentView = document.getElementById('content-view');
-const modulesList = document.getElementById('modules-list');
-const methodButtons = document.getElementById('method-buttons');
-const selectedModuleTitle = document.getElementById('selected-module-title');
-
-// Current state
-let currentModule = null;
-let currentMethod = null;
-let allModules = [];
-
-// Initialize the application
-async function init() {
-    try {
-        allModules = await loadModulesList();
-        renderModules(allModules);
-        setupEventListeners();
-    } catch (error) {
-        console.error('Error initializing app:', error);
-        modulesList.innerHTML = '<p class="error">Error loading modules. Please try again later.</p>';
+// Main application script
+document.addEventListener('DOMContentLoaded', () => {
+    // DOM Elements
+    const modulesView = document.getElementById('modules-view');
+    const methodsView = document.getElementById('methods-view');
+    const contentView = document.getElementById('content-view');
+    const modulesList = document.getElementById('modules-list');
+    const selectedModuleTitle = document.getElementById('selected-module-title');
+    const methodButtons = document.getElementById('method-buttons');
+    const homeLink = document.getElementById('home-link');
+    
+    // App state
+    let currentModule = null;
+    
+    // Initialize the application
+    init();
+    
+    // Event Listeners
+    homeLink.addEventListener('click', showModulesView);
+    
+    // Functions
+    function init() {
+        loadModules();
+        
+        // Initially show only the modules view
+        modulesView.style.display = 'block';
+        methodsView.style.display = 'none';
+        contentView.style.display = 'none';
     }
-}
-
-// Render modules list
-function renderModules(modules) {
-    modulesList.innerHTML = '';
     
-    modules.forEach((module, index) => {
-        const circleClass = `circle-${(index % 4) + 1}`;
-        
-        const moduleItem = document.createElement('div');
-        moduleItem.className = 'module-item';
-        moduleItem.dataset.id = module.id;
-        
-        moduleItem.innerHTML = `
-            <div class="number-circle ${circleClass}">${index + 1}</div>
-            <div class="module-item-content">
-                <div class="module-item-title">${module.title}</div>
-                <div class="module-item-desc">${module.description}</div>
-            </div>
-        `;
-        
-        modulesList.appendChild(moduleItem);
-    });
-}
-
-// Set up event listeners
-function setupEventListeners() {
-    // Home link
-    homeLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        resetToHome();
-    });
-    
-    // Module selection
-    modulesList.addEventListener('click', (e) => {
-        const moduleItem = e.target.closest('.module-item');
-        if (moduleItem) {
-            const moduleId = moduleItem.dataset.id;
-            selectModule(moduleId);
-        }
-    });
-}
-
-// Select a module
-async function selectModule(moduleId) {
-    try {
-        const moduleData = await loadModule(moduleId);
-        currentModule = moduleData;
-        
-        if (currentModule) {
-            // Update UI
-            modulesView.style.display = 'none';
-            methodsView.style.display = 'block';
-            selectedModuleTitle.textContent = currentModule.title;
-            
-            // Update breadcrumb
-            document.querySelector('.breadcrumb').innerHTML = `
-                <a href="#" id="home-breadcrumb">Home</a>
-                <span>></span>
-                <span>${currentModule.title}</span>
-            `;
-            
-            document.getElementById('home-breadcrumb').addEventListener('click', (e) => {
-                e.preventDefault();
-                resetToHome();
-            });
-            
-            // Render study methods
-            renderStudyMethods();
-        }
-    } catch (error) {
-        console.error('Error loading module:', error);
-        alert('Error loading module. Please try again.');
-        resetToHome();
-    }
-}
-
-// Render study methods
-function renderStudyMethods() {
-    methodButtons.innerHTML = '';
-    
-    const methods = [
-        { id: 'flashcards', name: 'Flashcards' },
-        { id: 'quiz', name: 'Quiz' },
-        { id: 'match', name: 'Match the Pairs' },
-        { id: 'visual', name: 'Visual Learning' }
-    ];
-    
-    methods.forEach((method, index) => {
-        const isAvailable = currentModule.methods && currentModule.methods.includes(method.id);
-        const circleClass = `circle-${(index % 4) + 1}`;
-        
-        const button = document.createElement('button');
-        button.className = isAvailable ? 'method-button' : 'method-button disabled';
-        button.disabled = !isAvailable;
-        
-        button.innerHTML = `
-            <div class="number-circle ${circleClass}">${index + 1}</div>
-            ${method.name}
-        `;
-        
-        if (isAvailable) {
-            button.addEventListener('click', () => {
-                selectMethod(method.id);
-            });
-        }
-        
-        methodButtons.appendChild(button);
-    });
-}
-
-// Select a study method
-function selectMethod(methodId) {
-    currentMethod = methodId;
-    
-    // Update UI
-    methodsView.style.display = 'none';
-    contentView.style.display = 'block';
-    
-    // Update breadcrumb
-    document.querySelector('.breadcrumb').innerHTML = `
-        <a href="#" id="home-breadcrumb">Home</a>
-        <span>></span>
-        <a href="#" id="module-breadcrumb">${currentModule.title}</a>
-        <span>></span>
-        <span>${getMethodName(methodId)}</span>
-    `;
-    
-    document.getElementById('home-breadcrumb').addEventListener('click', (e) => {
-        e.preventDefault();
-        resetToHome();
-    });
-    
-    document.getElementById('module-breadcrumb').addEventListener('click', (e) => {
-        e.preventDefault();
-        resetToModule();
-    });
-    
-    // Render content based on method
-    switch (methodId) {
-        case 'flashcards':
-            renderFlashcards();
-            break;
-        case 'quiz':
-            renderQuiz();
-            break;
-        case 'match':
-            renderMatchPairs();
-            break;
-        case 'visual':
-            renderVisualLearning();
-            break;
-    }
-}
-
-// Get method name
-function getMethodName(methodId) {
-    const names = {
-        'flashcards': 'Flashcards',
-        'quiz': 'Quiz',
-        'match': 'Match the Pairs',
-        'visual': 'Visual Learning'
-    };
-    return names[methodId] || 'Unknown';
-}
-
-// Reset to home view
-function resetToHome() {
-    modulesView.style.display = 'block';
-    methodsView.style.display = 'none';
-    contentView.style.display = 'none';
-    contentView.innerHTML = '';
-    
-    document.querySelector('.breadcrumb').innerHTML = `
-        <a href="#" id="home-link">Home</a>
-    `;
-    
-    document.getElementById('home-link').addEventListener('click', (e) => {
-        e.preventDefault();
-        resetToHome();
-    });
-    
-    currentModule = null;
-    currentMethod = null;
-}
-
-// Reset to module view
-function resetToModule() {
-    methodsView.style.display = 'block';
-    contentView.style.display = 'none';
-    contentView.innerHTML = '';
-    
-    document.querySelector('.breadcrumb').innerHTML = `
-        <a href="#" id="home-breadcrumb">Home</a>
-        <span>></span>
-        <span>${currentModule.title}</span>
-    `;
-    
-    document.getElementById('home-breadcrumb').addEventListener('click', (e) => {
-        e.preventDefault();
-        resetToHome();
-    });
-    
-    currentMethod = null;
-}
-
-// Render flashcards
-function renderFlashcards() {
-    const flashcards = currentModule.content.flashcards;
-    let currentCardIndex = 0;
-    
-    contentView.innerHTML = `
-        <h2>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h4l3 3 3-3h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-6 16h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 11.9 13 12.5 13 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
-            </svg>
-            Flashcards - ${currentModule.title}
-        </h2>
-        
-        <div class="flashcard">
-            <div class="flashcard-question">
-                <h3>${flashcards[currentCardIndex].question}</h3>
-            </div>
-            <div class="flashcard-answer">
-                <p>${flashcards[currentCardIndex].answer}</p>
-            </div>
-        </div>
-        
-        <div class="flashcard-nav">
-            <button class="back-button" id="prev-card" ${currentCardIndex === 0 ? 'disabled' : ''}>Previous</button>
-            <button class="back-button" id="flip-card">Flip Card</button>
-            <button class="back-button" id="next-card" ${currentCardIndex === flashcards.length - 1 ? 'disabled' : ''}>Next</button>
-        </div>
-        
-        <p style="text-align: center; margin-top: 1rem; color: var(--light-text);">
-            Card ${currentCardIndex + 1} of ${flashcards.length}
-        </p>
-    `;
-    
-    const card = document.querySelector('.flashcard');
-    const flipBtn = document.getElementById('flip-card');
-    const prevBtn = document.getElementById('prev-card');
-    const nextBtn = document.getElementById('next-card');
-    
-    // Flip card
-    flipBtn.addEventListener('click', () => {
-        card.classList.toggle('flipped');
-    });
-    
-    card.addEventListener('click', () => {
-        card.classList.toggle('flipped');
-    });
-    
-    // Navigation
-    prevBtn.addEventListener('click', () => {
-        if (currentCardIndex > 0) {
-            currentCardIndex--;
-            updateCard();
-        }
-    });
-    
-    nextBtn.addEventListener('click', () => {
-        if (currentCardIndex < flashcards.length - 1) {
-            currentCardIndex++;
-            updateCard();
-        }
-    });
-    
-    function updateCard() {
-        document.querySelector('.flashcard-question h3').textContent = flashcards[currentCardIndex].question;
-        document.querySelector('.flashcard-answer p').textContent = flashcards[currentCardIndex].answer;
-        
-        card.classList.remove('flipped');
-        
-        prevBtn.disabled = currentCardIndex === 0;
-        nextBtn.disabled = currentCardIndex === flashcards.length - 1;
-        
-        document.querySelector('p[style*="text-align: center"]').textContent = `Card ${currentCardIndex + 1} of ${flashcards.length}`;
-    }
-}
-
-// Render quiz
-function renderQuiz() {
-    const quizQuestions = currentModule.content.quiz;
-    let currentQuestionIndex = 0;
-    let score = 0;
-    let userAnswers = [];
-    
-    contentView.innerHTML = `
-        <h2>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-            </svg>
-            Quiz - ${currentModule.title}
-        </h2>
-        
-        <div class="quiz-container">
-            <div class="quiz-question">
-                <h3>${quizQuestions[currentQuestionIndex].question}</h3>
-                <ul class="quiz-options">
-                    ${quizQuestions[currentQuestionIndex].options.map((option, index) => 
-                        `<li class="quiz-option" data-index="${index}">${option}</li>`
-                    ).join('')}
-                </ul>
-            </div>
-            
-            <div class="quiz-nav">
-                <button class="back-button" id="prev-question" disabled>Previous</button>
-                <span>Question ${currentQuestionIndex + 1} of ${quizQuestions.length}</span>
-                <button class="back-button" id="next-question">Next</button>
-            </div>
-        </div>
-    `;
-    
-    // Add event listeners
-    document.querySelectorAll('.quiz-option').forEach(option => {
-        option.addEventListener('click', () => {
-            document.querySelectorAll('.quiz-option').forEach(o => {
-                o.classList.remove('selected');
-            });
-            
-            option.classList.add('selected');
-            userAnswers[currentQuestionIndex] = parseInt(option.dataset.index);
-        });
-    });
-    
-    document.getElementById('prev-question').addEventListener('click', () => {
-        if (currentQuestionIndex > 0) {
-            currentQuestionIndex--;
-            updateQuestion();
-        }
-    });
-    
-    document.getElementById('next-question').addEventListener('click', () => {
-        if (currentQuestionIndex < quizQuestions.length - 1) {
-            currentQuestionIndex++;
-            updateQuestion();
-        } else {
-            showResults();
-        }
-    });
-    
-    function updateQuestion() {
-        document.querySelector('.quiz-question h3').textContent = quizQuestions[currentQuestionIndex].question;
-        
-        const optionsHtml = quizQuestions[currentQuestionIndex].options.map((option, index) => {
-            const selected = userAnswers[currentQuestionIndex] === index ? 'selected' : '';
-            return `<li class="quiz-option ${selected}" data-index="${index}">${option}</li>`;
-        }).join('');
-        
-        document.querySelector('.quiz-options').innerHTML = optionsHtml;
-        
-        document.querySelectorAll('.quiz-option').forEach(option => {
-            option.addEventListener('click', () => {
-                document.querySelectorAll('.quiz-option').forEach(o => {
-                    o.classList.remove('selected');
-                });
+    function loadModules() {
+        fetch('data/modules/index.json')
+            .then(response => response.json())
+            .then(modules => {
+                modulesList.innerHTML = '';
                 
-                option.classList.add('selected');
-                userAnswers[currentQuestionIndex] = parseInt(option.dataset.index);
+                modules.forEach((module, index) => {
+                    const moduleElement = document.createElement('div');
+                    moduleElement.className = 'module-item';
+                    moduleElement.innerHTML = `
+                        <div class="number-circle circle-${(index % 4) + 1}">${index + 1}</div>
+                        <div class="module-item-content">
+                            <div class="module-item-title">${module.title}</div>
+                            <div class="module-item-desc">${module.description}</div>
+                        </div>
+                    `;
+                    
+                    moduleElement.addEventListener('click', () => {
+                        loadModule(module.id);
+                    });
+                    
+                    modulesList.appendChild(moduleElement);
+                });
+            })
+            .catch(error => {
+                console.error('Error loading modules:', error);
+                modulesList.innerHTML = '<p>Error loading modules. Please try again later.</p>';
             });
-        });
-        
-        document.getElementById('prev-question').disabled = currentQuestionIndex === 0;
-        document.getElementById('next-question').textContent = currentQuestionIndex === quizQuestions.length - 1 ? 'Finish' : 'Next';
-        
-        document.querySelector('.quiz-nav span').textContent = `Question ${currentQuestionIndex + 1} of ${quizQuestions.length}`;
     }
     
-    function showResults() {
-        // Calculate score
-        score = 0;
-        userAnswers.forEach((answer, index) => {
-            if (answer === quizQuestions[index].correctAnswer) {
-                score++;
+    function loadModule(moduleId) {
+        fetch(`data/modules/${moduleId}.json`)
+            .then(response => response.json())
+            .then(moduleData => {
+                currentModule = moduleData;
+                showMethodsView(moduleData);
+            })
+            .catch(error => {
+                console.error(`Error loading module ${moduleId}:`, error);
+                alert('Error loading module. Please try again later.');
+            });
+    }
+    
+    function showModulesView() {
+        modulesView.style.display = 'block';
+        methodsView.style.display = 'none';
+        contentView.style.display = 'none';
+    }
+    
+    function showMethodsView(moduleData) {
+        // Update title
+        selectedModuleTitle.textContent = moduleData.title;
+        
+        // Create method buttons
+        createMethodButtons(moduleData);
+        
+        // Show methods view, hide others
+        modulesView.style.display = 'none';
+        methodsView.style.display = 'block';
+        contentView.style.display = 'none';
+    }
+    
+    function createMethodButtons(moduleData) {
+        methodButtons.innerHTML = '';
+        
+        moduleData.methods.forEach(method => {
+            const button = document.createElement('button');
+            button.className = 'method-button';
+            button.id = `${method}-button`;
+            
+            // Use appropriate icons for each method
+            let icon = '';
+            let methodName = '';
+            
+            switch (method) {
+                case 'flashcards':
+                    icon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21 3H3a2 2 0 00-2 2v14a2 2 0 002 2h18a2 2 0 002-2V5a2 2 0 00-2-2zm0 16H3V5h18v14z"/><path d="M13 10H7v2h6v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>';
+                    methodName = 'Flashcards';
+                    break;
+                case 'quiz':
+                    icon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>';
+                    methodName = 'Quiz';
+                    break;
+                case 'time-trial':
+                    icon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>';
+                    methodName = 'Time Trial';
+                    break;
+                default:
+                    methodName = method.charAt(0).toUpperCase() + method.slice(1);
+            }
+            
+            button.innerHTML = `${icon} ${methodName}`;
+            
+            button.addEventListener('click', () => {
+                loadStudyMethod(moduleData, method);
+            });
+            
+            methodButtons.appendChild(button);
+        });
+    }
+    
+    function loadStudyMethod(moduleData, method) {
+        // Clear previous content
+        contentView.innerHTML = '';
+        
+        // Show the content view
+        contentView.style.display = 'block';
+        
+        // Load the appropriate study method
+        switch (method) {
+            case 'flashcards':
+                loadFlashcards(moduleData);
+                break;
+            case 'quiz':
+                loadQuiz(moduleData);
+                break;
+            case 'time-trial':
+                initTimeTrialGame(moduleData);
+                break;
+            default:
+                contentView.innerHTML = `<p>Study method "${method}" is not implemented yet.</p>`;
+        }
+    }
+    
+    function loadFlashcards(moduleData) {
+        const flashcardsData = moduleData.content.flashcards;
+        let currentCardIndex = 0;
+        
+        // Create flashcard container
+        contentView.innerHTML = `
+            <h3>${moduleData.title} - Flashcards</h3>
+            <div class="flashcard" id="current-flashcard">
+                <div class="flashcard-question">${flashcardsData[currentCardIndex].question}</div>
+                <div class="flashcard-answer">${flashcardsData[currentCardIndex].answer}</div>
+            </div>
+            <div class="flashcard-nav">
+                <button id="prev-card" class="back-button" ${currentCardIndex === 0 ? 'disabled' : ''}>Previous</button>
+                <button id="flip-card" class="back-button">Flip Card</button>
+                <button id="next-card" class="back-button" ${currentCardIndex === flashcardsData.length - 1 ? 'disabled' : ''}>Next</button>
+            </div>
+            <button id="back-to-methods" class="back-button">Back to Methods</button>
+        `;
+        
+        // Add event listeners
+        const flashcardElement = document.getElementById('current-flashcard');
+        const prevButton = document.getElementById('prev-card');
+        const nextButton = document.getElementById('next-card');
+        const flipButton = document.getElementById('flip-card');
+        const backButton = document.getElementById('back-to-methods');
+        
+        flashcardElement.addEventListener('click', () => {
+            flashcardElement.classList.toggle('flipped');
+        });
+        
+        flipButton.addEventListener('click', () => {
+            flashcardElement.classList.toggle('flipped');
+        });
+        
+        prevButton.addEventListener('click', () => {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                updateFlashcard();
             }
         });
         
-        contentView.innerHTML = `
-            <h2>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 2h1.5v3l2-3h1.7l-2 3 2 3h-1.7l-2-3v3H12V5zM7 7.25h2.5V6.5H7V5h4v3.75H8.5v.75H11V11H7V7.25zM19 13l-6 6-4-4-4 4v-2.5l4-4 4 4 6-6V13z"/>
-                </svg>
-                Quiz Results - ${currentModule.title}
-            </h2>
+        nextButton.addEventListener('click', () => {
+            if (currentCardIndex < flashcardsData.length - 1) {
+                currentCardIndex++;
+                updateFlashcard();
+            }
+        });
+        
+        backButton.addEventListener('click', () => {
+            showMethodsView(moduleData);
+        });
+        
+        function updateFlashcard() {
+            const card = flashcardsData[currentCardIndex];
+            document.querySelector('.flashcard-question').textContent = card.question;
+            document.querySelector('.flashcard-answer').textContent = card.answer;
+            flashcardElement.classList.remove('flipped');
             
-            <div style="text-align: center; padding: 2rem; background-color: #3a3a3a; border-radius: var(--border-radius); margin-top: 1.5rem;">
-                <h3>You scored ${score} out of ${quizQuestions.length}</h3>
-                <p>${Math.round((score / quizQuestions.length) * 100)}% correct</p>
-                <div style="margin-top: 1.5rem;">
-                    <button class="back-button" id="review-quiz">Review Answers</button>
-                    <button class="back-button" id="retry-quiz">Try Again</button>
+            // Update button states
+            prevButton.disabled = currentCardIndex === 0;
+            nextButton.disabled = currentCardIndex === flashcardsData.length - 1;
+        }
+    }
+    
+    function loadQuiz(moduleData) {
+        const quizData = moduleData.content.quiz;
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userAnswers = [];
+        
+        // Initialize user answers array
+        quizData.forEach(() => userAnswers.push(null));
+        
+        // Create quiz container
+        contentView.innerHTML = `
+            <h3>${moduleData.title} - Quiz</h3>
+            <div class="quiz-container" id="quiz-container">
+                <div class="quiz-question" id="quiz-question"></div>
+                <ul class="quiz-options" id="quiz-options"></ul>
+            </div>
+            <div class="quiz-nav">
+                <button id="prev-question" class="back-button">Previous</button>
+                <button id="next-question" class="back-button">Next</button>
+                <button id="submit-quiz" class="back-button">Submit Quiz</button>
+            </div>
+            <button id="back-to-methods" class="back-button">Back to Methods</button>
+        `;
+        
+        // Add event listeners
+        const prevButton = document.getElementById('prev-question');
+        const nextButton = document.getElementById('next-question');
+        const submitButton = document.getElementById('submit-quiz');
+        const backButton = document.getElementById('back-to-methods');
+        
+        prevButton.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        });
+        
+        nextButton.addEventListener('click', () => {
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            }
+        });
+        
+        submitButton.addEventListener('click', () => {
+            if (userAnswers.includes(null)) {
+                if (confirm("You haven't answered all questions. Are you sure you want to submit?")) {
+                    showQuizResults();
+                }
+            } else {
+                showQuizResults();
+            }
+        });
+        
+        backButton.addEventListener('click', () => {
+            if (confirm("Are you sure you want to exit the quiz? Your progress will be lost.")) {
+                showMethodsView(moduleData);
+            }
+        });
+        
+        // Load first question
+        loadQuestion();
+        
+        function loadQuestion() {
+            const questionData = quizData[currentQuestionIndex];
+            const questionElement = document.getElementById('quiz-question');
+            const optionsElement = document.getElementById('quiz-options');
+            
+            questionElement.textContent = `${currentQuestionIndex + 1}. ${questionData.question}`;
+            
+            optionsElement.innerHTML = '';
+            questionData.options.forEach((option, index) => {
+                const optionElement = document.createElement('li');
+                optionElement.className = 'quiz-option';
+                optionElement.textContent = option;
+                
+                if (userAnswers[currentQuestionIndex] === index) {
+                    optionElement.classList.add('selected');
+                }
+                
+                optionElement.addEventListener('click', () => {
+                    // Clear previous selection
+                    document.querySelectorAll('.quiz-option').forEach(el => el.classList.remove('selected'));
+                    
+                    // Select this option
+                    optionElement.classList.add('selected');
+                    
+                    // Save user's answer
+                    userAnswers[currentQuestionIndex] = index;
+                });
+                
+                optionsElement.appendChild(optionElement);
+            });
+            
+            // Update button states
+            prevButton.disabled = currentQuestionIndex === 0;
+            nextButton.disabled = currentQuestionIndex === quizData.length - 1;
+            
+            // Show/hide appropriate buttons
+            if (currentQuestionIndex === quizData.length - 1) {
+                nextButton.style.display = 'none';
+                submitButton.style.display = 'block';
+            } else {
+                nextButton.style.display = 'block';
+                submitButton.style.display = 'none';
+            }
+        }
+        
+        function showQuizResults() {
+            // Calculate score
+            score = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer === quizData[index].correctAnswer) {
+                    score++;
+                }
+            });
+            
+            // Display results
+            contentView.innerHTML = `
+                <h3>${moduleData.title} - Quiz Results</h3>
+                <div class="quiz-results">
+                    <h4>Your Score: ${score} out of ${quizData.length}</h4>
+                    <p>Percentage: ${Math.round((score / quizData.length) * 100)}%</p>
+                    <div class="quiz-feedback">
+                        ${score === quizData.length ? 
+                            '<p>Perfect! You got all the questions right.</p>' : 
+                            '<p>Keep learning to improve your score.</p>'}
+                    </div>
+                    <button id="review-quiz" class="back-button">Review Answers</button>
+                    <button id="retry-quiz" class="back-button">Retry Quiz</button>
+                    <button id="back-to-methods" class="back-button">Back to Methods</button>
+                </div>
+            `;
+            
+            // Add event listeners
+            document.getElementById('review-quiz').addEventListener('click', () => {
+                showQuizReview();
+            });
+            
+            document.getElementById('retry-quiz').addEventListener('click', () => {
+                loadQuiz(moduleData);
+            });
+            
+            document.getElementById('back-to-methods').addEventListener('click', () => {
+                showMethodsView(moduleData);
+            });
+        }
+        
+        function showQuizReview() {
+            contentView.innerHTML = `
+                <h3>${moduleData.title} - Quiz Review</h3>
+                <div class="quiz-review" id="quiz-review"></div>
+                <button id="back-to-results" class="back-button">Back to Results</button>
+            `;
+            
+            const reviewElement = document.getElementById('quiz-review');
+            
+            quizData.forEach((question, index) => {
+                const userAnswer = userAnswers[index] !== null ? userAnswers[index] : -1;
+                const isCorrect = userAnswer === question.correctAnswer;
+                
+                const questionElement = document.createElement('div');
+                questionElement.className = `quiz-review-item ${isCorrect ? 'correct' : 'incorrect'}`;
+                
+                questionElement.innerHTML = `
+                    <div class="quiz-review-question">${index + 1}. ${question.question}</div>
+                    <div class="quiz-review-answers">
+                        <div class="quiz-review-your-answer">
+                            Your answer: ${userAnswer >= 0 ? question.options[userAnswer] : 'Not answered'}
+                        </div>
+                        <div class="quiz-review-correct-answer">
+                            Correct answer: ${question.options[question.correctAnswer]}
+                        </div>
+                    </div>
+                `;
+                
+                reviewElement.appendChild(questionElement);
+            });
+            
+            document.getElementById('back-to-results').addEventListener('click', () => {
+                showQuizResults();
+            });
+        }
+    }
+    
+    // Time Trial Game Implementation
+    function initTimeTrialGame(moduleData) {
+        const timeTrialData = moduleData.content['time-trial'];
+        let score = 0;
+        let currentRound = 0;
+        let timer;
+        let timeLeft = 7;
+        let gameStarted = false;
+        let selectedItems = [];
+        
+        // Create the game UI
+        const contentView = document.getElementById('content-view');
+        contentView.innerHTML = `
+            <h3>${moduleData.title} - Time Trial</h3>
+            <div class="time-trial-container">
+                <div class="time-trial-header">
+                    <div class="time-trial-score">Score: <span id="time-trial-score">0</span></div>
+                    <div class="time-trial-timer">Time: <span id="time-trial-time">7</span>s</div>
+                    <div class="time-trial-progress">Question <span id="time-trial-current">1</span>/${timeTrialData.length}</div>
+                </div>
+                
+                <div class="time-trial-answer-container">
+                    <div class="time-trial-answer" id="time-trial-answer"></div>
+                </div>
+                
+                <div class="time-trial-options" id="time-trial-options"></div>
+                
+                <div class="time-trial-feedback" id="time-trial-feedback"></div>
+                
+                <div class="time-trial-controls">
+                    <button id="time-trial-start" class="time-trial-button">Start Game</button>
+                    <button id="time-trial-next" class="time-trial-button" style="display: none;">Next</button>
                 </div>
             </div>
         `;
         
-        document.getElementById('review-quiz').addEventListener('click', showReview);
-        document.getElementById('retry-quiz').addEventListener('click', () => {
-            currentQuestionIndex = 0;
-            userAnswers = [];
-            renderQuiz();
-        });
-    }
-    
-    function showReview() {
-        let reviewHtml = `
-            <h2>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
-                </svg>
-                Quiz Review - ${currentModule.title}
-            </h2>
-        `;
+        const scoreElement = document.getElementById('time-trial-score');
+        const timeElement = document.getElementById('time-trial-time');
+        const currentElement = document.getElementById('time-trial-current');
+        const answerElement = document.getElementById('time-trial-answer');
+        const optionsElement = document.getElementById('time-trial-options');
+        const feedbackElement = document.getElementById('time-trial-feedback');
+        const startButton = document.getElementById('time-trial-start');
+        const nextButton = document.getElementById('time-trial-next');
         
-        quizQuestions.forEach((question, index) => {
-            const userAnswer = userAnswers[index];
-            const isCorrect = userAnswer === question.correctAnswer;
+        // Initialize the game
+        startButton.addEventListener('click', startGame);
+        nextButton.addEventListener('click', nextRound);
+        
+        function startGame() {
+            gameStarted = true;
+            score = 0;
+            currentRound = 0;
+            scoreElement.textContent = '0';
+            startButton.style.display = 'none';
             
-            reviewHtml += `
-                <div class="quiz-container">
-                    <div class="quiz-question">
-                        <h3>${index + 1}. ${question.question}</h3>
-                        <ul class="quiz-options">
-            `;
+            // Shuffle the data for a random order
+            shuffleArray(timeTrialData);
             
-            question.options.forEach((option, optIndex) => {
-                let optionClass = '';
-                
-                if (optIndex === question.correctAnswer) {
-                    optionClass = 'selected'; // Correct answer
-                } else if (userAnswer === optIndex && userAnswer !== question.correctAnswer) {
-                    optionClass = 'selected'; // User's incorrect answer
-                }
-                
-                reviewHtml += `<li class="quiz-option ${optionClass}">${option}</li>`;
-            });
-            
-            reviewHtml += `
-                        </ul>
-                    </div>
-                </div>
-            `;
-        });
+            // Start the first round
+            nextRound();
+        }
         
-        reviewHtml += `
-            <button class="back-button" id="back-to-results">Back to Results</button>
-        `;
-        
-        contentView.innerHTML = reviewHtml;
-        
-        document.getElementById('back-to-results').addEventListener('click', showResults);
-    }
-}
-
-// Render match pairs
-function renderMatchPairs() {
-    const pairs = currentModule.content.match;
-    let cards = [];
-    
-    // Create pairs array
-    pairs.forEach((pair, index) => {
-        cards.push({
-            id: index,
-            content: pair.term,
-            type: 'term',
-            matchId: index,
-            flipped: false,
-            matched: false
-        });
-        
-        cards.push({
-            id: index + pairs.length,
-            content: pair.definition,
-            type: 'definition',
-            matchId: index,
-            flipped: false,
-            matched: false
-        });
-    });
-    
-    // Shuffle cards
-    cards = shuffleArray(cards);
-    
-    contentView.innerHTML = `
-        <h2>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-3 10h-2v2h-2v-2H8V5h2v6h2V5h2v8z"/>
-            </svg>
-            Match the Pairs - ${currentModule.title}
-        </h2>
-        
-        <p>Click on two cards to find matching pairs.</p>
-        
-        <div class="match-grid" id="match-grid">
-            ${cards.map(card => `
-                <div class="match-card" data-id="${card.id}" data-match-id="${card.matchId}">
-                    <div class="match-card-content">${card.content}</div>
-                </div>
-            `).join('')}
-        </div>
-        
-        <p style="text-align: center; margin-top: 1.5rem;">
-            Pairs found: <span id="pairs-found">0</span> of ${pairs.length}
-        </p>
-    `;
-    
-    const matchGrid = document.getElementById('match-grid');
-    const pairsFoundEl = document.getElementById('pairs-found');
-    let flippedCards = [];
-    let matchedPairs = 0;
-    
-    // Hide all card contents initially
-    document.querySelectorAll('.match-card-content').forEach(content => {
-        content.style.display = 'none';
-    });
-    
-    // Add click event to cards
-    document.querySelectorAll('.match-card').forEach(card => {
-        card.addEventListener('click', () => {
-            // Ignore if already matched or already flipped or two cards already flipped
-            if (card.classList.contains('matched') || card.classList.contains('flipped') || flippedCards.length >= 2) {
+        function nextRound() {
+            if (currentRound >= timeTrialData.length) {
+                endGame();
                 return;
             }
             
-            // Flip card
-            card.classList.add('flipped');
-            card.querySelector('.match-card-content').style.display = 'block';
-            flippedCards.push(card);
+            // Reset UI state
+            clearInterval(timer);
+            timeLeft = 7;
+            timeElement.textContent = timeLeft;
+            feedbackElement.innerHTML = '';
+            nextButton.style.display = 'none';
             
-            // Check for match if we have two flipped cards
-            if (flippedCards.length === 2) {
-                const card1 = flippedCards[0];
-                const card2 = flippedCards[1];
-                
-                if (card1.dataset.matchId === card2.dataset.matchId) {
-                    // Match found
-                    setTimeout(() => {
-                        card1.classList.add('matched');
-                        card2.classList.add('matched');
-                        flippedCards = [];
-                        
-                        matchedPairs++;
-                        pairsFoundEl.textContent = matchedPairs;
-                        
-                        // Check if all pairs are found
-                        if (matchedPairs === pairs.length) {
-                            showMatchComplete();
-                        }
-                    }, 500);
-                } else {
-                    // No match
-                    setTimeout(() => {
-                        card1.classList.remove('flipped');
-                        card2.classList.remove('flipped');
-                        card1.querySelector('.match-card-content').style.display = 'none';
-                        card2.querySelector('.match-card-content').style.display = 'none';
-                        flippedCards = [];
-                    }, 1000);
+            // Update progress
+            currentElement.textContent = currentRound + 1;
+            
+            // Get current item and generate options
+            const currentItem = timeTrialData[currentRound];
+            
+            // Display the definition (answer)
+            answerElement.textContent = currentItem.definition;
+            
+            // Generate options (including the correct one)
+            generateOptions(currentItem);
+            
+            // Start the timer
+            startTimer();
+            
+            // Increment round counter
+            currentRound++;
+        }
+        
+        function generateOptions(currentItem) {
+            // Clear previous options
+            optionsElement.innerHTML = '';
+            
+            // Get 3 random distractors (different from the correct one)
+            const allItems = [...timeTrialData];
+            const correctIndex = allItems.findIndex(item => item.term === currentItem.term);
+            allItems.splice(correctIndex, 1); // Remove the correct item
+            shuffleArray(allItems);
+            
+            // Use 3 distractors plus the correct option
+            const distractors = allItems.slice(0, 3);
+            const options = [...distractors, currentItem];
+            shuffleArray(options); // Shuffle so correct answer isn't always in the same position
+            
+            // Create option buttons
+            options.forEach(option => {
+                const optionButton = document.createElement('button');
+                optionButton.className = 'time-trial-option';
+                optionButton.textContent = option.term;
+                optionButton.dataset.term = option.term;
+                optionButton.addEventListener('click', () => selectOption(option.term, currentItem.term));
+                optionsElement.appendChild(optionButton);
+            });
+        }
+        
+        function selectOption(selectedTerm, correctTerm) {
+            // Stop the timer
+            clearInterval(timer);
+            
+            // Disable all options
+            const options = document.querySelectorAll('.time-trial-option');
+            options.forEach(option => {
+                option.disabled = true;
+                if (option.dataset.term === correctTerm) {
+                    option.classList.add('time-trial-correct');
+                } else if (option.dataset.term === selectedTerm && selectedTerm !== correctTerm) {
+                    option.classList.add('time-trial-incorrect');
                 }
+            });
+            
+            // Check if answer is correct
+            const isCorrect = selectedTerm === correctTerm;
+            
+            // Update score if correct
+            if (isCorrect) {
+                score++;
+                scoreElement.textContent = score;
+                feedbackElement.innerHTML = '<div class="time-trial-correct-feedback">Correct!</div>';
+            } else {
+                feedbackElement.innerHTML = `<div class="time-trial-incorrect-feedback">Incorrect! The correct answer was: ${correctTerm}</div>`;
             }
-        });
-    });
-    
-    function showMatchComplete() {
-        contentView.innerHTML += `
-            <div style="text-align: center; padding: 2rem; background-color: #3a3a3a; border-radius: var(--border-radius); margin-top: 1.5rem;">
-                <h3>Congratulations!</h3>
-                <p>You've successfully matched all the pairs.</p>
-                <button class="back-button" id="play-again" style="margin-top: 1rem;">Play Again</button>
-            </div>
-        `;
+            
+            // Show next button
+            nextButton.style.display = 'block';
+            
+            // Auto-advance if it's the last question
+            if (currentRound >= timeTrialData.length) {
+                setTimeout(endGame, 1500);
+            }
+        }
         
-        document.getElementById('play-again').addEventListener('click', renderMatchPairs);
+        function startTimer() {
+            timer = setInterval(() => {
+                timeLeft--;
+                timeElement.textContent = timeLeft;
+                
+                if (timeLeft <= 3) {
+                    timeElement.classList.add('time-trial-time-warning');
+                } else {
+                    timeElement.classList.remove('time-trial-time-warning');
+                }
+                
+                if (timeLeft <= 0) {
+                    timeOut();
+                }
+            }, 1000);
+        }
+        
+        function timeOut() {
+            clearInterval(timer);
+            
+            // Get the current item
+            const currentItem = timeTrialData[currentRound - 1];
+            
+            // Highlight the correct answer
+            const options = document.querySelectorAll('.time-trial-option');
+            options.forEach(option => {
+                option.disabled = true;
+                if (option.dataset.term === currentItem.term) {
+                    option.classList.add('time-trial-correct');
+                }
+            });
+            
+            feedbackElement.innerHTML = `<div class="time-trial-timeout-feedback">Time's up! The correct answer was: ${currentItem.term}</div>`;
+            
+            // Show next button
+            nextButton.style.display = 'block';
+            
+            // Auto-advance if it's the last question
+            if (currentRound >= timeTrialData.length) {
+                setTimeout(endGame, 1500);
+            }
+        }
+        
+        function endGame() {
+            // Display final score and game over message
+            contentView.innerHTML = `
+                <h3>${moduleData.title} - Time Trial</h3>
+                <div class="time-trial-container">
+                    <div class="time-trial-game-over">
+                        <h2>Game Over!</h2>
+                        <p>Your final score: ${score} out of ${timeTrialData.length}</p>
+                        <p>Accuracy: ${Math.round((score / timeTrialData.length) * 100)}%</p>
+                        ${score === timeTrialData.length ? 
+                            '<p class="time-trial-perfect">Perfect Score!</p>' : 
+                            '<p>Keep practicing to improve your knowledge!</p>'}
+                        <button id="time-trial-replay" class="time-trial-button">Play Again</button>
+                        <button id="time-trial-back" class="time-trial-button">Back to Methods</button>
+                    </div>
+                </div>
+            `;
+            
+            // Set up event listeners for the replay and back buttons
+            document.getElementById('time-trial-replay').addEventListener('click', () => {
+                initTimeTrialGame(moduleData);
+            });
+            
+            document.getElementById('time-trial-back').addEventListener('click', () => {
+                showMethodsView(moduleData);
+            });
+        }
     }
-}
-
-// Render visual learning
-function renderVisualLearning() {
-    contentView.innerHTML = `
-        <h2>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM9.41 15.95L12 13.4l2.59 2.55L17.5 12.5 21 16h-2v2h-14v-2H9.41zM5 10.5l2-2 4 4 4-4 2 2-4 4z"/>
-            </svg>
-            Visual Learning - ${currentModule.title}
-        </h2>
-        
-        <div class="visual-content">
-            <p>Visual learning content will be added in a future update.</p>
-            <p>This section can include animations, diagrams, and interactive visuals that help explain the concepts.</p>
-        </div>
-        
-        <button class="back-button" id="back-to-methods" style="margin-top: 1.5rem;">Back to Study Methods</button>
-    `;
     
-    document.getElementById('back-to-methods').addEventListener('click', resetToModule);
-}
-
-// Helper function to shuffle an array
-function shuffleArray(array) {
-    const newArray = [...array];
-    for (let i = newArray.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    // Helper function to shuffle an array
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
     }
-    return newArray;
-}
-
-// Initialize the app when document is loaded
-document.addEventListener('DOMContentLoaded', init);
+});
