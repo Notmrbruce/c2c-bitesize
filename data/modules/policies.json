@@ -2,7 +2,7 @@
   "id": "policies",
   "title": "Policies",
   "description": "Essential company policies, responsibility requirements, and regulations for safe operations",
-  "methods": ["flashcards", "quiz", "time-trial"],
+  "methods": ["flashcards", "quiz", "time-trial", "true-false"],
   "content": {
     "flashcards": [
       {
@@ -311,6 +311,158 @@
       { "term": "GSMR Calls", "definition": "May not be heard if using headphones" },
       { "term": "Minimum Pre-duty Sobriety", "definition": "12 hours after last drink" },
       { "term": "Policy Purpose", "definition": "Safe standards to minimize accidents/injuries" }
+    ],
+    "true-false": [
+      {
+        "statement": "You must not drink alcohol within 12 hours before duty.",
+        "isTrue": true,
+        "explanation": "The drugs and alcohol policy states that you must not drink less than 12 hours before duty."
+      },
+      {
+        "statement": "It takes the same amount of time for alcohol to leave the system for both men and women.",
+        "isTrue": false,
+        "explanation": "It takes approximately 1 hour per unit for men, but 1.5 hours per unit for women."
+      },
+      {
+        "statement": "A standard pint of beer contains 3 units of alcohol.",
+        "isTrue": false,
+        "explanation": "A normal larger/bitter/cider contains 2 units of alcohol. Strong larger contains 3 units."
+      },
+      {
+        "statement": "You can work a maximum of 15 consecutive days before requiring a day off.",
+        "isTrue": false,
+        "explanation": "You must not work more than 13 days in a row and must have the 14th day off."
+      },
+      {
+        "statement": "If you are sick and cannot attend duty, you should wait until just before your shift to inform management.",
+        "isTrue": false,
+        "explanation": "You must inform the depot supervisor at the earliest opportunity if sick and not coming into work."
+      },
+      {
+        "statement": "An error is defined as a deliberate breaking of rules.",
+        "isTrue": false,
+        "explanation": "An error is a genuine mistake that you did not mean to happen. A deliberate breaking of rules is a violation."
+      },
+      {
+        "statement": "You must report prescribed drugs to your depot manager as soon as possible.",
+        "isTrue": true,
+        "explanation": "You must report prescribed drugs to your depot manager as soon as possible to ensure they don't impact safety."
+      },
+      {
+        "statement": "Mobile phones must be switched off in an active cab.",
+        "isTrue": true,
+        "explanation": "According to the mobile phone policy, you must ensure your phone is switched off in an active cab."
+      },
+      {
+        "statement": "Managers are allowed to use personal electrical equipment in the cab while driving.",
+        "isTrue": false,
+        "explanation": "No personal electrical equipment should be used in the cab while driving. Managers can use company iPads for assessment purposes but must not be distracted."
+      },
+      {
+        "statement": "The maximum shift length is 10 hours.",
+        "isTrue": false,
+        "explanation": "The maximum shift length is 12 hours, not 10 hours."
+      },
+      {
+        "statement": "If caught drink driving, you should tell your depot manager immediately.",
+        "isTrue": true,
+        "explanation": "If caught drink driving, you must tell your depot manager immediately."
+      },
+      {
+        "statement": "The Care First policy provides free counselling and advice services.",
+        "isTrue": true,
+        "explanation": "Care First is a free phone service offering counselling, information, and advice on personal matters."
+      },
+      {
+        "statement": "The maximum hours you can work in 7 consecutive days is 72 hours.",
+        "isTrue": true, 
+        "explanation": "You can work no more than 72 hours in 7 consecutive days."
+      },
+      {
+        "statement": "The minimum rest period between shifts for safety critical staff is 8 hours.",
+        "isTrue": false,
+        "explanation": "The minimum rest period between shifts for safety critical staff is 12 hours, not 8 hours."
+      },
+      {
+        "statement": "Dismissal occurs at stage 3 of the MFA policy.",
+        "isTrue": false,
+        "explanation": "Dismissal occurs at stage 4 of the MFA policy. Stage 3 is a formal chat with the senior driver manager and union rep (final warning)."
+      },
+      {
+        "statement": "A violation includes cases where you know you've made a mistake and try to cover it up.",
+        "isTrue": true,
+        "explanation": "A violation is where you know you have made a mistake and try to cover it up, or you know the rules and deliberately break them."
+      },
+      {
+        "statement": "After consuming 3 pints of strong lager at 8pm, a man could safely sign on for duty at 8am the next morning according to policy.",
+        "isTrue": false,
+        "explanation": "3 pints of strong lager equals 9 units (3 units per pint). For a man, it takes at least 9 hours for alcohol to leave the system, but company policy requires at least 12 hours between drinking and duty. Therefore, the earliest sign-on would be 8pm + 12 hours = 8pm the next day."
+      },
+      {
+        "statement": "If a female employee consumes 2 glasses of wine (175ml each) at 7pm, she can legally sign on for duty at 9am the next morning.",
+        "isTrue": false,
+        "explanation": "2 glasses of wine (175ml) equals 4 units total. For a woman, it takes approximately 1.5 hours per unit = 6 hours minimum. However, company policy requires waiting at least 12 hours after drinking, so the earliest sign-on would be 7pm + 12 hours = 7pm the next day."
+      },
+      {
+        "statement": "If you've worked 13 consecutive days, you can work a 14th day if it's a shorter shift than usual.",
+        "isTrue": false,
+        "explanation": "After working 13 consecutive days, you must have the 14th day off regardless of shift length. The consecutive working limit is not flexible based on shift duration."
+      },
+      {
+        "statement": "Missing a station stop because you were distracted by personal thoughts is considered a violation rather than an error.",
+        "isTrue": false,
+        "explanation": "This would be considered an error - a genuine mistake that you did not mean to happen. A violation would require knowingly breaking rules or attempting to cover up the mistake."
+      },
+      {
+        "statement": "Taking prescribed medication that causes drowsiness without informing your depot manager is a violation of company policy.",
+        "isTrue": true,
+        "explanation": "Company policy requires reporting prescribed drugs to your depot manager as soon as possible. Not doing so when you know the requirement is a deliberate breach of policy, which constitutes a violation."
+      },
+      {
+        "statement": "If you have been off sick for 4 days in two separate instances within a 13-week period, you would trigger Stage 1 of the MFA policy.",
+        "isTrue": true,
+        "explanation": "The MFA policy is triggered if you are off for 5 days total OR 2 instances in a 13-week period. Having 2 separate instances means you would trigger Stage 1 of the policy even though the total is less than 5 days."
+      },
+      {
+        "statement": "If you've already worked 68 hours in 6 consecutive days, you can still work a 6-hour shift on the 7th day.",
+        "isTrue": false,
+        "explanation": "68 + 6 = 74 hours, which exceeds the maximum limit of 72 hours in 7 consecutive days. You would not be permitted to work this shift."
+      },
+      {
+        "statement": "When a company iPad runs out of battery during your duty, you can temporarily use your personal tablet to access critical work information.",
+        "isTrue": false,
+        "explanation": "No personal electrical equipment should be used in the cab while driving, regardless of the circumstances. This includes personal tablets, even if you're using them for work purposes after company equipment failure."
+      },
+      {
+        "statement": "If you finished a 12-hour shift at 10pm, you could start your next shift at 10am the following day.",
+        "isTrue": true,
+        "explanation": "The minimum rest period between shifts for safety critical staff is 12 hours. If you finished at 10pm, you could start at 10am the next day (12 hours later), provided you haven't exceeded other working hours limits."
+      },
+      {
+        "statement": "Using headphones in the crew room during your break is permitted by company policy.",
+        "isTrue": true,
+        "explanation": "The policy against personal electrical equipment applies specifically to 'in the cab while driving.' Using headphones in the crew room during a break would be permitted as long as it doesn't distract others carrying out their duties."
+      },
+      {
+        "statement": "If you know you've made an error, acknowledging it immediately converts it from a potential violation to an error.",
+        "isTrue": true,
+        "explanation": "A violation includes cases where you know you've made a mistake and try to cover it up. By acknowledging and reporting an error immediately, you prevent it from becoming a violation through attempted concealment."
+      },
+      {
+        "statement": "If you reach Stage 3 of the MFA policy, any further absence within the next 52 weeks will automatically result in dismissal.",
+        "isTrue": false,
+        "explanation": "While Stage 3 is a final warning, progression to Stage 4 (dismissal) would still require the appropriate absence trigger to be met. Not every absence after Stage 3 automatically results in dismissal, though the situation is serious."
+      },
+      {
+        "statement": "The requirement to have the 14th day off after working 13 consecutive days can be waived in emergency situations.",
+        "isTrue": false,
+        "explanation": "The requirement to have the 14th day off after 13 consecutive working days is a strict safety rule and cannot be waived even in emergency situations. This is to ensure proper rest and prevent fatigue-related safety incidents."
+      },
+      {
+        "statement": "A driver who has had 3 separate one-day absences in a 52-week period has triggered the MFA policy.",
+        "isTrue": false,
+        "explanation": "The MFA policy for a 52-week period is triggered after 10 days total OR 5 instances. With only 3 instances totaling 3 days, the policy would not yet be triggered for the 52-week period (though it may have triggered the 13-week criteria)."
+      }
     ]
   }
 }
