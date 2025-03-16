@@ -7,24 +7,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const modulesList = document.getElementById('modules-list');
     const selectedModuleTitle = document.getElementById('selected-module-title');
     const methodButtons = document.getElementById('method-buttons');
-    const homeLink = document.getElementById('home-link');
+    const breadcrumbModule = document.getElementById('breadcrumb-module');
+    const themeToggle = document.getElementById('theme-toggle');
+    const floatingNav = document.querySelector('.floating-nav');
     
     // App state
     let currentModule = null;
+    let lastScrollTop = 0;
     
-    // Method descriptions
-    const methodDescriptions = {
-        'flashcards': 'Flip through digital cards to test your recall of key information.',
-        'quiz': 'Test your knowledge with multiple-choice questions and get immediate feedback.',
-        'time-trial': 'Race against the clock to match terms with their definitions.',
-        'true-false': 'Determine whether statements are true or false to test your understanding.'
+    // Method descriptions and icons
+    const methodInfo = {
+        'flashcards': {
+            description: 'Flip through digital cards to test your recall of key information. Tap or click to reveal the answer.',
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M12 8v8"/><path d="M8 12h8"/></svg>'
+        },
+        'quiz': {
+            description: 'Test your knowledge with multiple-choice questions and get immediate feedback on your answers.',
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>'
+        },
+        'time-trial': {
+            description: 'Race against the clock to match terms with their definitions. Challenge yourself to recall information quickly.',
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'
+        },
+        'true-false': {
+            description: 'Determine whether statements are true or false and learn the reasoning behind each answer.',
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'
+        }
     };
     
     // Initialize the application
     init();
     
-    // Event Listeners
-    homeLink.addEventListener('click', showModulesView);
+    // Setup Event Listeners
+    setupEventListeners();
     
     // Functions
     function init() {
@@ -34,6 +49,61 @@ document.addEventListener('DOMContentLoaded', () => {
         modulesView.style.display = 'block';
         methodsView.style.display = 'none';
         contentView.style.display = 'none';
+        
+        // Add floating navbar scroll behavior
+        handleFloatingNavScroll();
+        
+        // Add entrance animations
+        animateElements();
+    }
+    
+    function setupEventListeners() {
+        // Home navigation
+        document.querySelectorAll('.nav-links a')[0].addEventListener('click', (e) => {
+            e.preventDefault();
+            showModulesView();
+        });
+        
+        // Theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Window scroll event for floating nav
+        window.addEventListener('scroll', handleFloatingNavScroll);
+    }
+    
+    function handleFloatingNavScroll() {
+        window.addEventListener('scroll', () => {
+            const st = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (st > lastScrollTop && st > 200) {
+                // Scrolling down
+                floatingNav.classList.add('hidden');
+            } else {
+                // Scrolling up
+                floatingNav.classList.remove('hidden');
+            }
+            
+            lastScrollTop = st <= 0 ? 0 : st;
+        });
+    }
+    
+    function animateElements() {
+        // Add fade-in to elements with data-animate attribute
+        const animateElements = document.querySelectorAll('[data-animate]');
+        animateElements.forEach(el => {
+            el.classList.add('fade-in');
+        });
+    }
+    
+    function toggleTheme() {
+        document.body.classList.toggle('light-theme');
+        
+        // Update toggle icon based on theme
+        if (document.body.classList.contains('light-theme')) {
+            themeToggle.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        } else {
+            themeToggle.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.93 4.93L6.34 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.66 17.66L19.07 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.34 17.66L4.93 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.07 4.93L17.66 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        }
     }
     
     function loadModules() {
@@ -44,13 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 modules.forEach((module, index) => {
                     const moduleElement = document.createElement('div');
-                    moduleElement.className = 'module-item';
+                    moduleElement.className = 'module-card';
                     moduleElement.innerHTML = `
-                        <div class="number-circle circle-${(index % 4) + 1}">${index + 1}</div>
-                        <div class="module-item-content">
-                            <div class="module-item-title">${module.title}</div>
-                            <div class="module-item-desc">${module.description}</div>
-                        </div>
+                        <div class="module-number">${index + 1}</div>
+                        <h3 class="module-title">${module.title}</h3>
+                        <p class="module-desc">${module.description}</p>
                     `;
                     
                     moduleElement.addEventListener('click', () => {
@@ -80,14 +148,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function showModulesView() {
+        // Update UI
         modulesView.style.display = 'block';
         methodsView.style.display = 'none';
         contentView.style.display = 'none';
+        
+        // Update navigation
+        document.querySelectorAll('.nav-links a')[0].classList.add('active');
+        breadcrumbModule.parentElement.classList.remove('active');
+        breadcrumbModule.textContent = '';
+        breadcrumbModule.href = '#';
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
     function showMethodsView(moduleData) {
-        // Update title
+        // Update titles
         selectedModuleTitle.textContent = moduleData.title;
+        
+        // Update breadcrumb
+        breadcrumbModule.textContent = moduleData.title;
+        breadcrumbModule.parentElement.classList.add('active');
         
         // Create method buttons
         createMethodButtons(moduleData);
@@ -97,19 +179,14 @@ document.addEventListener('DOMContentLoaded', () => {
         methodsView.style.display = 'block';
         contentView.style.display = 'none';
         
-        // Add method description section
-        const methodDescriptionElement = document.getElementById('method-description') || document.createElement('p');
-        methodDescriptionElement.id = 'method-description';
-        methodDescriptionElement.className = 'method-description';
-        methodDescriptionElement.textContent = 'Select a study method to begin.';
-        
-        // Insert after the "Choose a study method:" text if not already present
-        const methodSectionElement = document.querySelector('.study-methods');
-        const chooseTextElement = methodSectionElement.querySelector('p');
-        
-        if (!document.getElementById('method-description')) {
-            chooseTextElement.parentNode.insertBefore(methodDescriptionElement, chooseTextElement.nextSibling);
+        // Update method description
+        const methodDescriptionElement = document.getElementById('method-description');
+        if (methodDescriptionElement) {
+            methodDescriptionElement.textContent = 'Select a study method to begin';
         }
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
     function createMethodButtons(moduleData) {
@@ -120,41 +197,23 @@ document.addEventListener('DOMContentLoaded', () => {
             button.className = 'method-button';
             button.id = `${method}-button`;
             
-            // Use appropriate icons for each method
-            let icon = '';
-            let methodName = '';
+            // Get method info
+            const info = methodInfo[method] || {
+                description: `Learn with ${method}`,
+                icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>'
+            };
             
-            switch (method) {
-                case 'flashcards':
-                    icon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21 3H3a2 2 0 00-2 2v14a2 2 0 002 2h18a2 2 0 002-2V5a2 2 0 00-2-2zm0 16H3V5h18v14z"/><path d="M13 10H7v2h6v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>';
-                    methodName = 'Flashcards';
-                    break;
-                case 'quiz':
-                    icon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>';
-                    methodName = 'Quiz';
-                    break;
-                case 'time-trial':
-                    icon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>';
-                    methodName = 'Time Trial';
-                    break;
-                case 'true-false':
-                    icon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>';
-                    methodName = 'True & False';
-                    break;
-                default:
-                    methodName = method.charAt(0).toUpperCase() + method.slice(1);
-            }
+            const methodName = method.charAt(0).toUpperCase() + method.slice(1).replace('-', ' ');
             
-            button.innerHTML = `${icon} ${methodName}`;
+            button.innerHTML = `
+                <div class="method-icon">${info.icon}</div>
+                <div class="method-content">
+                    <div class="method-title">${methodName}</div>
+                    <div class="method-desc">${info.description}</div>
+                </div>
+            `;
             
             button.addEventListener('click', () => {
-                // Update method description
-                const methodDescriptionElement = document.getElementById('method-description');
-                if (methodDescriptionElement) {
-                    methodDescriptionElement.textContent = methodDescriptions[method] || `Learn with ${methodName}`;
-                }
-                
-                // Load the study method
                 loadStudyMethod(moduleData, method);
             });
             
@@ -168,6 +227,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Show the content view
         contentView.style.display = 'block';
+        contentView.classList.add('slide-up');
+        
+        // Remove the animation class after animation completes
+        setTimeout(() => {
+            contentView.classList.remove('slide-up');
+        }, 500);
         
         // Load the appropriate study method
         switch (method) {
@@ -184,8 +249,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 initTrueFalseQuestions(moduleData);
                 break;
             default:
-                contentView.innerHTML = `<p>Study method "${method}" is not implemented yet.</p>`;
+                contentView.innerHTML = `<div class="content-container"><p>Study method "${method}" is not implemented yet.</p></div>`;
         }
+        
+        // Scroll to content view
+        contentView.scrollIntoView({ behavior: 'smooth' });
     }
     
     function loadFlashcards(moduleData) {
@@ -194,18 +262,50 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Create flashcard container
         contentView.innerHTML = `
-            <h3>${moduleData.title} - Flashcards</h3>
-            <div class="flashcard-progress">Card <span id="current-card-number">1</span>/${flashcardsData.length}</div>
-            <div class="flashcard" id="current-flashcard">
-                <div class="flashcard-question">${flashcardsData[currentCardIndex].question}</div>
-                <div class="flashcard-answer">${flashcardsData[currentCardIndex].answer}</div>
+            <div class="content-header">
+                <h2 class="content-title">${moduleData.title} - Flashcards</h2>
+                <span class="progress-indicator">Card <span id="current-card-number">1</span> of ${flashcardsData.length}</span>
             </div>
-            <div class="flashcard-nav">
-                <button id="prev-card" class="back-button" ${currentCardIndex === 0 ? 'disabled' : ''}>Previous</button>
-                <button id="flip-card" class="back-button">Flip Card</button>
-                <button id="next-card" class="back-button" ${currentCardIndex === flashcardsData.length - 1 ? 'disabled' : ''}>Next</button>
+            
+            <div class="content-container">
+                <div class="flashcard" id="current-flashcard">
+                    <div class="card-indicator">Click to flip</div>
+                    <div class="flashcard-question">${flashcardsData[currentCardIndex].question}</div>
+                    <div class="flashcard-answer">${flashcardsData[currentCardIndex].answer}</div>
+                </div>
+                
+                <div class="card-controls">
+                    <button id="prev-card" class="btn" ${currentCardIndex === 0 ? 'disabled' : ''}>
+                        <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                        Previous
+                    </button>
+                    
+                    <button id="flip-card" class="btn btn-primary">
+                        <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 15l5 5 5-5"/>
+                            <path d="M12 20V4"/>
+                        </svg>
+                        Flip Card
+                    </button>
+                    
+                    <button id="next-card" class="btn" ${currentCardIndex === flashcardsData.length - 1 ? 'disabled' : ''}>
+                        Next
+                        <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
-            <button id="back-to-methods" class="back-button">Back to Methods</button>
+            
+            <button id="back-to-methods" class="btn">
+                <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5"/>
+                    <path d="M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Methods
+            </button>
         `;
         
         // Add event listeners
@@ -268,18 +368,43 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Create quiz container
         contentView.innerHTML = `
-            <h3>${moduleData.title} - Quiz</h3>
-            <div class="quiz-progress">Question <span id="current-question-number">1</span>/${quizData.length}</div>
-            <div class="quiz-container" id="quiz-container">
-                <div class="quiz-question" id="quiz-question"></div>
-                <ul class="quiz-options" id="quiz-options"></ul>
+            <div class="content-header">
+                <h2 class="content-title">${moduleData.title} - Quiz</h2>
+                <span class="progress-indicator">Question <span id="current-question-number">1</span> of ${quizData.length}</span>
             </div>
-            <div class="quiz-nav">
-                <button id="prev-question" class="back-button">Previous</button>
-                <button id="next-question" class="back-button">Next</button>
-                <button id="submit-quiz" class="back-button">Submit Quiz</button>
+            
+            <div class="content-container">
+                <div class="quiz-container" id="quiz-container">
+                    <div class="quiz-question" id="quiz-question"></div>
+                    <ul class="quiz-options" id="quiz-options"></ul>
+                </div>
+                
+                <div class="quiz-controls">
+                    <button id="prev-question" class="btn">
+                        <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                        Previous
+                    </button>
+                    
+                    <button id="next-question" class="btn">
+                        Next
+                        <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
+                    
+                    <button id="submit-quiz" class="btn btn-primary" style="display: none;">Submit Quiz</button>
+                </div>
             </div>
-            <button id="back-to-methods" class="back-button">Back to Methods</button>
+            
+            <button id="back-to-methods" class="btn">
+                <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5"/>
+                    <path d="M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Methods
+            </button>
         `;
         
         // Add event listeners
@@ -358,7 +483,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Update button states
             prevButton.disabled = currentQuestionIndex === 0;
-            nextButton.disabled = currentQuestionIndex === quizData.length - 1;
             
             // Show/hide appropriate buttons
             if (currentQuestionIndex === quizData.length - 1) {
@@ -379,42 +503,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             
+            const percentage = Math.round((score / quizData.length) * 100);
+            
             // Display results
             contentView.innerHTML = `
-                <h3>${moduleData.title} - Quiz Results</h3>
-                <div class="quiz-results">
-                    <h4>Your Score: ${score} out of ${quizData.length}</h4>
-                    <p>Percentage: ${Math.round((score / quizData.length) * 100)}%</p>
-                    <div class="quiz-feedback">
+                <div class="content-header">
+                    <h2 class="content-title">${moduleData.title} - Quiz Results</h2>
+                </div>
+                
+                <div class="content-container">
+                    <div class="quiz-results">
+                        <div class="quiz-score">${score} / ${quizData.length}</div>
+                        <div class="quiz-percentage">${percentage}%</div>
                         ${score === quizData.length ? 
-                            '<p>Perfect! You got all the questions right.</p>' : 
-                            '<p>Keep learning to improve your score.</p>'}
+                            '<div class="quiz-perfect">Perfect Score! 🎉</div>' : 
+                            '<p>Keep learning to improve your score!</p>'}
+                        
+                        <div class="quiz-actions">
+                            <button id="review-quiz" class="btn btn-primary">Review Answers</button>
+                            <button id="retry-quiz" class="btn">Try Again</button>
+                            <button id="back-to-methods" class="btn">Back to Methods</button>
+                        </div>
                     </div>
-                    <button id="review-quiz" class="back-button">Review Answers</button>
-                    <button id="retry-quiz" class="back-button">Retry Quiz</button>
-                    <button id="back-to-methods" class="back-button">Back to Methods</button>
                 </div>
             `;
             
             // Add event listeners
-            document.getElementById('review-quiz').addEventListener('click', () => {
-                showQuizReview();
-            });
-            
-            document.getElementById('retry-quiz').addEventListener('click', () => {
-                loadQuiz(moduleData);
-            });
-            
-            document.getElementById('back-to-methods').addEventListener('click', () => {
-                showMethodsView(moduleData);
-            });
+            document.getElementById('review-quiz').addEventListener('click', showQuizReview);
+            document.getElementById('retry-quiz').addEventListener('click', () => loadQuiz(moduleData));
+            document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(moduleData));
         }
         
         function showQuizReview() {
             contentView.innerHTML = `
-                <h3>${moduleData.title} - Quiz Review</h3>
-                <div class="quiz-review" id="quiz-review"></div>
-                <button id="back-to-results" class="back-button">Back to Results</button>
+                <div class="content-header">
+                    <h2 class="content-title">${moduleData.title} - Quiz Review</h2>
+                </div>
+                
+                <div class="content-container">
+                    <div id="quiz-review"></div>
+                </div>
+                
+                <button id="back-to-results" class="btn">
+                    <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5"/>
+                        <path d="M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back to Results
+                </button>
             `;
             
             const reviewElement = document.getElementById('quiz-review');
@@ -424,26 +560,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 const isCorrect = userAnswer === question.correctAnswer;
                 
                 const questionElement = document.createElement('div');
-                questionElement.className = `quiz-review-item ${isCorrect ? 'correct' : 'incorrect'}`;
+                questionElement.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
                 
                 questionElement.innerHTML = `
-                    <div class="quiz-review-question">${index + 1}. ${question.question}</div>
-                    <div class="quiz-review-answers">
-                        <div class="quiz-review-your-answer">
-                            Your answer: ${userAnswer >= 0 ? question.options[userAnswer] : 'Not answered'}
-                        </div>
-                        <div class="quiz-review-correct-answer">
-                            Correct answer: ${question.options[question.correctAnswer]}
-                        </div>
+                    <div class="review-statement">${index + 1}. ${question.question}</div>
+                    <div class="review-details">
+                        <div class="review-answer">Your answer: ${userAnswer >= 0 ? question.options[userAnswer] : 'Not answered'}</div>
+                        <div class="review-answer">Correct answer: ${question.options[question.correctAnswer]}</div>
                     </div>
                 `;
                 
                 reviewElement.appendChild(questionElement);
             });
             
-            document.getElementById('back-to-results').addEventListener('click', () => {
-                showQuizResults();
-            });
+            document.getElementById('back-to-results').addEventListener('click', showQuizResults);
         }
     }
     
@@ -455,56 +585,90 @@ document.addEventListener('DOMContentLoaded', () => {
         let timer;
         let timeLeft = 7;
         let gameStarted = false;
-        let selectedItems = [];
+        
+        // Shuffle and prepare data
+        const shuffledData = [...timeTrialData].sort(() => Math.random() - 0.5);
         
         // Create the game UI
-        const contentView = document.getElementById('content-view');
         contentView.innerHTML = `
-            <h3>${moduleData.title} - Time Trial</h3>
-            <div class="time-trial-container">
+            <div class="content-header">
+                <h2 class="content-title">${moduleData.title} - Time Trial</h2>
+            </div>
+            
+            <div class="content-container">
                 <div class="time-trial-header">
-                    <div class="time-trial-score">Score: <span id="time-trial-score">0</span></div>
-                    <div class="time-trial-timer">Time: <span id="time-trial-time">7</span>s</div>
-                    <div class="time-trial-progress">Question <span id="time-trial-current">1</span>/${timeTrialData.length}</div>
+                    <div class="time-trial-info">
+                        <div class="info-item">
+                            <div class="info-label">Score</div>
+                            <div class="info-value" id="time-trial-score">0</div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">Time</div>
+                            <div class="info-value time-value" id="time-trial-time">7s</div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">Question</div>
+                            <div class="info-value" id="time-trial-current">0/${timeTrialData.length}</div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="time-trial-answer-container">
-                    <div class="time-trial-answer" id="time-trial-answer"></div>
+                <div id="time-trial-gameplay" style="display: none;">
+                    <div class="time-trial-definition" id="time-trial-definition"></div>
+                    <div class="time-trial-options" id="time-trial-options"></div>
+                    <div class="time-trial-feedback" id="time-trial-feedback"></div>
                 </div>
                 
-                <div class="time-trial-options" id="time-trial-options"></div>
-                
-                <div class="time-trial-feedback" id="time-trial-feedback"></div>
+                <div id="time-trial-start-screen" class="text-center">
+                    <p class="mb-lg">Match the term with its definition as quickly as possible. You have 7 seconds for each question.</p>
+                    <button id="time-trial-start" class="btn btn-primary btn-large">Start Game</button>
+                </div>
                 
                 <div class="time-trial-controls">
-                    <button id="time-trial-start" class="time-trial-button">Start Game</button>
-                    <button id="time-trial-next" class="time-trial-button" style="display: none;">Next</button>
+                    <button id="time-trial-next" class="btn btn-primary" style="display: none;">Next Term</button>
                 </div>
             </div>
+            
+            <button id="back-to-methods" class="btn">
+                <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5"/>
+                    <path d="M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Methods
+            </button>
         `;
         
         const scoreElement = document.getElementById('time-trial-score');
         const timeElement = document.getElementById('time-trial-time');
         const currentElement = document.getElementById('time-trial-current');
-        const answerElement = document.getElementById('time-trial-answer');
+        const definitionElement = document.getElementById('time-trial-definition');
         const optionsElement = document.getElementById('time-trial-options');
         const feedbackElement = document.getElementById('time-trial-feedback');
         const startButton = document.getElementById('time-trial-start');
         const nextButton = document.getElementById('time-trial-next');
+        const backButton = document.getElementById('back-to-methods');
+        const gameplayElement = document.getElementById('time-trial-gameplay');
+        const startScreenElement = document.getElementById('time-trial-start-screen');
         
         // Initialize the game
         startButton.addEventListener('click', startGame);
         nextButton.addEventListener('click', nextRound);
+        backButton.addEventListener('click', () => {
+            clearInterval(timer);
+            showMethodsView(moduleData);
+        });
         
         function startGame() {
             gameStarted = true;
             score = 0;
             currentRound = 0;
             scoreElement.textContent = '0';
-            startButton.style.display = 'none';
             
-            // Shuffle the data for a random order
-            shuffleArray(timeTrialData);
+            // Hide start screen, show gameplay
+            startScreenElement.style.display = 'none';
+            gameplayElement.style.display = 'block';
             
             // Start the first round
             nextRound();
@@ -519,20 +683,21 @@ document.addEventListener('DOMContentLoaded', () => {
             // Reset UI state
             clearInterval(timer);
             timeLeft = 7;
-            timeElement.textContent = timeLeft;
+            timeElement.textContent = timeLeft + 's';
+            timeElement.classList.remove('warning');
             feedbackElement.innerHTML = '';
             nextButton.style.display = 'none';
             
             // Update progress
-            currentElement.textContent = currentRound + 1;
+            currentElement.textContent = `${currentRound + 1}/${timeTrialData.length}`;
             
             // Get current item and generate options
-            const currentItem = timeTrialData[currentRound];
+            const currentItem = shuffledData[currentRound];
             
-            // Display the definition (answer)
-            answerElement.textContent = currentItem.definition;
+            // Display the definition
+            definitionElement.textContent = currentItem.definition;
             
-            // Generate options (including the correct one)
+            // Generate options
             generateOptions(currentItem);
             
             // Start the timer
@@ -547,15 +712,13 @@ document.addEventListener('DOMContentLoaded', () => {
             optionsElement.innerHTML = '';
             
             // Get 3 random distractors (different from the correct one)
-            const allItems = [...timeTrialData];
-            const correctIndex = allItems.findIndex(item => item.term === currentItem.term);
-            allItems.splice(correctIndex, 1); // Remove the correct item
-            shuffleArray(allItems);
-            
-            // Use 3 distractors plus the correct option
-            const distractors = allItems.slice(0, 3);
-            const options = [...distractors, currentItem];
-            shuffleArray(options); // Shuffle so correct answer isn't always in the same position
+            const distractors = timeTrialData
+                .filter(item => item.term !== currentItem.term)
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 3);
+                
+            // Combine correct option with distractors and shuffle
+            const options = [currentItem, ...distractors].sort(() => Math.random() - 0.5);
             
             // Create option buttons
             options.forEach(option => {
@@ -577,9 +740,9 @@ document.addEventListener('DOMContentLoaded', () => {
             options.forEach(option => {
                 option.disabled = true;
                 if (option.dataset.term === correctTerm) {
-                    option.classList.add('time-trial-correct');
+                    option.classList.add('correct');
                 } else if (option.dataset.term === selectedTerm && selectedTerm !== correctTerm) {
-                    option.classList.add('time-trial-incorrect');
+                    option.classList.add('incorrect');
                 }
             });
             
@@ -590,9 +753,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isCorrect) {
                 score++;
                 scoreElement.textContent = score;
-                feedbackElement.innerHTML = '<div class="time-trial-correct-feedback">Correct!</div>';
+                feedbackElement.innerHTML = '<div class="feedback-correct">Correct!</div>';
             } else {
-                feedbackElement.innerHTML = `<div class="time-trial-incorrect-feedback">Incorrect! The correct answer was: ${correctTerm}</div>`;
+                feedbackElement.innerHTML = `<div class="feedback-incorrect">Incorrect! The correct answer was: ${correctTerm}</div>`;
             }
             
             // Show next button
@@ -607,12 +770,12 @@ document.addEventListener('DOMContentLoaded', () => {
         function startTimer() {
             timer = setInterval(() => {
                 timeLeft--;
-                timeElement.textContent = timeLeft;
+                timeElement.textContent = timeLeft + 's';
                 
                 if (timeLeft <= 3) {
-                    timeElement.classList.add('time-trial-time-warning');
+                    timeElement.classList.add('warning');
                 } else {
-                    timeElement.classList.remove('time-trial-time-warning');
+                    timeElement.classList.remove('warning');
                 }
                 
                 if (timeLeft <= 0) {
@@ -625,18 +788,18 @@ document.addEventListener('DOMContentLoaded', () => {
             clearInterval(timer);
             
             // Get the current item
-            const currentItem = timeTrialData[currentRound - 1];
+            const currentItem = shuffledData[currentRound - 1];
             
             // Highlight the correct answer
             const options = document.querySelectorAll('.time-trial-option');
             options.forEach(option => {
                 option.disabled = true;
                 if (option.dataset.term === currentItem.term) {
-                    option.classList.add('time-trial-correct');
+                    option.classList.add('correct');
                 }
             });
             
-            feedbackElement.innerHTML = `<div class="time-trial-timeout-feedback">Time's up! The correct answer was: ${currentItem.term}</div>`;
+            feedbackElement.innerHTML = `<div class="feedback-timeout">Time's up! The correct answer was: ${currentItem.term}</div>`;
             
             // Show next button
             nextButton.style.display = 'block';
@@ -648,29 +811,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         function endGame() {
+            // Clear any running timer
+            clearInterval(timer);
+            
+            const percentage = Math.round((score / timeTrialData.length) * 100);
+            
             // Display final score and game over message
             contentView.innerHTML = `
-                <h3>${moduleData.title} - Time Trial</h3>
-                <div class="time-trial-container">
-                    <div class="time-trial-game-over">
-                        <h2>Game Over!</h2>
-                        <p>Your final score: ${score} out of ${timeTrialData.length}</p>
-                        <p>Accuracy: ${Math.round((score / timeTrialData.length) * 100)}%</p>
+                <div class="content-header">
+                    <h2 class="content-title">${moduleData.title} - Time Trial</h2>
+                </div>
+                
+                <div class="content-container">
+                    <div class="time-trial-results">
+                        <div class="quiz-score">${score} / ${timeTrialData.length}</div>
+                        <div class="quiz-percentage">${percentage}%</div>
                         ${score === timeTrialData.length ? 
-                            '<p class="time-trial-perfect">Perfect Score!</p>' : 
-                            '<p>Keep practicing to improve your knowledge!</p>'}
-                        <button id="time-trial-replay" class="time-trial-button">Play Again</button>
-                        <button id="time-trial-back" class="time-trial-button">Back to Methods</button>
+                            '<div class="quiz-perfect">Perfect Score! 🎉</div>' : 
+                            '<p>Keep practicing to improve your speed and accuracy!</p>'}
+                        
+                        <div class="quiz-actions">
+                            <button id="time-trial-replay" class="btn btn-primary">Play Again</button>
+                            <button id="back-to-methods" class="btn">Back to Methods</button>
+                        </div>
                     </div>
                 </div>
             `;
             
-            // Set up event listeners for the replay and back buttons
+            // Add event listeners
             document.getElementById('time-trial-replay').addEventListener('click', () => {
                 initTimeTrialGame(moduleData);
             });
             
-            document.getElementById('time-trial-back').addEventListener('click', () => {
+            document.getElementById('back-to-methods').addEventListener('click', () => {
                 showMethodsView(moduleData);
             });
         }
@@ -684,34 +857,38 @@ document.addEventListener('DOMContentLoaded', () => {
         let userAnswers = [];
         
         // Create the UI
-        const contentView = document.getElementById('content-view');
         contentView.innerHTML = `
-            <h3>${moduleData.title} - True & False</h3>
-            <div class="true-false-container">
-                <div class="true-false-header">
-                    <div class="true-false-score">Score: <span id="true-false-score">0</span></div>
-                    <div class="true-false-progress">Question <span id="true-false-current">1</span>/${trueFalseData.length}</div>
-                </div>
-                
-                <div class="true-false-statement-container">
+            <div class="content-header">
+                <h2 class="content-title">${moduleData.title} - True & False</h2>
+                <span class="progress-indicator">Question <span id="true-false-current">1</span> of ${trueFalseData.length}</span>
+            </div>
+            
+            <div class="content-container">
+                <div class="true-false-container">
                     <div class="true-false-statement" id="true-false-statement"></div>
+                    
+                    <div class="true-false-options">
+                        <button id="true-button" class="btn btn-true">TRUE</button>
+                        <button id="false-button" class="btn btn-false">FALSE</button>
+                    </div>
+                    
+                    <div class="true-false-feedback" id="true-false-feedback"></div>
                 </div>
                 
-                <div class="true-false-buttons">
-                    <button id="true-button" class="true-button">TRUE</button>
-                    <button id="false-button" class="false-button">FALSE</button>
-                </div>
-                
-                <div class="true-false-feedback" id="true-false-feedback"></div>
-                
-                <div class="true-false-controls">
-                    <button id="true-false-next" class="true-false-button" style="display: none;">Next</button>
-                    <button id="back-to-methods" class="back-button">Back to Methods</button>
+                <div class="quiz-controls">
+                    <button id="true-false-next" class="btn btn-primary" style="display: none;">Next Question</button>
                 </div>
             </div>
+            
+            <button id="back-to-methods" class="btn">
+                <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5"/>
+                    <path d="M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Methods
+            </button>
         `;
         
-        const scoreElement = document.getElementById('true-false-score');
         const currentElement = document.getElementById('true-false-current');
         const statementElement = document.getElementById('true-false-statement');
         const trueButton = document.getElementById('true-button');
@@ -721,7 +898,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const backButton = document.getElementById('back-to-methods');
         
         // Initialize
-        shuffleArray(trueFalseData);
+        const shuffledData = [...trueFalseData].sort(() => Math.random() - 0.5);
         loadQuestion();
         
         // Add event listeners
@@ -735,7 +912,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         function loadQuestion() {
-            const questionData = trueFalseData[currentQuestionIndex];
+            const questionData = shuffledData[currentQuestionIndex];
             
             // Update statement
             statementElement.textContent = questionData.statement;
@@ -746,8 +923,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Reset buttons
             trueButton.disabled = false;
             falseButton.disabled = false;
-            trueButton.classList.remove('true-button-selected');
-            falseButton.classList.remove('false-button-selected');
+            trueButton.classList.remove('selected');
+            falseButton.classList.remove('selected');
             
             // Hide feedback and next button
             feedbackElement.classList.remove('visible');
@@ -755,14 +932,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         function selectAnswer(userAnswer) {
-            const questionData = trueFalseData[currentQuestionIndex];
+            const questionData = shuffledData[currentQuestionIndex];
             const isCorrect = userAnswer === questionData.isTrue;
             
             // Update UI to show selected answer
             if (userAnswer) {
-                trueButton.classList.add('true-button-selected');
+                trueButton.classList.add('selected');
             } else {
-                falseButton.classList.add('false-button-selected');
+                falseButton.classList.add('selected');
             }
             
             // Disable buttons
@@ -772,15 +949,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Show feedback
             if (isCorrect) {
                 score++;
-                scoreElement.textContent = score;
                 feedbackElement.innerHTML = `
-                    <div class="true-false-correct-feedback">Correct!</div>
-                    <div class="true-false-explanation">${questionData.explanation}</div>
+                    <div class="feedback-header">Correct!</div>
+                    <div class="feedback-content">${questionData.explanation}</div>
                 `;
             } else {
                 feedbackElement.innerHTML = `
-                    <div class="true-false-incorrect-feedback">Incorrect!</div>
-                    <div class="true-false-explanation">${questionData.explanation}</div>
+                    <div class="feedback-header">Incorrect!</div>
+                    <div class="feedback-content">${questionData.explanation}</div>
                 `;
             }
             
@@ -799,7 +975,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function nextQuestion() {
             currentQuestionIndex++;
             
-            if (currentQuestionIndex >= trueFalseData.length) {
+            if (currentQuestionIndex >= shuffledData.length) {
                 showResults();
                 return;
             }
@@ -809,22 +985,27 @@ document.addEventListener('DOMContentLoaded', () => {
         
         function showResults() {
             // Calculate final score
-            const accuracy = Math.round((score / trueFalseData.length) * 100);
+            const percentage = Math.round((score / trueFalseData.length) * 100);
             
             // Display results
             contentView.innerHTML = `
-                <h3>${moduleData.title} - True & False Results</h3>
-                <div class="true-false-container">
-                    <div class="true-false-results">
-                        <h2>Quiz Complete!</h2>
-                        <p>Your final score: ${score} out of ${trueFalseData.length}</p>
-                        <p>Accuracy: ${accuracy}%</p>
+                <div class="content-header">
+                    <h2 class="content-title">${moduleData.title} - True & False Results</h2>
+                </div>
+                
+                <div class="content-container">
+                    <div class="time-trial-results">
+                        <div class="quiz-score">${score} / ${trueFalseData.length}</div>
+                        <div class="quiz-percentage">${percentage}%</div>
                         ${score === trueFalseData.length ? 
-                            '<p class="true-false-perfect">Perfect Score!</p>' : 
-                            '<p>Keep practicing to improve your knowledge!</p>'}
-                        <button id="true-false-review" class="true-false-button">Review Answers</button>
-                        <button id="true-false-replay" class="true-false-button">Play Again</button>
-                        <button id="true-false-back" class="true-false-button">Back to Methods</button>
+                            '<div class="quiz-perfect">Perfect Score! 🎉</div>' : 
+                            '<p>Keep learning to improve your knowledge!</p>'}
+                        
+                        <div class="quiz-actions">
+                            <button id="true-false-review" class="btn btn-primary">Review Answers</button>
+                            <button id="true-false-replay" class="btn">Try Again</button>
+                            <button id="back-to-methods" class="btn">Back to Methods</button>
+                        </div>
                     </div>
                 </div>
             `;
@@ -834,41 +1015,45 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('true-false-replay').addEventListener('click', () => {
                 initTrueFalseQuestions(moduleData);
             });
-            document.getElementById('true-false-back').addEventListener('click', () => {
+            document.getElementById('back-to-methods').addEventListener('click', () => {
                 showMethodsView(moduleData);
             });
         }
         
         function showReview() {
             contentView.innerHTML = `
-                <h3>${moduleData.title} - True & False Review</h3>
-                <div class="true-false-container" id="review-container">
+                <div class="content-header">
+                    <h2 class="content-title">${moduleData.title} - True & False Review</h2>
+                </div>
+                
+                <div class="content-container" id="review-container">
                     <!-- Review items will be added here -->
                 </div>
-                <button id="back-to-results" class="back-button">Back to Results</button>
+                
+                <button id="back-to-results" class="btn">
+                    <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5"/>
+                        <path d="M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back to Results
+                </button>
             `;
             
             const reviewContainer = document.getElementById('review-container');
             
             // Add review items
-            trueFalseData.forEach((question, index) => {
+            shuffledData.forEach((question, index) => {
                 const userAnswer = userAnswers[index];
                 
                 // Create review item
                 const reviewItem = document.createElement('div');
-                reviewItem.className = 'true-false-statement-container';
+                reviewItem.className = `review-item ${userAnswer && userAnswer.isCorrect ? 'correct' : 'incorrect'}`;
                 reviewItem.innerHTML = `
-                    <div class="true-false-statement">${index + 1}. ${question.statement}</div>
-                    <div class="true-false-feedback visible">
-                        <div class="${userAnswer && userAnswer.isCorrect ? 
-                            'true-false-correct-feedback' : 'true-false-incorrect-feedback'}">
-                            ${userAnswer ? (userAnswer.isCorrect ? 'Correct!' : 'Incorrect!') : 'Not answered'}
-                        </div>
-                        <div>
-                            <p>Correct answer: <strong>${question.isTrue ? 'TRUE' : 'FALSE'}</strong></p>
-                            ${userAnswer ? `<p>Your answer: <strong>${userAnswer.userAnswer ? 'TRUE' : 'FALSE'}</strong></p>` : ''}
-                        </div>
-                        <div class="true-false-explanation">${question.explanation}</div>
+                    <div class="review-statement">${index + 1}. ${question.statement}</div>
+                    <div class="review-details">
+                        <div class="review-answer">Correct answer: <strong>${question.isTrue ? 'TRUE' : 'FALSE'}</strong></div>
+                        ${userAnswer ? `<div class="review-answer">Your answer: <strong>${userAnswer.userAnswer ? 'TRUE' : 'FALSE'}</strong></div>` : ''}
+                        <div class="review-explanation">${question.explanation}</div>
                     </div>
                 `;
                 
@@ -882,9 +1067,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Helper function to shuffle an array
     function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
+        const newArray = [...array];
+        for (let i = newArray.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
         }
+        return newArray;
     }
 });
