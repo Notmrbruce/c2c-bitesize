@@ -115,6 +115,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     icon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>';
                     methodName = 'Time Trial';
                     break;
+                case 'true-false':
+                    icon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>';
+                    methodName = 'True & False';
+                    break;
                 default:
                     methodName = method.charAt(0).toUpperCase() + method.slice(1);
             }
@@ -146,6 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             case 'time-trial':
                 initTimeTrialGame(moduleData);
+                break;
+            case 'true-false':
+                initTrueFalseQuestions(moduleData);
                 break;
             default:
                 contentView.innerHTML = `<p>Study method "${method}" is not implemented yet.</p>`;
@@ -627,6 +634,210 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('time-trial-back').addEventListener('click', () => {
                 showMethodsView(moduleData);
             });
+        }
+    }
+    
+    // True-False Questions Implementation
+    function initTrueFalseQuestions(moduleData) {
+        const trueFalseData = moduleData.content['true-false'];
+        let score = 0;
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        
+        // Create the UI
+        const contentView = document.getElementById('content-view');
+        contentView.innerHTML = `
+            <h3>${moduleData.title} - True & False</h3>
+            <div class="true-false-container">
+                <div class="true-false-header">
+                    <div class="true-false-score">Score: <span id="true-false-score">0</span></div>
+                    <div class="true-false-progress">Question <span id="true-false-current">1</span>/${trueFalseData.length}</div>
+                </div>
+                
+                <div class="true-false-statement-container">
+                    <div class="true-false-statement" id="true-false-statement"></div>
+                </div>
+                
+                <div class="true-false-buttons">
+                    <button id="true-button" class="true-button">TRUE</button>
+                    <button id="false-button" class="false-button">FALSE</button>
+                </div>
+                
+                <div class="true-false-feedback" id="true-false-feedback"></div>
+                
+                <div class="true-false-controls">
+                    <button id="true-false-next" class="true-false-button" style="display: none;">Next</button>
+                    <button id="back-to-methods" class="back-button">Back to Methods</button>
+                </div>
+            </div>
+        `;
+        
+        const scoreElement = document.getElementById('true-false-score');
+        const currentElement = document.getElementById('true-false-current');
+        const statementElement = document.getElementById('true-false-statement');
+        const trueButton = document.getElementById('true-button');
+        const falseButton = document.getElementById('false-button');
+        const feedbackElement = document.getElementById('true-false-feedback');
+        const nextButton = document.getElementById('true-false-next');
+        const backButton = document.getElementById('back-to-methods');
+        
+        // Initialize
+        shuffleArray(trueFalseData);
+        loadQuestion();
+        
+        // Add event listeners
+        trueButton.addEventListener('click', () => selectAnswer(true));
+        falseButton.addEventListener('click', () => selectAnswer(false));
+        nextButton.addEventListener('click', nextQuestion);
+        backButton.addEventListener('click', () => {
+            if (confirm("Are you sure you want to exit? Your progress will be lost.")) {
+                showMethodsView(moduleData);
+            }
+        });
+        
+        function loadQuestion() {
+            const questionData = trueFalseData[currentQuestionIndex];
+            
+            // Update statement
+            statementElement.textContent = questionData.statement;
+            
+            // Update progress
+            currentElement.textContent = currentQuestionIndex + 1;
+            
+            // Reset buttons
+            trueButton.disabled = false;
+            falseButton.disabled = false;
+            trueButton.classList.remove('true-button-selected');
+            falseButton.classList.remove('false-button-selected');
+            
+            // Hide feedback and next button
+            feedbackElement.classList.remove('visible');
+            nextButton.style.display = 'none';
+        }
+        
+        function selectAnswer(userAnswer) {
+            const questionData = trueFalseData[currentQuestionIndex];
+            const isCorrect = userAnswer === questionData.isTrue;
+            
+            // Update UI to show selected answer
+            if (userAnswer) {
+                trueButton.classList.add('true-button-selected');
+            } else {
+                falseButton.classList.add('false-button-selected');
+            }
+            
+            // Disable buttons
+            trueButton.disabled = true;
+            falseButton.disabled = true;
+            
+            // Show feedback
+            if (isCorrect) {
+                score++;
+                scoreElement.textContent = score;
+                feedbackElement.innerHTML = `
+                    <div class="true-false-correct-feedback">Correct!</div>
+                    <div class="true-false-explanation">${questionData.explanation}</div>
+                `;
+            } else {
+                feedbackElement.innerHTML = `
+                    <div class="true-false-incorrect-feedback">Incorrect!</div>
+                    <div class="true-false-explanation">${questionData.explanation}</div>
+                `;
+            }
+            
+            feedbackElement.classList.add('visible');
+            
+            // Show next button
+            nextButton.style.display = 'block';
+            
+            // Save user's answer
+            userAnswers[currentQuestionIndex] = {
+                userAnswer,
+                isCorrect
+            };
+        }
+        
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex >= trueFalseData.length) {
+                showResults();
+                return;
+            }
+            
+            loadQuestion();
+        }
+        
+        function showResults() {
+            // Calculate final score
+            const accuracy = Math.round((score / trueFalseData.length) * 100);
+            
+            // Display results
+            contentView.innerHTML = `
+                <h3>${moduleData.title} - True & False Results</h3>
+                <div class="true-false-container">
+                    <div class="true-false-results">
+                        <h2>Quiz Complete!</h2>
+                        <p>Your final score: ${score} out of ${trueFalseData.length}</p>
+                        <p>Accuracy: ${accuracy}%</p>
+                        ${score === trueFalseData.length ? 
+                            '<p class="true-false-perfect">Perfect Score!</p>' : 
+                            '<p>Keep practicing to improve your knowledge!</p>'}
+                        <button id="true-false-review" class="true-false-button">Review Answers</button>
+                        <button id="true-false-replay" class="true-false-button">Play Again</button>
+                        <button id="true-false-back" class="true-false-button">Back to Methods</button>
+                    </div>
+                </div>
+            `;
+            
+            // Add event listeners
+            document.getElementById('true-false-review').addEventListener('click', showReview);
+            document.getElementById('true-false-replay').addEventListener('click', () => {
+                initTrueFalseQuestions(moduleData);
+            });
+            document.getElementById('true-false-back').addEventListener('click', () => {
+                showMethodsView(moduleData);
+            });
+        }
+        
+        function showReview() {
+            contentView.innerHTML = `
+                <h3>${moduleData.title} - True & False Review</h3>
+                <div class="true-false-container" id="review-container">
+                    <!-- Review items will be added here -->
+                </div>
+                <button id="back-to-results" class="back-button">Back to Results</button>
+            `;
+            
+            const reviewContainer = document.getElementById('review-container');
+            
+            // Add review items
+            trueFalseData.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                
+                // Create review item
+                const reviewItem = document.createElement('div');
+                reviewItem.className = 'true-false-statement-container';
+                reviewItem.innerHTML = `
+                    <div class="true-false-statement">${index + 1}. ${question.statement}</div>
+                    <div class="true-false-feedback visible">
+                        <div class="${userAnswer && userAnswer.isCorrect ? 
+                            'true-false-correct-feedback' : 'true-false-incorrect-feedback'}">
+                            ${userAnswer ? (userAnswer.isCorrect ? 'Correct!' : 'Incorrect!') : 'Not answered'}
+                        </div>
+                        <div>
+                            <p>Correct answer: <strong>${question.isTrue ? 'TRUE' : 'FALSE'}</strong></p>
+                            ${userAnswer ? `<p>Your answer: <strong>${userAnswer.userAnswer ? 'TRUE' : 'FALSE'}</strong></p>` : ''}
+                        </div>
+                        <div class="true-false-explanation">${question.explanation}</div>
+                    </div>
+                `;
+                
+                reviewContainer.appendChild(reviewItem);
+            });
+            
+            // Add back button listener
+            document.getElementById('back-to-results').addEventListener('click', showResults);
         }
     }
     
