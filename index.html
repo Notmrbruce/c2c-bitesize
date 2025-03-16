@@ -4,49 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C2C Bitesize</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header>
-        <h1>C2C Bitesize</h1>
-        <p>Select a learning module to start studying</p>
+    <div class="background-gradient"></div>
+    
+    <header class="site-header">
+        <div class="logo">
+            <span class="logo-text">C2C</span>
+            <span class="logo-subtext">Bitesize</span>
+        </div>
     </header>
     
-    <div class="container">
-        <div class="breadcrumb">
-            <a href="#" id="home-link">Home</a>
-        </div>
-        
-        <div id="modules-view" class="section-card">
-            <h2>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+    <nav class="floating-nav">
+        <ul class="nav-links">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#" id="breadcrumb-module"></a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4.93 4.93L6.34 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17.66 17.66L19.07 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.34 17.66L4.93 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19.07 4.93L17.66 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                Learning Modules
-            </h2>
-            <div class="modules-container" id="modules-list">
+            </button>
+        </div>
+    </nav>
+    
+    <main class="main-content">
+        <div id="modules-view" class="view-container">
+            <div class="section-header">
+                <div class="section-header-left">
+                    <h1 class="section-title">Learning Modules</h1>
+                    <p class="section-subtitle">Select a module to start your learning journey</p>
+                </div>
+                <div class="section-header-right">
+                    <span class="badge">Railway Training</span>
+                </div>
+            </div>
+            
+            <div class="module-grid" id="modules-list">
                 <!-- Modules will be loaded here -->
             </div>
         </div>
         
-        <div id="methods-view" class="section-card study-methods">
-            <h2>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
-                </svg>
-                <span id="selected-module-title">Selected Module</span>
-            </h2>
-            <p>Choose a study method:</p>
-            <div class="method-buttons" id="method-buttons">
+        <div id="methods-view" class="view-container study-methods">
+            <div class="section-header">
+                <div class="section-header-left">
+                    <h1 class="section-title" id="selected-module-title">Selected Module</h1>
+                    <p class="section-subtitle" id="method-description">Select a study method to begin</p>
+                </div>
+                <div class="section-header-right">
+                    <span class="badge">Study Methods</span>
+                </div>
+            </div>
+            
+            <div class="method-grid" id="method-buttons">
                 <!-- Study methods will be loaded here -->
             </div>
         </div>
         
-        <div id="content-view" class="section-card content-area">
+        <div id="content-view" class="view-container content-area">
             <!-- Content will be loaded here -->
         </div>
-    </div>
+    </main>
+    
+    <div class="decorative-element decorator-1"></div>
+    <div class="decorative-element decorator-2"></div>
+    
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>C2C Bitesize Learning Platform</p>
+            <p class="copyright">© 2025</p>
+        </div>
+    </footer>
     
     <script src="js/app.js" type="module"></script>
 </body>
