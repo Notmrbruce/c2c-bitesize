@@ -144,6 +144,14 @@ h2 {
     display: none;
 }
 
+.method-description {
+    color: var(--light-text);
+    font-style: italic;
+    margin-bottom: 1.25rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
 .method-buttons {
     display: flex;
     flex-direction: column;
@@ -198,6 +206,16 @@ h2 {
 .back-button:hover {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
+}
+
+.flashcard-progress, .quiz-progress {
+    background-color: var(--card-bg-color);
+    color: var(--light-text);
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    text-align: right;
+    margin-bottom: 1rem;
+    font-weight: 500;
 }
 
 .flashcard {
