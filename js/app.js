@@ -12,6 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // App state
     let currentModule = null;
     
+    // Method descriptions
+    const methodDescriptions = {
+        'flashcards': 'Flip through digital cards to test your recall of key information.',
+        'quiz': 'Test your knowledge with multiple-choice questions and get immediate feedback.',
+        'time-trial': 'Race against the clock to match terms with their definitions.',
+        'true-false': 'Determine whether statements are true or false to test your understanding.'
+    };
+    
     // Initialize the application
     init();
     
@@ -88,6 +96,20 @@ document.addEventListener('DOMContentLoaded', () => {
         modulesView.style.display = 'none';
         methodsView.style.display = 'block';
         contentView.style.display = 'none';
+        
+        // Add method description section
+        const methodDescriptionElement = document.getElementById('method-description') || document.createElement('p');
+        methodDescriptionElement.id = 'method-description';
+        methodDescriptionElement.className = 'method-description';
+        methodDescriptionElement.textContent = 'Select a study method to begin.';
+        
+        // Insert after the "Choose a study method:" text if not already present
+        const methodSectionElement = document.querySelector('.study-methods');
+        const chooseTextElement = methodSectionElement.querySelector('p');
+        
+        if (!document.getElementById('method-description')) {
+            chooseTextElement.parentNode.insertBefore(methodDescriptionElement, chooseTextElement.nextSibling);
+        }
     }
     
     function createMethodButtons(moduleData) {
@@ -126,6 +148,13 @@ document.addEventListener('DOMContentLoaded', () => {
             button.innerHTML = `${icon} ${methodName}`;
             
             button.addEventListener('click', () => {
+                // Update method description
+                const methodDescriptionElement = document.getElementById('method-description');
+                if (methodDescriptionElement) {
+                    methodDescriptionElement.textContent = methodDescriptions[method] || `Learn with ${methodName}`;
+                }
+                
+                // Load the study method
                 loadStudyMethod(moduleData, method);
             });
             
@@ -166,6 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create flashcard container
         contentView.innerHTML = `
             <h3>${moduleData.title} - Flashcards</h3>
+            <div class="flashcard-progress">Card <span id="current-card-number">1</span>/${flashcardsData.length}</div>
             <div class="flashcard" id="current-flashcard">
                 <div class="flashcard-question">${flashcardsData[currentCardIndex].question}</div>
                 <div class="flashcard-answer">${flashcardsData[currentCardIndex].answer}</div>
@@ -184,6 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const nextButton = document.getElementById('next-card');
         const flipButton = document.getElementById('flip-card');
         const backButton = document.getElementById('back-to-methods');
+        const cardNumberElement = document.getElementById('current-card-number');
         
         flashcardElement.addEventListener('click', () => {
             flashcardElement.classList.toggle('flipped');
@@ -217,6 +248,9 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.flashcard-answer').textContent = card.answer;
             flashcardElement.classList.remove('flipped');
             
+            // Update card number
+            cardNumberElement.textContent = currentCardIndex + 1;
+            
             // Update button states
             prevButton.disabled = currentCardIndex === 0;
             nextButton.disabled = currentCardIndex === flashcardsData.length - 1;
@@ -235,6 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create quiz container
         contentView.innerHTML = `
             <h3>${moduleData.title} - Quiz</h3>
+            <div class="quiz-progress">Question <span id="current-question-number">1</span>/${quizData.length}</div>
             <div class="quiz-container" id="quiz-container">
                 <div class="quiz-question" id="quiz-question"></div>
                 <ul class="quiz-options" id="quiz-options"></ul>
@@ -252,6 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const nextButton = document.getElementById('next-question');
         const submitButton = document.getElementById('submit-quiz');
         const backButton = document.getElementById('back-to-methods');
+        const questionNumberElement = document.getElementById('current-question-number');
         
         prevButton.addEventListener('click', () => {
             if (currentQuestionIndex > 0) {
@@ -292,6 +328,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const optionsElement = document.getElementById('quiz-options');
             
             questionElement.textContent = `${currentQuestionIndex + 1}. ${questionData.question}`;
+            
+            // Update question number
+            questionNumberElement.textContent = currentQuestionIndex + 1;
             
             optionsElement.innerHTML = '';
             questionData.options.forEach((option, index) => {
