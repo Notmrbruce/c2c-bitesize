@@ -30,8 +30,8 @@
     <!-- Mobile Dropdown Menu -->
     <div class="mobile-dropdown" id="mobile-dropdown">
         <a href="javascript:void(0);" onclick="window.location.href='index.html'; return false;" class="active">Home</a>
-        <a href="#" id="mobile-breadcrumb">Medical Requirements</a>
-        <!-- Add more links as needed -->
+        <!-- Module link will be added dynamically -->
+        <a href="#" id="mobile-breadcrumb" style="display: none;"></a>
     </div>
     
     <!-- Floating navbar that moves on scroll -->
@@ -42,7 +42,8 @@
                 <ul class="nav-links">
                     <!-- Using javascript:void(0) with inline onclick for maximum reliability -->
                     <li><a href="javascript:void(0);" onclick="window.location.href='index.html'; return false;" class="active">Home</a></li>
-                    <li><a href="#" id="breadcrumb-module">Medical Requirements</a></li>
+                    <!-- Module link will be added dynamically -->
+                    <li id="breadcrumb-item" style="display: none;"><a href="#" id="breadcrumb-module"></a></li>
                 </ul>
             </div>
         </nav>
@@ -158,13 +159,16 @@
                     // Only hide navbar when scrolling down
                     if (isScrollingDown) {
                         navbarWrapper.classList.add('hidden-nav');
+                        mobileMenuButton.classList.add('hidden-nav');
                     } else {
                         navbarWrapper.classList.remove('hidden-nav');
+                        mobileMenuButton.classList.remove('hidden-nav');
                     }
                 } else {
                     // When at top, show everything
                     logoContainer.classList.remove('hidden-logo');
                     navbarWrapper.classList.remove('hidden-nav');
+                    mobileMenuButton.classList.remove('hidden-nav');
                 }
             });
         });
