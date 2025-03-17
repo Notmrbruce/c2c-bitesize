@@ -1,6 +1,6 @@
 {
-  "id": "comm-safety-module-001",
-  "title": "Safety Critical Communication in Railway Operations",
+  "id": "communication",
+  "title": "Communication",
   "description": "A comprehensive module covering critical communication protocols, methods, and best practices for railway safety operations",
   "methods": ["flashcards", "quiz", "time-trial", "true-false"],
   "content": {

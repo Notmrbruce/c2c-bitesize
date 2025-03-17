@@ -43,5 +43,10 @@
     "id": "pts",
     "title": "Personal Track Safety (PTS)",
     "description": "Essential safety procedures, requirements, and protocols for working on or near the railway"
+  },
+  {
+    "id": "communication",
+  "title": "Communication",
+  "description": "A comprehensive module covering critical communication protocols, methods, and best practices for railway safety operations"
   }
 ]
