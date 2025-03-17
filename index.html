@@ -14,15 +14,17 @@
     <div class="logo-container" id="logo-container">
         <div class="logo">
             <span class="logo-text">C2C</span>
-            <span class="logo-subtext">Bitesize</span>
+            <span class="logo-subtext">BITESIZE</span>
         </div>
     </div>
     
     <!-- Floating navbar that moves on scroll -->
     <div class="navbar-wrapper">
         <nav class="floating-nav" id="floating-nav">
-            <!-- Glowing border effect -->
-            <div class="nav-glow"></div>
+            <!-- Traveling dot glow effect -->
+            <div class="nav-glow">
+                <div class="glow-dot"></div>
+            </div>
             
             <div class="nav-content">
                 <ul class="nav-links">
@@ -53,7 +55,7 @@
         <div id="modules-view" class="view-container">
             <div class="section-header">
                 <div class="section-header-left">
-                    <h1 class="section-title">Learning Modules</h1>
+                    <h1 class="section-title funky-heading">LEARNING MODULES</h1>
                     <p class="section-subtitle">Select a module to start your learning journey</p>
                 </div>
                 <div class="section-header-right">
@@ -99,20 +101,30 @@
     
     <script src="js/app.js" type="module"></script>
     <script>
-        // Script to handle logo visibility on scroll
+        // Script to handle navbar position on scroll
         document.addEventListener('DOMContentLoaded', function() {
             const logoContainer = document.getElementById('logo-container');
             const floatingNav = document.getElementById('floating-nav');
+            
+            // Always ensure navbar is visible
+            floatingNav.classList.add('visible-nav');
             
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 50) {
                     logoContainer.classList.add('hidden-logo');
                     floatingNav.classList.add('scrolled-nav');
+                    floatingNav.classList.remove('top-position');
                 } else {
                     logoContainer.classList.remove('hidden-logo');
                     floatingNav.classList.remove('scrolled-nav');
+                    floatingNav.classList.add('top-position');
                 }
             });
+            
+            // Initialize proper position on page load
+            if (window.scrollY <= 50) {
+                floatingNav.classList.add('top-position');
+            }
         });
     </script>
 </body>
