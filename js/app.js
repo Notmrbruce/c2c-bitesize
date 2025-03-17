@@ -116,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const moduleElement = document.createElement('div');
                     moduleElement.className = 'module-card';
                     moduleElement.innerHTML = `
-                        <div class="module-number">${index + 1}</div>
                         <h3 class="module-title">${module.title}</h3>
                         <p class="module-desc">${module.description}</p>
                     `;
@@ -170,6 +169,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update breadcrumb
         breadcrumbModule.textContent = moduleData.title;
         breadcrumbModule.parentElement.classList.add('active');
+        breadcrumbModule.addEventListener('click', (e) => {
+            e.preventDefault();
+            showMethodsView(currentModule);
+        });
         
         // Create method buttons
         createMethodButtons(moduleData);
@@ -203,7 +206,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>'
             };
             
-            const methodName = method.charAt(0).toUpperCase() + method.slice(1).replace('-', ' ');
+            // Format the method name properly
+            let methodName = method.charAt(0).toUpperCase() + method.slice(1).replace('-', ' ');
+            
+            // Special case for true-false
+            if (method === 'true-false') {
+                methodName = 'True or False';
+            }
             
             button.innerHTML = `
                 <div class="method-icon">${info.icon}</div>
@@ -225,7 +234,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Clear previous content
         contentView.innerHTML = '';
         
-        // Show the content view
+        // Show the content view and hide other views
+        modulesView.style.display = 'none';
+        methodsView.style.display = 'none';
         contentView.style.display = 'block';
         contentView.classList.add('slide-up');
         
@@ -252,8 +263,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 contentView.innerHTML = `<div class="content-container"><p>Study method "${method}" is not implemented yet.</p></div>`;
         }
         
-        // Scroll to content view
-        contentView.scrollIntoView({ behavior: 'smooth' });
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
     function loadFlashcards(moduleData) {
@@ -859,7 +870,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create the UI
         contentView.innerHTML = `
             <div class="content-header">
-                <h2 class="content-title">${moduleData.title} - True & False</h2>
+                <h2 class="content-title">${moduleData.title} - True or False</h2>
                 <span class="progress-indicator">Question <span id="true-false-current">1</span> of ${trueFalseData.length}</span>
             </div>
             
@@ -990,7 +1001,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Display results
             contentView.innerHTML = `
                 <div class="content-header">
-                    <h2 class="content-title">${moduleData.title} - True & False Results</h2>
+                    <h2 class="content-title">${moduleData.title} - True or False Results</h2>
                 </div>
                 
                 <div class="content-container">
@@ -1023,7 +1034,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function showReview() {
             contentView.innerHTML = `
                 <div class="content-header">
-                    <h2 class="content-title">${moduleData.title} - True & False Review</h2>
+                    <h2 class="content-title">${moduleData.title} - True or False Review</h2>
                 </div>
                 
                 <div class="content-container" id="review-container">
