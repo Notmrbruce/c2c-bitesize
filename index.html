@@ -4,88 +4,231 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C2C Bitesize</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div class="background-gradient"></div>
-    
-    <header class="site-header">
-        <div class="logo">
-            <span class="logo-text">C2C</span>
-            <span class="logo-subtext">Bitesize</span>
-        </div>
-    </header>
-    
-    <nav class="floating-nav">
-        <ul class="nav-links">
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="#" id="breadcrumb-module"></a></li>
-        </ul>
-        <div class="nav-actions">
-            <button id="theme-toggle" class="theme-toggle">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M4.93 4.93L6.34 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M17.66 17.66L19.07 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M20 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.34 17.66L4.93 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M19.07 4.93L17.66 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-        </div>
-    </nav>
-    
-    <main class="main-content">
-        <div id="modules-view" class="view-container">
-            <div class="section-header">
-                <div class="section-header-left">
+    <div class="app-wrapper">
+        <!-- Header with logo -->
+        <header class="site-header">
+            <div class="logo-container">
+                <div class="logo">
+                    <span class="logo-text">C2C</span>
+                    <span class="logo-subtext">Bitesize</span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Floating navigation -->
+        <nav class="floating-nav">
+            <div class="nav-content">
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" id="module-link" data-page="module"></a></li>
+                    <li><a href="#" class="nav-link" id="method-link" data-page="method"></a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark mode">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Main content area -->
+        <main class="main-content">
+            <!-- Home view (modules list) -->
+            <section id="home-view" class="content-view">
+                <div class="section-header">
                     <h1 class="section-title">Learning Modules</h1>
                     <p class="section-subtitle">Select a module to start your learning journey</p>
                 </div>
-                <div class="section-header-right">
-                    <span class="badge">Railway Training</span>
+                
+                <div class="module-grid" id="modules-list">
+                    <!-- Module cards will be loaded here via JavaScript -->
+                </div>
+            </section>
+            
+            <!-- Module view (study methods) -->
+            <section id="module-view" class="content-view">
+                <div class="section-header">
+                    <h1 class="section-title" id="selected-module-title">Module Title</h1>
+                    <p class="section-subtitle">Select a study method to begin</p>
+                </div>
+                
+                <div class="method-grid" id="method-buttons">
+                    <!-- Study methods will be loaded here via JavaScript -->
+                </div>
+            </section>
+            
+            <!-- Study content view -->
+            <section id="study-view" class="content-view">
+                <div class="study-container" id="study-container">
+                    <!-- Study content will be loaded here via JavaScript -->
+                </div>
+            </section>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>C2C Bitesize Learning Platform &copy; <span id="current-year">2025</span></p>
+        </footer>
+    </div>
+    
+    <!-- Study method templates -->
+    <template id="flashcard-template">
+        <div class="flashcard-container">
+            <div class="card-header">
+                <h2 class="card-title">{{moduleTitle}} - Flashcards</h2>
+                <div class="card-progress">Card <span id="current-card-number">1</span> of <span id="total-cards">10</span></div>
+            </div>
+            
+            <div class="flashcard" id="current-flashcard">
+                <div class="flip-indicator">Tap to flip</div>
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <div class="flashcard-content" id="flashcard-question"></div>
+                    </div>
+                    <div class="flashcard-back">
+                        <div class="flashcard-content" id="flashcard-answer"></div>
+                    </div>
                 </div>
             </div>
             
-            <div class="module-grid" id="modules-list">
-                <!-- Modules will be loaded here -->
+            <div class="card-controls">
+                <button id="prev-card" class="btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                    Previous
+                </button>
+                
+                <button id="flip-card" class="btn btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 15l5 5 5-5"/>
+                        <path d="M12 20V4"/>
+                    </svg>
+                    Flip Card
+                </button>
+                
+                <button id="next-card" class="btn">
+                    Next
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
             </div>
         </div>
-        
-        <div id="methods-view" class="view-container study-methods">
-            <div class="section-header">
-                <div class="section-header-left">
-                    <h1 class="section-title" id="selected-module-title">Selected Module</h1>
-                    <p class="section-subtitle" id="method-description">Select a study method to begin</p>
-                </div>
-                <div class="section-header-right">
-                    <span class="badge">Study Methods</span>
+    </template>
+    
+    <template id="quiz-template">
+        <div class="quiz-container">
+            <div class="card-header">
+                <h2 class="card-title">{{moduleTitle}} - Quiz</h2>
+                <div class="card-progress">Question <span id="current-question-number">1</span> of <span id="total-questions">10</span></div>
+            </div>
+            
+            <div class="quiz-question-container">
+                <div class="quiz-question" id="quiz-question"></div>
+                <ul class="quiz-options" id="quiz-options"></ul>
+            </div>
+            
+            <div class="card-controls">
+                <button id="prev-question" class="btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                    Previous
+                </button>
+                
+                <button id="next-question" class="btn">
+                    Next
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+                
+                <button id="submit-quiz" class="btn btn-primary" style="display: none;">Submit Quiz</button>
+            </div>
+        </div>
+    </template>
+    
+    <template id="time-trial-template">
+        <div class="time-trial-container">
+            <div class="card-header">
+                <h2 class="card-title">{{moduleTitle}} - Time Trial</h2>
+                <div class="time-trial-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Score</span>
+                        <span class="stat-value" id="time-trial-score">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Time</span>
+                        <span class="stat-value" id="time-trial-time">7s</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Progress</span>
+                        <span class="stat-value" id="time-trial-progress">0/10</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="method-grid" id="method-buttons">
-                <!-- Study methods will be loaded here -->
+            <div id="time-trial-start-screen" class="time-trial-start">
+                <p>Match the term with its definition as quickly as possible. You have 7 seconds for each question.</p>
+                <button id="time-trial-start" class="btn btn-primary">Start Game</button>
+            </div>
+            
+            <div id="time-trial-gameplay" style="display: none;">
+                <div class="time-trial-definition" id="time-trial-definition"></div>
+                <div class="time-trial-options" id="time-trial-options"></div>
+                <div class="time-trial-feedback" id="time-trial-feedback"></div>
+                <button id="time-trial-next" class="btn btn-primary" style="display: none;">Next Term</button>
             </div>
         </div>
-        
-        <div id="content-view" class="view-container content-area">
-            <!-- Content will be loaded here -->
-        </div>
-    </main>
+    </template>
     
-    <div class="decorative-element decorator-1"></div>
-    <div class="decorative-element decorator-2"></div>
-    
-    <footer class="site-footer">
-        <div class="footer-content">
-            <p>C2C Bitesize Learning Platform</p>
-            <p class="copyright">© 2025</p>
+    <template id="true-false-template">
+        <div class="true-false-container">
+            <div class="card-header">
+                <h2 class="card-title">{{moduleTitle}} - True or False</h2>
+                <div class="card-progress">Question <span id="true-false-current">1</span> of <span id="true-false-total">10</span></div>
+            </div>
+            
+            <div class="true-false-statement-container">
+                <div class="true-false-statement" id="true-false-statement"></div>
+                <div class="true-false-options">
+                    <button id="true-button" class="btn btn-true">TRUE</button>
+                    <button id="false-button" class="btn btn-false">FALSE</button>
+                </div>
+                <div class="true-false-feedback" id="true-false-feedback"></div>
+            </div>
+            
+            <div class="card-controls">
+                <button id="true-false-next" class="btn btn-primary" style="display: none;">Next Question</button>
+            </div>
         </div>
-    </footer>
+    </template>
+    
+    <!-- Results templates -->
+    <template id="results-template">
+        <div class="results-container">
+            <div class="results-header">
+                <h2 class="results-title">{{moduleTitle}} - {{methodTitle}} Results</h2>
+            </div>
+            
+            <div class="results-content">
+                <div class="results-score">{{score}} / {{total}}</div>
+                <div class="results-percentage">{{percentage}}%</div>
+                <div class="results-message">{{message}}</div>
+                
+                <div class="results-actions">
+                    <button id="review-answers" class="btn btn-primary">Review Answers</button>
+                    <button id="retry-activity" class="btn">Try Again</button>
+                    <button id="back-to-methods" class="btn">Back to Methods</button>
+                </div>
+            </div>
+        </div>
+    </template>
     
     <script src="js/app.js" type="module"></script>
 </body>
