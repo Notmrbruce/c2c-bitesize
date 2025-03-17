@@ -188,12 +188,14 @@ a:hover {
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-lg);
-    padding: var(--spacing-sm) 0;
-    padding-right: var(--spacing-lg);
     width: calc(100% - var(--spacing-lg) * 2);
     max-width: 1400px;
     margin: 0 auto;
     transition: transform var(--transition-normal), opacity var(--transition-normal);
+}
+
+.nav-container {
+    padding-left: var(--site-padding);
 }
 
 .floating-nav.hidden {
@@ -204,7 +206,6 @@ a:hover {
 .nav-links {
     display: flex;
     list-style: none;
-    padding-left: var(--site-padding);
 }
 
 .nav-links li {
@@ -215,7 +216,8 @@ a:hover {
 .nav-links a {
     color: var(--text-secondary);
     font-weight: 500;
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-sm) 0;
+    display: inline-block;
     transition: color var(--transition-fast);
 }
 
@@ -228,12 +230,15 @@ a:hover {
     content: '';
     position: absolute;
     bottom: -4px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
     width: 20px;
     height: 3px;
     border-radius: 1.5px;
     background: var(--primary-gradient);
+}
+
+.nav-actions {
+    padding-right: var(--spacing-lg);
 }
 
 .theme-toggle {
