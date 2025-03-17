@@ -208,40 +208,31 @@ a:hover {
 /* Navbar Styles */
 .navbar-wrapper {
     position: fixed;
-    top: 25px; /* Precisely align with logo */
+    top: 32px; /* Better vertical alignment with logo */
     left: 0;
     width: 100%;
     z-index: 1000;
     display: flex;
     justify-content: center;
     pointer-events: none;
-    transition: top var(--transition-normal);
 }
 
 .floating-nav {
-    position: relative;
-    background-color: rgba(52, 40, 76, 0.7); 
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    width: 220px;
+    height: 40px;
     border: none;
-    border-radius: 50px; /* Pill shape */
-    height: 40px; /* Smaller height */
-    min-width: 120px; /* Smaller width */
-    max-width: 320px;
-    width: auto;
+    outline: none;
+    color: #fff;
+    background: rgba(20, 20, 40, 0.8);
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 var(--spacing-md);
-    transition: transform var(--transition-normal), 
-                width var(--transition-normal),
-                opacity var(--transition-normal),
-                top var(--transition-normal);
-    overflow: hidden;
     pointer-events: auto;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    opacity: 1; /* Always visible */
-    z-index: 0;
 }
 
 .floating-nav:before {
@@ -266,7 +257,7 @@ a:hover {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(52, 40, 76, 0.9);
+    background: rgba(52, 40, 76, 0.85);
     left: 0;
     top: 0;
     border-radius: 50px;
@@ -278,16 +269,9 @@ a:hover {
     100% { background-position: 0 0; }
 }
 
-.floating-nav.top-position {
-    transform: translateY(0); 
-}
-
 .floating-nav.scrolled-nav {
+    position: fixed;
     top: var(--spacing-lg);
-}
-
-.floating-nav.expanded {
-    width: 300px;
 }
 
 .nav-content {
@@ -298,6 +282,7 @@ a:hover {
     height: 100%;
     position: relative;
     z-index: 2;
+    padding: 0 var(--spacing-sm);
 }
 
 .nav-links {
@@ -583,8 +568,24 @@ a:hover {
 }
 
 .content-title {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-2xl);
     color: var(--text-primary);
+}
+
+/* Apply funky heading style to all relevant headings */
+#selected-module-title,
+#content-title,
+.section-title.funky-heading {
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #5661f0 0%, #ad6ef8 50%, #c985ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 15px rgba(86, 97, 240, 0.3);
+    font-family: var(--font-family);
 }
 
 .content-container {
