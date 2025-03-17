@@ -24,7 +24,8 @@
             <!-- Navbar with glowing border -->
             <div class="nav-content">
                 <ul class="nav-links">
-                    <li><a href="index.html" class="active" id="home-link">Home</a></li>
+                    <!-- Using javascript:void(0) with inline onclick for maximum reliability -->
+                    <li><a href="javascript:void(0);" onclick="window.location.href='index.html'; return false;" class="active">Home</a></li>
                     <li><a href="#" id="breadcrumb-module"></a></li>
                 </ul>
                 
@@ -97,19 +98,17 @@
     
     <script src="js/app.js" type="module"></script>
     <script>
-        // Simple direct approach
+        // Simple script to handle the logo hiding and ensuring navbar functionality
         document.addEventListener('DOMContentLoaded', function() {
             const logoContainer = document.getElementById('logo-container');
             const floatingNav = document.getElementById('floating-nav');
-            const homeLink = document.getElementById('home-link');
             
-            // Add a direct window location change
-            if (homeLink) {
-                homeLink.addEventListener('click', function(e) {
-                    window.location.href = 'index.html';
-                    return false;
-                });
-            }
+            // Force all navbar links to be clickable from the start
+            document.querySelectorAll('.nav-links a').forEach(function(link) {
+                link.style.pointerEvents = 'auto';
+                link.style.cursor = 'pointer';
+                link.style.zIndex = '9999';
+            });
             
             // Handle scroll effects
             window.addEventListener('scroll', function() {
