@@ -165,11 +165,11 @@ a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 120px; /* Fixed width to ensure C2C and Bitesize have same width */
+    width: 100px; /* Smaller width for logo */
 }
 
 .logo-text {
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-2xl); /* Smaller size */
     font-weight: 700;
     background: var(--primary-gradient);
     -webkit-background-clip: text;
@@ -181,18 +181,20 @@ a:hover {
 }
 
 .logo-subtext {
-    font-size: var(--font-size-lg);
-    font-weight: 400;
+    font-size: var(--font-size-xs);
+    font-weight: 700; /* Bold */
+    letter-spacing: 1px; /* Spacing between letters */
     color: var(--text-secondary);
     margin-top: var(--spacing-xs);
     width: 100%;
     text-align: center;
+    text-transform: uppercase; /* All caps */
 }
 
 /* Navbar Styles */
 .navbar-wrapper {
     position: fixed;
-    top: calc(var(--logo-height) / 2 + var(--site-padding));
+    top: calc(var(--site-padding) + 20px); /* Align with logo */
     left: 0;
     width: 100%;
     z-index: 1000;
@@ -204,7 +206,7 @@ a:hover {
 
 .floating-nav {
     position: relative;
-    background-color: rgba(20, 20, 40, 0.3);
+    background-color: rgba(52, 40, 76, 0.7); /* Darker, more opaque purple */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border-color);
@@ -219,10 +221,20 @@ a:hover {
     padding: 0 var(--spacing-lg);
     transition: transform var(--transition-normal), 
                 width var(--transition-normal),
-                opacity var(--transition-normal);
-    overflow: hidden;
+                opacity var(--transition-normal),
+                top var(--transition-normal);
+    overflow: visible; /* Changed to visible for the glow dot */
     pointer-events: auto;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    opacity: 0; /* Start invisible */
+}
+
+.floating-nav.visible-nav {
+    opacity: 1; /* Always visible */
+}
+
+.floating-nav.top-position {
+    transform: translateY(0); /* When at top of page, align with logo */
 }
 
 .floating-nav.scrolled-nav {
@@ -243,7 +255,7 @@ a:hover {
     z-index: 2;
 }
 
-/* Glow effect */
+/* Traveling dot glow effect */
 .nav-glow {
     position: absolute;
     top: 0;
@@ -252,36 +264,48 @@ a:hover {
     height: 100%;
     pointer-events: none;
     z-index: 1;
-    overflow: hidden;
     border-radius: 50px; /* Match navbar border-radius */
 }
 
-.nav-glow::before {
-    content: '';
+/* Creating the traveling dot effect */
+.glow-dot {
     position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(90deg, 
-        transparent, 
-        var(--primary-light), 
-        var(--accent-light), 
-        var(--primary-light), 
-        transparent);
-    border-radius: 52px; /* Slightly larger than navbar */
-    background-size: 400% 100%;
-    opacity: 0.3; /* Always visible but subtle */
-    animation: glow-animation 6s linear infinite;
+    width: 15px;
+    height: 15px;
+    background: radial-gradient(circle, var(--accent-light) 0%, rgba(173, 110, 248, 0.3) 70%, transparent 100%);
+    border-radius: 50%;
+    filter: blur(3px);
+    box-shadow: 0 0 10px 2px var(--accent);
+    animation: travel-around 4s linear infinite;
+    z-index: 0;
 }
 
-.floating-nav:hover .nav-glow::before {
-    opacity: 0.8;
-}
-
-@keyframes glow-animation {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 400% 0%; }
+@keyframes travel-around {
+    0% {
+        top: 50%;
+        left: 0;
+        transform: translate(-50%, -50%);
+    }
+    25% {
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    50% {
+        top: 50%;
+        left: 100%;
+        transform: translate(-50%, -50%);
+    }
+    75% {
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        top: 50%;
+        left: 0;
+        transform: translate(-50%, -50%);
+    }
 }
 
 .nav-links {
@@ -344,7 +368,7 @@ a:hover {
 
 /* Main Content */
 .main-content {
-    padding-top: calc(var(--logo-height) + var(--spacing-xl));
+    padding-top: calc(var(--logo-height) + var(--spacing-2xl));
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -377,6 +401,20 @@ a:hover {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+}
+
+/* New funky heading style */
+.funky-heading {
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #5661f0 0%, #ad6ef8 50%, #c985ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 15px rgba(86, 97, 240, 0.3);
+    font-family: var(--font-family);
 }
 
 .section-subtitle {
