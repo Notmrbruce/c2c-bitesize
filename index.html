@@ -10,84 +10,84 @@
 <body>
     <div class="background-gradient"></div>
     
-    <header class="site-header">
-        <div class="logo-container">
+    <div class="app-container">
+        <header class="site-header">
             <div class="logo">
                 <span class="logo-text">C2C</span>
                 <span class="logo-subtext">Bitesize</span>
             </div>
-        </div>
-    </header>
-    
-    <nav class="floating-nav">
-        <ul class="nav-links">
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="#" id="breadcrumb-module"></a></li>
-        </ul>
-        <div class="nav-actions">
-            <button id="theme-toggle" class="theme-toggle">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M4.93 4.93L6.34 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M17.66 17.66L19.07 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M20 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.34 17.66L4.93 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M19.07 4.93L17.66 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-        </div>
-    </nav>
-    
-    <main class="main-content">
-        <div id="modules-view" class="view-container">
-            <div class="section-header">
-                <div class="section-header-left">
-                    <h1 class="section-title">Learning Modules</h1>
-                    <p class="section-subtitle">Select a module to start your learning journey</p>
+        </header>
+        
+        <nav class="floating-nav">
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#" id="breadcrumb-module"></a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="theme-toggle" class="theme-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M4.93 4.93L6.34 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M17.66 17.66L19.07 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M20 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6.34 17.66L4.93 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M19.07 4.93L17.66 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        
+        <main class="main-content">
+            <div id="modules-view" class="view-container">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <h1 class="section-title">Learning Modules</h1>
+                        <p class="section-subtitle">Select a module to start your learning journey</p>
+                    </div>
+                    <div class="section-header-right">
+                        <span class="badge">Railway Training</span>
+                    </div>
                 </div>
-                <div class="section-header-right">
-                    <span class="badge">Railway Training</span>
+                
+                <div class="module-grid" id="modules-list">
+                    <!-- Modules will be loaded here -->
                 </div>
             </div>
             
-            <div class="module-grid" id="modules-list">
-                <!-- Modules will be loaded here -->
-            </div>
-        </div>
-        
-        <div id="methods-view" class="view-container study-methods">
-            <div class="section-header">
-                <div class="section-header-left">
-                    <h1 class="section-title" id="selected-module-title">Selected Module</h1>
-                    <p class="section-subtitle" id="method-description">Select a study method to begin</p>
+            <div id="methods-view" class="view-container study-methods">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <h1 class="section-title" id="selected-module-title">Selected Module</h1>
+                        <p class="section-subtitle" id="method-description">Select a study method to begin</p>
+                    </div>
+                    <div class="section-header-right">
+                        <span class="badge">Study Methods</span>
+                    </div>
                 </div>
-                <div class="section-header-right">
-                    <span class="badge">Study Methods</span>
+                
+                <div class="method-grid" id="method-buttons">
+                    <!-- Study methods will be loaded here -->
                 </div>
             </div>
             
-            <div class="method-grid" id="method-buttons">
-                <!-- Study methods will be loaded here -->
+            <div id="content-view" class="view-container content-area">
+                <!-- Content will be loaded here -->
             </div>
-        </div>
+        </main>
         
-        <div id="content-view" class="view-container content-area">
-            <!-- Content will be loaded here -->
-        </div>
-    </main>
-    
-    <div class="decorative-element decorator-1"></div>
-    <div class="decorative-element decorator-2"></div>
-    
-    <footer class="site-footer">
-        <div class="footer-content">
-            <p>C2C Bitesize Learning Platform</p>
-            <p class="copyright">© 2025</p>
-        </div>
-    </footer>
+        <div class="decorative-element decorator-1"></div>
+        <div class="decorative-element decorator-2"></div>
+        
+        <footer class="site-footer">
+            <div class="footer-content">
+                <p>C2C Bitesize Learning Platform</p>
+                <p class="copyright">© 2025</p>
+            </div>
+        </footer>
+    </div>
     
     <script src="js/app.js" type="module"></script>
 </body>
