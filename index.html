@@ -11,7 +11,7 @@
     <div class="background-gradient"></div>
     
     <!-- Fixed logo area that stays in place -->
-    <div class="logo-container">
+    <div class="logo-container" id="logo-container">
         <div class="logo">
             <span class="logo-text">C2C</span>
             <span class="logo-subtext">Bitesize</span>
@@ -21,7 +21,7 @@
     <!-- Floating navbar that moves on scroll -->
     <div class="navbar-wrapper">
         <nav class="floating-nav" id="floating-nav">
-            <!-- Glowing border effect (for bonus feature) -->
+            <!-- Glowing border effect -->
             <div class="nav-glow"></div>
             
             <div class="nav-content">
@@ -98,5 +98,22 @@
     </footer>
     
     <script src="js/app.js" type="module"></script>
+    <script>
+        // Script to handle logo visibility on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoContainer = document.getElementById('logo-container');
+            const floatingNav = document.getElementById('floating-nav');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    logoContainer.classList.add('hidden-logo');
+                    floatingNav.classList.add('scrolled-nav');
+                } else {
+                    logoContainer.classList.remove('hidden-logo');
+                    floatingNav.classList.remove('scrolled-nav');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
