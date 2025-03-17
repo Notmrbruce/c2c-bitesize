@@ -112,11 +112,10 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(modules => {
                 modulesList.innerHTML = '';
                 
-                modules.forEach((module, index) => {
+                modules.forEach((module) => {
                     const moduleElement = document.createElement('div');
                     moduleElement.className = 'module-card';
                     moduleElement.innerHTML = `
-                        <div class="module-number">${index + 1}</div>
                         <h3 class="module-title">${module.title}</h3>
                         <p class="module-desc">${module.description}</p>
                     `;
@@ -269,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             <div class="content-container">
                 <div class="flashcard" id="current-flashcard">
-                    <div class="card-indicator">Click to flip</div>
+                    <div class="card-indicator">Tap to flip</div>
                     <div class="flashcard-question">${flashcardsData[currentCardIndex].question}</div>
                     <div class="flashcard-answer">${flashcardsData[currentCardIndex].answer}</div>
                 </div>
@@ -315,13 +314,43 @@ document.addEventListener('DOMContentLoaded', () => {
         const flipButton = document.getElementById('flip-card');
         const backButton = document.getElementById('back-to-methods');
         const cardNumberElement = document.getElementById('current-card-number');
+        const cardIndicator = document.querySelector('.card-indicator');
+        
+        // Check if using mobile device to update card indicator text
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            cardIndicator.textContent = "Tap to flip";
+        } else {
+            cardIndicator.textContent = "Click to flip";
+        }
         
         flashcardElement.addEventListener('click', () => {
             flashcardElement.classList.toggle('flipped');
+            
+            // Update card indicator text when flipped
+            if (flashcardElement.classList.contains('flipped')) {
+                cardIndicator.textContent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+                    ? "Tap to return" 
+                    : "Click to return";
+            } else {
+                cardIndicator.textContent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+                    ? "Tap to flip"
+                    : "Click to flip";
+            }
         });
         
         flipButton.addEventListener('click', () => {
             flashcardElement.classList.toggle('flipped');
+            
+            // Update card indicator text when flipped via button
+            if (flashcardElement.classList.contains('flipped')) {
+                cardIndicator.textContent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+                    ? "Tap to return" 
+                    : "Click to return";
+            } else {
+                cardIndicator.textContent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+                    ? "Tap to flip"
+                    : "Click to flip";
+            }
         });
         
         prevButton.addEventListener('click', () => {
@@ -347,6 +376,11 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.flashcard-question').textContent = card.question;
             document.querySelector('.flashcard-answer').textContent = card.answer;
             flashcardElement.classList.remove('flipped');
+            
+            // Reset card indicator text
+            cardIndicator.textContent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+                ? "Tap to flip"
+                : "Click to flip";
             
             // Update card number
             cardNumberElement.textContent = currentCardIndex + 1;
@@ -848,230 +882,3 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
-    
-    // True-False Questions Implementation
-    function initTrueFalseQuestions(moduleData) {
-        const trueFalseData = moduleData.content['true-false'];
-        let score = 0;
-        let currentQuestionIndex = 0;
-        let userAnswers = [];
-        
-        // Create the UI
-        contentView.innerHTML = `
-            <div class="content-header">
-                <h2 class="content-title">${moduleData.title} - True & False</h2>
-                <span class="progress-indicator">Question <span id="true-false-current">1</span> of ${trueFalseData.length}</span>
-            </div>
-            
-            <div class="content-container">
-                <div class="true-false-container">
-                    <div class="true-false-statement" id="true-false-statement"></div>
-                    
-                    <div class="true-false-options">
-                        <button id="true-button" class="btn btn-true">TRUE</button>
-                        <button id="false-button" class="btn btn-false">FALSE</button>
-                    </div>
-                    
-                    <div class="true-false-feedback" id="true-false-feedback"></div>
-                </div>
-                
-                <div class="quiz-controls">
-                    <button id="true-false-next" class="btn btn-primary" style="display: none;">Next Question</button>
-                </div>
-            </div>
-            
-            <button id="back-to-methods" class="btn">
-                <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M19 12H5"/>
-                    <path d="M12 19l-7-7 7-7"/>
-                </svg>
-                Back to Methods
-            </button>
-        `;
-        
-        const currentElement = document.getElementById('true-false-current');
-        const statementElement = document.getElementById('true-false-statement');
-        const trueButton = document.getElementById('true-button');
-        const falseButton = document.getElementById('false-button');
-        const feedbackElement = document.getElementById('true-false-feedback');
-        const nextButton = document.getElementById('true-false-next');
-        const backButton = document.getElementById('back-to-methods');
-        
-        // Initialize
-        const shuffledData = [...trueFalseData].sort(() => Math.random() - 0.5);
-        loadQuestion();
-        
-        // Add event listeners
-        trueButton.addEventListener('click', () => selectAnswer(true));
-        falseButton.addEventListener('click', () => selectAnswer(false));
-        nextButton.addEventListener('click', nextQuestion);
-        backButton.addEventListener('click', () => {
-            if (confirm("Are you sure you want to exit? Your progress will be lost.")) {
-                showMethodsView(moduleData);
-            }
-        });
-        
-        function loadQuestion() {
-            const questionData = shuffledData[currentQuestionIndex];
-            
-            // Update statement
-            statementElement.textContent = questionData.statement;
-            
-            // Update progress
-            currentElement.textContent = currentQuestionIndex + 1;
-            
-            // Reset buttons
-            trueButton.disabled = false;
-            falseButton.disabled = false;
-            trueButton.classList.remove('selected');
-            falseButton.classList.remove('selected');
-            
-            // Hide feedback and next button
-            feedbackElement.classList.remove('visible');
-            nextButton.style.display = 'none';
-        }
-        
-        function selectAnswer(userAnswer) {
-            const questionData = shuffledData[currentQuestionIndex];
-            const isCorrect = userAnswer === questionData.isTrue;
-            
-            // Update UI to show selected answer
-            if (userAnswer) {
-                trueButton.classList.add('selected');
-            } else {
-                falseButton.classList.add('selected');
-            }
-            
-            // Disable buttons
-            trueButton.disabled = true;
-            falseButton.disabled = true;
-            
-            // Show feedback
-            if (isCorrect) {
-                score++;
-                feedbackElement.innerHTML = `
-                    <div class="feedback-header">Correct!</div>
-                    <div class="feedback-content">${questionData.explanation}</div>
-                `;
-            } else {
-                feedbackElement.innerHTML = `
-                    <div class="feedback-header">Incorrect!</div>
-                    <div class="feedback-content">${questionData.explanation}</div>
-                `;
-            }
-            
-            feedbackElement.classList.add('visible');
-            
-            // Show next button
-            nextButton.style.display = 'block';
-            
-            // Save user's answer
-            userAnswers[currentQuestionIndex] = {
-                userAnswer,
-                isCorrect
-            };
-        }
-        
-        function nextQuestion() {
-            currentQuestionIndex++;
-            
-            if (currentQuestionIndex >= shuffledData.length) {
-                showResults();
-                return;
-            }
-            
-            loadQuestion();
-        }
-        
-        function showResults() {
-            // Calculate final score
-            const percentage = Math.round((score / trueFalseData.length) * 100);
-            
-            // Display results
-            contentView.innerHTML = `
-                <div class="content-header">
-                    <h2 class="content-title">${moduleData.title} - True & False Results</h2>
-                </div>
-                
-                <div class="content-container">
-                    <div class="time-trial-results">
-                        <div class="quiz-score">${score} / ${trueFalseData.length}</div>
-                        <div class="quiz-percentage">${percentage}%</div>
-                        ${score === trueFalseData.length ? 
-                            '<div class="quiz-perfect">Perfect Score! 🎉</div>' : 
-                            '<p>Keep learning to improve your knowledge!</p>'}
-                        
-                        <div class="quiz-actions">
-                            <button id="true-false-review" class="btn btn-primary">Review Answers</button>
-                            <button id="true-false-replay" class="btn">Try Again</button>
-                            <button id="back-to-methods" class="btn">Back to Methods</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // Add event listeners
-            document.getElementById('true-false-review').addEventListener('click', showReview);
-            document.getElementById('true-false-replay').addEventListener('click', () => {
-                initTrueFalseQuestions(moduleData);
-            });
-            document.getElementById('back-to-methods').addEventListener('click', () => {
-                showMethodsView(moduleData);
-            });
-        }
-        
-        function showReview() {
-            contentView.innerHTML = `
-                <div class="content-header">
-                    <h2 class="content-title">${moduleData.title} - True & False Review</h2>
-                </div>
-                
-                <div class="content-container" id="review-container">
-                    <!-- Review items will be added here -->
-                </div>
-                
-                <button id="back-to-results" class="btn">
-                    <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M19 12H5"/>
-                        <path d="M12 19l-7-7 7-7"/>
-                    </svg>
-                    Back to Results
-                </button>
-            `;
-            
-            const reviewContainer = document.getElementById('review-container');
-            
-            // Add review items
-            shuffledData.forEach((question, index) => {
-                const userAnswer = userAnswers[index];
-                
-                // Create review item
-                const reviewItem = document.createElement('div');
-                reviewItem.className = `review-item ${userAnswer && userAnswer.isCorrect ? 'correct' : 'incorrect'}`;
-                reviewItem.innerHTML = `
-                    <div class="review-statement">${index + 1}. ${question.statement}</div>
-                    <div class="review-details">
-                        <div class="review-answer">Correct answer: <strong>${question.isTrue ? 'TRUE' : 'FALSE'}</strong></div>
-                        ${userAnswer ? `<div class="review-answer">Your answer: <strong>${userAnswer.userAnswer ? 'TRUE' : 'FALSE'}</strong></div>` : ''}
-                        <div class="review-explanation">${question.explanation}</div>
-                    </div>
-                `;
-                
-                reviewContainer.appendChild(reviewItem);
-            });
-            
-            // Add back button listener
-            document.getElementById('back-to-results').addEventListener('click', showResults);
-        }
-    }
-    
-    // Helper function to shuffle an array
-    function shuffleArray(array) {
-        const newArray = [...array];
-        for (let i = newArray.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-        }
-        return newArray;
-    }
-});
