@@ -289,6 +289,7 @@ a:hover {
     display: flex;
     list-style: none;
     justify-content: center;
+    pointer-events: auto; /* Ensure all links are clickable */
 }
 
 .nav-links li {
@@ -307,6 +308,8 @@ a:hover {
     text-overflow: ellipsis;
     max-width: 160px;
     font-size: 0.9rem;
+    cursor: pointer; /* Make sure the cursor shows it's clickable */
+    pointer-events: auto; /* Extra guarantee of clickability */
 }
 
 .nav-links a:hover,
@@ -567,15 +570,11 @@ a:hover {
     padding: 0 var(--site-padding);
 }
 
-.content-title {
-    font-size: var(--font-size-2xl);
-    color: var(--text-primary);
-}
-
-/* Apply funky heading style to all relevant headings */
+/* Apply funky heading style to all relevant headings including study type */
 #selected-module-title,
 #content-title,
-.section-title.funky-heading {
+.section-title.funky-heading,
+.content-title {
     font-size: var(--font-size-2xl);
     font-weight: 800;
     text-transform: uppercase;
