@@ -141,6 +141,20 @@ a:hover {
     color: var(--accent-light);
 }
 
+/* Funky heading style for all section titles */
+.funky-heading {
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #5661f0 0%, #ad6ef8 50%, #c985ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 15px rgba(86, 97, 240, 0.3);
+    font-family: var(--font-family);
+}
+
 /* Logo Styles */
 .logo-container {
     position: fixed;
@@ -194,7 +208,7 @@ a:hover {
 /* Navbar Styles */
 .navbar-wrapper {
     position: fixed;
-    top: calc(var(--site-padding) + 20px); /* Align with logo */
+    top: 25px; /* Precisely align with logo */
     left: 0;
     width: 100%;
     z-index: 1000;
@@ -206,35 +220,66 @@ a:hover {
 
 .floating-nav {
     position: relative;
-    background-color: rgba(52, 40, 76, 0.7); /* Darker, more opaque purple */
+    background-color: rgba(52, 40, 76, 0.7); 
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--border-color);
+    border: none;
     border-radius: 50px; /* Pill shape */
-    height: var(--navbar-height);
-    min-width: 180px;
-    max-width: 400px;
+    height: 40px; /* Smaller height */
+    min-width: 120px; /* Smaller width */
+    max-width: 320px;
     width: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 var(--spacing-lg);
+    padding: 0 var(--spacing-md);
     transition: transform var(--transition-normal), 
                 width var(--transition-normal),
                 opacity var(--transition-normal),
                 top var(--transition-normal);
-    overflow: visible; /* Changed to visible for the glow dot */
+    overflow: hidden;
     pointer-events: auto;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    opacity: 0; /* Start invisible */
+    opacity: 1; /* Always visible */
+    z-index: 0;
 }
 
-.floating-nav.visible-nav {
+.floating-nav:before {
+    content: '';
+    background: linear-gradient(45deg, #5661f0, #6f78ff, #ad6ef8, #c985ff, #5661f0);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
     opacity: 1; /* Always visible */
+    border-radius: 50px;
+}
+
+.floating-nav:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(52, 40, 76, 0.9);
+    left: 0;
+    top: 0;
+    border-radius: 50px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
 }
 
 .floating-nav.top-position {
-    transform: translateY(0); /* When at top of page, align with logo */
+    transform: translateY(0); 
 }
 
 .floating-nav.scrolled-nav {
@@ -255,59 +300,6 @@ a:hover {
     z-index: 2;
 }
 
-/* Traveling dot glow effect */
-.nav-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-    border-radius: 50px; /* Match navbar border-radius */
-}
-
-/* Creating the traveling dot effect */
-.glow-dot {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background: radial-gradient(circle, var(--accent-light) 0%, rgba(173, 110, 248, 0.3) 70%, transparent 100%);
-    border-radius: 50%;
-    filter: blur(3px);
-    box-shadow: 0 0 10px 2px var(--accent);
-    animation: travel-around 4s linear infinite;
-    z-index: 0;
-}
-
-@keyframes travel-around {
-    0% {
-        top: 50%;
-        left: 0;
-        transform: translate(-50%, -50%);
-    }
-    25% {
-        top: 0;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-    50% {
-        top: 50%;
-        left: 100%;
-        transform: translate(-50%, -50%);
-    }
-    75% {
-        top: 100%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-    100% {
-        top: 50%;
-        left: 0;
-        transform: translate(-50%, -50%);
-    }
-}
-
 .nav-links {
     display: flex;
     list-style: none;
@@ -316,19 +308,20 @@ a:hover {
 
 .nav-links li {
     position: relative;
-    margin: 0 var(--spacing-md);
+    margin: 0 var(--spacing-sm);
 }
 
 .nav-links a {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     font-weight: 500;
-    padding: var(--spacing-sm) var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
     display: block;
     transition: color var(--transition-fast);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 160px;
+    font-size: 0.9rem;
 }
 
 .nav-links a:hover,
@@ -339,16 +332,16 @@ a:hover {
 .nav-links a.active::after {
     content: '';
     position: absolute;
-    bottom: -4px;
+    bottom: -2px;
     left: var(--spacing-sm);
     right: var(--spacing-sm);
-    height: 3px;
-    border-radius: 1.5px;
+    height: 2px;
+    border-radius: 1px;
     background: var(--primary-gradient);
 }
 
 .nav-actions {
-    margin-left: var(--spacing-lg);
+    margin-left: var(--spacing-sm);
 }
 
 .theme-toggle {
@@ -360,6 +353,7 @@ a:hover {
     align-items: center;
     justify-content: center;
     transition: color var(--transition-fast);
+    transform: scale(0.8); /* Make the icon smaller */
 }
 
 .theme-toggle:hover {
@@ -395,26 +389,7 @@ a:hover {
 }
 
 .section-title {
-    font-size: var(--font-size-2xl);
     margin-bottom: var(--spacing-xs);
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-/* New funky heading style */
-.funky-heading {
-    font-size: var(--font-size-3xl);
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    background: linear-gradient(135deg, #5661f0 0%, #ad6ef8 50%, #c985ff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: 0 0 15px rgba(86, 97, 240, 0.3);
-    font-family: var(--font-family);
 }
 
 .section-subtitle {
