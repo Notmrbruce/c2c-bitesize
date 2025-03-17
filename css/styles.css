@@ -206,32 +206,34 @@ a:hover {
     text-transform: uppercase; /* All caps */
 }
 
-/* Navbar Styles - FIXED */
+/* Navbar Styles - UPDATED FOR ADAPTIVE WIDTH */
 .navbar-wrapper {
     position: fixed;
-    top: 32px; /* Position to align with logo */
+    top: 32px;
     left: 0;
     width: 100%;
-    z-index: 1002; /* FIXED: Higher than logo container */
+    z-index: 1002; /* Higher than logo container */
     display: flex;
     justify-content: center;
-    pointer-events: all !important; /* Critical fix */
+    pointer-events: all !important;
 }
 
 .floating-nav {
-    width: 180px; /* Reduced size */
-    height: 36px; /* Reduced size */
+    width: auto; /* Changed from fixed width to auto */
+    min-width: 180px; /* Minimum width */
+    max-width: 500px; /* Increased maximum width */
+    height: 36px;
     border: none;
     outline: none;
     color: #fff;
-    background: rgba(12, 12, 20, 0.95); /* Darker background */
+    background: rgba(12, 12, 20, 0.95);
     position: relative;
-    z-index: 1003; /* FIXED: Higher than wrapper */
+    z-index: 1003;
     border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 var(--spacing-md);
+    padding: 0 var(--spacing-xl); /* Increased horizontal padding */
     pointer-events: all !important;
 }
 
@@ -247,7 +249,7 @@ a:hover {
     width: calc(100% + 4px);
     height: calc(100% + 4px);
     animation: glowing 20s linear infinite;
-    opacity: 1; /* Always visible */
+    opacity: 1;
     border-radius: 50px;
 }
 
@@ -257,7 +259,7 @@ a:hover {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(12, 12, 20, 0.95); /* Almost black background */
+    background: rgba(12, 12, 20, 0.95);
     left: 0;
     top: 0;
     border-radius: 50px;
@@ -282,7 +284,7 @@ a:hover {
     height: 100%;
     position: relative;
     z-index: 10;
-    padding: 0 var(--spacing-sm);
+    padding: 0;
     pointer-events: all !important;
 }
 
@@ -290,8 +292,10 @@ a:hover {
     display: flex;
     list-style: none;
     justify-content: center;
-    z-index: 1004; /* FIXED: Higher z-index */
+    z-index: 1004;
     pointer-events: all !important;
+    padding: 0;
+    margin: 0;
 }
 
 .nav-links li {
@@ -306,14 +310,11 @@ a:hover {
     display: block;
     transition: color var(--transition-fast);
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 160px;
-    font-size: 0.85rem; /* Smaller text */
+    font-size: 0.85rem;
     cursor: pointer !important;
     pointer-events: all !important;
-    z-index: 1005 !important; /* FIXED: Super high z-index */
-    position: relative; /* FIXED: Needed for z-index to work */
+    z-index: 1005 !important;
+    position: relative;
 }
 
 .nav-links a:hover,
@@ -330,26 +331,6 @@ a:hover {
     height: 2px;
     border-radius: 1px;
     background: var(--primary-gradient);
-}
-
-.nav-actions {
-    margin-left: var(--spacing-sm);
-}
-
-.theme-toggle {
-    background: transparent;
-    border: none;
-    color: var(--text-tertiary);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: color var(--transition-fast);
-    transform: scale(0.75); /* Smaller icon */
-}
-
-.theme-toggle:hover {
-    color: var(--text-primary);
 }
 
 /* Main Content */
@@ -1080,7 +1061,7 @@ a:hover {
     font-size: var(--font-size-sm);
 }
 
-/* Responsive Design */
+/* Responsive Design - IMPROVED FOR MOBILE */
 @media (max-width: 768px) {
     :root {
         --font-size-2xl: 1.75rem;
@@ -1088,6 +1069,28 @@ a:hover {
         --font-size-4xl: 2.5rem;
         --site-padding: 1.5rem;
         --logo-height: 70px;
+    }
+    
+    /* Adjust navbar for mobile */
+    .navbar-wrapper {
+        top: 25px; /* Move up slightly on mobile */
+    }
+    
+    .floating-nav {
+        min-width: 140px; /* Smaller minimum width */
+        max-width: 85%; /* Use percentage for better adaptation */
+        height: 36px;
+    }
+    
+    .nav-links li {
+        margin: 0 var(--spacing-xs); /* Reduced margin */
+    }
+    
+    .nav-links a {
+        font-size: 0.8rem; /* Smaller font size */
+        padding: var(--spacing-xs) var(--spacing-xs); /* Reduced padding */
+        text-overflow: clip; /* Remove text overflow ellipsis to show full text */
+        max-width: none;
     }
     
     .module-grid, 
@@ -1120,6 +1123,32 @@ a:hover {
     }
 }
 
+/* Mobile portrait mode adjustments */
+@media (max-width: 420px) {
+    .navbar-wrapper {
+        top: 20px; /* Move even higher on very small screens */
+    }
+    
+    .floating-nav {
+        max-width: 90%;
+        padding: 0 var(--spacing-md); /* Reduce horizontal padding */
+    }
+    
+    /* When the logo container is hidden, give more room for the navbar */
+    .hidden-logo + .navbar-wrapper {
+        top: 15px;
+    }
+    
+    /* Adjust logo on small screens */
+    .logo {
+        width: 80px; /* Even smaller width */
+    }
+    
+    .logo-text {
+        font-size: var(--font-size-xl);
+    }
+}
+
 /* Animation Classes */
 .fade-in {
     animation: fadeIn 0.5s ease forwards;
@@ -1148,13 +1177,3 @@ a:hover {
 .text-center {
     text-align: center;
 }
-
-.mt-sm { margin-top: var(--spacing-sm); }
-.mt-md { margin-top: var(--spacing-md); }
-.mt-lg { margin-top: var(--spacing-lg); }
-.mt-xl { margin-top: var(--spacing-xl); }
-
-.mb-sm { margin-bottom: var(--spacing-sm); }
-.mb-md { margin-bottom: var(--spacing-md); }
-.mb-lg { margin-bottom: var(--spacing-lg); }
-.mb-xl { margin-bottom: var(--spacing-xl); }
