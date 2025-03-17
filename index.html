@@ -24,7 +24,8 @@
             <!-- Navbar with glowing border -->
             <div class="nav-content">
                 <ul class="nav-links">
-                    <li><a href="#" class="active">Home</a></li>
+                    <!-- Using direct onclick attribute as a fail-safe -->
+                    <li><a href="index.html" class="active" onclick="window.location.href='index.html'; return false;">Home</a></li>
                     <li><a href="#" id="breadcrumb-module"></a></li>
                 </ul>
                 
@@ -97,27 +98,33 @@
     
     <script src="js/app.js" type="module"></script>
     <script>
-        // Fixed navbar functionality - UPDATED VERSION
+        // Fixed navbar functionality - FINAL VERSION
         document.addEventListener('DOMContentLoaded', function() {
             const logoContainer = document.getElementById('logo-container');
             const floatingNav = document.getElementById('floating-nav');
-            const navLinks = document.querySelectorAll('.nav-links a');
             
-            // Force all navbar links to be clickable immediately
-            navLinks.forEach(function(link) {
-                link.addEventListener('click', function(e) {
+            // Explicitly ensure navigation works
+            document.querySelectorAll('.nav-links a').forEach(function(link) {
+                link.style.cursor = 'pointer';
+                link.style.pointerEvents = 'auto';
+                
+                // Set direct click handlers to override any other behavior
+                link.onclick = function(e) {
                     e.preventDefault();
                     const href = this.getAttribute('href');
-                    if (href === '#' || href === '') {
+                    console.log('Link clicked: ' + href);
+                    if (href === '#' || href === '' || href === null || href === undefined) {
                         window.location.href = 'index.html';
                     } else {
                         window.location.href = href;
                     }
-                });
+                    return false;
+                };
             });
             
-            // Explicitly make sure the navbar is interactive
+            // Ensure the navbar is visible and interactive
             floatingNav.style.pointerEvents = 'auto';
+            floatingNav.style.opacity = '1';
             
             // Handle scroll effects separately
             window.addEventListener('scroll', function() {
@@ -129,6 +136,9 @@
                     floatingNav.classList.remove('scrolled-nav');
                 }
             });
+            
+            // Debug - check if clicking actually works
+            console.log('Navigation setup complete');
         });
     </script>
 </body>
