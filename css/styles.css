@@ -77,7 +77,6 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
     position: relative;
-    padding-top: var(--logo-height); /* Space for the fixed logo */
 }
 
 .background-gradient {
@@ -148,19 +147,25 @@ a:hover {
     top: 0;
     left: 0;
     width: 100%;
-    height: var(--logo-height);
     z-index: 1001;
-    background-color: var(--background);
+    background-color: transparent;
     padding: var(--site-padding);
-    padding-top: var(--site-padding);
     display: flex;
     align-items: center;
+    height: auto;
+    transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+.logo-container.hidden-logo {
+    opacity: 0;
+    transform: translateY(-100%);
 }
 
 .logo {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    width: 120px; /* Fixed width to ensure C2C and Bitesize have same width */
 }
 
 .logo-text {
@@ -171,6 +176,8 @@ a:hover {
     background-clip: text;
     color: transparent;
     line-height: 0.9;
+    width: 100%;
+    text-align: center;
 }
 
 .logo-subtext {
@@ -178,27 +185,30 @@ a:hover {
     font-weight: 400;
     color: var(--text-secondary);
     margin-top: var(--spacing-xs);
+    width: 100%;
+    text-align: center;
 }
 
 /* Navbar Styles */
 .navbar-wrapper {
     position: fixed;
-    top: calc(var(--logo-height) - var(--navbar-height) / 2);
+    top: calc(var(--logo-height) / 2 + var(--site-padding));
     left: 0;
     width: 100%;
     z-index: 1000;
     display: flex;
     justify-content: center;
-    pointer-events: none; /* Allow clicks to pass through the wrapper */
+    pointer-events: none;
+    transition: top var(--transition-normal);
 }
 
 .floating-nav {
     position: relative;
-    background: var(--surface-tertiary);
+    background-color: rgba(20, 20, 40, 0.3);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-lg);
+    border-radius: 50px; /* Pill shape */
     height: var(--navbar-height);
     min-width: 180px;
     max-width: 400px;
@@ -211,12 +221,12 @@ a:hover {
                 width var(--transition-normal),
                 opacity var(--transition-normal);
     overflow: hidden;
-    pointer-events: auto; /* Restore pointer events */
+    pointer-events: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-.floating-nav.scrolled {
-    transform: translateY(calc(var(--navbar-height) * -1.5));
-    opacity: 0;
+.floating-nav.scrolled-nav {
+    top: var(--spacing-lg);
 }
 
 .floating-nav.expanded {
@@ -233,7 +243,7 @@ a:hover {
     z-index: 2;
 }
 
-/* Glow effect (bonus feature) */
+/* Glow effect */
 .nav-glow {
     position: absolute;
     top: 0;
@@ -243,7 +253,7 @@ a:hover {
     pointer-events: none;
     z-index: 1;
     overflow: hidden;
-    border-radius: var(--border-radius-lg);
+    border-radius: 50px; /* Match navbar border-radius */
 }
 
 .nav-glow::before {
@@ -259,10 +269,9 @@ a:hover {
         var(--accent-light), 
         var(--primary-light), 
         transparent);
-    border-radius: calc(var(--border-radius-lg) + 2px);
+    border-radius: 52px; /* Slightly larger than navbar */
     background-size: 400% 100%;
-    opacity: 0;
-    transition: opacity var(--transition-normal);
+    opacity: 0.3; /* Always visible but subtle */
     animation: glow-animation 6s linear infinite;
 }
 
@@ -335,7 +344,7 @@ a:hover {
 
 /* Main Content */
 .main-content {
-    padding-top: var(--spacing-lg);
+    padding-top: calc(var(--logo-height) + var(--spacing-xl));
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -1070,7 +1079,7 @@ a:hover {
     }
     
     .main-content {
-        padding-top: 0;
+        padding-top: calc(var(--logo-height) + var(--spacing-xl));
     }
     
     .time-trial-options {
