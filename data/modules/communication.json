@@ -1,0 +1,166 @@
+{
+  "id": "comm-safety-module-001",
+  "title": "Safety Critical Communication in Railway Operations",
+  "description": "A comprehensive module covering critical communication protocols, methods, and best practices for railway safety operations",
+  "methods": ["flashcards", "quiz", "time-trial", "true-false"],
+  "content": {
+    "flashcards": [
+      {
+        "question": "What is the ABC of safety critical communication?",
+        "answer": "Accurate: Provide correct details of situation and location. Brief: Avoid irrelevant information. Clear: Speak clearly and ensure understanding by repeating back messages."
+      },
+      {
+        "question": "How do you ensure a message is fully understood?",
+        "answer": "Ask the recipient to repeat the message back and verify its accuracy. Confirm each critical detail to prevent misunderstandings."
+      },
+      {
+        "question": "What are the lead responsibility hierarchies in railway communication?",
+        "answer": "ECO over signaler, Signaler over everyone else, SPM over Shunters, West End man over other shunters or drivers. Always respect the established communication chain of command."
+      },
+      {
+        "question": "What critical steps must be taken during an emergency group call?",
+        "answer": "1. Press the red button on GSMR radio, 2. State 'This is an emergency call', 3. Provide head code, 4. Give location of incident, 5. Describe nature of incident, 6. Specify affected lines, 7. Identify lines to be blocked, 8. Request necessary emergency services, 9. Provide contact number, 10. Confirm message is repeated back correctly."
+      },
+      {
+        "question": "What communication methods are available in railway operations?",
+        "answer": "Radio communications (GSMR), hand signals, SPT, lineside telephone, mobile phone. Each method has specific protocols and usage guidelines."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Which of the following is NOT an acceptable term during safety-critical communication?",
+        "options": [
+          "'Over' to request a response",
+          "'Not clear' when the line is blocked",
+          "'Out' to end a message",
+          "Using the phonetic alphabet"
+        ],
+        "correctAnswer": 1,
+        "explanation": "'Not clear' is explicitly forbidden in safety-critical communication. Instead, use precise and unambiguous language."
+      },
+      {
+        "question": "In a scenario where you need to communicate a train's location using phonetics, how would you correctly state the location UR900?",
+        "options": [
+          "Uniform Romeo Nine Zero Zero",
+          "Universal Radio Nine Hundred",
+          "Urgent Route Nine Zero Zero",
+          "United Routing Nine Hundred"
+        ],
+        "correctAnswer": 0,
+        "explanation": "The correct phonetic representation is 'Uniform Romeo Nine Zero Zero', following standard phonetic alphabet protocols."
+      },
+      {
+        "question": "Who has the ultimate lead responsibility in communication protocols?",
+        "options": [
+          "ECO",
+          "West End man",
+          "Signaler",
+          "SPM"
+        ],
+        "correctAnswer": 2,
+        "explanation": "The Signaler has lead responsibility over everyone else in the communication hierarchy."
+      },
+      {
+        "question": "When using a lineside or mobile phone, what critical step must you take to ensure proper communication?",
+        "options": [
+          "Speak loudly",
+          "Ensure you are speaking to the correct person/work station",
+          "Use technical jargon",
+          "Keep the conversation as long as possible"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Always verify you are speaking to the correct person or work station to prevent miscommunication."
+      },
+      {
+        "question": "In a complex communication scenario involving an emergency, what is the most critical initial step?",
+        "options": [
+          "Describe the entire incident in detail",
+          "Press the red button on the GSMR radio",
+          "Call emergency services directly",
+          "Contact your immediate supervisor"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Pressing the red button on the GSMR radio initiates the emergency communication protocol, ensuring immediate attention and response."
+      }
+    ],
+    "time-trial": [
+      { "term": "ABC of Communication", "definition": "Accurate, Brief, Clear communication protocol" },
+      { "term": "Phonetic Alphabet", "definition": "Method of spelling out words using standard words to prevent misunderstanding" },
+      { "term": "GSMR", "definition": "Global System for Mobile Railway communications" },
+      { "term": "Lead Responsibility", "definition": "Hierarchical communication protocol ensuring clear chain of command" },
+      { "term": "Emergency Group Call", "definition": "Specific radio protocol for urgent communication of critical incidents" },
+      { "term": "Over", "definition": "Radio communication term requesting a response" },
+      { "term": "Out", "definition": "Radio communication term signaling end of message" },
+      { "term": "SPT", "definition": "Specific railway communication system" },
+      { "term": "Cab to Cab Communication", "definition": "Direct communication method between train cab units" },
+      { "term": "PA System", "definition": "Public Address system for train-wide announcements" },
+      { "term": "Lineside Telephone", "definition": "Communication method located along railway lines" },
+      { "term": "Head Code", "definition": "Unique identifier for a specific train" },
+      { "term": "Work Station", "definition": "Specific location or operational point in railway system" },
+      { "term": "Repeat Back", "definition": "Confirmation technique where recipient repeats message to verify understanding" },
+      { "term": "Communication Hierarchy", "definition": "Established order of communication responsibility" },
+      { "term": "Emergency Services", "definition": "Rescue, medical, and support organizations for critical incidents" },
+      { "term": "Incident Location", "definition": "Precise geographical point where an event occurs" },
+      { "term": "Communication Protocol", "definition": "Standardized procedures for effective and safe communication" },
+      { "term": "Mobile Communication", "definition": "Communication using mobile phones in railway operations" },
+      { "term": "Hand Signals", "definition": "Non-verbal communication method using physical gestures" },
+      { "term": "West End Man", "definition": "Specific railway personnel with communication responsibilities" },
+      { "term": "ECO", "definition": "Operational communication supervisor" },
+      { "term": "SPM", "definition": "Specialized personnel managing shunting operations" },
+      { "term": "Shunter", "definition": "Railway worker responsible for moving trains or train cars" },
+      { "term": "Communication Methods", "definition": "Various ways of exchanging information in railway operations" }
+    ],
+    "true-false": [
+      {
+        "statement": "It is acceptable to use slang terms during safety-critical communication.",
+        "isTrue": false,
+        "explanation": "Slang terms are prohibited in safety-critical communication to ensure clarity and prevent misunderstandings."
+      },
+      {
+        "statement": "When using a mobile phone for communication, you must provide your contact number to the other party.",
+        "isTrue": true,
+        "explanation": "Providing your contact number ensures traceability and enables follow-up communication if needed."
+      },
+      {
+        "statement": "The signaler does not have lead responsibility over other personnel.",
+        "isTrue": false,
+        "explanation": "The signaler has lead responsibility over everyone else in the communication hierarchy."
+      },
+      {
+        "statement": "In an emergency group call, it is optional to get the message repeated back.",
+        "isTrue": false,
+        "explanation": "Repeating back the message is crucial to confirm understanding and prevent critical errors."
+      },
+      {
+        "statement": "The PA system can only be used to communicate within the same train cab.",
+        "isTrue": false,
+        "explanation": "The PA system allows announcements throughout the entire train, not just within a single cab."
+      },
+      {
+        "statement": "During safety-critical communication, using 'Over and Out' is an acceptable practice.",
+        "isTrue": false,
+        "explanation": "'Over and Out' is incorrect. 'Over' requests a response, while 'Out' signals the end of communication. They cannot be used together."
+      },
+      {
+        "statement": "In a scenario with multiple communication methods available, the most direct method should always be chosen first.",
+        "isTrue": true,
+        "explanation": "Choosing the most direct and reliable communication method ensures the quickest and most accurate information transfer."
+      },
+      {
+        "statement": "A driver has lead responsibility over a shunter in all communication scenarios.",
+        "isTrue": false,
+        "explanation": "Lead responsibility depends on specific operational roles. The SPM has lead responsibility over shunters."
+      },
+      {
+        "statement": "Using the phonetic alphabet is optional during safety-critical communication.",
+        "isTrue": false,
+        "explanation": "Using the phonetic alphabet is crucial to prevent misunderstandings, especially with similar-sounding words or numbers."
+      },
+      {
+        "statement": "An emergency group call requires providing a contact number for follow-up.",
+        "isTrue": true,
+        "explanation": "Providing a contact number ensures that emergency services can reach you for additional information or coordination."
+      }
+    ]
+  }
+}
