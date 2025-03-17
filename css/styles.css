@@ -155,7 +155,7 @@ a:hover {
     font-family: var(--font-family);
 }
 
-/* Logo Styles */
+/* Logo Styles - FIXED */
 .logo-container {
     position: fixed;
     top: 0;
@@ -167,12 +167,13 @@ a:hover {
     display: flex;
     align-items: center;
     height: auto;
-    transition: opacity var(--transition-normal), transform var(--transition-normal);
+    transition: opacity var(--transition-normal), transform var(--transition-normal), pointer-events 0s;
 }
 
 .logo-container.hidden-logo {
     opacity: 0;
     transform: translateY(-100%);
+    pointer-events: none !important; /* CRITICAL FIX: When hidden, don't block clicks */
 }
 
 .logo {
@@ -205,13 +206,13 @@ a:hover {
     text-transform: uppercase; /* All caps */
 }
 
-/* Navbar Styles - FIXED VERSION */
+/* Navbar Styles - FIXED */
 .navbar-wrapper {
     position: fixed;
     top: 32px; /* Position to align with logo */
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 1002; /* FIXED: Higher than logo container */
     display: flex;
     justify-content: center;
     pointer-events: all !important; /* Critical fix */
@@ -225,7 +226,7 @@ a:hover {
     color: #fff;
     background: rgba(12, 12, 20, 0.95); /* Darker background */
     position: relative;
-    z-index: 5;
+    z-index: 1003; /* FIXED: Higher than wrapper */
     border-radius: 50px;
     display: flex;
     align-items: center;
@@ -289,7 +290,7 @@ a:hover {
     display: flex;
     list-style: none;
     justify-content: center;
-    z-index: 10;
+    z-index: 1004; /* FIXED: Higher z-index */
     pointer-events: all !important;
 }
 
@@ -311,6 +312,8 @@ a:hover {
     font-size: 0.85rem; /* Smaller text */
     cursor: pointer !important;
     pointer-events: all !important;
+    z-index: 1005 !important; /* FIXED: Super high z-index */
+    position: relative; /* FIXED: Needed for z-index to work */
 }
 
 .nav-links a:hover,
