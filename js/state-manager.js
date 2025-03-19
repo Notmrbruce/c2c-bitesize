@@ -23,6 +23,12 @@ class StateManager {
                 lastScrollTop: 0,
                 theme: 'dark', // 'dark' or 'light'
                 menuOpen: false
+            },
+            
+            // Navigation state
+            navigation: {
+                view: 'modules',
+                params: {}
             }
         };
         
@@ -102,23 +108,26 @@ class StateManager {
      * @param {Object} params - Additional parameters for the view
      */
     navigateTo(view, params = {}) {
-        // Update our state
-        this.set('currentView', view);
+        // Update navigation state
+        this._state.navigation = {
+            view,
+            params
+        };
+        
+        // Update current view
+        this._state.currentView = view;
         
         // Handle specific view parameters
         if (view === 'methods' && params.module) {
-            this.set('currentModule', params.module);
+            this._state.currentModule = params.module;
         }
         
         if (view === 'content' && params.method) {
-            this.set('currentMethod', params.method);
+            this._state.currentMethod = params.method;
         }
         
         // Publish navigation event for view components to respond to
-        this._notifySubscribers('navigation', {
-            view,
-            params
-        });
+        this._notifySubscribers('navigation', {});
     }
     
     /**
@@ -195,7 +204,12 @@ class StateManager {
         // Notify exact key subscribers
         if (this._subscribers[key]) {
             this._subscribers[key].forEach(callback => {
-                callback(this.get(key), this._getNestedValue(oldState, key), this._state);
+                if (key === 'navigation') {
+                    // For navigation events, pass the current navigation state
+                    callback(this._state.navigation);
+                } else {
+                    callback(this.get(key), this._getNestedValue(oldState, key), this._state);
+                }
             });
         }
         

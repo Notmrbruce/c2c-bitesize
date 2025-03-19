@@ -3,6 +3,9 @@
  */
 
 export const config = {
+    // Debug mode - set to true to see detailed logs
+    debug: true,
+    
     // Base paths
     paths: {
         data: 'data/modules',

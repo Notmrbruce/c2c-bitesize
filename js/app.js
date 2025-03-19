@@ -95,7 +95,9 @@ function setupEventListeners() {
  * @param {Object} navigation - New navigation state
  */
 function handleNavigation(navigation) {
-    const { view, params } = navigation;
+    // Get navigation from state if not provided (safeguard)
+    const navData = navigation || state.get('navigation') || { view: 'modules', params: {} };
+    const { view, params } = navData;
     
     // Hide all views
     ui.hideElement(modulesView);
@@ -109,7 +111,7 @@ function handleNavigation(navigation) {
             break;
             
         case 'methods':
-            if (params.module) {
+            if (params && params.module) {
                 showMethodsView(params.module);
             } else {
                 // Fallback to modules view if no module specified
@@ -118,13 +120,17 @@ function handleNavigation(navigation) {
             break;
             
         case 'content':
-            if (params.module && params.method) {
+            if (params && params.module && params.method) {
                 loadStudyMethod(params.module, params.method);
             } else {
                 // Fallback to modules view if missing params
                 ui.showElement(modulesView);
             }
             break;
+            
+        default:
+            // Default to modules view
+            ui.showElement(modulesView);
     }
     
     // Update active navigation link
