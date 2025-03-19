@@ -463,3 +463,50 @@
         font-size: var(--font-size-xl);
     }
 }
+
+/* Update the active nav-link style to ensure proper indicator display */
+.nav-links a.active, .nav-links .nav-link.active {
+    color: var(--text-primary);
+    position: relative;
+}
+
+/* Improve the active indicator style */
+.nav-links a.active::after, .nav-links .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: var(--spacing-sm);
+    right: var(--spacing-sm);
+    height: 2px;
+    border-radius: 1px;
+    background: var(--primary-gradient);
+    /* Add animation for smoother transitions */
+    transform-origin: center;
+    animation: navIndicator 0.3s ease forwards;
+}
+
+/* Animation for the nav indicator to smoothly appear */
+@keyframes navIndicator {
+    from {
+        transform: scaleX(0);
+        opacity: 0;
+    }
+    to {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+/* Mobile dropdown menu active indicator */
+.mobile-dropdown a.active, .mobile-dropdown .nav-link.active {
+    position: relative;
+    color: var(--primary-light);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid var(--primary);
+    padding-left: 13px;
+}
+
+/* Make sure we have consistent active styles across all pages */
+.nav-link[data-page].active {
+    color: var(--text-primary);
+}

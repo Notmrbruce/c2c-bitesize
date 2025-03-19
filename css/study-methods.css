@@ -389,3 +389,106 @@
         height: 50px;
     }
 }
+
+/* Common question image container */
+.question-image-container {
+    margin-bottom: var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    max-width: 100%;
+    text-align: center;
+}
+
+/* Question image with border and shadow */
+.question-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    background-color: var(--surface-tertiary);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Image caption if needed */
+.question-image-caption {
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    text-align: center;
+    font-style: italic;
+}
+
+/* Flashcard specific adjustments */
+.flashcard {
+    display: flex;
+    flex-direction: column;
+}
+
+.flashcard-question {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flashcard-question .question-image-container {
+    max-height: 200px;
+    margin-bottom: var(--spacing-md);
+    order: -1; /* Place image above text */
+}
+
+.flashcard-question .question-text {
+    margin-top: var(--spacing-md);
+}
+
+/* Quiz specific adjustments */
+.quiz-container .question-image-container {
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Time trial specific adjustments */
+.time-trial-definition {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time-trial-definition .question-image-container {
+    margin-bottom: var(--spacing-md);
+    order: -1; /* Place image above text */
+    max-width: 300px;
+}
+
+.time-trial-definition .definition-text {
+    width: 100%;
+    text-align: center;
+}
+
+/* True-false specific adjustments */
+.true-false-container .question-image-container {
+    margin-bottom: var(--spacing-lg);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .question-image-container {
+        max-width: 100%;
+    }
+    
+    .flashcard-question .question-image-container {
+        max-height: 150px;
+    }
+    
+    .flashcard-question .question-text {
+        font-size: var(--font-size-md);
+    }
+    
+    .time-trial-definition .question-image-container {
+        max-width: 250px;
+    }
+}
