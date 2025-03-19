@@ -1,5 +1,5 @@
 /**
- * True/False Study Method Module
+ * True/False Study Method Module with Image Support
  * Handles the true/false learning experience
  */
 
@@ -94,8 +94,24 @@ export function initTrueFalse(moduleData, container) {
     function loadQuestion() {
         const questionData = shuffledData[currentQuestionIndex];
         
-        // Update statement
-        statementElement.textContent = questionData.statement;
+        // Generate statement content with possible image
+        let statementContent = '';
+        
+        // Add image if available
+        if (questionData.image) {
+            statementContent += `
+                <div class="question-image-container">
+                    <img src="${questionData.image}" alt="Statement image" class="question-image">
+                    ${questionData.imageCaption ? `<div class="question-image-caption">${questionData.imageCaption}</div>` : ''}
+                </div>
+            `;
+        }
+        
+        // Add statement text
+        statementContent += `<div class="statement-text">${questionData.statement}</div>`;
+        
+        // Update statement content
+        statementElement.innerHTML = statementContent;
         
         // Update progress
         currentElement.textContent = currentQuestionIndex + 1;
@@ -236,13 +252,32 @@ export function initTrueFalse(moduleData, container) {
             // Get the original question data
             const question = trueFalseData.find(q => q === answer.statementIndex) || shuffledData[index];
             
+            // Create statement content with possible image
+            let statementContent = '';
+            
+            // Add image if available
+            if (question.image) {
+                statementContent += `
+                    <div class="question-image-container">
+                        <img src="${question.image}" alt="Statement image" class="question-image" style="max-width: 200px;">
+                        ${question.imageCaption ? `<div class="question-image-caption">${question.imageCaption}</div>` : ''}
+                    </div>
+                `;
+            }
+            
+            // Add statement text
+            statementContent += `<div class="review-statement">${index + 1}. ${question.statement}</div>`;
+            
             // Create review item
             const reviewItem = createElement('div', {
                 className: `review-item ${answer && answer.isCorrect ? 'correct' : 'incorrect'}`,
                 role: 'region',
                 'aria-label': `Question ${index + 1}: ${answer && answer.isCorrect ? 'Correct' : 'Incorrect'}`
             }, [
-                createElement('div', { className: 'review-statement' }, `${index + 1}. ${question.statement}`),
+                createElement('div', { 
+                    className: 'review-content',
+                    innerHTML: statementContent
+                }),
                 createElement('div', { className: 'review-details' }, [
                     createElement('div', { className: 'review-answer' }, `Correct answer: <strong>${question.isTrue ? 'TRUE' : 'FALSE'}</strong>`),
                     answer ? createElement('div', { className: 'review-answer' }, `Your answer: <strong>${answer.userAnswer ? 'TRUE' : 'FALSE'}</strong>`) : '',

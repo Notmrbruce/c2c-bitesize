@@ -1,5 +1,5 @@
 /**
- * Quiz Study Method Module
+ * Quiz Study Method Module with Image Support
  * Handles the quiz learning experience
  */
 
@@ -132,7 +132,24 @@ export function initQuiz(moduleData, container) {
         const questionElement = document.getElementById('quiz-question');
         const optionsElement = document.getElementById('quiz-options');
         
-        questionElement.textContent = `${currentQuestionIndex + 1}. ${questionData.question}`;
+        // Generate question content with possible image
+        let questionContent = '';
+        
+        // Add image if available
+        if (questionData.image) {
+            questionContent += `
+                <div class="question-image-container">
+                    <img src="${questionData.image}" alt="Question image" class="question-image">
+                    ${questionData.imageCaption ? `<div class="question-image-caption">${questionData.imageCaption}</div>` : ''}
+                </div>
+            `;
+        }
+        
+        // Add question text
+        questionContent += `<div class="question-text">${currentQuestionIndex + 1}. ${questionData.question}</div>`;
+        
+        // Update question content
+        questionElement.innerHTML = questionContent;
         questionElement.setAttribute('id', `question-${currentQuestionIndex}`);
         
         // Update question number
@@ -281,12 +298,30 @@ export function initQuiz(moduleData, container) {
             const userAnswer = userAnswers[index] !== null ? userAnswers[index] : -1;
             const isCorrect = userAnswer === question.correctAnswer;
             
+            let questionContent = '';
+            
+            // Add image if available
+            if (question.image) {
+                questionContent += `
+                    <div class="question-image-container">
+                        <img src="${question.image}" alt="Question image" class="question-image" style="max-width: 200px;">
+                        ${question.imageCaption ? `<div class="question-image-caption">${question.imageCaption}</div>` : ''}
+                    </div>
+                `;
+            }
+            
+            // Add question text
+            questionContent += `<div class="review-statement">${index + 1}. ${question.question}</div>`;
+            
             const questionElement = createElement('div', {
                 className: `review-item ${isCorrect ? 'correct' : 'incorrect'}`,
                 role: 'region',
                 'aria-label': `Question ${index + 1}: ${isCorrect ? 'Correct' : 'Incorrect'}`
             }, [
-                createElement('div', { className: 'review-statement' }, `${index + 1}. ${question.question}`),
+                createElement('div', { 
+                    className: 'review-content',
+                    innerHTML: questionContent
+                }),
                 createElement('div', { className: 'review-details' }, [
                     createElement('div', { className: 'review-answer' }, `Your answer: ${userAnswer >= 0 ? question.options[userAnswer] : 'Not answered'}`),
                     createElement('div', { className: 'review-answer' }, `Correct answer: ${question.options[question.correctAnswer]}`)

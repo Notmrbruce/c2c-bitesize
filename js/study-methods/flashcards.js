@@ -27,6 +27,12 @@ export function initFlashcards(moduleData, container) {
         currentCardIndex = savedProgress.currentCardIndex;
     }
     
+    // Get current card
+    const currentCard = flashcardsData[currentCardIndex];
+    
+    // Create HTML for question content including possible image
+    const questionContent = getQuestionWithImage(currentCard);
+    
     // Create flashcard UI
     container.innerHTML = `
         <div class="content-header">
@@ -37,8 +43,10 @@ export function initFlashcards(moduleData, container) {
         <div class="content-container">
             <div class="flashcard" id="current-flashcard" tabindex="0" aria-label="Flashcard. Press Enter or Space to flip">
                 <div class="card-indicator">Click to flip</div>
-                <div class="flashcard-question" id="flashcard-question">${flashcardsData[currentCardIndex].question}</div>
-                <div class="flashcard-answer" id="flashcard-answer">${flashcardsData[currentCardIndex].answer}</div>
+                <div class="flashcard-question" id="flashcard-question">
+                    ${questionContent}
+                </div>
+                <div class="flashcard-answer" id="flashcard-answer">${currentCard.answer}</div>
             </div>
             
             <div class="card-controls">
@@ -129,8 +137,8 @@ export function initFlashcards(moduleData, container) {
         const questionElement = document.getElementById('flashcard-question');
         const answerElement = document.getElementById('flashcard-answer');
         
-        // Update content
-        questionElement.innerHTML = card.question;
+        // Update content with image support
+        questionElement.innerHTML = getQuestionWithImage(card);
         answerElement.innerHTML = card.answer;
         
         // Reset flip state
@@ -143,6 +151,26 @@ export function initFlashcards(moduleData, container) {
         // Update button states
         prevButton.disabled = currentCardIndex === 0;
         nextButton.disabled = currentCardIndex === flashcardsData.length - 1;
+    }
+    
+    // Function to get HTML for question content with image support
+    function getQuestionWithImage(card) {
+        let html = '';
+        
+        // Add image if available
+        if (card.image) {
+            html += `
+                <div class="question-image-container">
+                    <img src="${card.image}" alt="Question image" class="question-image">
+                    ${card.imageCaption ? `<div class="question-image-caption">${card.imageCaption}</div>` : ''}
+                </div>
+            `;
+        }
+        
+        // Add question text
+        html += `<div class="question-text">${card.question}</div>`;
+        
+        return html;
     }
     
     // Function to save current progress

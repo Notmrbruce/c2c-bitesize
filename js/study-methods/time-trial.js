@@ -1,5 +1,5 @@
 /**
- * Time Trial Study Method Module
+ * Time Trial Study Method Module with Image Support
  * Handles the time trial learning experience
  */
 
@@ -157,8 +157,23 @@ export function initTimeTrial(moduleData, container) {
         // Get current item and generate options
         const currentItem = shuffledData[currentRound];
         
-        // Display the definition
-        definitionElement.textContent = currentItem.definition;
+        // Display the definition with possible image
+        let definitionContent = '';
+        
+        // Add image if available
+        if (currentItem.image) {
+            definitionContent += `
+                <div class="question-image-container">
+                    <img src="${currentItem.image}" alt="Definition image" class="question-image">
+                    ${currentItem.imageCaption ? `<div class="question-image-caption">${currentItem.imageCaption}</div>` : ''}
+                </div>
+            `;
+        }
+        
+        // Add definition text
+        definitionContent += `<div class="definition-text">${currentItem.definition}</div>`;
+        
+        definitionElement.innerHTML = definitionContent;
         
         // Generate options
         generateOptions(currentItem);
