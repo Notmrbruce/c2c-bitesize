@@ -190,5 +190,46 @@
             });
         });
     </script>
+<!-- Add at the bottom of index.html, before closing </body> -->
+<div id="debug-panel" style="position: fixed; bottom: 0; right: 0; background: rgba(0,0,0,0.8); color: white; padding: 10px; font-size: 12px; max-width: 300px; max-height: 200px; overflow: auto; z-index: 9999; display: none;">
+    <h3>Debug Info</h3>
+    <pre id="debug-content"></pre>
+</div>
+
+<script>
+    // Simple debug helper
+    window.debugInfo = function(message, data) {
+        if (typeof data !== 'undefined') {
+            console.log(message, data);
+            message += ' ' + JSON.stringify(data);
+        } else {
+            console.log(message);
+        }
+        
+        // Add to debug panel
+        const debugPanel = document.getElementById('debug-panel');
+        const debugContent = document.getElementById('debug-content');
+        
+        if (debugPanel && debugContent) {
+            debugPanel.style.display = 'block';
+            const now = new Date().toLocaleTimeString();
+            debugContent.innerHTML += `[${now}] ${message}\n`;
+            
+            // Scroll to bottom
+            debugContent.scrollTop = debugContent.scrollHeight;
+        }
+    };
+    
+    // Toggle debug panel with Ctrl+D
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.key === 'd') {
+            e.preventDefault();
+            const debugPanel = document.getElementById('debug-panel');
+            if (debugPanel) {
+                debugPanel.style.display = debugPanel.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+    });
+</script>
 </body>
 </html>
