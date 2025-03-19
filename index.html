@@ -35,7 +35,8 @@
     
     <!-- Mobile Dropdown Menu -->
     <div class="mobile-dropdown" id="mobile-dropdown" role="navigation" aria-label="Mobile navigation">
-        <a href="javascript:void(0);" onclick="window.location.href='index.html'; return false;" class="active">Home</a>
+        <a href="index.html" class="nav-link" data-page="home">Home</a>
+        <a href="modules.html" class="nav-link" data-page="modules">Learning Modules</a>
         <!-- Module link will be added dynamically -->
         <a href="#" id="mobile-breadcrumb" style="display: none;"></a>
     </div>
@@ -46,8 +47,8 @@
             <!-- Navbar with glowing border -->
             <div class="nav-content">
                 <ul class="nav-links">
-                    <!-- Using javascript:void(0) with inline onclick for maximum reliability -->
-                    <li><a href="javascript:void(0);" onclick="window.location.href='index.html'; return false;" class="active">Home</a></li>
+                    <li><a href="index.html" class="nav-link" data-page="home">Home</a></li>
+                    <li><a href="modules.html" class="nav-link" data-page="modules">Learning Modules</a></li>
                     <!-- Module link will be added dynamically -->
                     <li id="breadcrumb-item" style="display: none;"><a href="#" id="breadcrumb-module"></a></li>
                 </ul>
@@ -59,20 +60,47 @@
         <div id="modules-view" class="view-container">
             <div class="section-header">
                 <div class="section-header-left">
-                    <h1 class="section-title funky-heading">LEARNING MODULES</h1>
-                    <p class="section-subtitle">Select a module to start your learning journey</p>
+                    <h1 class="section-title funky-heading">WELCOME TO C2C BITESIZE</h1>
+                    <p class="section-subtitle">Your interactive learning platform for railway operations</p>
                 </div>
                 <div class="section-header-right">
-                    <span class="badge">Railway Training</span>
+                    <span class="badge">Home</span>
                 </div>
             </div>
             
-            <div class="module-grid" id="modules-list" role="list" aria-label="Available learning modules">
-                <!-- Modules will be loaded here -->
+            <div class="content-container">
+                <h2>Start Your Learning Journey</h2>
+                <p>C2C Bitesize offers a range of interactive learning modules to help you build and maintain your railway knowledge. Our platform includes several study methods to accommodate different learning styles:</p>
+                
+                <div class="module-grid">
+                    <div class="module-card">
+                        <h3 class="module-title">Flashcards</h3>
+                        <p class="module-desc">Test your recall with interactive digital flashcards - perfect for quick study sessions.</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <h3 class="module-title">Quizzes</h3>
+                        <p class="module-desc">Challenge yourself with multiple-choice questions that test your knowledge and understanding.</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <h3 class="module-title">Time Trials</h3>
+                        <p class="module-desc">Race against the clock to match terms with definitions and improve your speed recall.</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <h3 class="module-title">True or False</h3>
+                        <p class="module-desc">Determine whether statements are true or false to test your understanding of key concepts.</p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-xl">
+                    <a href="modules.html" class="btn btn-primary btn-large">Browse Learning Modules</a>
+                </div>
             </div>
         </div>
         
-        <div id="methods-view" class="view-container study-methods">
+        <div id="methods-view" class="view-container study-methods hidden">
             <div class="section-header">
                 <div class="section-header-left">
                     <h1 class="section-title funky-heading" id="selected-module-title">SELECTED MODULE</h1>
@@ -88,7 +116,7 @@
             </div>
         </div>
         
-        <div id="content-view" class="view-container content-area" aria-live="polite">
+        <div id="content-view" class="view-container content-area hidden" aria-live="polite">
             <!-- Content will be loaded here -->
         </div>
     </main>
@@ -107,130 +135,11 @@
     <script src="js/state-manager.js" type="module"></script>
     <script src="js/ui-utils.js" type="module"></script>
     <script src="js/module-loader.js" type="module"></script>
+    <script src="js/navigation.js" type="module"></script>
     <script src="js/study-methods/flashcards.js" type="module"></script>
     <script src="js/study-methods/quiz.js" type="module"></script>
     <script src="js/study-methods/time-trial.js" type="module"></script>
     <script src="js/study-methods/true-false.js" type="module"></script>
     <script src="js/app.js" type="module"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const logoContainer = document.getElementById('logo-container');
-            const navbarWrapper = document.getElementById('navbar-wrapper');
-            const floatingNav = document.getElementById('floating-nav');
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const hamburgerIcon = document.getElementById('hamburger-icon');
-            const mobileDropdown = document.getElementById('mobile-dropdown');
-            
-            // Force all navbar links to be clickable
-            document.querySelectorAll('.nav-links a, .mobile-dropdown a').forEach(function(link) {
-                link.style.pointerEvents = 'auto';
-                link.style.cursor = 'pointer';
-                link.style.zIndex = '9999';
-            });
-            
-            // Mobile menu toggle
-            mobileMenuButton.addEventListener('click', function() {
-                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-                hamburgerIcon.classList.toggle('open');
-                mobileDropdown.classList.toggle('open');
-            });
-            
-            // Set active link based on current page
-            function setActiveLinks() {
-                const currentPath = window.location.pathname;
-                const links = document.querySelectorAll('.nav-links a, .mobile-dropdown a');
-                
-                links.forEach(link => {
-                    // Get the link href without domain
-                    const linkPath = new URL(link.href, window.location.origin).pathname;
-                    
-                    // If paths match or if we're on index page
-                    if (linkPath === currentPath || 
-                        (currentPath.includes('index.html') && link.textContent.trim() === 'Home') ||
-                        (currentPath === '/' && link.textContent.trim() === 'Home')) {
-                        link.classList.add('active');
-                        link.setAttribute('aria-current', 'page');
-                    } else {
-                        link.classList.remove('active');
-                        link.removeAttribute('aria-current');
-                    }
-                });
-            }
-            
-            // Call it once on page load
-            setActiveLinks();
-            
-            // Handle scroll effects - hide both logo and navbar
-            let lastScrollTop = 0;
-            window.addEventListener('scroll', function() {
-                const st = window.scrollY;
-                
-                // Determine scroll direction
-                const isScrollingDown = st > lastScrollTop;
-                lastScrollTop = st <= 0 ? 0 : st;
-                
-                // When scrolling down past threshold, hide elements
-                if (st > 50) {
-                    logoContainer.classList.add('hidden-logo');
-                    
-                    // Only hide navbar when scrolling down
-                    if (isScrollingDown) {
-                        navbarWrapper.classList.add('hidden-nav');
-                        mobileMenuButton.classList.add('hidden-nav');
-                    } else {
-                        navbarWrapper.classList.remove('hidden-nav');
-                        mobileMenuButton.classList.remove('hidden-nav');
-                    }
-                } else {
-                    // When at top, show everything
-                    logoContainer.classList.remove('hidden-logo');
-                    navbarWrapper.classList.remove('hidden-nav');
-                    mobileMenuButton.classList.remove('hidden-nav');
-                }
-            });
-        });
-    </script>
-<!-- Add at the bottom of index.html, before closing </body> -->
-<div id="debug-panel" style="position: fixed; bottom: 0; right: 0; background: rgba(0,0,0,0.8); color: white; padding: 10px; font-size: 12px; max-width: 300px; max-height: 200px; overflow: auto; z-index: 9999; display: none;">
-    <h3>Debug Info</h3>
-    <pre id="debug-content"></pre>
-</div>
-
-<script>
-    // Simple debug helper
-    window.debugInfo = function(message, data) {
-        if (typeof data !== 'undefined') {
-            console.log(message, data);
-            message += ' ' + JSON.stringify(data);
-        } else {
-            console.log(message);
-        }
-        
-        // Add to debug panel
-        const debugPanel = document.getElementById('debug-panel');
-        const debugContent = document.getElementById('debug-content');
-        
-        if (debugPanel && debugContent) {
-            debugPanel.style.display = 'block';
-            const now = new Date().toLocaleTimeString();
-            debugContent.innerHTML += `[${now}] ${message}\n`;
-            
-            // Scroll to bottom
-            debugContent.scrollTop = debugContent.scrollHeight;
-        }
-    };
-    
-    // Toggle debug panel with Ctrl+D
-    document.addEventListener('keydown', function(e) {
-        if (e.ctrlKey && e.key === 'd') {
-            e.preventDefault();
-            const debugPanel = document.getElementById('debug-panel');
-            if (debugPanel) {
-                debugPanel.style.display = debugPanel.style.display === 'none' ? 'block' : 'none';
-            }
-        }
-    });
-</script>
 </body>
 </html>
