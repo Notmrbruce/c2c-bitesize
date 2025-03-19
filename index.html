@@ -10,42 +10,50 @@
 <body>
     <div class="background-gradient"></div>
     
-    <header class="site-header">
+    <!-- Fixed logo area that stays in place -->
+    <div class="logo-container" id="logo-container">
         <div class="logo">
             <span class="logo-text">C2C</span>
-            <span class="logo-subtext">Bitesize</span>
+            <span class="logo-subtext">BITESIZE</span>
         </div>
-    </header>
+    </div>
     
-    <nav class="floating-nav">
-        <div class="nav-container">
-            <ul class="nav-links">
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="#" id="breadcrumb-module"></a></li>
-            </ul>
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-button" id="mobile-menu-button">
+        <div class="hamburger-icon" id="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-        <div class="nav-actions">
-            <button id="theme-toggle" class="theme-toggle">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M4.93 4.93L6.34 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M17.66 17.66L19.07 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M20 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.34 17.66L4.93 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M19.07 4.93L17.66 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-        </div>
-    </nav>
+    </button>
+    
+    <!-- Mobile Dropdown Menu -->
+    <div class="mobile-dropdown" id="mobile-dropdown">
+        <a href="javascript:void(0);" onclick="window.location.href='index.html'; return false;" class="active">Home</a>
+        <!-- Module link will be added dynamically -->
+        <a href="#" id="mobile-breadcrumb" style="display: none;"></a>
+    </div>
+    
+    <!-- Floating navbar that moves on scroll -->
+    <div class="navbar-wrapper" id="navbar-wrapper">
+        <nav class="floating-nav" id="floating-nav">
+            <!-- Navbar with glowing border -->
+            <div class="nav-content">
+                <ul class="nav-links">
+                    <!-- Using javascript:void(0) with inline onclick for maximum reliability -->
+                    <li><a href="javascript:void(0);" onclick="window.location.href='index.html'; return false;" class="active">Home</a></li>
+                    <!-- Module link will be added dynamically -->
+                    <li id="breadcrumb-item" style="display: none;"><a href="#" id="breadcrumb-module"></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
     
     <main class="main-content">
         <div id="modules-view" class="view-container">
             <div class="section-header">
                 <div class="section-header-left">
-                    <h1 class="section-title">Learning Modules</h1>
+                    <h1 class="section-title funky-heading">LEARNING MODULES</h1>
                     <p class="section-subtitle">Select a module to start your learning journey</p>
                 </div>
                 <div class="section-header-right">
@@ -61,7 +69,7 @@
         <div id="methods-view" class="view-container study-methods">
             <div class="section-header">
                 <div class="section-header-left">
-                    <h1 class="section-title" id="selected-module-title">Selected Module</h1>
+                    <h1 class="section-title funky-heading" id="selected-module-title">SELECTED MODULE</h1>
                     <p class="section-subtitle" id="method-description">Select a study method to begin</p>
                 </div>
                 <div class="section-header-right">
@@ -90,5 +98,80 @@
     </footer>
     
     <script src="js/app.js" type="module"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoContainer = document.getElementById('logo-container');
+            const navbarWrapper = document.getElementById('navbar-wrapper');
+            const floatingNav = document.getElementById('floating-nav');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const mobileDropdown = document.getElementById('mobile-dropdown');
+            
+            // Force all navbar links to be clickable
+            document.querySelectorAll('.nav-links a, .mobile-dropdown a').forEach(function(link) {
+                link.style.pointerEvents = 'auto';
+                link.style.cursor = 'pointer';
+                link.style.zIndex = '9999';
+            });
+            
+            // Mobile menu toggle
+            mobileMenuButton.addEventListener('click', function() {
+                hamburgerIcon.classList.toggle('open');
+                mobileDropdown.classList.toggle('open');
+            });
+            
+            // Set active link based on current page
+            function setActiveLinks() {
+                const currentPath = window.location.pathname;
+                const links = document.querySelectorAll('.nav-links a, .mobile-dropdown a');
+                
+                links.forEach(link => {
+                    // Get the link href without domain
+                    const linkPath = new URL(link.href, window.location.origin).pathname;
+                    
+                    // If paths match or if we're on index page
+                    if (linkPath === currentPath || 
+                        (currentPath.includes('index.html') && link.textContent.trim() === 'Home') ||
+                        (currentPath === '/' && link.textContent.trim() === 'Home')) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Call it once on page load
+            setActiveLinks();
+            
+            // Handle scroll effects - hide both logo and navbar
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', function() {
+                const st = window.scrollY;
+                
+                // Determine scroll direction
+                const isScrollingDown = st > lastScrollTop;
+                lastScrollTop = st;
+                
+                // When scrolling down past threshold, hide elements
+                if (st > 50) {
+                    logoContainer.classList.add('hidden-logo');
+                    
+                    // Only hide navbar when scrolling down
+                    if (isScrollingDown) {
+                        navbarWrapper.classList.add('hidden-nav');
+                        mobileMenuButton.classList.add('hidden-nav');
+                    } else {
+                        navbarWrapper.classList.remove('hidden-nav');
+                        mobileMenuButton.classList.remove('hidden-nav');
+                    }
+                } else {
+                    // When at top, show everything
+                    logoContainer.classList.remove('hidden-logo');
+                    navbarWrapper.classList.remove('hidden-nav');
+                    mobileMenuButton.classList.remove('hidden-nav');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
