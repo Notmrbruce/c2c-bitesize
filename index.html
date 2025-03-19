@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C2C Bitesize</title>
+    <meta name="description" content="C2C Bitesize Learning Platform - Interactive training modules for railway operations">
+    <title>C2C Bitesize - Railway Training Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/animations.css">
 </head>
 <body>
-    <div class="background-gradient"></div>
+    <div class="background-gradient" aria-hidden="true"></div>
     
     <!-- Fixed logo area that stays in place -->
     <div class="logo-container" id="logo-container">
-        <div class="logo">
+        <div class="logo" role="banner">
             <span class="logo-text">C2C</span>
             <span class="logo-subtext">BITESIZE</span>
         </div>
     </div>
     
     <!-- Mobile Menu Button -->
-    <button class="mobile-menu-button" id="mobile-menu-button">
+    <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-dropdown">
         <div class="hamburger-icon" id="hamburger-icon">
             <span></span>
             <span></span>
@@ -28,7 +33,7 @@
     </button>
     
     <!-- Mobile Dropdown Menu -->
-    <div class="mobile-dropdown" id="mobile-dropdown">
+    <div class="mobile-dropdown" id="mobile-dropdown" role="navigation" aria-label="Mobile navigation">
         <a href="javascript:void(0);" onclick="window.location.href='index.html'; return false;" class="active">Home</a>
         <!-- Module link will be added dynamically -->
         <a href="#" id="mobile-breadcrumb" style="display: none;"></a>
@@ -36,7 +41,7 @@
     
     <!-- Floating navbar that moves on scroll -->
     <div class="navbar-wrapper" id="navbar-wrapper">
-        <nav class="floating-nav" id="floating-nav">
+        <nav class="floating-nav" id="floating-nav" aria-label="Main navigation">
             <!-- Navbar with glowing border -->
             <div class="nav-content">
                 <ul class="nav-links">
@@ -61,7 +66,7 @@
                 </div>
             </div>
             
-            <div class="module-grid" id="modules-list">
+            <div class="module-grid" id="modules-list" role="list" aria-label="Available learning modules">
                 <!-- Modules will be loaded here -->
             </div>
         </div>
@@ -77,26 +82,34 @@
                 </div>
             </div>
             
-            <div class="method-grid" id="method-buttons">
+            <div class="method-grid" id="method-buttons" role="list" aria-label="Study method options">
                 <!-- Study methods will be loaded here -->
             </div>
         </div>
         
-        <div id="content-view" class="view-container content-area">
+        <div id="content-view" class="view-container content-area" aria-live="polite">
             <!-- Content will be loaded here -->
         </div>
     </main>
     
-    <div class="decorative-element decorator-1"></div>
-    <div class="decorative-element decorator-2"></div>
+    <div class="decorative-element decorator-1" aria-hidden="true"></div>
+    <div class="decorative-element decorator-2" aria-hidden="true"></div>
     
-    <footer class="site-footer">
+    <footer class="site-footer" role="contentinfo">
         <div class="footer-content">
             <p>C2C Bitesize Learning Platform</p>
             <p class="copyright">© 2025</p>
         </div>
     </footer>
     
+    <script src="js/config.js" type="module"></script>
+    <script src="js/state-manager.js" type="module"></script>
+    <script src="js/ui-utils.js" type="module"></script>
+    <script src="js/module-loader.js" type="module"></script>
+    <script src="js/study-methods/flashcards.js" type="module"></script>
+    <script src="js/study-methods/quiz.js" type="module"></script>
+    <script src="js/study-methods/time-trial.js" type="module"></script>
+    <script src="js/study-methods/true-false.js" type="module"></script>
     <script src="js/app.js" type="module"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -116,6 +129,8 @@
             
             // Mobile menu toggle
             mobileMenuButton.addEventListener('click', function() {
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
                 hamburgerIcon.classList.toggle('open');
                 mobileDropdown.classList.toggle('open');
             });
@@ -134,8 +149,10 @@
                         (currentPath.includes('index.html') && link.textContent.trim() === 'Home') ||
                         (currentPath === '/' && link.textContent.trim() === 'Home')) {
                         link.classList.add('active');
+                        link.setAttribute('aria-current', 'page');
                     } else {
                         link.classList.remove('active');
+                        link.removeAttribute('aria-current');
                     }
                 });
             }
@@ -150,7 +167,7 @@
                 
                 // Determine scroll direction
                 const isScrollingDown = st > lastScrollTop;
-                lastScrollTop = st;
+                lastScrollTop = st <= 0 ? 0 : st;
                 
                 // When scrolling down past threshold, hide elements
                 if (st > 50) {
