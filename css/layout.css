@@ -510,3 +510,44 @@
 .nav-link[data-page].active {
     color: var(--text-primary);
 }
+/* Additional CSS to fix navigation indicator - add to your layout.css file */
+
+/* Ensure the active class works for links with data-page attribute */
+.nav-links a.active, 
+.nav-links .nav-link.active,
+.nav-links a[data-page].active,
+.mobile-dropdown a[data-page].active {
+    color: var(--text-primary);
+    position: relative;
+}
+
+.nav-links a.active::after, 
+.nav-links .nav-link.active::after,
+.nav-links a[data-page].active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: var(--spacing-sm);
+    right: var(--spacing-sm);
+    height: 2px;
+    border-radius: 1px;
+    background: var(--primary-gradient);
+    transform-origin: center;
+    animation: navIndicator 0.3s ease forwards;
+}
+
+/* Mobile dropdown active indicator */
+.mobile-dropdown a.active, 
+.mobile-dropdown .nav-link.active,
+.mobile-dropdown a[data-page].active {
+    color: var(--primary-light);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid var(--primary);
+    padding-left: 13px !important;
+}
+
+/* Force active state - important to override other styles */
+a[data-page="home"].active, 
+a[data-page="modules"].active {
+    color: var(--text-primary) !important;
+}
