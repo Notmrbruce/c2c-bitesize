@@ -8,6 +8,7 @@ import config from './config.js';
 import state from './state-manager.js';
 import { loadModulesList, loadModule } from './module-loader.js';
 import * as ui from './ui-utils.js';
+import { loadModulesContent } from './navigation.js';
 
 // Import study methods
 import flashcards from './study-methods/flashcards.js';
@@ -19,6 +20,7 @@ import trueFalse from './study-methods/true-false.js';
 let modulesView;
 let methodsView;
 let contentView;
+let homeView;
 let modulesList;
 let selectedModuleTitle;
 let methodButtons;
@@ -34,6 +36,7 @@ document.addEventListener('DOMContentLoaded', init);
  */
 async function init() {
     // Get DOM elements
+    homeView = document.getElementById('home-view');
     modulesView = document.getElementById('modules-view');
     methodsView = document.getElementById('methods-view');
     contentView = document.getElementById('content-view');
@@ -50,12 +53,18 @@ async function init() {
     // Subscribe to state changes
     state.subscribe('navigation', handleNavigation);
     
-    // Load modules
     try {
-        await loadModules();
+        // Determine current page and initialize accordingly
+        const currentPath = window.location.pathname;
         
-        // Initially show only the modules view
-        state.navigateTo('modules');
+        if (currentPath.endsWith('modules.html')) {
+            // If we're on the modules page, load modules
+            await loadModulesContent();
+            state.navigateTo('modules');
+        } else if (currentPath.endsWith('index.html') || currentPath.endsWith('/')) {
+            // If we're on the home page
+            state.navigateTo('home');
+        }
         
         // Add entrance animations
         animateElements();
@@ -69,12 +78,6 @@ async function init() {
  * Setup all event listeners
  */
 function setupEventListeners() {
-    // Home navigation
-    document.querySelectorAll('.nav-links a')[0].addEventListener('click', (e) => {
-        e.preventDefault();
-        state.navigateTo('modules');
-    });
-    
     // Theme toggle
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
@@ -85,9 +88,6 @@ function setupEventListeners() {
         // Set initial theme icon
         updateThemeIcon();
     }
-    
-    // Window scroll event for floating nav
-    window.addEventListener('scroll', handleFloatingNavScroll);
 }
 
 /**
@@ -99,15 +99,20 @@ function handleNavigation(navigation) {
     const navData = navigation || state.get('navigation') || { view: 'modules', params: {} };
     const { view, params } = navData;
     
-    // Hide all views
-    ui.hideElement(modulesView);
-    ui.hideElement(methodsView);
-    ui.hideElement(contentView);
+    // Hide all views first
+    if (homeView) hideElement(homeView);
+    if (modulesView) hideElement(modulesView);
+    if (methodsView) hideElement(methodsView);
+    if (contentView) hideElement(contentView);
     
     // Show the appropriate view
     switch (view) {
+        case 'home':
+            if (homeView) showElement(homeView);
+            break;
+            
         case 'modules':
-            ui.showElement(modulesView);
+            if (modulesView) showElement(modulesView);
             break;
             
         case 'methods':
@@ -115,7 +120,7 @@ function handleNavigation(navigation) {
                 showMethodsView(params.module);
             } else {
                 // Fallback to modules view if no module specified
-                ui.showElement(modulesView);
+                if (modulesView) showElement(modulesView);
             }
             break;
             
@@ -124,13 +129,18 @@ function handleNavigation(navigation) {
                 loadStudyMethod(params.module, params.method);
             } else {
                 // Fallback to modules view if missing params
-                ui.showElement(modulesView);
+                if (modulesView) showElement(modulesView);
             }
             break;
             
         default:
-            // Default to modules view
-            ui.showElement(modulesView);
+            // Default to home or modules view depending on the page
+            const currentPath = window.location.pathname;
+            if (currentPath.endsWith('index.html') || currentPath.endsWith('/')) {
+                if (homeView) showElement(homeView);
+            } else {
+                if (modulesView) showElement(modulesView);
+            }
     }
     
     // Update active navigation link
@@ -138,6 +148,26 @@ function handleNavigation(navigation) {
     
     // Scroll to top
     ui.scrollToTop();
+}
+
+/**
+ * Show or hide an element
+ * @param {HTMLElement} element - Element to show/hide
+ */
+function showElement(element) {
+    if (element) {
+        element.classList.remove('hidden');
+    }
+}
+
+/**
+ * Hide an element
+ * @param {HTMLElement} element - Element to hide
+ */
+function hideElement(element) {
+    if (element) {
+        element.classList.add('hidden');
+    }
 }
 
 /**
@@ -150,54 +180,41 @@ function updateActiveNavLink(view) {
         link.removeAttribute('aria-current');
     });
     
-    // Set home link as active for modules view
-    if (view === 'modules') {
-        document.querySelectorAll('.nav-links a')[0].classList.add('active');
-        document.querySelectorAll('.nav-links a')[0].setAttribute('aria-current', 'page');
-        document.querySelectorAll('.mobile-dropdown a')[0].classList.add('active');
-        document.querySelectorAll('.mobile-dropdown a')[0].setAttribute('aria-current', 'page');
+    // Set appropriate link as active based on view
+    if (view === 'home') {
+        document.querySelectorAll('[data-page="home"]').forEach(link => {
+            link.classList.add('active');
+            link.setAttribute('aria-current', 'page');
+        });
         
         // Hide module breadcrumb
-        document.getElementById('breadcrumb-item').style.display = 'none';
-        mobileBreadcrumb.style.display = 'none';
-    } else {
-        // Show module breadcrumb for other views
-        document.getElementById('breadcrumb-item').style.display = 'block';
-        mobileBreadcrumb.style.display = 'block';
-    }
-}
-
-/**
- * Handle floating nav scroll behavior
- */
-function handleFloatingNavScroll() {
-    const navbarWrapper = document.getElementById('navbar-wrapper');
-    const floatingNav = document.getElementById('floating-nav');
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const logoContainer = document.getElementById('logo-container');
-    
-    const st = window.pageYOffset || document.documentElement.scrollTop;
-    const isScrollingDown = st > state.get('ui.lastScrollTop');
-    
-    state.set('ui.lastScrollTop', st <= 0 ? 0 : st);
-    
-    // When scrolling down past threshold, hide elements
-    if (st > config.ui.thresholds.scrollHide) {
-        logoContainer.classList.add('hidden-logo');
+        if (document.getElementById('breadcrumb-item')) {
+            document.getElementById('breadcrumb-item').style.display = 'none';
+        }
+        if (mobileBreadcrumb) {
+            mobileBreadcrumb.style.display = 'none';
+        }
+    } else if (view === 'modules') {
+        document.querySelectorAll('[data-page="modules"]').forEach(link => {
+            link.classList.add('active');
+            link.setAttribute('aria-current', 'page');
+        });
         
-        // Only hide navbar when scrolling down
-        if (isScrollingDown) {
-            navbarWrapper.classList.add('hidden-nav');
-            mobileMenuButton.classList.add('hidden-nav');
-        } else {
-            navbarWrapper.classList.remove('hidden-nav');
-            mobileMenuButton.classList.remove('hidden-nav');
+        // Hide module breadcrumb
+        if (document.getElementById('breadcrumb-item')) {
+            document.getElementById('breadcrumb-item').style.display = 'none';
+        }
+        if (mobileBreadcrumb) {
+            mobileBreadcrumb.style.display = 'none';
         }
     } else {
-        // When at top, show everything
-        logoContainer.classList.remove('hidden-logo');
-        navbarWrapper.classList.remove('hidden-nav');
-        mobileMenuButton.classList.remove('hidden-nav');
+        // For methods or content views, show module breadcrumb
+        if (document.getElementById('breadcrumb-item')) {
+            document.getElementById('breadcrumb-item').style.display = 'block';
+        }
+        if (mobileBreadcrumb) {
+            mobileBreadcrumb.style.display = 'block';
+        }
     }
 }
 
@@ -229,74 +246,47 @@ function updateThemeIcon() {
 }
 
 /**
- * Load all available modules
- */
-async function loadModules() {
-    // Show loading indicator
-    const loadingIndicator = ui.showLoading(modulesList);
-    
-    try {
-        const modules = await loadModulesList();
-        
-        // Clear container
-        modulesList.innerHTML = '';
-        
-        // Create module cards
-        modules.forEach((module, index) => {
-            const moduleCard = ui.createModuleCard(module, () => {
-                loadModule(module.id)
-                    .then(moduleData => {
-                        state.navigateTo('methods', { module: moduleData });
-                    })
-                    .catch(error => {
-                        console.error(`Error loading module ${module.id}:`, error);
-                        ui.showToast('Error loading module. Please try again.', 'error');
-                    });
-            });
-            
-            // Add staggered animation
-            ui.animateElement(moduleCard, 'fade-in', index * 100);
-            
-            modulesList.appendChild(moduleCard);
-        });
-    } catch (error) {
-        console.error('Error loading modules:', error);
-        modulesList.innerHTML = '<p>Error loading modules. Please try again later.</p>';
-    } finally {
-        // Remove loading indicator
-        ui.hideLoading(loadingIndicator);
-    }
-}
-
-/**
  * Show the methods view for a specific module
  * @param {Object} moduleData - The module data
  */
 function showMethodsView(moduleData) {
     // Update titles
-    selectedModuleTitle.textContent = moduleData.title;
+    if (selectedModuleTitle) {
+        selectedModuleTitle.textContent = moduleData.title.toUpperCase();
+    }
     
     // Update breadcrumb
-    breadcrumbModule.textContent = moduleData.title;
-    breadcrumbModule.href = '#';
-    mobileBreadcrumb.textContent = moduleData.title;
-    mobileBreadcrumb.href = '#';
+    if (breadcrumbModule) {
+        breadcrumbModule.textContent = moduleData.title;
+        breadcrumbModule.href = '#';
+    }
     
-    breadcrumbModule.addEventListener('click', (e) => {
-        e.preventDefault();
-        state.navigateTo('methods', { module: moduleData });
-    });
+    if (mobileBreadcrumb) {
+        mobileBreadcrumb.textContent = moduleData.title;
+        mobileBreadcrumb.href = '#';
+    }
     
-    mobileBreadcrumb.addEventListener('click', (e) => {
-        e.preventDefault();
-        state.navigateTo('methods', { module: moduleData });
-    });
+    if (breadcrumbModule) {
+        breadcrumbModule.addEventListener('click', (e) => {
+            e.preventDefault();
+            state.navigateTo('methods', { module: moduleData });
+        });
+    }
+    
+    if (mobileBreadcrumb) {
+        mobileBreadcrumb.addEventListener('click', (e) => {
+            e.preventDefault();
+            state.navigateTo('methods', { module: moduleData });
+        });
+    }
     
     // Create method buttons
     createMethodButtons(moduleData);
     
     // Show methods view
-    ui.showElement(methodsView);
+    if (methodsView) {
+        showElement(methodsView);
+    }
     
     // Update method description
     const methodDescriptionElement = document.getElementById('method-description');
@@ -311,6 +301,7 @@ function showMethodsView(moduleData) {
  */
 function createMethodButtons(moduleData) {
     // Clear container
+    if (!methodButtons) return;
     methodButtons.innerHTML = '';
     
     // Create a button for each available method
@@ -340,10 +331,11 @@ function createMethodButtons(moduleData) {
  */
 function loadStudyMethod(moduleData, method) {
     // Clear previous content
+    if (!contentView) return;
     contentView.innerHTML = '';
     
     // Show the content view
-    ui.showElement(contentView);
+    showElement(contentView);
     contentView.classList.add('slide-up');
     
     // Remove the animation class after animation completes
@@ -390,7 +382,6 @@ function loadStudyMethod(moduleData, method) {
 // Export for potential reuse in extensions
 export {
     init,
-    loadModules,
     showMethodsView,
     loadStudyMethod
 };
