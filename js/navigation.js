@@ -4,10 +4,16 @@
  */
 
 import state from './state-manager.js';
+import { loadModulesList } from './module-loader.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     // Setup navigation
     setupNavigation();
+    
+    // If we're on the modules page, load modules
+    if (isCurrentPage('modules')) {
+        loadModulesContent();
+    }
 });
 
 /**
@@ -22,15 +28,12 @@ function setupNavigation() {
         link.addEventListener('click', function(e) {
             const page = this.getAttribute('data-page');
             
-            // Allow normal navigation for multi-page structure
-            // (No need to prevent default since we're using real page navigation)
-            
-            // However, if we're already on the right page, prevent default
-            // and use client-side navigation
+            // For same-page navigation, prevent default and use client-side routing
             if (isCurrentPage(page)) {
                 e.preventDefault();
                 handlePageNavigation(page);
             }
+            // Else, let the browser handle the navigation to a new page
         });
     });
     
@@ -56,6 +59,130 @@ function setupNavigation() {
 }
 
 /**
+ * Load modules content for the modules page
+ */
+async function loadModulesContent() {
+    try {
+        const modulesList = document.getElementById('modules-list');
+        if (!modulesList) return;
+        
+        // Show loading
+        modulesList.innerHTML = '<div class="loading-indicator">Loading modules...</div>';
+        
+        // Load modules data
+        const modules = await loadModulesList();
+        
+        // Clear loading
+        modulesList.innerHTML = '';
+        
+        // Display modules
+        if (modules && modules.length > 0) {
+            modules.forEach((module, index) => {
+                const moduleCard = document.createElement('div');
+                moduleCard.className = 'module-card';
+                moduleCard.setAttribute('role', 'listitem');
+                moduleCard.setAttribute('tabindex', '0');
+                moduleCard.setAttribute('aria-label', `Module: ${module.title}`);
+                
+                moduleCard.innerHTML = `
+                    <h3 class="module-title">${module.title}</h3>
+                    <p class="module-desc">${module.description}</p>
+                `;
+                
+                // Add click handler to navigate to module
+                moduleCard.addEventListener('click', () => {
+                    navigateToModule(module.id);
+                });
+                
+                // Add keyboard handler
+                moduleCard.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        navigateToModule(module.id);
+                    }
+                });
+                
+                modulesList.appendChild(moduleCard);
+                
+                // Add fade-in animation with delay
+                setTimeout(() => {
+                    moduleCard.classList.add('fade-in');
+                }, index * 100);
+            });
+        } else {
+            modulesList.innerHTML = '<p>No modules available.</p>';
+        }
+    } catch (error) {
+        console.error('Error loading modules:', error);
+        const modulesList = document.getElementById('modules-list');
+        if (modulesList) {
+            modulesList.innerHTML = '<p>Error loading modules. Please try again later.</p>';
+        }
+    }
+}
+
+/**
+ * Navigate to a specific module
+ * @param {string} moduleId - The ID of the module to navigate to
+ */
+function navigateToModule(moduleId) {
+    // Since we've moved to a multi-page structure, we need to load the module details
+    // This requires us to import the module loader and then navigate via state
+    import('./module-loader.js').then(({ loadModule }) => {
+        loadModule(moduleId)
+            .then(moduleData => {
+                state.navigateTo('methods', { module: moduleData });
+                
+                // Update the breadcrumb
+                const breadcrumbModule = document.getElementById('breadcrumb-module');
+                const mobileBreadcrumb = document.getElementById('mobile-breadcrumb');
+                const breadcrumbItem = document.getElementById('breadcrumb-item');
+                
+                if (breadcrumbModule) {
+                    breadcrumbModule.textContent = moduleData.title;
+                    breadcrumbModule.href = '#';
+                }
+                
+                if (mobileBreadcrumb) {
+                    mobileBreadcrumb.textContent = moduleData.title;
+                    mobileBreadcrumb.href = '#';
+                    mobileBreadcrumb.style.display = 'block';
+                }
+                
+                if (breadcrumbItem) {
+                    breadcrumbItem.style.display = 'block';
+                }
+                
+                // Show methods view, hide modules view
+                const methodsView = document.getElementById('methods-view');
+                const modulesView = document.getElementById('modules-view');
+                const contentView = document.getElementById('content-view');
+                
+                if (methodsView) {
+                    methodsView.classList.remove('hidden');
+                }
+                
+                if (modulesView) {
+                    modulesView.classList.add('hidden');
+                }
+                
+                if (contentView) {
+                    contentView.classList.add('hidden');
+                }
+                
+                // Update the selected module title
+                const selectedModuleTitle = document.getElementById('selected-module-title');
+                if (selectedModuleTitle) {
+                    selectedModuleTitle.textContent = moduleData.title.toUpperCase();
+                }
+            })
+            .catch(error => {
+                console.error(`Error loading module ${moduleId}:`, error);
+            });
+    });
+}
+
+/**
  * Check if the specified page is the current page
  * @param {string} page - Page identifier
  * @returns {boolean} True if it's the current page
@@ -78,14 +205,25 @@ function isCurrentPage(page) {
  */
 function handlePageNavigation(page) {
     if (page === 'home') {
-        // Handle home page specific logic (if any)
+        // Handle home page specific logic
+        // This should now properly display the home content
         if (typeof state !== 'undefined') {
             state.navigateTo('home');
+            
+            // Update view visibility
+            const modulesView = document.getElementById('modules-view');
+            const methodsView = document.getElementById('methods-view');
+            const contentView = document.getElementById('content-view');
+            
+            if (modulesView) modulesView.classList.remove('hidden');
+            if (methodsView) methodsView.classList.add('hidden');
+            if (contentView) contentView.classList.add('hidden');
         }
     } else if (page === 'modules') {
         // Handle modules page specific logic
         if (typeof state !== 'undefined') {
             state.navigateTo('modules');
+            loadModulesContent(); // Actually load the modules
         }
     }
 }
@@ -169,11 +307,15 @@ function handleScrollBehavior() {
 export {
     setupNavigation,
     setActiveNavLinks,
-    handleScrollBehavior
+    handleScrollBehavior,
+    loadModulesContent,
+    navigateToModule
 };
 
 export default {
     setupNavigation,
     setActiveNavLinks,
-    handleScrollBehavior
+    handleScrollBehavior,
+    loadModulesContent,
+    navigateToModule
 };
