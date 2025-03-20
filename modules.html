@@ -558,5 +558,262 @@
     <script src="js/study-methods/time-trial.js" type="module" defer></script>
     <script src="js/study-methods/true-false.js" type="module" defer></script>
     <script src="js/app.js" type="module" defer></script>
+    <!-- Add this script right before the closing </body> tag in modules.html -->
+<script>
+    // Emergency direct fix for study methods - run after page load
+    window.addEventListener('load', function() {
+        console.log('[EmergencyFix] Applying emergency fix for study methods');
+        
+        // Direct module click handler setup
+        function setupModuleCardHandlers() {
+            console.log('[EmergencyFix] Setting up module card handlers');
+            
+            // Get all module cards
+            const moduleCards = document.querySelectorAll('.module-card');
+            console.log('[EmergencyFix] Found', moduleCards.length, 'module cards');
+            
+            moduleCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Get module info from the card
+                    const title = card.querySelector('.module-title').textContent;
+                    const id = title.toLowerCase().replace(/\s+/g, '-');
+                    console.log('[EmergencyFix] Module clicked:', id, title);
+                    
+                    // Show method buttons directly
+                    showMethodButtons(id, title);
+                });
+            });
+        }
+        
+        // Direct method to show study methods
+        function showMethodButtons(moduleId, moduleTitle) {
+            console.log('[EmergencyFix] Showing methods for module:', moduleId, moduleTitle);
+            
+            // Get view elements
+            const modulesView = document.getElementById('modules-view');
+            const methodsView = document.getElementById('methods-view');
+            const methodButtons = document.getElementById('method-buttons');
+            const moduleTitle = document.getElementById('selected-module-title');
+            
+            // Hide modules view, show methods view
+            if (modulesView) modulesView.classList.add('hidden');
+            if (methodsView) methodsView.classList.remove('hidden');
+            
+            // Update title
+            if (moduleTitle) {
+                moduleTitle.textContent = moduleTitle.toUpperCase();
+            }
+            
+            // Create method buttons directly
+            if (methodButtons) {
+                console.log('[EmergencyFix] Creating method buttons');
+                
+                // Clear previous buttons
+                methodButtons.innerHTML = '';
+                
+                // Create standard method buttons
+                const methods = [
+                    { id: 'flashcards', name: 'Flashcards', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M12 8v8"/><path d="M8 12h8"/></svg>' },
+                    { id: 'quiz', name: 'Quiz', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>' },
+                    { id: 'time-trial', name: 'Time Trial', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' },
+                    { id: 'true-false', name: 'True or False', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' }
+                ];
+                
+                methods.forEach(method => {
+                    // Create button
+                    const button = document.createElement('button');
+                    button.className = 'method-button';
+                    button.setAttribute('aria-label', `Start ${method.name} study method`);
+                    
+                    button.innerHTML = `
+                        <div class="method-icon">${method.icon}</div>
+                        <div class="method-content">
+                            <div class="method-title">${method.name}</div>
+                            <div class="method-desc">Study using ${method.name.toLowerCase()} to test your knowledge.</div>
+                        </div>
+                    `;
+                    
+                    // Add click handler
+                    button.addEventListener('click', function() {
+                        console.log('[EmergencyFix] Method button clicked:', method.id);
+                        showStudyMethod(moduleId, moduleTitle, method.id);
+                    });
+                    
+                    // Add to container
+                    methodButtons.appendChild(button);
+                });
+                
+                // Add back button
+                const backContainer = document.createElement('div');
+                backContainer.className = 'text-center mt-xl';
+                
+                const backButton = document.createElement('button');
+                backButton.className = 'btn';
+                backButton.textContent = 'Back to Modules';
+                
+                backButton.addEventListener('click', function() {
+                    if (modulesView) modulesView.classList.remove('hidden');
+                    if (methodsView) methodsView.classList.add('hidden');
+                });
+                
+                backContainer.appendChild(backButton);
+                methodsView.appendChild(backContainer);
+            } else {
+                console.error('[EmergencyFix] Method buttons container not found!');
+            }
+        }
+        
+        // Show a study method
+        function showStudyMethod(moduleId, moduleTitle, methodName) {
+            console.log('[EmergencyFix] Showing study method:', methodName, 'for module:', moduleId);
+            
+            // Get view elements
+            const modulesView = document.getElementById('modules-view');
+            const methodsView = document.getElementById('methods-view');
+            const contentView = document.getElementById('content-view');
+            
+            // Hide other views, show content view
+            if (modulesView) modulesView.classList.add('hidden');
+            if (methodsView) methodsView.classList.add('hidden');
+            if (contentView) {
+                contentView.classList.remove('hidden');
+                
+                // Create placeholder content
+                contentView.innerHTML = `
+                    <div class="content-header">
+                        <h2 class="content-title">${moduleTitle} - ${methodName.charAt(0).toUpperCase() + methodName.slice(1)}</h2>
+                    </div>
+                    <div class="content-container">
+                        <p>Loading study content for ${methodName}...</p>
+                        <div class="loading-indicator">Please wait while we prepare your learning experience.</div>
+                    </div>
+                `;
+                
+                // Try to load the actual study method module
+                try {
+                    // Create a basic module data structure
+                    const moduleData = {
+                        id: moduleId,
+                        title: moduleTitle,
+                        methods: ['flashcards', 'quiz', 'time-trial', 'true-false'],
+                        content: {}
+                    };
+                    
+                    // Create placeholder content based on method type
+                    if (methodName === 'flashcards') {
+                        moduleData.content.flashcards = [
+                            {
+                                question: "Sample flashcard question for " + moduleTitle,
+                                answer: "Sample answer for this flashcard."
+                            },
+                            {
+                                question: "This is a placeholder flashcard.",
+                                answer: "The actual content will be loaded from your module data."
+                            }
+                        ];
+                    } else if (methodName === 'quiz') {
+                        moduleData.content.quiz = [
+                            {
+                                question: "Sample quiz question for " + moduleTitle,
+                                options: ["Option A", "Option B", "Option C", "Option D"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "This is a placeholder quiz question.",
+                                options: ["Placeholder option 1", "Placeholder option 2", "Placeholder option 3", "Placeholder option 4"],
+                                correctAnswer: 1
+                            }
+                        ];
+                    } else if (methodName === 'time-trial') {
+                        moduleData.content['time-trial'] = [
+                            {
+                                term: "Sample term for " + moduleTitle,
+                                definition: "Sample definition matching this term."
+                            },
+                            {
+                                term: "Placeholder term",
+                                definition: "This is a placeholder definition."
+                            }
+                        ];
+                    } else if (methodName === 'true-false') {
+                        moduleData.content['true-false'] = [
+                            {
+                                statement: "Sample statement for " + moduleTitle + " (this statement is true).",
+                                isTrue: true,
+                                explanation: "Explanation for why this statement is true."
+                            },
+                            {
+                                statement: "This is a placeholder statement (this statement is false).",
+                                isTrue: false,
+                                explanation: "This is a placeholder explanation."
+                            }
+                        ];
+                    }
+                    
+                    // Load the study method module
+                    import(`./js/study-methods/${methodName}.js`)
+                        .then(module => {
+                            console.log('[EmergencyFix] Study method module loaded:', methodName);
+                            
+                            // Initialize the appropriate method
+                            if (methodName === 'flashcards' && module.initFlashcards) {
+                                module.initFlashcards(moduleData, contentView);
+                            } else if (methodName === 'quiz' && module.initQuiz) {
+                                module.initQuiz(moduleData, contentView);
+                            } else if (methodName === 'time-trial' && module.initTimeTrial) {
+                                module.initTimeTrial(moduleData, contentView);
+                            } else if (methodName === 'true-false' && module.initTrueFalse) {
+                                module.initTrueFalse(moduleData, contentView);
+                            } else {
+                                throw new Error(`Method ${methodName} implementation not found`);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('[EmergencyFix] Error loading study method:', error);
+                            contentView.innerHTML = `
+                                <div class="content-header">
+                                    <h2 class="content-title">${moduleTitle} - ${methodName.charAt(0).toUpperCase() + methodName.slice(1)}</h2>
+                                </div>
+                                <div class="content-container">
+                                    <p>Error loading the study method. Please try again later.</p>
+                                    <p>Error details: ${error.message}</p>
+                                    <button id="method-back-btn" class="btn btn-primary">Back to Methods</button>
+                                </div>
+                            `;
+                            
+                            document.getElementById('method-back-btn')?.addEventListener('click', function() {
+                                if (contentView) contentView.classList.add('hidden');
+                                if (methodsView) methodsView.classList.remove('hidden');
+                            });
+                        });
+                } catch (error) {
+                    console.error('[EmergencyFix] Error initializing study method:', error);
+                    contentView.innerHTML = `
+                        <div class="content-header">
+                            <h2 class="content-title">${moduleTitle} - Error</h2>
+                        </div>
+                        <div class="content-container">
+                            <p>Error initializing the study method. Please try again later.</p>
+                            <p>Error details: ${error.message}</p>
+                            <button id="method-back-btn" class="btn btn-primary">Back to Methods</button>
+                        </div>
+                    `;
+                    
+                    document.getElementById('method-back-btn')?.addEventListener('click', function() {
+                        if (contentView) contentView.classList.add('hidden');
+                        if (methodsView) methodsView.classList.remove('hidden');
+                    });
+                }
+            } else {
+                console.error('[EmergencyFix] Content view not found!');
+            }
+        }
+        
+        // Set up with a slight delay to ensure modules are loaded
+        setTimeout(() => {
+            setupModuleCardHandlers();
+        }, 1000);
+    });
+</script>
 </body>
 </html>
