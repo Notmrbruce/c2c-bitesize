@@ -27,7 +27,6 @@ function debugLog(message, data) {
 export async function loadModulesList() {
     try {
         debugLog('Loading modules list...');
-        console.log('[ModuleLoader] Attempt to load modules from:', config.api.modulesList);
         
         // Check cache first
         if (moduleCache.has('index')) {
@@ -35,22 +34,13 @@ export async function loadModulesList() {
             return moduleCache.get('index');
         }
         
-        // Check if the path is correct
-        console.log('[ModuleLoader] Current page path:', window.location.pathname);
+        // Create the absolute URL for the modules index - key fix
+        let baseUrl = new URL(window.location.href).origin;
+        let moduleListPath = new URL('/data/modules/index.json', baseUrl).href;
         
-        // Determine the relative path based on the current page
-        let moduleListPath = config.api.modulesList;
-        if (window.location.pathname.includes('/modules.html')) {
-            // We're in the root directory
-            debugLog('On modules.html page, using the original path');
-        } else if (window.location.pathname.endsWith('/')) {
-            // We're in the root directory
-            debugLog('On root page, using the original path');
-        }
+        console.log('[ModuleLoader] Using absolute URL path:', moduleListPath);
         
-        console.log('[ModuleLoader] Using path:', moduleListPath);
-        
-        // Try to fetch the modules list
+        // Try to fetch the modules list with the absolute URL
         const response = await fetch(moduleListPath);
         
         console.log('[ModuleLoader] Fetch response status:', response.status);
@@ -86,53 +76,8 @@ export async function loadModulesList() {
         }
     } catch (error) {
         console.error('[ModuleLoader] Error loading modules list:', error);
-        
-        // Try with XMLHttpRequest as a fallback
-        try {
-            console.log('[ModuleLoader] Trying XHR fallback for loading modules list');
-            const modulesList = await loadModulesListWithXHR();
-            console.log('[ModuleLoader] XHR fallback successful');
-            return modulesList;
-        } catch (xhrError) {
-            console.error('[ModuleLoader] XHR fallback also failed:', xhrError);
-            showToast('Failed to load modules. Please check console for details.', 'error');
-            return [];
-        }
+        throw error;
     }
-}
-
-/**
- * Fallback method to load modules list using XMLHttpRequest
- * @returns {Promise<Array>} Array of module metadata
- */
-function loadModulesListWithXHR() {
-    return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        console.log('[ModuleLoader] XHR attempting to load from:', config.api.modulesList);
-        
-        xhr.open('GET', config.api.modulesList);
-        
-        xhr.onload = function() {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                try {
-                    const data = JSON.parse(xhr.responseText);
-                    console.log('[ModuleLoader] XHR successfully loaded modules list');
-                    moduleCache.set('index', data);
-                    resolve(data);
-                } catch (error) {
-                    reject(new Error(`Error parsing modules list: ${error.message}`));
-                }
-            } else {
-                reject(new Error(`Failed to load modules list: ${xhr.status} ${xhr.statusText}`));
-            }
-        };
-        
-        xhr.onerror = function() {
-            reject(new Error('Network error when loading modules list'));
-        };
-        
-        xhr.send();
-    });
 }
 
 /**
@@ -155,9 +100,12 @@ export async function loadModule(moduleId) {
             return moduleCache.get(moduleId);
         }
         
-        const moduleUrl = `${config.api.modulePrefix}${moduleId}.json`;
-        debugLog(`Fetching from URL: ${moduleUrl}`);
-        console.log(`[ModuleLoader] Fetching module from URL: ${moduleUrl}`);
+        // Create the absolute URL for the module - key fix
+        let baseUrl = new URL(window.location.href).origin;
+        let moduleUrl = new URL(`/data/modules/${moduleId}.json`, baseUrl).href;
+        
+        debugLog(`Fetching from absolute URL: ${moduleUrl}`);
+        console.log(`[ModuleLoader] Fetching module from absolute URL: ${moduleUrl}`);
         
         const response = await fetch(moduleUrl);
         console.log(`[ModuleLoader] Fetch response status for ${moduleId}:`, response.status);
@@ -202,56 +150,8 @@ export async function loadModule(moduleId) {
         }
     } catch (error) {
         console.error(`[ModuleLoader] Error loading module '${moduleId}':`, error);
-        
-        // Try using XMLHttpRequest as fallback for fetch issues
-        try {
-            debugLog(`Trying XHR fallback for module: ${moduleId}`);
-            console.log(`[ModuleLoader] Trying XHR fallback for module: ${moduleId}`);
-            const data = await loadModuleWithXHR(moduleId);
-            moduleCache.set(moduleId, data);
-            return data;
-        } catch (xhrError) {
-            console.error(`[ModuleLoader] XHR fallback also failed for module '${moduleId}':`, xhrError);
-            showToast(`Failed to load module. Please try again.`, 'error');
-            throw error; // Throw the original error
-        }
+        throw error;
     }
-}
-
-/**
- * Fallback method to load module using XMLHttpRequest
- * @param {string} moduleId - The module ID to load
- * @returns {Promise<Object>} Module data
- */
-function loadModuleWithXHR(moduleId) {
-    return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        const moduleUrl = `${config.api.modulePrefix}${moduleId}.json`;
-        console.log(`[ModuleLoader] XHR loading from: ${moduleUrl}`);
-        
-        xhr.open('GET', moduleUrl);
-        
-        xhr.onload = function() {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                try {
-                    const data = JSON.parse(xhr.responseText);
-                    validateModuleStructure(data);
-                    console.log(`[ModuleLoader] XHR successfully loaded module: ${moduleId}`);
-                    resolve(data);
-                } catch (error) {
-                    reject(new Error(`Error processing module '${moduleId}': ${error.message}`));
-                }
-            } else {
-                reject(new Error(`Failed to load module '${moduleId}': ${xhr.status} ${xhr.statusText}`));
-            }
-        };
-        
-        xhr.onerror = function() {
-            reject(new Error(`Network error when loading module '${moduleId}'`));
-        };
-        
-        xhr.send();
-    });
 }
 
 /**
