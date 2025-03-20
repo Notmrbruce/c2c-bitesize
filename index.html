@@ -131,6 +131,15 @@
         </div>
     </footer>
     
+    <!-- New modules for enhanced functionality -->
+    <script src="js/path-resolver.js" type="module"></script>
+    <script src="js/module-normalizer.js" type="module"></script>
+    <script src="js/view-manager.js" type="module"></script>
+    <script src="js/enhanced-module-loader.js" type="module"></script>
+    <script src="js/study-method-initializer.js" type="module"></script>
+    <script src="js/app-controller.js" type="module"></script>
+    
+    <!-- Original modules - some functionality will be redirected to new modules -->
     <script src="js/config.js" type="module"></script>
     <script src="js/state-manager.js" type="module"></script>
     <script src="js/ui-utils.js" type="module"></script>
@@ -141,70 +150,38 @@
     <script src="js/study-methods/time-trial.js" type="module"></script>
     <script src="js/study-methods/true-false.js" type="module"></script>
     <script src="js/app.js" type="module"></script>
-    <!-- Add this script before the closing </body> tag in both HTML files -->
-<script>
-    // Console error handler to log more detailed errors
-    window.addEventListener('error', function(e) {
-        console.error('JavaScript error:', e.message);
-        console.error('File:', e.filename);
-        console.error('Line:', e.lineno);
-        console.error('Column:', e.colno);
-        console.error('Stack:', e.error?.stack);
-    });
     
-    // Log page load completion
-    window.addEventListener('load', function() {
-        console.log('Page fully loaded at:', new Date().toISOString());
-        console.log('Current page:', window.location.pathname);
-        console.log('Module list element exists:', !!document.getElementById('modules-list'));
-        console.log('Navigation initialized:', !!window.navigationInitialized);
-        console.log('App initialized:', !!window.appInitialized);
-        console.log('Modules content loaded:', !!window.modulesContentLoaded);
-    });
-</script>
-    // Add this script to both HTML files right before the closing </body> tag
-<script>
-    // Check and log path information
-    (function() {
-        console.log('====== PATH DEBUGGING ======');
-        console.log('Window location:');
-        console.log('- href:', window.location.href);
-        console.log('- pathname:', window.location.pathname);
-        console.log('- origin:', window.location.origin);
+    <!-- Application initialization with new controller -->
+    <script type="module">
+        import appController from './js/app-controller.js';
         
-        // Resolve paths
-        function resolvePath(path) {
-            const link = document.createElement('a');
-            link.href = path;
-            return link.href;
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('[Main] Initializing application with new controller');
+            appController.initApp().then(success => {
+                if (success) {
+                    console.log('[Main] Application successfully initialized');
+                } else {
+                    console.error('[Main] Application initialization failed');
+                }
+            });
+        });
+    </script>
+    
+    <!-- Console error handler -->
+    <script>
+        window.addEventListener('error', function(e) {
+            console.error('JavaScript error:', e.message);
+            console.error('File:', e.filename);
+            console.error('Line:', e.lineno);
+            console.error('Column:', e.colno);
+            console.error('Stack:', e.error?.stack);
+        });
         
-        console.log('Resolved paths:');
-        console.log('- ./data/modules/index.json:', resolvePath('./data/modules/index.json'));
-        console.log('- data/modules/index.json:', resolvePath('data/modules/index.json'));
-        console.log('- /data/modules/index.json:', resolvePath('/data/modules/index.json'));
-        
-        // Check if the modules file exists using a HEAD request
-        function checkFileExists(url) {
-            fetch(url, { method: 'HEAD' })
-                .then(response => {
-                    console.log(`File check for ${url}: ${response.status} ${response.ok ? 'OK' : 'Not Found'}`);
-                })
-                .catch(error => {
-                    console.error(`File check for ${url} failed:`, error);
-                });
-        }
-        
-        // Check various path combinations
-        checkFileExists('./data/modules/index.json');
-        checkFileExists('data/modules/index.json');
-        checkFileExists('/data/modules/index.json');
-        
-        // Check with full origin
-        checkFileExists(window.location.origin + '/data/modules/index.json');
-        
-        console.log('====== END PATH DEBUGGING ======');
-    })();
-</script>
+        // Log page load completion
+        window.addEventListener('load', function() {
+            console.log('Page fully loaded at:', new Date().toISOString());
+            console.log('Current page:', window.location.pathname);
+        });
+    </script>
 </body>
 </html>
