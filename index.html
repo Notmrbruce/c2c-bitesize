@@ -162,5 +162,49 @@
         console.log('Modules content loaded:', !!window.modulesContentLoaded);
     });
 </script>
+    // Add this script to both HTML files right before the closing </body> tag
+<script>
+    // Check and log path information
+    (function() {
+        console.log('====== PATH DEBUGGING ======');
+        console.log('Window location:');
+        console.log('- href:', window.location.href);
+        console.log('- pathname:', window.location.pathname);
+        console.log('- origin:', window.location.origin);
+        
+        // Resolve paths
+        function resolvePath(path) {
+            const link = document.createElement('a');
+            link.href = path;
+            return link.href;
+        }
+        
+        console.log('Resolved paths:');
+        console.log('- ./data/modules/index.json:', resolvePath('./data/modules/index.json'));
+        console.log('- data/modules/index.json:', resolvePath('data/modules/index.json'));
+        console.log('- /data/modules/index.json:', resolvePath('/data/modules/index.json'));
+        
+        // Check if the modules file exists using a HEAD request
+        function checkFileExists(url) {
+            fetch(url, { method: 'HEAD' })
+                .then(response => {
+                    console.log(`File check for ${url}: ${response.status} ${response.ok ? 'OK' : 'Not Found'}`);
+                })
+                .catch(error => {
+                    console.error(`File check for ${url} failed:`, error);
+                });
+        }
+        
+        // Check various path combinations
+        checkFileExists('./data/modules/index.json');
+        checkFileExists('data/modules/index.json');
+        checkFileExists('/data/modules/index.json');
+        
+        // Check with full origin
+        checkFileExists(window.location.origin + '/data/modules/index.json');
+        
+        console.log('====== END PATH DEBUGGING ======');
+    })();
+</script>
 </body>
 </html>
