@@ -1,0 +1,305 @@
+/* 
+ * Enhanced Styles for C2C Bitesize Platform
+ * This file contains additional styles to support the enhanced functionality
+ */
+
+/* Error notification */
+.error-notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background-color: rgba(255, 80, 80, 0.9);
+    color: white;
+    padding: 15px 20px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    animation: slideInDown 0.3s ease-out;
+}
+
+.error-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error-content h3 {
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--font-size-lg);
+}
+
+.error-content p {
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-sm);
+}
+
+.error-content button {
+    background-color: white;
+    color: var(--error);
+    border: none;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+.error-content button:hover {
+    background-color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+/* Enhanced loading indicator */
+.enhanced-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl);
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary);
+    animation: spin 1s linear infinite;
+    margin-bottom: var(--spacing-md);
+}
+
+.loading-text {
+    color: var(--text-secondary);
+    font-size: var(--font-size-md);
+}
+
+/* Enhanced animations */
+@keyframes slideInDown {
+    from {
+        transform: translate(-50%, -100px);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Study method transitions */
+.view-transition {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.view-transition.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Module card enhancements */
+.module-card:focus-visible {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.module-card.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-tertiary);
+    border: 1px dashed var(--border-color);
+    background-color: transparent;
+}
+
+.module-card.empty-state:hover {
+    transform: none;
+    border-color: var(--border-color);
+}
+
+.module-card.empty-state .empty-icon {
+    font-size: 24px;
+    margin-bottom: var(--spacing-md);
+}
+
+/* Method button improvements */
+.method-button:focus-visible {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+/* Improved toasts */
+.toast-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--surface-secondary);
+    color: var(--text-primary);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    max-width: 300px;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast-notification.toast-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast-notification.toast-success {
+    background-color: var(--success-bg);
+    color: var(--success);
+}
+
+.toast-notification.toast-error {
+    background-color: var(--error-bg);
+    color: var(--error);
+}
+
+.toast-notification.toast-warning {
+    background-color: rgba(255, 200, 50, 0.2);
+    color: rgb(255, 180, 0);
+}
+
+/* Placeholder content styles */
+.placeholder-content {
+    background-color: var(--surface-primary);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+.placeholder-text {
+    height: 16px;
+    margin-bottom: 8px;
+    background-color: var(--surface-secondary);
+    border-radius: 4px;
+}
+
+.placeholder-title {
+    height: 24px;
+    width: 70%;
+    margin-bottom: 16px;
+    background-color: var(--surface-secondary);
+    border-radius: 4px;
+}
+
+/* Enhanced feedback messages */
+.feedback-message {
+    background-color: var(--surface-primary);
+    border-left: 4px solid var(--primary);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+
+.feedback-message.success {
+    border-left-color: var(--success);
+}
+
+.feedback-message.error {
+    border-left-color: var(--error);
+}
+
+.feedback-message.warning {
+    border-left-color: #f6ad55;
+}
+
+.feedback-message.info {
+    border-left-color: var(--primary);
+}
+
+/* Improved content transitions */
+.content-slide-in {
+    animation: slideIn 0.3s ease-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhanced accessibility focus styles */
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Method information tooltip */
+.method-info-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.method-info-tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--surface-tertiary);
+    color: var(--text-primary);
+    text-align: center;
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-sm);
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.method-info-tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Fallback content styles */
+.fallback-notice {
+    background-color: rgba(255, 193, 7, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    color: #e0a800;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.fallback-container {
+    opacity: 0.9;
+}
