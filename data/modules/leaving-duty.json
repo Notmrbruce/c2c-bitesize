@@ -1,0 +1,343 @@
+{
+  "id": "leaving-duty-module",
+  "title": "Leaving Duty Procedures",
+  "description": "This module covers essential procedures and responsibilities when ending your duty shift, including required reports, submission methods, and next duty verification.",
+  "methods": ["flashcards", "quiz", "time-trial", "true-false"],
+  "content": {
+    "flashcards": [
+      {
+        "question": "When must incident report forms be submitted?",
+        "answer": "Incident report forms must be handed in by the end of your turn of duty so that details can be acted upon as soon as possible."
+      },
+      {
+        "question": "What are the three ways of submitting reports?",
+        "answer": "Reports can be handed to your SPM, emailed, or faxed."
+      },
+      {
+        "question": "How should you determine your next turn of duty?",
+        "answer": "Before leaving duty, you must ascertain your next turn of duty by either looking at the daily sheet for your next turn of duty or by contacting the SPM."
+      },
+      {
+        "question": "Why is it important to submit incident reports before the end of your duty?",
+        "answer": "Timely submission ensures that details can be acted upon as soon as possible, maintaining operational continuity and allowing for prompt response to any issues that require immediate attention."
+      },
+      {
+        "question": "What should you do if you're involved in multiple incidents during your duty?",
+        "answer": "You must submit separate report forms for each incident by the end of your turn of duty, ensuring all details are accurately documented for each occurrence."
+      },
+      {
+        "question": "What is your responsibility if you witness a colleague involved in an incident?",
+        "answer": "If you witness a colleague involved in an incident, you must still submit your own report by the end of your duty, providing your perspective and observations of the event."
+      },
+      {
+        "question": "What information should you verify before leaving your duty?",
+        "answer": "Before leaving duty, you should verify your next turn of duty time and date, ensure all required reports are submitted, and confirm that all outstanding tasks from your shift have been properly documented or handed over."
+      },
+      {
+        "question": "What should you do if the daily sheet for next duty assignments is not available?",
+        "answer": "If the daily sheet is not available, you must contact the SPM directly to confirm your next turn of duty before leaving your current shift."
+      },
+      {
+        "question": "What are the implications of failing to submit required reports before ending your duty?",
+        "answer": "Failing to submit required reports can delay response to incidents, create gaps in documentation, potentially lead to disciplinary action, and compromise the organization's ability to address issues promptly."
+      },
+      {
+        "question": "What should you do if you realize you've forgotten to include important details in a submitted report?",
+        "answer": "If you realize you've omitted important details after submission but before leaving duty, you should submit an amended report immediately. If discovered after leaving duty, contact your SPM as soon as possible to provide the additional information."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "By when must incident report forms be submitted?",
+        "options": [
+          "Within 24 hours of the incident",
+          "By the end of your turn of duty",
+          "Before your next shift begins",
+          "Within 48 hours of the incident"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "Which of the following is NOT a valid way to submit reports?",
+        "options": [
+          "Handing them to your SPM",
+          "Emailing them",
+          "Faxing them",
+          "Leaving them on your desk for collection"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "How should you determine your next turn of duty?",
+        "options": [
+          "Ask a colleague",
+          "Check your personal calendar",
+          "Look at the daily sheet or contact the SPM",
+          "Wait for a notification"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "You've been involved in an incident that occurred 30 minutes before the end of your shift. What should you do?",
+        "options": [
+          "Submit the report at the beginning of your next shift",
+          "Send an email briefly describing the incident and submit the full report later",
+          "Complete and submit the report before ending your current shift",
+          "Call the SPM and describe the incident verbally"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "During your shift, you observe a minor incident but are not directly involved. You're about to end your duty. What is the correct procedure?",
+        "options": [
+          "No action is required as you weren't directly involved",
+          "Make a note to report it during your next shift",
+          "Verbally inform the incoming shift personnel",
+          "Submit a report before the end of your current duty"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "The daily sheet showing next duty assignments is missing, and your SPM is unavailable. What should you do?",
+        "options": [
+          "Assume you're following your regular schedule",
+          "Leave without confirming your next duty",
+          "Try to contact another supervisor or manager for this information",
+          "Wait until your SPM returns, even if it extends your shift"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "You've submitted an incident report but then remember additional important details as you're about to leave. What is the best course of action?",
+        "options": [
+          "Add the information to your report at the start of your next shift",
+          "Submit an amended or supplementary report before leaving",
+          "Call your SPM the next day with the additional information",
+          "Document the details in your personal notes for future reference"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "In a situation where multiple incidents occur during your shift, what is the correct reporting procedure?",
+        "options": [
+          "Combine all incidents into one comprehensive report",
+          "Report only the most significant incident",
+          "Submit separate reports for each incident before ending your duty",
+          "Submit a report for the first incident and verbally brief your SPM about the others"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Why is it important to confirm your next turn of duty before leaving?",
+        "options": [
+          "It's merely an administrative formality",
+          "To ensure you're available if called in for an emergency",
+          "To properly prepare and plan for your next shift",
+          "Only for scheduling overtime hours"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "You're involved in an incident right at the end of your shift. The report will take time to complete properly. What should you do?",
+        "options": [
+          "Submit a brief report now and complete a detailed one at the start of your next shift",
+          "Inform your SPM and seek guidance on whether to extend your shift to complete the report",
+          "Leave a note for the incoming shift to handle the report",
+          "Submit whatever you can complete in 5 minutes before leaving"
+        ],
+        "correctAnswer": 1
+      }
+    ],
+    "time-trial": [
+      {
+        "term": "End of Duty Reports",
+        "definition": "Reports that must be submitted before completing your shift"
+      },
+      {
+        "term": "Incident Report",
+        "definition": "Documentation of any unusual or notable events that occurred during your duty"
+      },
+      {
+        "term": "Report Submission Deadline",
+        "definition": "By the end of your turn of duty"
+      },
+      {
+        "term": "SPM",
+        "definition": "Supervisor or manager to whom reports can be submitted"
+      },
+      {
+        "term": "Report Submission Methods",
+        "definition": "Hand to SPM, email, or fax"
+      },
+      {
+        "term": "Daily Sheet",
+        "definition": "Document showing duty assignments and schedules"
+      },
+      {
+        "term": "Next Duty Verification",
+        "definition": "Confirming your next scheduled shift before leaving current duty"
+      },
+      {
+        "term": "Amended Report",
+        "definition": "Supplementary documentation providing additional or corrected information"
+      },
+      {
+        "term": "Duty Handover",
+        "definition": "Process of transferring responsibilities to the incoming shift"
+      },
+      {
+        "term": "Incident Documentation",
+        "definition": "Detailed recording of events, actions taken, and outcomes"
+      },
+      {
+        "term": "Report Timeframe",
+        "definition": "Period by which reports must be submitted (end of duty)"
+      },
+      {
+        "term": "Email Submission",
+        "definition": "Electronic method of submitting reports"
+      },
+      {
+        "term": "Fax Submission",
+        "definition": "Method of transmitting paper documents electronically"
+      },
+      {
+        "term": "Physical Submission",
+        "definition": "Handing a hard copy of the report directly to the SPM"
+      },
+      {
+        "term": "Duty Completion Procedures",
+        "definition": "Steps that must be taken before concluding your shift"
+      },
+      {
+        "term": "Schedule Verification",
+        "definition": "Confirming your next work assignment prior to departure"
+      },
+      {
+        "term": "Incident Response Documentation",
+        "definition": "Records detailing how situations were handled during your shift"
+      },
+      {
+        "term": "Timely Reporting",
+        "definition": "Submitting information promptly to enable swift action"
+      },
+      {
+        "term": "Reporting Obligation",
+        "definition": "Responsibility to document and submit information about incidents"
+      },
+      {
+        "term": "Witness Report",
+        "definition": "Documentation provided by someone who observed but wasn't directly involved in an incident"
+      },
+      {
+        "term": "Report Accuracy",
+        "definition": "Precision and correctness of information provided in documentation"
+      },
+      {
+        "term": "Submission Confirmation",
+        "definition": "Verification that reports have been received by the appropriate personnel"
+      },
+      {
+        "term": "Duty Transition",
+        "definition": "Process of concluding current shift and preparing for the next one"
+      },
+      {
+        "term": "Schedule Lookup",
+        "definition": "Checking the daily sheet for next duty assignment"
+      },
+      {
+        "term": "Supervisor Notification",
+        "definition": "Informing your SPM about incidents or issues before ending duty"
+      },
+      {
+        "term": "Documentation Requirements",
+        "definition": "Mandatory reports and forms that must be completed by end of duty"
+      },
+      {
+        "term": "End-of-Shift Protocol",
+        "definition": "Standard procedures to follow before concluding your working period"
+      },
+      {
+        "term": "Multiple Incident Reporting",
+        "definition": "Process of submitting separate documentation for each occurrence during a shift"
+      }
+    ],
+    "true-false": [
+      {
+        "statement": "Incident reports can be submitted at the beginning of your next duty shift.",
+        "isTrue": false,
+        "explanation": "This is false. Incident reports must be handed in by the end of your current turn of duty so that details can be acted upon as soon as possible, not at the beginning of your next shift."
+      },
+      {
+        "statement": "There are three acceptable ways to submit reports: handing them to your SPM, emailing them, or faxing them.",
+        "isTrue": true,
+        "explanation": "This is true. The three accepted methods for submitting reports are handing them to your SPM, emailing them, or faxing them."
+      },
+      {
+        "statement": "You must contact your SPM to confirm your next duty regardless of whether the daily sheet is available.",
+        "isTrue": false,
+        "explanation": "This is false. You can ascertain your next turn of duty by either looking at the daily sheet or by contacting the SPM. Both methods are acceptable, and you only need to contact the SPM if the daily sheet is unavailable or unclear."
+      },
+      {
+        "statement": "If you witness a minor incident but are not directly involved, you don't need to submit a report.",
+        "isTrue": false,
+        "explanation": "This is false. Any incident that you observe during your duty, regardless of your direct involvement, requires you to submit a report by the end of your shift if it warrants documentation according to procedures."
+      },
+      {
+        "statement": "If multiple incidents occur during your shift, you should compile them into a single comprehensive report.",
+        "isTrue": false,
+        "explanation": "This is false. Each separate incident requires its own report form to ensure clear documentation and appropriate follow-up actions for each specific event."
+      },
+      {
+        "statement": "If the daily sheet showing next duty assignments is missing, you should assume you're following your regular schedule.",
+        "isTrue": false,
+        "explanation": "This is false. If the daily sheet is missing, you must contact the SPM directly to confirm your next turn of duty rather than making assumptions based on your typical schedule."
+      },
+      {
+        "statement": "You can submit reports via text message to your SPM as an alternative to email.",
+        "isTrue": false,
+        "explanation": "This is false. The only acceptable methods for submitting reports are handing them to your SPM, emailing them, or faxing them. Text messages are not listed as an approved submission method."
+      },
+      {
+        "statement": "If an incident occurs just before the end of your shift, you should extend your duty time to complete and submit the report.",
+        "isTrue": true,
+        "explanation": "This is true. Reports must be submitted by the end of your turn of duty, so if an incident occurs late in your shift, you should take the necessary time to complete and submit the report before leaving, even if it means staying slightly longer."
+      },
+      {
+        "statement": "If you've already submitted a report but remember additional details later, you should wait until your next shift to provide this information.",
+        "isTrue": false,
+        "explanation": "This is false. If you remember additional important details after submitting a report but before leaving your duty, you should submit an amended report immediately. Waiting until your next shift would delay the processing of important information."
+      },
+      {
+        "statement": "When submitting an incident report by email, you don't need to follow up with your SPM to confirm receipt.",
+        "isTrue": false,
+        "explanation": "This is false. While not explicitly stated in the basic content, professional practice dictates that when submitting important documents like incident reports electronically, you should ensure they've been received, especially for significant incidents."
+      },
+      {
+        "statement": "In a situation where you're involved in an incident with another colleague, only the most senior person needs to submit a report.",
+        "isTrue": false,
+        "explanation": "This is false. Each person involved in or witnessing an incident must submit their own report, regardless of seniority, to ensure all perspectives and details are properly documented."
+      },
+      {
+        "statement": "If you're unable to complete a comprehensive incident report by the end of your shift due to its complexity, it's acceptable to submit a preliminary report and follow up with complete details later.",
+        "isTrue": true,
+        "explanation": "This is true. While reports should ideally be complete, in complex situations it's better to submit a preliminary report by the end of your duty with the essential information and follow up with complete details as soon as possible, rather than submitting nothing."
+      },
+      {
+        "statement": "Looking at the daily sheet is the only approved method for determining your next turn of duty.",
+        "isTrue": false,
+        "explanation": "This is false. You can determine your next turn of duty by either looking at the daily sheet OR by contacting the SPM. Both methods are approved."
+      },
+      {
+        "statement": "If you're submitting a report via fax, you should retain a copy of the fax confirmation as proof of submission.",
+        "isTrue": true,
+        "explanation": "This is true. While not explicitly stated in the basic content, standard procedure when faxing important documents includes keeping the transmission confirmation as proof of submission."
+      },
+      {
+        "statement": "During a major incident where multiple staff members are involved, a single collaborative report can be submitted instead of individual reports.",
+        "isTrue": false,
+        "explanation": "This is false. Each staff member involved in an incident must submit their own individual report, even for major incidents with multiple participants. This ensures all perspectives and observations are properly documented."
+      }
+    ]
+  }
+}

@@ -1,0 +1,369 @@
+{
+  "id": "c2c-publications",
+  "title": "Railway Publications and Reference Materials",
+  "description": "This module covers essential knowledge about railway publications including rule books, timetables, notices, and how to access and interpret them correctly.",
+  "methods": ["flashcards", "quiz", "time-trial", "true-false"],
+  "content": {
+    "flashcards": [
+      {
+        "question": "How are you kept up-to-date with publication changes?",
+        "answer": "Publication changes are communicated through multiple channels: the Periodic Operating Notice (PON) updates the sectional appendix and any changes to the rule book, briefings from managers, and through Staff Training and Development (STUD) days."
+      },
+      {
+        "question": "Where can you access information regarding the rule book and c2c appendices?",
+        "answer": "Rule books are kept in driver managers offices. Both rule books and appendices can also be found on the c2c intranet and on the RSSB (Rail Safety and Standards Board) website."
+      },
+      {
+        "question": "What is the Working Time Table (WTT) and when would you need to refer to it?",
+        "answer": "The Working Time Table (WTT) contains train schedules including passing times for fast services, and departure/arrival times. You would check it to ensure you are not running too early or too late which could result in being held at red signals, and to verify train departure and arrival times."
+      },
+      {
+        "question": "What do the different train classification numbers in the WTT represent?",
+        "answer": "In the WTT: 1 = Fast train, 2 = All stations, 3 = Freight/staff train, 5 = Empty Coaching Stock (ECS), 9 = Special service."
+      },
+      {
+        "question": "What do the time allowance notations in the WTT mean?",
+        "answer": "[2] = engineering time extra allowance, (2) = pathing time, <2> = performance time."
+      },
+      {
+        "question": "What does 'Arr' and 'Dep' refer to in the WTT?",
+        "answer": "'Arr' refers to arrival time and 'Dep' refers to departure time in the Working Time Table."
+      },
+      {
+        "question": "What does the '+' symbol indicate in the WTT?",
+        "answer": "The '+' symbol in the WTT indicates ECS (Empty Coaching Stock) time."
+      },
+      {
+        "question": "What are the principle sections of the Service Time Notice (STN) and when would you need to refer to it?",
+        "answer": "The STN includes alterations to the WTT, planned sporting/music events, planned engineering works, closures of other lines, ticket acceptance from other lines, and additional dispatch requirements. You would refer to it to stay informed about temporary changes to the normal schedule."
+      },
+      {
+        "question": "What are the principle sections of the Weekly Operating Notice (WON) and when would you need to refer to it?",
+        "answer": "The WON includes safety notices, Section A (Temporary speed restrictions), Section B (Engineering arrangements), Section C (Signalling and permanent way alterations), Section D (General instructions and notices), and information about Multi SPAD signals. You would refer to it for weekly updates on operational safety information."
+      },
+      {
+        "question": "What are the sections of the Periodic Operating Notice (PON) and when would you need to refer to it?",
+        "answer": "The PON contains Part 1 (items new to PON, marked with a thick black line in the margin), Part 2 (items previously published but still current, with items published for the last time marked with 3 * if relevant), and AR2 updates to the sectional appendix. You would refer to it for periodic updates to operating procedures."
+      },
+      {
+        "question": "What publication can you find information on line speed?",
+        "answer": "Information on line speed can be found in the Sectional Appendix."
+      },
+      {
+        "question": "If you noticed a new Multi SPAD signal on your route, which publication would you check for information?",
+        "answer": "You would check the Weekly Operating Notice (WON), which includes information about Multi SPAD signals."
+      },
+      {
+        "question": "How can you identify items that are published for the last time in the PON?",
+        "answer": "Items published for the last time in the PON are marked with 3 asterisks (***) if they are relevant to note."
+      },
+      {
+        "question": "If there is a major sporting event affecting services on your route, where would you find information about altered schedules?",
+        "answer": "Information about altered schedules due to major sporting events would be found in the Service Time Notice (STN)."
+      },
+      {
+        "question": "How can you identify new items in the Periodic Operating Notice (PON)?",
+        "answer": "New items in the PON (not posted before in WON) are marked with a thick black line in the margin."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Which publication would you check to find information about temporary speed restrictions?",
+        "options": [
+          "Periodic Operating Notice (PON)",
+          "Weekly Operating Notice (WON)",
+          "Working Time Table (WTT)",
+          "Service Time Notice (STN)"
+        ],
+        "correctAnswer": 1,
+        "explanation": "The Weekly Operating Notice (WON) includes Section A which specifically covers Temporary speed restrictions."
+      },
+      {
+        "question": "What does train classification number '5' represent in the Working Time Table?",
+        "options": [
+          "Fast train",
+          "All stations train",
+          "Empty Coaching Stock (ECS)",
+          "Special service"
+        ],
+        "correctAnswer": 2,
+        "explanation": "In the WTT classification system, '5' represents Empty Coaching Stock (ECS)."
+      },
+      {
+        "question": "You need to check the maximum line speed for a section of track you'll be driving on. Which publication should you refer to?",
+        "options": [
+          "Sectional Appendix",
+          "Working Time Table",
+          "Weekly Operating Notice",
+          "Service Time Notice"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Information on line speed can be found in the Sectional Appendix."
+      },
+      {
+        "question": "What does the notation [2] represent in the Working Time Table?",
+        "options": [
+          "Pathing time",
+          "Engineering time extra allowance",
+          "Performance time",
+          "All stations train"
+        ],
+        "correctAnswer": 1,
+        "explanation": "In the WTT, [2] represents engineering time extra allowance."
+      },
+      {
+        "question": "Which of the following is NOT a principle section of the Weekly Operating Notice (WON)?",
+        "options": [
+          "Section A - Temporary speed restrictions",
+          "Section B - Engineering arrangements",
+          "Section C - Ticket acceptance from other lines",
+          "Section D - General instructions and notices"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Ticket acceptance from other lines is part of the Service Time Notice (STN), not the Weekly Operating Notice (WON)."
+      },
+      {
+        "question": "You notice a thick black line in the margin of an item in the Periodic Operating Notice (PON). What does this indicate?",
+        "options": [
+          "The item is being published for the last time",
+          "The item is new to the PON and not posted before in WON",
+          "The item requires immediate attention",
+          "The item is an update to the sectional appendix"
+        ],
+        "correctAnswer": 1,
+        "explanation": "A thick black line in the margin of the PON indicates that the item is new to the PON and has not been posted before in the WON."
+      },
+      {
+        "question": "A colleague mentions they saw '3***' next to an item in Part 2 of the PON. What does this indicate?",
+        "options": [
+          "The item requires three separate acknowledgments",
+          "The item is extremely high priority",
+          "The item is being published for the last time and is relevant to note",
+          "The item applies to freight/staff trains only"
+        ],
+        "correctAnswer": 2,
+        "explanation": "In the PON, items published for the last time are marked with 3 asterisks (***) if they are relevant to note."
+      },
+      {
+        "question": "You're about to operate a fast service and need to ensure you're not running too early or too late. Which publication would you consult?",
+        "options": [
+          "Service Time Notice",
+          "Weekly Operating Notice",
+          "Working Time Table",
+          "Periodic Operating Notice"
+        ],
+        "correctAnswer": 2,
+        "explanation": "The Working Time Table (WTT) contains passing times for fast services that you would check to ensure you are not running too early or too late."
+      },
+      {
+        "question": "There's a major music festival happening next weekend that will affect train services. Where would you find information about these changes?",
+        "options": [
+          "Weekly Operating Notice (WON)",
+          "Service Time Notice (STN)",
+          "Periodic Operating Notice (PON)",
+          "Working Time Table (WTT)"
+        ],
+        "correctAnswer": 1,
+        "explanation": "The Service Time Notice (STN) includes information about planned sporting/music events and their impact on services."
+      },
+      {
+        "question": "You need to check for recent changes to signaling arrangements on your route. Which publication should you consult?",
+        "options": [
+          "Working Time Table",
+          "Weekly Operating Notice, Section C",
+          "Periodic Operating Notice, Part 1",
+          "Service Time Notice"
+        ],
+        "correctAnswer": 1,
+        "explanation": "The Weekly Operating Notice (WON) Section C specifically covers Signalling and permanent way alterations."
+      },
+      {
+        "question": "You're planning to operate a train through an area with engineering works. Which TWO publications would be most relevant to check?",
+        "options": [
+          "WON Section B and STN",
+          "PON Part 1 and WTT",
+          "Sectional Appendix and PON Part 2",
+          "WTT and STN"
+        ],
+        "correctAnswer": 0,
+        "explanation": "The Weekly Operating Notice (WON) Section B covers Engineering arrangements, and the Service Time Notice (STN) includes information about planned engineering works."
+      },
+      {
+        "question": "What does the notation <2> represent in the Working Time Table?",
+        "options": [
+          "Engineering time extra allowance",
+          "Pathing time",
+          "Performance time",
+          "Two-minute stop"
+        ],
+        "correctAnswer": 2,
+        "explanation": "In the WTT, <2> represents performance time."
+      },
+      {
+        "question": "Scenario: You're operating train 2A56 which is classified as a '2' in the WTT. You notice that the next station platform is occupied by another train. What does the train classification tell you about your service?",
+        "options": [
+          "Your train operates as a fast service and might need to bypass the station",
+          "Your train is an all stations service and will need to stop at this platform",
+          "Your train is running as ECS and doesn't need to stop for passengers",
+          "Your train is a special service with priority over the platform occupancy"
+        ],
+        "correctAnswer": 1,
+        "explanation": "In the WTT, train classification '2' represents an 'All stations' service, meaning your train is scheduled to stop at all stations along the route, including the platform currently occupied."
+      },
+      {
+        "question": "You notice the notation (3) next to a timing in the WTT. What does this represent?",
+        "options": [
+          "3 minutes of engineering allowance",
+          "A freight/staff train",
+          "3 minutes of pathing time",
+          "A performance target of 3 minutes"
+        ],
+        "correctAnswer": 2,
+        "explanation": "In the WTT, the notation (3) would represent 3 minutes of pathing time, as pathing time is shown in parentheses ()."
+      },
+      {
+        "question": "Scenario: Engineering works are taking place on your usual route. Where would you find comprehensive information about both temporary speed restrictions AND alternative routing arrangements?",
+        "options": [
+          "Only in the Sectional Appendix",
+          "Only in the Working Time Table",
+          "In both the WON (Sections A and B) and the STN",
+          "Only in the PON Parts 1 and 2"
+        ],
+        "correctAnswer": 2,
+        "explanation": "The Weekly Operating Notice (WON) Section A covers Temporary speed restrictions and Section B covers Engineering arrangements, while the Service Time Notice (STN) provides information about planned engineering works and alterations to the WTT. Combined, these would provide comprehensive information about both aspects."
+      }
+    ],
+    "time-trial": [
+      { "term": "WTT", "definition": "Working Time Table - Contains train schedules including passing times and arrival/departure information" },
+      { "term": "STN", "definition": "Service Time Notice - Contains alterations to WTT, planned events, engineering works, and ticket acceptance information" },
+      { "term": "WON", "definition": "Weekly Operating Notice - Contains safety notices, temporary speed restrictions, engineering arrangements, and signalling alterations" },
+      { "term": "PON", "definition": "Periodic Operating Notice - Updates sectional appendix and rule book changes" },
+      { "term": "Sectional Appendix", "definition": "Publication containing information on line speeds" },
+      { "term": "Classification 1", "definition": "Fast train service" },
+      { "term": "Classification 2", "definition": "All stations service" },
+      { "term": "Classification 3", "definition": "Freight or staff train" },
+      { "term": "Classification 5", "definition": "Empty Coaching Stock (ECS)" },
+      { "term": "Classification 9", "definition": "Special service" },
+      { "term": "Arr", "definition": "Arrival time in the WTT" },
+      { "term": "Dep", "definition": "Departure time in the WTT" },
+      { "term": "+", "definition": "ECS time in the WTT" },
+      { "term": "[2]", "definition": "Engineering time extra allowance" },
+      { "term": "(2)", "definition": "Pathing time" },
+      { "term": "<2>", "definition": "Performance time" },
+      { "term": "WON Section A", "definition": "Temporary speed restrictions" },
+      { "term": "WON Section B", "definition": "Engineering arrangements" },
+      { "term": "WON Section C", "definition": "Signalling and permanent way alterations" },
+      { "term": "WON Section D", "definition": "General instructions and notices" },
+      { "term": "PON Part 1", "definition": "Items new to PON, not posted before in WON (marked with thick black line in margin)" },
+      { "term": "PON Part 2", "definition": "Items previously published in the PON but still current" },
+      { "term": "Three asterisks (***)", "definition": "Indicates items published for the last time in the PON if relevant to note" },
+      { "term": "AR2", "definition": "Updates to sectional appendix in the PON" },
+      { "term": "Multi SPAD signals", "definition": "Signals with multiple Signal Passed At Danger incidents, information found in the WON" },
+      { "term": "RSSB", "definition": "Rail Safety and Standards Board - website where rule books and appendices can be found" },
+      { "term": "c2c intranet", "definition": "Online platform where rule books and appendices can be accessed" },
+      { "term": "STUD days", "definition": "Staff Training and Development days - used to brief staff on publication changes" }
+    ],
+    "true-false": [
+      {
+        "statement": "The Service Time Notice (STN) contains information about Multi SPAD signals.",
+        "isTrue": false,
+        "explanation": "Information about Multi SPAD signals is found in the Weekly Operating Notice (WON), not the Service Time Notice (STN)."
+      },
+      {
+        "statement": "The classification number '2' in the Working Time Table indicates a train that stops at all stations.",
+        "isTrue": true,
+        "explanation": "In the WTT classification system, '2' represents an 'All stations' service that stops at every station on its route."
+      },
+      {
+        "statement": "Updates to the sectional appendix can be found in both the WON and the PON.",
+        "isTrue": false,
+        "explanation": "Updates to the sectional appendix (AR2) are specifically found in the Periodic Operating Notice (PON), not the Weekly Operating Notice (WON)."
+      },
+      {
+        "statement": "The notation (3) in the Working Time Table represents 3 minutes of engineering time extra allowance.",
+        "isTrue": false,
+        "explanation": "Engineering time extra allowance is represented by square brackets [3]. Parentheses (3) represent pathing time."
+      },
+      {
+        "statement": "If there's a thick black line in the margin of an item in the PON, it means the item is being published for the last time.",
+        "isTrue": false,
+        "explanation": "A thick black line in the margin of the PON indicates that the item is new to the PON and has not been posted before in the WON. Items published for the last time are marked with 3 asterisks (***)."
+      },
+      {
+        "statement": "Scenario: You're driving a train classified as '5' in the WTT. This means you should stop at all stations to pick up passengers.",
+        "isTrue": false,
+        "explanation": "Classification '5' in the WTT represents Empty Coaching Stock (ECS), meaning the train is running without passengers. It would not stop to pick up passengers."
+      },
+      {
+        "statement": "The sectional appendix is the only publication that contains information about line speeds.",
+        "isTrue": true,
+        "explanation": "Information on line speed can only be found in the Sectional Appendix, as stated in the content."
+      },
+      {
+        "statement": "Scenario: There's a planned engineering work that will affect your route next month. The STN would be the most appropriate publication to check for information about this.",
+        "isTrue": true,
+        "explanation": "The Service Time Notice (STN) includes information about planned engineering works, making it the most appropriate publication to check for information about future planned works."
+      },
+      {
+        "statement": "In the WTT, the '+' symbol indicates additional time that needs to be added to the scheduled arrival time.",
+        "isTrue": false,
+        "explanation": "The '+' symbol in the WTT indicates ECS (Empty Coaching Stock) time, not additional time to be added to the scheduled arrival."
+      },
+      {
+        "statement": "Scenario: A colleague tells you about a temporary speed restriction on part of your route. You should check the WON Section A to verify this information.",
+        "isTrue": true,
+        "explanation": "The Weekly Operating Notice (WON) Section A specifically covers Temporary speed restrictions, making it the correct publication to verify this information."
+      },
+      {
+        "statement": "Rule books can only be accessed in driver managers' offices and not electronically.",
+        "isTrue": false,
+        "explanation": "While rule books are kept in driver managers' offices, they can also be accessed electronically on the c2c intranet and RSSB website."
+      },
+      {
+        "statement": "Scenario: You need to check if there are any signalling alterations on your route for this week. The WON Section C would be the most appropriate place to look.",
+        "isTrue": true,
+        "explanation": "The Weekly Operating Notice (WON) Section C specifically covers Signalling and permanent way alterations, making it the most appropriate section to check for current week signalling alterations."
+      },
+      {
+        "statement": "If you need to check for ticket acceptance from other lines due to disruption, you should refer to the PON.",
+        "isTrue": false,
+        "explanation": "Information about ticket acceptance from other lines is found in the Service Time Notice (STN), not the Periodic Operating Notice (PON)."
+      },
+      {
+        "statement": "Scenario: You see '3***' next to an item in Part 2 of the PON. This means you can disregard the information as it's no longer relevant.",
+        "isTrue": false,
+        "explanation": "The 3 asterisks (***) indicate that the item is being published for the last time and is relevant to note. It should not be disregarded; rather, it's specifically marked for attention because it's important and won't appear in future publications."
+      },
+      {
+        "statement": "Checking the passing times for a fast service in the WTT helps ensure you are not running too early or too late, which could result in being held at red signals.",
+        "isTrue": true,
+        "explanation": "One of the main reasons to check the WTT for fast services is to verify passing times to ensure you're not running too early or too late, which could indeed result in being held at red signals."
+      },
+      {
+        "statement": "Scenario: There's a major sporting event happening this weekend that will affect your route. The best place to find information about altered schedules would be the WON Section D.",
+        "isTrue": false,
+        "explanation": "Information about altered schedules due to major sporting events would be found in the Service Time Notice (STN), not the WON Section D which covers General instructions and notices."
+      },
+      {
+        "statement": "The notation <2> in the WTT represents 2 minutes that have been added to account for performance targets.",
+        "isTrue": true,
+        "explanation": "In the WTT, the notation <2> represents performance time, which is time added to account for performance targets or standards."
+      },
+      {
+        "statement": "Scenario: If both the WON and PON contain conflicting information about the same operational procedure, you should always follow the information in the PON as it takes precedence.",
+        "isTrue": true,
+        "explanation": "The PON (Periodic Operating Notice) updates the sectional appendix and rule book changes and generally contains the most current information. When there's a conflict, the PON would typically take precedence as it represents the most recent periodic update to procedures."
+      },
+      {
+        "statement": "STUD days are primarily used for physical training rather than briefings on publication changes.",
+        "isTrue": false,
+        "explanation": "STUD (Staff Training and Development) days are used for briefings from managers about publication changes, among other training purposes. They are not primarily for physical training."
+      },
+      {
+        "statement": "Scenario: You're scheduled to operate a train classified as '9' in the WTT. This indicates you'll be operating a freight service.",
+        "isTrue": false,
+        "explanation": "Classification '9' in the WTT represents a Special service, not a freight service. Freight trains are classified as '3'."
+      }
+    ]
+  }
+}

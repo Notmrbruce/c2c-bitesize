@@ -1,0 +1,342 @@
+{
+  "id": "safety-security-module",
+  "title": "Safety and Security in Rail Operations",
+  "description": "This module covers essential safety and security procedures for rail operations, including incident reporting, handling suspicious behavior, emergency protocols, and workplace safety requirements.",
+  "methods": ["flashcards", "quiz", "time-trial", "true-false"],
+  "content": {
+    "flashcards": [
+      {
+        "question": "What is the complete reporting procedure for accidents and incidents at the depot?",
+        "answer": "All accidents and near misses at the depot must be reported in the first instance to the SPM (Senior Production Manager) who will: 1) arrange for all movements to be stopped if required, 2) arrange for any necessary medical attention, and 3) record the incident in the accident book kept in the front office."
+      },
+      {
+        "question": "How should you handle a situation where you witness someone acting in an unsafe manner?",
+        "answer": "Challenge them if you feel it's safe to do so. Call the Signaller if on track or SPM/Depot Manager in the depot (block lines if needed) and advise them to call British Transport Police (BTP)."
+      },
+      {
+        "question": "What are your responsibilities if you discover unauthorized persons on a train within a depot?",
+        "answer": "Report immediately to the SPM. Ensure arrangements are made for them to be escorted from the train to the exit gate by the safest possible means. It is essential that they are dealt with immediately and are not left alone at any point."
+      },
+      {
+        "question": "What does the acronym H.O.T. stand for in security procedures?",
+        "answer": "H - HIDDEN (placed out of public view), O - OBVIOUSLY suspicious (looks unusual), T - Not TYPICAL of what is regularly or should be encountered in that location."
+      },
+      {
+        "question": "Under what conditions can dropped items on the track be removed?",
+        "answer": "Dropped items on the track can ONLY be removed if: 1) The line is blocked by the relevant signaller (Workstation 1), 2) It is outside of peak times, 3) The person retrieving the item must have a current and in-date PTS card. Litter pickers can be used if the item is within reach and you have EXPRESS PERMISSION from the signaller."
+      },
+      {
+        "question": "What are the key methods for recording perishable evidence?",
+        "answer": "Methods for recording perishable evidence include: photographing, bagging up or securing evidence, sketching, taking notes, CCTV recording, train downloads, and collecting eye witness accounts."
+      },
+      {
+        "question": "What are your responsibilities when signing in for duty?",
+        "answer": "When signing in you must: 1) Sign the statement of readiness for duty on time, 2) Confirm you are fit for duty, 3) Wear your issued uniform and correct PPE, 4) Have all relevant equipment, licenses and documents needed for duty, 5) Read the late notice case, train crew notice case, and check for altered workings."
+      },
+      {
+        "question": "How would you identify an authorized walking route within the depot?",
+        "answer": "Authorized walking routes within the shed are marked out in green. Outside the shed, they are marked out in yellow or have raised wooden edges."
+      },
+      {
+        "question": "What information should you provide when reporting an issue with a passing train?",
+        "answer": "When reporting an issue with a passing train to the signaller/SPM, provide as much information as possible including: what was amiss, head code, time, location, and direction of travel."
+      },
+      {
+        "question": "What is the procedure if you discover a trespasser on the tracks?",
+        "answer": "If you discover a trespasser on the tracks, stop the train immediately and make an emergency call to the signaller."
+      },
+      {
+        "question": "What are your responsibilities if you find hazards blocking an authorized walking route?",
+        "answer": "Any hazards found blocking your walking route, station or fire exits are to be removed if safe to do so and/or reported to the SPM."
+      },
+      {
+        "question": "What should you do if you encounter a potential security threat during off-peak hours?",
+        "answer": "Challenge the person if you feel it's safe to do so. Report immediately to the appropriate authority (Signaller if on track, SPM/Depot Manager if in depot). Ensure lines are blocked if necessary and advise them to contact British Transport Police."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "After witnessing an accident in the depot, what is your first action?",
+        "options": [
+          "Call British Transport Police directly",
+          "Report to the Senior Production Manager (SPM)",
+          "Record the incident in the accident book yourself",
+          "Arrange for medical attention independently"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "You notice an item on the track that could potentially damage a train. You have a valid PTS card and it's currently 2pm on a Wednesday. What is the correct procedure?",
+        "options": [
+          "Use a litter picker to remove it immediately",
+          "Wait until after peak hours before attempting removal",
+          "Contact the signaller at Workstation 1 to block the line before retrieval",
+          "Report it to the SPM but take no further action"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Under the H.O.T. protocol, a suspicious package would be identified as:",
+        "options": [
+          "Heavy, Operational, Threatening",
+          "Hidden, Obviously suspicious, not Typical",
+          "Hazardous, Obscured, Technical",
+          "Hot, Obstructive, Threatening"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "You notice a colleague not following proper safety procedures when working near the tracks. What should you do?",
+        "options": [
+          "Report them directly to British Transport Police",
+          "Ignore it if it doesn't directly affect your work",
+          "Document the violation and report it at the end of your shift",
+          "Challenge them if safe to do so and report to the SPM/Depot Manager"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "A passenger has been discovered on a train in the depot after hours. What is the correct procedure?",
+        "options": [
+          "Allow them to exit the depot on their own",
+          "Call British Transport Police immediately",
+          "Report to SPM and ensure they are escorted from the train to the exit gate",
+          "Detain them until the next scheduled service"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "You're working in the depot and notice smoke coming from beneath a stationary train. The correct immediate action is to:",
+        "options": [
+          "Evacuate the area and pull the fire alarm",
+          "Attempt to extinguish the fire yourself",
+          "Report to the SPM who will arrange for movements to be stopped",
+          "Move the train to an isolated siding"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "Where would COSHH safety data sheets be located?",
+        "options": [
+          "In the First Aid Room",
+          "In the Health & Safety Notice Case",
+          "In the SPM office",
+          "In East Ham depot in shed near buffer stops of 5 road"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "question": "You find debris blocking an authorized walking route in the depot. The correct procedure is to:",
+        "options": [
+          "Walk around it and continue with your duties",
+          "Place a warning sign and leave it for the cleaning crew",
+          "Remove it if safe to do so and/or report it to the SPM",
+          "Block off the entire walking route until it can be cleared"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "When signing in for duty, which of the following is NOT a requirement?",
+        "options": [
+          "Confirming you are fit for duty",
+          "Having all necessary equipment and documents",
+          "Checking the Health & Safety Notice Case (Yellow Border)",
+          "Reading the late notice case and crew notice case"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "You've dropped your radio on the track during peak hours. What's the correct procedure?",
+        "options": [
+          "Use a litter picker to retrieve it with permission from the signaller",
+          "Wait until off-peak hours and retrieve it with proper authorization",
+          "Ask a colleague with a PTS card to retrieve it immediately",
+          "Report the loss and request a replacement"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "You notice a suspicious package hidden under a seat on a train in the depot. After ensuring your own safety, what's your next action?",
+        "options": [
+          "Open it carefully to determine if it's dangerous",
+          "Remove it from the train and take it to a secure location",
+          "Report it immediately to the SPM and follow H.O.T. protocol",
+          "Make an announcement asking if anyone has left a package"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "You witness a near-miss incident where no one was injured. What should you do?",
+        "options": [
+          "Since no one was hurt, no action is required",
+          "Make a note for yourself but formal reporting isn't necessary",
+          "Report it to the SPM who will record it in the accident book",
+          "Only report it if it could have resulted in serious injury"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "A passing train appears to have a door that isn't fully closed. What information should you include when reporting this?",
+        "options": [
+          "Only the train number is needed",
+          "The head code and approximate time of observation",
+          "Head code, time, location, direction, and details of the issue",
+          "Your employee ID and the exact time of observation"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "question": "You notice someone taking photographs of operational areas of the depot. What should you do?",
+        "options": [
+          "Ignore them as photography is permitted in public areas",
+          "Challenge them if safe to do so and report to the SPM/Depot Manager",
+          "Confiscate their camera or phone immediately",
+          "Call British Transport Police directly without alerting local management"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "question": "In a scenario where multiple security concerns arise simultaneously, which should take priority?",
+        "options": [
+          "Trespassers in a non-operational area",
+          "A suspicious package near operational equipment",
+          "Someone taking photographs from outside the perimeter",
+          "A minor rule violation by a staff member"
+        ],
+        "correctAnswer": 1
+      }
+    ],
+    "time-trial": [
+      { "term": "SPM", "definition": "Senior Production Manager" },
+      { "term": "H.O.T.", "definition": "Hidden, Obviously suspicious, not Typical" },
+      { "term": "PTS card", "definition": "Personal Track Safety card" },
+      { "term": "COSHH", "definition": "Control of Substances Hazardous to Health" },
+      { "term": "BTP", "definition": "British Transport Police" },
+      { "term": "Authorized walking route (inside shed)", "definition": "Marked in green" },
+      { "term": "Authorized walking route (outside shed)", "definition": "Marked in yellow or with raised wooden edges" },
+      { "term": "Accident book location", "definition": "Front office" },
+      { "term": "First aid equipment locations", "definition": "First Aid Room, SPM office, Fringe boxes, train cabs" },
+      { "term": "First aiders list location", "definition": "Health & Safety Notice Case (Yellow Border)" },
+      { "term": "COSHH safety data sheets location", "definition": "East Ham depot in shed near buffer stops of 5 road" },
+      { "term": "Track retrieval requirements", "definition": "Line blocked, outside peak times, valid PTS card" },
+      { "term": "Perishable evidence", "definition": "Evidence that can deteriorate or be lost if not promptly recorded" },
+      { "term": "Evidence recording methods", "definition": "Photography, securing items, sketching, notes, CCTV, train downloads, witness accounts" },
+      { "term": "Signaller Workstation 1", "definition": "Authority responsible for blocking lines for item retrieval" },
+      { "term": "Over-carried passenger", "definition": "Passenger who has remained on a train beyond their intended destination" },
+      { "term": "Trespass response on tracks", "definition": "Stop train immediately and make emergency call to signaller" },
+      { "term": "Trespass response in depot", "definition": "Report to SPM and escort to exit by safest means, never leaving them alone" },
+      { "term": "Safety instructions locations", "definition": "Health & Safety Notice Case, sectional appendix, depot safety instructions, intranet" },
+      { "term": "Passing train issues", "definition": "Report with head code, time, location, direction, and problem details" },
+      { "term": "Litter picker use", "definition": "Only with express permission from signaller and if item is within reach" },
+      { "term": "Signing in requirements", "definition": "Statement of readiness, fitness for duty, proper uniform/PPE, required equipment/documents" },
+      { "term": "Accident reporting sequence", "definition": "Report to SPM, stop movements if needed, arrange medical attention, record in accident book" },
+      { "term": "Hazard on walking route", "definition": "Remove if safe and/or report to SPM" },
+      { "term": "Hazard in depot sidings", "definition": "Report immediately to SPM" },
+      { "term": "Late notice case", "definition": "Must be checked during signing in process" },
+      { "term": "Train crew notice case", "definition": "Must be checked during signing in process" },
+      { "term": "Altered workings", "definition": "Changes to normal operations that must be checked during signing in" }
+    ],
+    "true-false": [
+      {
+        "statement": "When retrieving dropped items from the track, you must have a current PTS card regardless of whether it's peak or off-peak hours.",
+        "isTrue": false,
+        "explanation": "Dropped items on the track can ONLY be removed if: the line is blocked by the relevant signaller (Workstation 1), it is outside of peak times, AND the person retrieving the item must have a current and in-date PTS card. During peak hours, items should not be retrieved even with a valid PTS card."
+      },
+      {
+        "statement": "If you witness a near-miss where no one was injured, formal reporting is not required.",
+        "isTrue": false,
+        "explanation": "All accidents AND near misses at the depot must be reported to the SPM who will record the incident in the accident book. Near misses are important safety indicators even when no injury occurs."
+      },
+      {
+        "statement": "Authorized walking routes within the shed are marked out in yellow.",
+        "isTrue": false,
+        "explanation": "Authorized walking routes within the shed are marked out in green. Outside the shed, they are marked in yellow or have raised wooden edges."
+      },
+      {
+        "statement": "If you discover unauthorized persons on a train in the depot, they can exit independently once directed to the nearest exit.",
+        "isTrue": false,
+        "explanation": "Unauthorized persons/over-carried passengers must be reported immediately to the SPM and arrangements made for them to be escorted from the train to the exit gate by the safest possible means. It is essential they are dealt with immediately and are not left alone at any point."
+      },
+      {
+        "statement": "When using the H.O.T. protocol, 'T' stands for 'Threatening'.",
+        "isTrue": false,
+        "explanation": "In the H.O.T. protocol, 'T' stands for not TYPICAL of what is regularly or should be encountered in that location. The full acronym is HIDDEN (placed out of public view), OBVIOUSLY suspicious (looks unusual), not TYPICAL."
+      },
+      {
+        "statement": "A list of first aiders can be found in the Health & Safety Notice Case with the Yellow Border.",
+        "isTrue": true,
+        "explanation": "According to the safety procedures, the list of first aiders is displayed in the Health & Safety Notice Case with the Yellow Border."
+      },
+      {
+        "statement": "When reporting an issue with a passing train, you only need to provide the train's head code.",
+        "isTrue": false,
+        "explanation": "When reporting an issue with a passing train, you should provide as much information as possible including: what was amiss, head code, time, location, and direction of travel."
+      },
+      {
+        "statement": "In a situation where you notice someone violating safety rules, you should challenge them regardless of any potential risk to yourself.",
+        "isTrue": false,
+        "explanation": "The correct procedure is to challenge them ONLY if you feel it's safe to do so. Call the Signaller if on track or SPM/Depot Manager in the depot (block lines if needed) and advise them to call British Transport Police (BTP)."
+      },
+      {
+        "statement": "COSHH safety data sheets are located in the First Aid Room.",
+        "isTrue": false,
+        "explanation": "COSHH safety data sheets are located at East Ham depot in the shed near buffer stops of 5 road, not in the First Aid Room."
+      },
+      {
+        "statement": "Litter pickers can be used to retrieve items from the track without signaller permission as long as the item is within reach.",
+        "isTrue": false,
+        "explanation": "Litter pickers can only be used if the item is within reach AND you have EXPRESS PERMISSION from the signaller. Both conditions must be met."
+      },
+      {
+        "statement": "If you find hazards within the depot sidings, you should remove them immediately without reporting.",
+        "isTrue": false,
+        "explanation": "Hazards found within the depot sidings should be reported IMMEDIATELY to the SPM. Unlike hazards on walking routes (which should be removed if safe to do so), the procedure for sidings hazards is specifically to report them."
+      },
+      {
+        "statement": "When signing in for duty, reading the late notice case and checking for altered workings are mandatory requirements.",
+        "isTrue": true,
+        "explanation": "When signing in for duty, you must read the late notice case, train crew notice case, and check for altered workings as part of your signing in requirements."
+      },
+      {
+        "statement": "In a scenario where you discover trespassers on the tracks, the immediate action is to report to the SPM while maintaining observation.",
+        "isTrue": false,
+        "explanation": "If trespassers are discovered on the tracks, you must stop the train immediately and make an emergency call to the signaller. Safety takes precedence over observation."
+      },
+      {
+        "statement": "First aid equipment can be found in multiple locations including the SPM office and train cabs.",
+        "isTrue": true,
+        "explanation": "First aid equipment is located in multiple places including the First Aid Room, SPM office, Fringe boxes, and train cabs, enabling quick access in different areas of operation."
+      },
+      {
+        "statement": "If you observe someone acting suspiciously near operational equipment, you should maintain surveillance until they leave the area.",
+        "isTrue": false,
+        "explanation": "The correct procedure is to challenge them if you feel it's safe to do so, then call the Signaller if on track or SPM/Depot Manager in the depot (block lines if needed) and advise them to call British Transport Police (BTP). Maintaining surveillance without reporting is not the proper protocol."
+      },
+      {
+        "statement": "In a situation where an accident occurs, medical attention should only be arranged after the incident has been recorded in the accident book.",
+        "isTrue": false,
+        "explanation": "The SPM will arrange for all movements to be stopped if required, arrange for any medical attention to be provided, and then record the incident in the accident book. Medical attention takes priority over documentation."
+      },
+      {
+        "statement": "The primary method for recording perishable evidence is through photography and CCTV recordings.",
+        "isTrue": false,
+        "explanation": "While photography and CCTV are important methods, there are multiple ways to record perishable evidence including: photographing, bagging up or securing evidence, sketching, taking notes, CCTV recording, train downloads, and collecting eye witness accounts. No single method is designated as primary."
+      },
+      {
+        "statement": "When an incident occurs that might require evidence collection, prioritizing safety over evidence preservation is the correct approach.",
+        "isTrue": true,
+        "explanation": "While evidence collection is important, safety always takes precedence. Ensuring personal safety and that of others should be the first priority before attempting to preserve evidence."
+      },
+      {
+        "statement": "If you notice a door malfunction on a train entering the depot, you should report it with just the basic information that a door is malfunctioning.",
+        "isTrue": false,
+        "explanation": "When reporting any issue with a train, you should provide as much information as possible including what was amiss (specific details about the door malfunction), head code, time, location, and direction of travel."
+      },
+      {
+        "statement": "When using a litter picker to retrieve an item from the track with signaller permission, you must still ensure the line is blocked and it's outside peak hours.",
+        "isTrue": true,
+        "explanation": "Even when using a litter picker with signaller permission, the standard requirements still apply: the line must be blocked by the relevant signaller, it must be outside peak hours, and the person must have a current PTS card."
+      }
+    ]
+  }
+}
