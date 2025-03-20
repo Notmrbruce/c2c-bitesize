@@ -6,17 +6,17 @@ export const config = {
     // Debug mode - set to true to see detailed logs
     debug: true,
     
-    // Base paths
+    // Base paths - using relative paths to ensure they work from any page
     paths: {
-        data: 'data/modules',
-        css: 'css',
-        js: 'js'
+        data: './data/modules',
+        css: './css',
+        js: './js'
     },
     
-    // API endpoints
+    // API endpoints - using relative paths
     api: {
-        modulesList: 'data/modules/index.json',
-        modulePrefix: 'data/modules/'
+        modulesList: './data/modules/index.json',
+        modulePrefix: './data/modules/'
     },
     
     // UI settings
@@ -58,6 +58,14 @@ export const config = {
         fade: 500, // ms for animations
     }
 };
+
+// Log configuration when loaded (useful for debugging)
+console.log('[Config] Configuration loaded with:');
+console.log('[Config] API paths:', {
+    modulesList: config.api.modulesList,
+    modulePrefix: config.api.modulePrefix
+});
+console.log('[Config] Debug mode:', config.debug);
 
 // Singleton instance - ensures config is only loaded once
 export default config;
