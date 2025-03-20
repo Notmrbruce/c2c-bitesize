@@ -70,6 +70,7 @@
             
             <div class="module-grid" id="modules-list" role="list" aria-label="Available learning modules">
                 <!-- Modules will be loaded here -->
+                <div class="loading-indicator">Loading modules...</div>
             </div>
         </div>
         
@@ -104,36 +105,261 @@
         </div>
     </footer>
     
-    <script src="js/config.js" type="module"></script>
-    <script src="js/state-manager.js" type="module"></script>
-    <script src="js/ui-utils.js" type="module"></script>
-    <script src="js/module-loader.js" type="module"></script>
-    <script src="js/navigation.js" type="module"></script>
-    <script src="js/study-methods/flashcards.js" type="module"></script>
-    <script src="js/study-methods/quiz.js" type="module"></script>
-    <script src="js/study-methods/time-trial.js" type="module"></script>
-    <script src="js/study-methods/true-false.js" type="module"></script>
-    <script src="js/app.js" type="module"></script>
-    <!-- Add this script before the closing </body> tag in both HTML files -->
-<script>
-    // Console error handler to log more detailed errors
-    window.addEventListener('error', function(e) {
-        console.error('JavaScript error:', e.message);
-        console.error('File:', e.filename);
-        console.error('Line:', e.lineno);
-        console.error('Column:', e.colno);
-        console.error('Stack:', e.error?.stack);
-    });
+    <!-- Console error handler to log more detailed errors -->
+    <script>
+        window.addEventListener('error', function(e) {
+            console.error('JavaScript error:', e.message);
+            console.error('File:', e.filename);
+            console.error('Line:', e.lineno);
+            console.error('Column:', e.colno);
+            console.error('Stack:', e.error?.stack);
+        });
+        
+        // Expose navigation function for direct access
+        window.navigateToModule = function(moduleId) {
+            console.log('[GlobalNav] Navigation to module requested:', moduleId);
+            // Import the navigation module
+            import('./js/navigation.js').then(nav => {
+                if (nav.navigateToModule) {
+                    nav.navigateToModule(moduleId);
+                } else {
+                    console.error('[GlobalNav] navigateToModule function not found in navigation module');
+                }
+            }).catch(err => {
+                console.error('[GlobalNav] Error importing navigation module:', err);
+            });
+        };
+    </script>
     
-    // Log page load completion
-    window.addEventListener('load', function() {
-        console.log('Page fully loaded at:', new Date().toISOString());
-        console.log('Current page:', window.location.pathname);
-        console.log('Module list element exists:', !!document.getElementById('modules-list'));
-        console.log('Navigation initialized:', !!window.navigationInitialized);
-        console.log('App initialized:', !!window.appInitialized);
-        console.log('Modules content loaded:', !!window.modulesContentLoaded);
-    });
+    <!-- Path and network debugging -->
+    <script>
+        // Check and log path information
+        (function() {
+            console.log('====== PATH DEBUGGING ======');
+            console.log('Window location:');
+            console.log('- href:', window.location.href);
+            console.log('- pathname:', window.location.pathname);
+            console.log('- origin:', window.location.origin);
+            
+            // Resolve paths
+            function resolvePath(path) {
+                const link = document.createElement('a');
+                link.href = path;
+                return link.href;
+            }
+            
+            console.log('Resolved paths:');
+            console.log('- ./data/modules/index.json:', resolvePath('./data/modules/index.json'));
+            console.log('- data/modules/index.json:', resolvePath('data/modules/index.json'));
+            console.log('- /data/modules/index.json:', resolvePath('/data/modules/index.json'));
+            
+            // Check if the modules file exists using a HEAD request
+            function checkFileExists(url) {
+                fetch(url, { method: 'HEAD' })
+                    .then(response => {
+                        console.log(`File check for ${url}: ${response.status} ${response.ok ? 'OK' : 'Not Found'}`);
+                    })
+                    .catch(error => {
+                        console.error(`File check for ${url} failed:`, error);
+                    });
+            }
+            
+            // Check various path combinations
+            checkFileExists('./data/modules/index.json');
+            checkFileExists('data/modules/index.json');
+            checkFileExists('/data/modules/index.json');
+            
+            // Check with full origin
+            checkFileExists(window.location.origin + '/data/modules/index.json');
+            
+            console.log('====== END PATH DEBUGGING ======');
+        })();
+    </script>
+    
+    <!-- Direct modules loader -->
+    <script>
+        // Direct modules loader for modules.html page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('[DirectFix] Attempting direct modules loading fix');
+            
+            const modulesList = document.getElementById('modules-list');
+            if (!modulesList) {
+                console.error('[DirectFix] Modules list container not found!');
+                return;
+            }
+            
+            // Show loading message
+            modulesList.innerHTML = '<div class="loading-indicator">Loading modules...</div>';
+            
+            // Direct fetch of the index.json - try different paths
+            const possiblePaths = [
+                './data/modules/index.json',
+                '../data/modules/index.json',
+                'data/modules/index.json',
+                '/data/modules/index.json',
+                window.location.origin + '/data/modules/index.json'
+            ];
+            
+            // Try each path in sequence
+            function tryNextPath(index) {
+                if (index >= possiblePaths.length) {
+                    // All paths failed
+                    modulesList.innerHTML = `
+                        <div style="text-align: center; padding: 20px;">
+                            <p>Error loading modules. All paths failed.</p>
+                            <button id="retry-modules" class="btn btn-primary">Retry</button>
+                        </div>
+                    `;
+                    
+                    document.getElementById('retry-modules')?.addEventListener('click', function() {
+                        location.reload();
+                    });
+                    return;
+                }
+                
+                const path = possiblePaths[index];
+                console.log(`[DirectFix] Trying path ${index + 1}/${possiblePaths.length}: ${path}`);
+                
+                fetch(path)
+                    .then(response => {
+                        console.log(`[DirectFix] Fetch response for ${path}: ${response.status}`);
+                        if (!response.ok) {
+                            throw new Error(`Failed to load modules: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(modules => {
+                        console.log('[DirectFix] Successfully loaded', modules.length, 'modules');
+                        
+                        // Clear the loading message
+                        modulesList.innerHTML = '';
+                        
+                        // Display modules
+                        if (modules && modules.length > 0) {
+                            modules.forEach((module, index) => {
+                                const moduleCard = document.createElement('div');
+                                moduleCard.className = 'module-card';
+                                moduleCard.setAttribute('role', 'listitem');
+                                moduleCard.setAttribute('tabindex', '0');
+                                moduleCard.setAttribute('aria-label', `Module: ${module.title}`);
+                                
+                                moduleCard.innerHTML = `
+                                    <h3 class="module-title">${module.title}</h3>
+                                    <p class="module-desc">${module.description}</p>
+                                `;
+                                
+                                // Navigate to the module page or trigger the module navigation
+                                moduleCard.addEventListener('click', function() {
+                                    console.log('[DirectFix] Module clicked:', module.id);
+                                    // Use the global navigation function
+                                    if (window.navigateToModule) {
+                                        window.navigateToModule(module.id);
+                                    } else {
+                                        // Fallback to directly showing methods view
+                                        const modulesView = document.getElementById('modules-view');
+                                        const methodsView = document.getElementById('methods-view');
+                                        
+                                        if (modulesView) modulesView.classList.add('hidden');
+                                        if (methodsView) {
+                                            methodsView.classList.remove('hidden');
+                                            
+                                            // Update title
+                                            const titleElement = document.getElementById('selected-module-title');
+                                            if (titleElement) {
+                                                titleElement.textContent = module.title.toUpperCase();
+                                            }
+                                        }
+                                    }
+                                });
+                                
+                                // Add keyboard handler
+                                moduleCard.addEventListener('keydown', (e) => {
+                                    if (e.key === 'Enter' || e.key === ' ') {
+                                        e.preventDefault();
+                                        moduleCard.click();
+                                    }
+                                });
+                                
+                                modulesList.appendChild(moduleCard);
+                                
+                                // Add fade-in animation with delay
+                                setTimeout(() => {
+                                    moduleCard.classList.add('fade-in');
+                                }, index * 100);
+                            });
+                            
+                            // Set flag to indicate modules have been loaded
+                            window.modulesContentLoaded = true;
+                        } else {
+                            modulesList.innerHTML = '<p>No modules available.</p>';
+                        }
+                    })
+                    .catch(error => {
+                        console.error(`[DirectFix] Error loading modules from ${path}:`, error);
+                        // Try the next path
+                        tryNextPath(index + 1);
+                    });
+            }
+            
+            // Start trying paths
+            tryNextPath(0);
+        });
+    </script>
+    
+    <!-- Application scripts - deferred to let the direct loader run first -->
+    <script src="js/config.js" type="module" defer></script>
+    <script src="js/state-manager.js" type="module" defer></script>
+    <script src="js/ui-utils.js" type="module" defer></script>
+    <script src="js/module-loader.js" type="module" defer></script>
+    <script src="js/navigation.js" type="module" defer></script>
+    <script src="js/study-methods/flashcards.js" type="module" defer></script>
+    <script src="js/study-methods/quiz.js" type="module" defer></script>
+    <script src="js/study-methods/time-trial.js" type="module" defer></script>
+    <script src="js/study-methods/true-false.js" type="module" defer></script>
+    <script src="js/app.js" type="module" defer></script>
+    // Add this script to both HTML files right before the closing </body> tag
+<script>
+    // Check and log path information
+    (function() {
+        console.log('====== PATH DEBUGGING ======');
+        console.log('Window location:');
+        console.log('- href:', window.location.href);
+        console.log('- pathname:', window.location.pathname);
+        console.log('- origin:', window.location.origin);
+        
+        // Resolve paths
+        function resolvePath(path) {
+            const link = document.createElement('a');
+            link.href = path;
+            return link.href;
+        }
+        
+        console.log('Resolved paths:');
+        console.log('- ./data/modules/index.json:', resolvePath('./data/modules/index.json'));
+        console.log('- data/modules/index.json:', resolvePath('data/modules/index.json'));
+        console.log('- /data/modules/index.json:', resolvePath('/data/modules/index.json'));
+        
+        // Check if the modules file exists using a HEAD request
+        function checkFileExists(url) {
+            fetch(url, { method: 'HEAD' })
+                .then(response => {
+                    console.log(`File check for ${url}: ${response.status} ${response.ok ? 'OK' : 'Not Found'}`);
+                })
+                .catch(error => {
+                    console.error(`File check for ${url} failed:`, error);
+                });
+        }
+        
+        // Check various path combinations
+        checkFileExists('./data/modules/index.json');
+        checkFileExists('data/modules/index.json');
+        checkFileExists('/data/modules/index.json');
+        
+        // Check with full origin
+        checkFileExists(window.location.origin + '/data/modules/index.json');
+        
+        console.log('====== END PATH DEBUGGING ======');
+    })();
 </script>
     // Add this script to modules.html right before the closing </body> tag
 <script>
