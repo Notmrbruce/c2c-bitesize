@@ -20,13 +20,15 @@ import trueFalse from './study-methods/true-false.js';
 let modulesView;
 let methodsView;
 let contentView;
-let homeView;
 let modulesList;
 let selectedModuleTitle;
 let methodButtons;
 let breadcrumbModule;
 let mobileBreadcrumb;
 let themeToggle;
+
+// Flag to track initialization
+window.appInitialized = false;
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', init);
@@ -35,8 +37,12 @@ document.addEventListener('DOMContentLoaded', init);
  * Initialize the application
  */
 async function init() {
+    console.log('[App] Initializing application...');
+    
+    // Set initialization flag
+    window.appInitialized = true;
+    
     // Get DOM elements
-    homeView = document.getElementById('home-view');
     modulesView = document.getElementById('modules-view');
     methodsView = document.getElementById('methods-view');
     contentView = document.getElementById('content-view');
@@ -47,6 +53,11 @@ async function init() {
     mobileBreadcrumb = document.getElementById('mobile-breadcrumb');
     themeToggle = document.getElementById('theme-toggle');
     
+    // Log found elements for debugging
+    console.log('[App] Found modulesView:', !!modulesView);
+    console.log('[App] Found methodsView:', !!methodsView);
+    console.log('[App] Found contentView:', !!contentView);
+    
     // Setup event listeners
     setupEventListeners();
     
@@ -56,20 +67,26 @@ async function init() {
     try {
         // Determine current page and initialize accordingly
         const currentPath = window.location.pathname;
+        console.log('[App] Current path:', currentPath);
         
         if (currentPath.endsWith('modules.html')) {
             // If we're on the modules page, load modules
+            console.log('[App] On modules page, loading modules content');
             await loadModulesContent();
+            window.modulesContentLoaded = true;
             state.navigateTo('modules');
         } else if (currentPath.endsWith('index.html') || currentPath.endsWith('/')) {
             // If we're on the home page
+            console.log('[App] On home page, showing home content');
             state.navigateTo('home');
         }
         
         // Add entrance animations
         animateElements();
+        
+        console.log('[App] Initialization complete');
     } catch (error) {
-        console.error('Error during initialization:', error);
+        console.error('[App] Error during initialization:', error);
         ui.showToast('There was an error initializing the application. Please try again.', 'error');
     }
 }
@@ -99,36 +116,53 @@ function handleNavigation(navigation) {
     const navData = navigation || state.get('navigation') || { view: 'modules', params: {} };
     const { view, params } = navData;
     
+    console.log('[App] Handling navigation to view:', view, 'with params:', params);
+    
     // Hide all views first
-    if (homeView) hideElement(homeView);
-    if (modulesView) hideElement(modulesView);
-    if (methodsView) hideElement(methodsView);
-    if (contentView) hideElement(contentView);
+    if (modulesView) {
+        console.log('[App] Hiding modulesView');
+        hideElement(modulesView);
+    }
+    if (methodsView) {
+        console.log('[App] Hiding methodsView');
+        hideElement(methodsView);
+    }
+    if (contentView) {
+        console.log('[App] Hiding contentView');
+        hideElement(contentView);
+    }
     
     // Show the appropriate view
     switch (view) {
         case 'home':
-            if (homeView) showElement(homeView);
+            console.log('[App] Showing home view');
+            // On index.html, use the modulesView for home content
+            if (modulesView) showElement(modulesView);
             break;
             
         case 'modules':
+            console.log('[App] Showing modules view');
             if (modulesView) showElement(modulesView);
             break;
             
         case 'methods':
+            console.log('[App] Showing methods view');
             if (params && params.module) {
                 showMethodsView(params.module);
             } else {
                 // Fallback to modules view if no module specified
+                console.log('[App] No module specified, showing modules view instead');
                 if (modulesView) showElement(modulesView);
             }
             break;
             
         case 'content':
+            console.log('[App] Showing content view');
             if (params && params.module && params.method) {
                 loadStudyMethod(params.module, params.method);
             } else {
                 // Fallback to modules view if missing params
+                console.log('[App] Missing module or method params, showing modules view instead');
                 if (modulesView) showElement(modulesView);
             }
             break;
@@ -136,8 +170,9 @@ function handleNavigation(navigation) {
         default:
             // Default to home or modules view depending on the page
             const currentPath = window.location.pathname;
+            console.log('[App] Default case - current path:', currentPath);
             if (currentPath.endsWith('index.html') || currentPath.endsWith('/')) {
-                if (homeView) showElement(homeView);
+                if (modulesView) showElement(modulesView);
             } else {
                 if (modulesView) showElement(modulesView);
             }
@@ -157,6 +192,7 @@ function handleNavigation(navigation) {
 function showElement(element) {
     if (element) {
         element.classList.remove('hidden');
+        console.log('[App] Element displayed:', element.id || 'unnamed element');
     }
 }
 
@@ -167,6 +203,7 @@ function showElement(element) {
 function hideElement(element) {
     if (element) {
         element.classList.add('hidden');
+        console.log('[App] Element hidden:', element.id || 'unnamed element');
     }
 }
 
@@ -175,6 +212,7 @@ function hideElement(element) {
  * @param {string} view - Current view
  */
 function updateActiveNavLink(view) {
+    console.log('[App] Updating active nav link for view:', view);
     document.querySelectorAll('.nav-links a, .mobile-dropdown a').forEach(link => {
         link.classList.remove('active');
         link.removeAttribute('aria-current');
@@ -250,6 +288,8 @@ function updateThemeIcon() {
  * @param {Object} moduleData - The module data
  */
 function showMethodsView(moduleData) {
+    console.log('[App] Showing methods view for module:', moduleData.id);
+    
     // Update titles
     if (selectedModuleTitle) {
         selectedModuleTitle.textContent = moduleData.title.toUpperCase();
@@ -302,7 +342,15 @@ function showMethodsView(moduleData) {
 function createMethodButtons(moduleData) {
     // Clear container
     if (!methodButtons) return;
+    console.log('[App] Creating method buttons for module:', moduleData.id);
     methodButtons.innerHTML = '';
+    
+    // Handle case where methods might not be defined
+    if (!moduleData.methods || !Array.isArray(moduleData.methods)) {
+        console.error('[App] No methods defined for module:', moduleData.id);
+        methodButtons.innerHTML = '<p>No study methods available for this module.</p>';
+        return;
+    }
     
     // Create a button for each available method
     moduleData.methods.forEach((method, index) => {
@@ -311,6 +359,8 @@ function createMethodButtons(moduleData) {
             description: `Learn with ${method}`,
             icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>'
         };
+        
+        console.log('[App] Creating button for method:', method);
         
         // Create the button
         const button = ui.createMethodButton(method, methodInfo, () => {
@@ -332,6 +382,7 @@ function createMethodButtons(moduleData) {
 function loadStudyMethod(moduleData, method) {
     // Clear previous content
     if (!contentView) return;
+    console.log('[App] Loading study method:', method, 'for module:', moduleData.id);
     contentView.innerHTML = '';
     
     // Show the content view
