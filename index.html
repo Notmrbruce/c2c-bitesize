@@ -141,5 +141,26 @@
     <script src="js/study-methods/time-trial.js" type="module"></script>
     <script src="js/study-methods/true-false.js" type="module"></script>
     <script src="js/app.js" type="module"></script>
+    <!-- Add this script before the closing </body> tag in both HTML files -->
+<script>
+    // Console error handler to log more detailed errors
+    window.addEventListener('error', function(e) {
+        console.error('JavaScript error:', e.message);
+        console.error('File:', e.filename);
+        console.error('Line:', e.lineno);
+        console.error('Column:', e.colno);
+        console.error('Stack:', e.error?.stack);
+    });
+    
+    // Log page load completion
+    window.addEventListener('load', function() {
+        console.log('Page fully loaded at:', new Date().toISOString());
+        console.log('Current page:', window.location.pathname);
+        console.log('Module list element exists:', !!document.getElementById('modules-list'));
+        console.log('Navigation initialized:', !!window.navigationInitialized);
+        console.log('App initialized:', !!window.appInitialized);
+        console.log('Modules content loaded:', !!window.modulesContentLoaded);
+    });
+</script>
 </body>
 </html>
