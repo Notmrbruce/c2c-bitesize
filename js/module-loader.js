@@ -29,13 +29,17 @@ export async function loadModulesList() {
  * @param {string} moduleId - The ID of the module to load
  * @returns {Promise<Object>} Module data
  */
-export async function loadModule(moduleId) {
+export async function loadModuleData(moduleId) {
     try {
+        console.log(`Fetching module from: ${MODULES_PATH}/${moduleId}.json`);
         const response = await fetch(`${MODULES_PATH}/${moduleId}.json`);
         if (!response.ok) {
             throw new Error(`Failed to load module '${moduleId}': ${response.status} ${response.statusText}`);
         }
-        return await response.json();
+        
+        const data = await response.json();
+        console.log(`Successfully loaded module: ${moduleId}`);
+        return data;
     } catch (error) {
         console.error(`Error loading module '${moduleId}':`, error);
         throw error;
@@ -48,14 +52,20 @@ export async function loadModule(moduleId) {
  */
 export async function loadAssessmentsList() {
     try {
+        // Try to load assessments, but handle gracefully if directory doesn't exist yet
         const response = await fetch(`${ASSESSMENTS_PATH}/index.json`);
         if (!response.ok) {
+            if (response.status === 404) {
+                console.warn('Assessments index not found. This feature may not be set up yet.');
+                return []; // Return empty array instead of throwing
+            }
             throw new Error(`Failed to load assessments index: ${response.status} ${response.statusText}`);
         }
         return await response.json();
     } catch (error) {
         console.error('Error loading assessments list:', error);
-        throw error;
+        // Return empty array instead of throwing, for a more graceful fallback
+        return [];
     }
 }
 
@@ -89,35 +99,8 @@ export async function checkImageExists(imagePath) {
         const response = await fetch(imagePath, { method: 'HEAD' });
         return response.ok;
     } catch (error) {
-        console.error(`Error checking image existence for '${imagePath}':`, error);
+        console.warn(`Error checking image existence for '${imagePath}':`, error);
         return false;
-    }
-}
-
-/**
- * Load an image as a data URL (for fallback/caching)
- * @param {string} imagePath - Path to the image
- * @returns {Promise<string>} Image as data URL
- */
-export async function loadImageAsDataUrl(imagePath) {
-    if (!imagePath) return null;
-    
-    try {
-        const response = await fetch(imagePath);
-        if (!response.ok) {
-            throw new Error(`Failed to load image '${imagePath}': ${response.status} ${response.statusText}`);
-        }
-        
-        const blob = await response.blob();
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = reject;
-            reader.readAsDataURL(blob);
-        });
-    } catch (error) {
-        console.error(`Error loading image '${imagePath}' as data URL:`, error);
-        return null;
     }
 }
 
@@ -130,14 +113,4 @@ export async function loadImageAsDataUrl(imagePath) {
  */
 export function getImagePath(moduleId, method, index) {
     return `${MODULES_PATH}/images/${moduleId}/${method}_${index}.jpg`;
-}
-
-/**
- * Helper function to get the image path for an assessment question
- * @param {string} assessmentId - The assessment ID
- * @param {number} questionIndex - The question index
- * @returns {string} The image path if specified, null otherwise
- */
-export function getAssessmentImagePath(assessmentId, questionIndex) {
-    return `${ASSESSMENTS_PATH}/images/${assessmentId}/question_${questionIndex}.jpg`;
 }
