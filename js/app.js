@@ -1,4 +1,6 @@
 // Main application script
+import { loadModulesList, loadModule, getImagePath, checkImageExists } from './module-loader.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
     const modulesView = document.getElementById('modules-view');
@@ -8,12 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedModuleTitle = document.getElementById('selected-module-title');
     const methodButtons = document.getElementById('method-buttons');
     const breadcrumbModule = document.getElementById('breadcrumb-module');
-    const themeToggle = document.getElementById('theme-toggle');
-    const floatingNav = document.querySelector('.floating-nav');
     
     // App state
     let currentModule = null;
-    let lastScrollTop = 0;
     
     // Method descriptions and icons
     const methodInfo = {
@@ -38,53 +37,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize the application
     init();
     
-    // Setup Event Listeners
-    setupEventListeners();
-    
     // Functions
-    function init() {
-        loadModules();
+    async function init() {
+        await loadModules();
         
         // Initially show only the modules view
         modulesView.style.display = 'block';
         methodsView.style.display = 'none';
         contentView.style.display = 'none';
         
-        // Add floating navbar scroll behavior
-        handleFloatingNavScroll();
-        
         // Add entrance animations
         animateElements();
-    }
-    
-    function setupEventListeners() {
-        // Home navigation
-        document.querySelectorAll('.nav-links a')[0].addEventListener('click', (e) => {
-            e.preventDefault();
-            showModulesView();
-        });
-        
-        // Theme toggle
-        themeToggle.addEventListener('click', toggleTheme);
-        
-        // Window scroll event for floating nav
-        window.addEventListener('scroll', handleFloatingNavScroll);
-    }
-    
-    function handleFloatingNavScroll() {
-        window.addEventListener('scroll', () => {
-            const st = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (st > lastScrollTop && st > 200) {
-                // Scrolling down
-                floatingNav.classList.add('hidden');
-            } else {
-                // Scrolling up
-                floatingNav.classList.remove('hidden');
-            }
-            
-            lastScrollTop = st <= 0 ? 0 : st;
-        });
     }
     
     function animateElements() {
@@ -95,55 +58,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    function toggleTheme() {
-        document.body.classList.toggle('light-theme');
-        
-        // Update toggle icon based on theme
-        if (document.body.classList.contains('light-theme')) {
-            themeToggle.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-        } else {
-            themeToggle.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.93 4.93L6.34 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.66 17.66L19.07 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.34 17.66L4.93 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.07 4.93L17.66 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    async function loadModules() {
+        try {
+            const modules = await loadModulesList();
+            
+            modulesList.innerHTML = '';
+            
+            modules.forEach((module, index) => {
+                const moduleElement = document.createElement('div');
+                moduleElement.className = 'module-card';
+                moduleElement.innerHTML = `
+                    <h3 class="module-title">${module.title}</h3>
+                    <p class="module-desc">${module.description}</p>
+                `;
+                
+                moduleElement.addEventListener('click', () => {
+                    loadModule(module.id);
+                });
+                
+                modulesList.appendChild(moduleElement);
+            });
+        } catch (error) {
+            console.error('Error loading modules:', error);
+            modulesList.innerHTML = '<p>Error loading modules. Please try again later.</p>';
         }
     }
     
-    function loadModules() {
-        fetch('data/modules/index.json')
-            .then(response => response.json())
-            .then(modules => {
-                modulesList.innerHTML = '';
-                
-                modules.forEach((module, index) => {
-                    const moduleElement = document.createElement('div');
-                    moduleElement.className = 'module-card';
-                    moduleElement.innerHTML = `
-                        <h3 class="module-title">${module.title}</h3>
-                        <p class="module-desc">${module.description}</p>
-                    `;
-                    
-                    moduleElement.addEventListener('click', () => {
-                        loadModule(module.id);
-                    });
-                    
-                    modulesList.appendChild(moduleElement);
-                });
-            })
-            .catch(error => {
-                console.error('Error loading modules:', error);
-                modulesList.innerHTML = '<p>Error loading modules. Please try again later.</p>';
-            });
-    }
-    
-    function loadModule(moduleId) {
-        fetch(`data/modules/${moduleId}.json`)
-            .then(response => response.json())
-            .then(moduleData => {
-                currentModule = moduleData;
-                showMethodsView(moduleData);
-            })
-            .catch(error => {
-                console.error(`Error loading module ${moduleId}:`, error);
-                alert('Error loading module. Please try again later.');
-            });
+    async function loadModule(moduleId) {
+        try {
+            const moduleData = await loadModule(moduleId);
+            currentModule = moduleData;
+            showMethodsView(moduleData);
+        } catch (error) {
+            console.error(`Error loading module ${moduleId}:`, error);
+            alert('Error loading module. Please try again later.');
+        }
     }
     
     function showModulesView() {
@@ -152,11 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
         methodsView.style.display = 'none';
         contentView.style.display = 'none';
         
-        // Update navigation
-        document.querySelectorAll('.nav-links a')[0].classList.add('active');
-        breadcrumbModule.parentElement.classList.remove('active');
-        breadcrumbModule.textContent = '';
-        breadcrumbModule.href = '#';
+        // Hide breadcrumb
+        if (window.hideBreadcrumb) {
+            window.hideBreadcrumb();
+        }
         
         // Scroll to top
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -167,12 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedModuleTitle.textContent = moduleData.title;
         
         // Update breadcrumb
-        breadcrumbModule.textContent = moduleData.title;
-        breadcrumbModule.parentElement.classList.add('active');
-        breadcrumbModule.addEventListener('click', (e) => {
-            e.preventDefault();
-            showMethodsView(currentModule);
-        });
+        if (window.updateBreadcrumb) {
+            window.updateBreadcrumb(moduleData.title, () => {
+                showMethodsView(currentModule);
+            });
+        }
         
         // Create method buttons
         createMethodButtons(moduleData);
@@ -267,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
-    function loadFlashcards(moduleData) {
+    async function loadFlashcards(moduleData) {
         const flashcardsData = moduleData.content.flashcards;
         let currentCardIndex = 0;
         
@@ -281,8 +228,12 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="content-container">
                 <div class="flashcard" id="current-flashcard">
                     <div class="card-indicator">Click to flip</div>
-                    <div class="flashcard-question">${flashcardsData[currentCardIndex].question}</div>
-                    <div class="flashcard-answer">${flashcardsData[currentCardIndex].answer}</div>
+                    <div class="flashcard-question" id="flashcard-question-content">${flashcardsData[currentCardIndex].question}</div>
+                    <div class="flashcard-answer" id="flashcard-answer-content">${flashcardsData[currentCardIndex].answer}</div>
+                </div>
+                
+                <div id="flashcard-image-container" class="flashcard-image-container" style="display: none;">
+                    <img id="flashcard-image" src="" alt="Flashcard image" class="flashcard-image">
                 </div>
                 
                 <div class="card-controls">
@@ -353,11 +304,40 @@ document.addEventListener('DOMContentLoaded', () => {
             showMethodsView(moduleData);
         });
         
-        function updateFlashcard() {
+        // Initial flashcard update
+        await updateFlashcard();
+        
+        async function updateFlashcard() {
             const card = flashcardsData[currentCardIndex];
-            document.querySelector('.flashcard-question').textContent = card.question;
-            document.querySelector('.flashcard-answer').textContent = card.answer;
+            
+            // Update question and answer text
+            document.getElementById('flashcard-question-content').textContent = card.question;
+            document.getElementById('flashcard-answer-content').textContent = card.answer;
+            
+            // Reset card flip state
             flashcardElement.classList.remove('flipped');
+            
+            // Check for image
+            const imageContainer = document.getElementById('flashcard-image-container');
+            const imageElement = document.getElementById('flashcard-image');
+            
+            if (card.image || moduleData.id) {
+                // Try direct image path first, then fallback to standard path
+                const hasDirectImage = card.image ? await checkImageExists(card.image) : false;
+                const standardPath = getImagePath(moduleData.id, 'flashcards', currentCardIndex);
+                const hasStandardImage = await checkImageExists(standardPath);
+                
+                if (hasDirectImage || hasStandardImage) {
+                    const imagePath = hasDirectImage ? card.image : standardPath;
+                    imageElement.src = imagePath;
+                    imageElement.alt = card.imageAlt || `Image for ${card.question}`;
+                    imageContainer.style.display = 'block';
+                } else {
+                    imageContainer.style.display = 'none';
+                }
+            } else {
+                imageContainer.style.display = 'none';
+            }
             
             // Update card number
             cardNumberElement.textContent = currentCardIndex + 1;
@@ -368,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    function loadQuiz(moduleData) {
+    async function loadQuiz(moduleData) {
         const quizData = moduleData.content.quiz;
         let currentQuestionIndex = 0;
         let score = 0;
@@ -387,6 +367,9 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="content-container">
                 <div class="quiz-container" id="quiz-container">
                     <div class="quiz-question" id="quiz-question"></div>
+                    <div id="quiz-image-container" class="quiz-image-container" style="display: none;">
+                        <img id="quiz-image" src="" alt="Quiz question image" class="quiz-image">
+                    </div>
                     <ul class="quiz-options" id="quiz-options"></ul>
                 </div>
                 
@@ -456,14 +439,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         // Load first question
-        loadQuestion();
+        await loadQuestion();
         
-        function loadQuestion() {
+        async function loadQuestion() {
             const questionData = quizData[currentQuestionIndex];
             const questionElement = document.getElementById('quiz-question');
             const optionsElement = document.getElementById('quiz-options');
+            const imageContainer = document.getElementById('quiz-image-container');
+            const imageElement = document.getElementById('quiz-image');
             
             questionElement.textContent = `${currentQuestionIndex + 1}. ${questionData.question}`;
+            
+            // Check for image
+            if (questionData.image || moduleData.id) {
+                // Try direct image path first, then fallback to standard path
+                const hasDirectImage = questionData.image ? await checkImageExists(questionData.image) : false;
+                const standardPath = getImagePath(moduleData.id, 'quiz', currentQuestionIndex);
+                const hasStandardImage = await checkImageExists(standardPath);
+                
+                if (hasDirectImage || hasStandardImage) {
+                    const imagePath = hasDirectImage ? questionData.image : standardPath;
+                    imageElement.src = imagePath;
+                    imageElement.alt = questionData.imageAlt || `Image for question ${currentQuestionIndex + 1}`;
+                    imageContainer.style.display = 'block';
+                } else {
+                    imageContainer.style.display = 'none';
+                }
+            } else {
+                imageContainer.style.display = 'none';
+            }
             
             // Update question number
             questionNumberElement.textContent = currentQuestionIndex + 1;
@@ -545,7 +549,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(moduleData));
         }
         
-        function showQuizReview() {
+        async function showQuizReview() {
             contentView.innerHTML = `
                 <div class="content-header">
                     <h2 class="content-title">${moduleData.title} - Quiz Review</h2>
@@ -566,15 +570,35 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const reviewElement = document.getElementById('quiz-review');
             
-            quizData.forEach((question, index) => {
+            for (let index = 0; index < quizData.length; index++) {
+                const question = quizData[index];
                 const userAnswer = userAnswers[index] !== null ? userAnswers[index] : -1;
                 const isCorrect = userAnswer === question.correctAnswer;
                 
                 const questionElement = document.createElement('div');
                 questionElement.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
                 
+                // Check for image
+                let imageHtml = '';
+                if (question.image || moduleData.id) {
+                    // Try direct image path first, then fallback to standard path
+                    const hasDirectImage = question.image ? await checkImageExists(question.image) : false;
+                    const standardPath = getImagePath(moduleData.id, 'quiz', index);
+                    const hasStandardImage = await checkImageExists(standardPath);
+                    
+                    if (hasDirectImage || hasStandardImage) {
+                        const imagePath = hasDirectImage ? question.image : standardPath;
+                        imageHtml = `
+                            <div class="review-image-container">
+                                <img src="${imagePath}" alt="${question.imageAlt || `Image for question ${index + 1}`}" class="review-image">
+                            </div>
+                        `;
+                    }
+                }
+                
                 questionElement.innerHTML = `
                     <div class="review-statement">${index + 1}. ${question.question}</div>
+                    ${imageHtml}
                     <div class="review-details">
                         <div class="review-answer">Your answer: ${userAnswer >= 0 ? question.options[userAnswer] : 'Not answered'}</div>
                         <div class="review-answer">Correct answer: ${question.options[question.correctAnswer]}</div>
@@ -582,14 +606,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 
                 reviewElement.appendChild(questionElement);
-            });
+            }
             
             document.getElementById('back-to-results').addEventListener('click', showQuizResults);
         }
     }
     
     // Time Trial Game Implementation
-    function initTimeTrialGame(moduleData) {
+    async function initTimeTrialGame(moduleData) {
         const timeTrialData = moduleData.content['time-trial'];
         let score = 0;
         let currentRound = 0;
@@ -628,6 +652,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 <div id="time-trial-gameplay" style="display: none;">
                     <div class="time-trial-definition" id="time-trial-definition"></div>
+                    <div id="time-trial-image-container" class="time-trial-image-container" style="display: none;">
+                        <img id="time-trial-image" src="" alt="Time trial image" class="time-trial-image">
+                    </div>
                     <div class="time-trial-options" id="time-trial-options"></div>
                     <div class="time-trial-feedback" id="time-trial-feedback"></div>
                 </div>
@@ -662,6 +689,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const backButton = document.getElementById('back-to-methods');
         const gameplayElement = document.getElementById('time-trial-gameplay');
         const startScreenElement = document.getElementById('time-trial-start-screen');
+        const imageContainer = document.getElementById('time-trial-image-container');
+        const imageElement = document.getElementById('time-trial-image');
         
         // Initialize the game
         startButton.addEventListener('click', startGame);
@@ -685,7 +714,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nextRound();
         }
         
-        function nextRound() {
+        async function nextRound() {
             if (currentRound >= timeTrialData.length) {
                 endGame();
                 return;
@@ -707,6 +736,25 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Display the definition
             definitionElement.textContent = currentItem.definition;
+            
+            // Check for and display image if available
+            if (currentItem.image || moduleData.id) {
+                // Try direct image path first, then fallback to standard path
+                const hasDirectImage = currentItem.image ? await checkImageExists(currentItem.image) : false;
+                const standardPath = getImagePath(moduleData.id, 'time-trial', currentRound);
+                const hasStandardImage = await checkImageExists(standardPath);
+                
+                if (hasDirectImage || hasStandardImage) {
+                    const imagePath = hasDirectImage ? currentItem.image : standardPath;
+                    imageElement.src = imagePath;
+                    imageElement.alt = currentItem.imageAlt || `Image for ${currentItem.term}`;
+                    imageContainer.style.display = 'block';
+                } else {
+                    imageContainer.style.display = 'none';
+                }
+            } else {
+                imageContainer.style.display = 'none';
+            }
             
             // Generate options
             generateOptions(currentItem);
@@ -861,7 +909,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // True-False Questions Implementation
-    function initTrueFalseQuestions(moduleData) {
+    async function initTrueFalseQuestions(moduleData) {
         const trueFalseData = moduleData.content['true-false'];
         let score = 0;
         let currentQuestionIndex = 0;
@@ -877,6 +925,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="content-container">
                 <div class="true-false-container">
                     <div class="true-false-statement" id="true-false-statement"></div>
+                    
+                    <div id="true-false-image-container" class="true-false-image-container" style="display: none;">
+                        <img id="true-false-image" src="" alt="True/False question image" class="true-false-image">
+                    </div>
                     
                     <div class="true-false-options">
                         <button id="true-button" class="btn btn-true">TRUE</button>
@@ -907,10 +959,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const feedbackElement = document.getElementById('true-false-feedback');
         const nextButton = document.getElementById('true-false-next');
         const backButton = document.getElementById('back-to-methods');
+        const imageContainer = document.getElementById('true-false-image-container');
+        const imageElement = document.getElementById('true-false-image');
         
         // Initialize
         const shuffledData = [...trueFalseData].sort(() => Math.random() - 0.5);
-        loadQuestion();
+        await loadQuestion();
         
         // Add event listeners
         trueButton.addEventListener('click', () => selectAnswer(true));
@@ -922,11 +976,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        function loadQuestion() {
+        async function loadQuestion() {
             const questionData = shuffledData[currentQuestionIndex];
             
             // Update statement
             statementElement.textContent = questionData.statement;
+            
+            // Check for image
+            if (questionData.image || moduleData.id) {
+                // Try direct image path first, then fallback to standard path
+                const hasDirectImage = questionData.image ? await checkImageExists(questionData.image) : false;
+                const standardPath = getImagePath(moduleData.id, 'true-false', currentQuestionIndex);
+                const hasStandardImage = await checkImageExists(standardPath);
+                
+                if (hasDirectImage || hasStandardImage) {
+                    const imagePath = hasDirectImage ? questionData.image : standardPath;
+                    imageElement.src = imagePath;
+                    imageElement.alt = questionData.imageAlt || `Image for statement ${currentQuestionIndex + 1}`;
+                    imageContainer.style.display = 'block';
+                } else {
+                    imageContainer.style.display = 'none';
+                }
+            } else {
+                imageContainer.style.display = 'none';
+            }
             
             // Update progress
             currentElement.textContent = currentQuestionIndex + 1;
@@ -983,7 +1056,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         }
         
-        function nextQuestion() {
+        async function nextQuestion() {
             currentQuestionIndex++;
             
             if (currentQuestionIndex >= shuffledData.length) {
@@ -991,7 +1064,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            loadQuestion();
+            await loadQuestion();
         }
         
         function showResults() {
@@ -1031,7 +1104,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         
-        function showReview() {
+        async function showReview() {
             contentView.innerHTML = `
                 <div class="content-header">
                     <h2 class="content-title">${moduleData.title} - True or False Review</h2>
@@ -1053,14 +1126,34 @@ document.addEventListener('DOMContentLoaded', () => {
             const reviewContainer = document.getElementById('review-container');
             
             // Add review items
-            shuffledData.forEach((question, index) => {
+            for (let index = 0; index < shuffledData.length; index++) {
+                const question = shuffledData[index];
                 const userAnswer = userAnswers[index];
+                
+                // Check for image
+                let imageHtml = '';
+                if (question.image || moduleData.id) {
+                    // Try direct image path first, then fallback to standard path
+                    const hasDirectImage = question.image ? await checkImageExists(question.image) : false;
+                    const standardPath = getImagePath(moduleData.id, 'true-false', index);
+                    const hasStandardImage = await checkImageExists(standardPath);
+                    
+                    if (hasDirectImage || hasStandardImage) {
+                        const imagePath = hasDirectImage ? question.image : standardPath;
+                        imageHtml = `
+                            <div class="review-image-container">
+                                <img src="${imagePath}" alt="${question.imageAlt || `Image for statement ${index + 1}`}" class="review-image">
+                            </div>
+                        `;
+                    }
+                }
                 
                 // Create review item
                 const reviewItem = document.createElement('div');
                 reviewItem.className = `review-item ${userAnswer && userAnswer.isCorrect ? 'correct' : 'incorrect'}`;
                 reviewItem.innerHTML = `
                     <div class="review-statement">${index + 1}. ${question.statement}</div>
+                    ${imageHtml}
                     <div class="review-details">
                         <div class="review-answer">Correct answer: <strong>${question.isTrue ? 'TRUE' : 'FALSE'}</strong></div>
                         ${userAnswer ? `<div class="review-answer">Your answer: <strong>${userAnswer.userAnswer ? 'TRUE' : 'FALSE'}</strong></div>` : ''}
@@ -1069,7 +1162,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 
                 reviewContainer.appendChild(reviewItem);
-            });
+            }
             
             // Add back button listener
             document.getElementById('back-to-results').addEventListener('click', showResults);
