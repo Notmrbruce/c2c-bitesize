@@ -1,0 +1,10 @@
+[
+  {
+    "id": "personal-track-safety-assessment",
+    "moduleId": "personal-track-safety",
+    "title": "Personal Track Safety Assessment",
+    "description": "Test your knowledge of essential safety procedures and protocols for working on or near railway tracks.",
+    "questionCount": 15,
+    "timeLimit": 30
+  }
+]
