@@ -6,37 +6,5 @@
     "description": "Test your knowledge of essential safety procedures and protocols for working on or near railway tracks.",
     "questionCount": 15,
     "timeLimit": 30
-  },
-  {
-    "id": "policies-assessment",
-    "moduleId": "policies",
-    "title": "Policies Assessment",
-    "description": "Verify your understanding of essential company policies, responsibility requirements, and regulations for safe operations.",
-    "questionCount": 20,
-    "timeLimit": 25
-  },
-  {
-    "id": "medical-requirements-assessment",
-    "moduleId": "medical-requirements",
-    "title": "Medical Requirements Assessment",
-    "description": "Test your knowledge of medical standards, requirements for glasses/medication, and drug screening procedures.",
-    "questionCount": 15,
-    "timeLimit": 20
-  },
-  {
-    "id": "preparation-for-duty-assessment",
-    "moduleId": "preparation-for-duty",
-    "title": "Preparation for Duty Assessment",
-    "description": "Verify your understanding of requirements for attending duty including documents, equipment, fitness standards, and roster management.",
-    "questionCount": 18,
-    "timeLimit": 25
-  },
-  {
-    "id": "safety-security-assessment",
-    "moduleId": "safety-security",
-    "title": "Safety and Security Assessment",
-    "description": "Test your knowledge of essential protocols for handling accidents, incidents, suspicious activities, and maintaining operational safety.",
-    "questionCount": 25,
-    "timeLimit": 30
   }
 ]
