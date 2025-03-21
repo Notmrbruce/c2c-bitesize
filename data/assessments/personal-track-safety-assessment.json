@@ -1,7 +1,7 @@
 {
   "id": "personal-track-safety-assessment",
   "moduleId": "personal-track-safety",
-  "title": "Personal Track Safety Assessment",
+  "title": "PTS",
   "description": "Test your knowledge of essential safety procedures and protocols for working on or near railway tracks.",
   "timeLimit": 30,
   "passingScore": 70,
