@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C2C Bitesize - Assessments</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="background-gradient"></div>
+    
+    <!-- Fixed logo area that stays in place -->
+    <div class="logo-container" id="logo-container">
+        <div class="logo">
+            <span class="logo-text">C2C</span>
+            <span class="logo-subtext">BITESIZE</span>
+        </div>
+    </div>
+    
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-button" id="mobile-menu-button">
+        <div class="hamburger-icon" id="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </button>
+    
+    <!-- Mobile Dropdown Menu -->
+    <div class="mobile-dropdown" id="mobile-dropdown">
+        <a href="index.html">Home</a>
+        <a href="modules.html">Learning Modules</a>
+        <a href="assessments.html" class="active">Assessments</a>
+        <a href="#" id="mobile-assessment-breadcrumb" style="display: none;"></a>
+    </div>
+    
+    <!-- Floating navbar that moves on scroll -->
+    <div class="navbar-wrapper" id="navbar-wrapper">
+        <nav class="floating-nav" id="floating-nav">
+            <!-- Navbar with glowing border -->
+            <div class="nav-content">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="modules.html">Learning Modules</a></li>
+                    <li><a href="assessments.html" class="active">Assessments</a></li>
+                    <li id="assessment-breadcrumb-item" style="display: none;"><a href="#" id="assessment-breadcrumb"></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    
+    <main class="main-content">
+        <div id="assessments-view" class="view-container">
+            <div class="section-header">
+                <div class="section-header-left">
+                    <h1 class="section-title funky-heading">ASSESSMENTS</h1>
+                    <p class="section-subtitle">Test your knowledge with formal assessments on each module</p>
+                </div>
+                <div class="section-header-right">
+                    <span class="badge">Knowledge Testing</span>
+                </div>
+            </div>
+            
+            <div class="assessment-grid" id="assessments-list">
+                <!-- Assessments will be loaded here -->
+            </div>
+        </div>
+        
+        <div id="assessment-intro" class="view-container assessment-intro" style="display: none;">
+            <div class="section-header">
+                <div class="section-header-left">
+                    <h1 class="section-title funky-heading" id="assessment-title">ASSESSMENT TITLE</h1>
+                    <p class="section-subtitle" id="assessment-description">Assessment description will appear here</p>
+                </div>
+                <div class="section-header-right">
+                    <span class="badge">Knowledge Test</span>
+                </div>
+            </div>
+            
+            <div class="assessment-details-container">
+                <div class="assessment-details">
+                    <div class="assessment-info">
+                        <div class="info-item">
+                            <div class="info-label">Questions</div>
+                            <div class="info-value" id="question-count">0</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Time Limit</div>
+                            <div class="info-value" id="time-limit">N/A</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Passing Score</div>
+                            <div class="info-value" id="passing-score">70%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="assessment-instructions">
+                        <h2>Instructions</h2>
+                        <ul>
+                            <li>Read each question carefully before selecting your answer</li>
+                            <li>You can change your answers before submitting the assessment</li>
+                            <li>Once you submit, you'll see your results immediately</li>
+                            <li>You can review your answers after completion</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="cta-container">
+                        <button id="start-assessment" class="btn btn-primary btn-large">Start Assessment</button>
+                        <button id="back-to-assessments" class="btn btn-large">Back to Assessments</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="assessment-content" class="view-container assessment-content" style="display: none;">
+            <!-- Assessment content will be loaded here -->
+        </div>
+    </main>
+    
+    <div class="decorative-element decorator-1"></div>
+    <div class="decorative-element decorator-2"></div>
+    
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>C2C Bitesize Learning Platform</p>
+            <p class="copyright">© 2025</p>
+        </div>
+    </footer>
+    
+    <script src="js/navigation.js" type="module"></script>
+    <script src="js/assessments.js" type="module"></script>
+</body>
+</html>

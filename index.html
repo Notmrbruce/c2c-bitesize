@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C2C Bitesize</title>
+    <title>C2C Bitesize - Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -29,9 +29,9 @@
     
     <!-- Mobile Dropdown Menu -->
     <div class="mobile-dropdown" id="mobile-dropdown">
-        <a href="javascript:void(0);" onclick="window.location.href='index.html'; return false;" class="active">Home</a>
-        <!-- Module link will be added dynamically -->
-        <a href="#" id="mobile-breadcrumb" style="display: none;"></a>
+        <a href="index.html" class="active">Home</a>
+        <a href="modules.html">Learning Modules</a>
+        <a href="assessments.html">Assessments</a>
     </div>
     
     <!-- Floating navbar that moves on scroll -->
@@ -40,50 +40,121 @@
             <!-- Navbar with glowing border -->
             <div class="nav-content">
                 <ul class="nav-links">
-                    <!-- Using javascript:void(0) with inline onclick for maximum reliability -->
-                    <li><a href="javascript:void(0);" onclick="window.location.href='index.html'; return false;" class="active">Home</a></li>
-                    <!-- Module link will be added dynamically -->
-                    <li id="breadcrumb-item" style="display: none;"><a href="#" id="breadcrumb-module"></a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="modules.html">Learning Modules</a></li>
+                    <li><a href="assessments.html">Assessments</a></li>
                 </ul>
             </div>
         </nav>
     </div>
     
     <main class="main-content">
-        <div id="modules-view" class="view-container">
+        <div class="home-hero">
+            <div class="hero-content">
+                <h1 class="hero-title funky-heading">RAILWAY TRAINING MADE SIMPLE</h1>
+                <p class="hero-subtitle">Interactive learning methods to help you master essential railway knowledge</p>
+                <div class="hero-cta">
+                    <a href="modules.html" class="btn btn-primary btn-large">Start Learning</a>
+                    <a href="assessments.html" class="btn btn-large">Take Assessment</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="home-features">
             <div class="section-header">
                 <div class="section-header-left">
-                    <h1 class="section-title funky-heading">LEARNING MODULES</h1>
-                    <p class="section-subtitle">Select a module to start your learning journey</p>
+                    <h2 class="section-title funky-heading">LEARNING FEATURES</h2>
+                    <p class="section-subtitle">Multiple interactive study methods to enhance your learning experience</p>
                 </div>
                 <div class="section-header-right">
                     <span class="badge">Railway Training</span>
                 </div>
             </div>
             
-            <div class="module-grid" id="modules-list">
-                <!-- Modules will be loaded here -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+                    </div>
+                    <h3 class="feature-title">Flashcards</h3>
+                    <p class="feature-desc">Flip through digital cards to test your recall of key information. Tap or click to reveal the answer.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    </div>
+                    <h3 class="feature-title">Quiz</h3>
+                    <p class="feature-desc">Test your knowledge with multiple-choice questions and get immediate feedback on your answers.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <h3 class="feature-title">Time Trial</h3>
+                    <p class="feature-desc">Race against the clock to match terms with their definitions. Challenge yourself to recall information quickly.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <h3 class="feature-title">True or False</h3>
+                    <p class="feature-desc">Determine whether statements are true or false and learn the reasoning behind each answer.</p>
+                </div>
             </div>
         </div>
         
-        <div id="methods-view" class="view-container study-methods">
+        <div class="home-about">
             <div class="section-header">
                 <div class="section-header-left">
-                    <h1 class="section-title funky-heading" id="selected-module-title">SELECTED MODULE</h1>
-                    <p class="section-subtitle" id="method-description">Select a study method to begin</p>
-                </div>
-                <div class="section-header-right">
-                    <span class="badge">Study Methods</span>
+                    <h2 class="section-title funky-heading">ABOUT C2C BITESIZE</h2>
+                    <p class="section-subtitle">A modular web-based learning platform for C2C training materials</p>
                 </div>
             </div>
             
-            <div class="method-grid" id="method-buttons">
-                <!-- Study methods will be loaded here -->
+            <div class="about-content">
+                <p>The C2C Bitesize platform is designed to help railway staff learn and refresh critical knowledge through bite-sized learning activities. Our platform offers multiple interactive study methods, visual learning aids, and assessments to ensure comprehensive understanding of railway operations, safety procedures, and regulatory requirements.</p>
+                
+                <div class="about-steps">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Choose a Module</h3>
+                            <p class="step-desc">Select from a variety of learning modules covering essential railway topics.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Select Study Method</h3>
+                            <p class="step-desc">Pick your preferred learning style from our interactive study methods.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Practice & Learn</h3>
+                            <p class="step-desc">Engage with the content through interactive exercises and visual aids.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Test Your Knowledge</h3>
+                            <p class="step-desc">Take assessments to verify your understanding and track progress.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cta-container">
+                    <a href="modules.html" class="btn btn-primary btn-large">Explore Learning Modules</a>
+                </div>
             </div>
-        </div>
-        
-        <div id="content-view" class="view-container content-area">
-            <!-- Content will be loaded here -->
         </div>
     </main>
     
@@ -97,7 +168,8 @@
         </div>
     </footer>
     
-    <script src="js/app.js" type="module"></script>
+    <script src="js/navigation.js" type="module"></script>
+    <script src="js/home.js" type="module"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const logoContainer = document.getElementById('logo-container');
@@ -131,8 +203,8 @@
                     
                     // If paths match or if we're on index page
                     if (linkPath === currentPath || 
-                        (currentPath.includes('index.html') && link.textContent.trim() === 'Home') ||
-                        (currentPath === '/' && link.textContent.trim() === 'Home')) {
+                        (currentPath.includes('index.html') && linkPath.includes('index.html')) ||
+                        (currentPath === '/' && linkPath.includes('index.html'))) {
                         link.classList.add('active');
                     } else {
                         link.classList.remove('active');

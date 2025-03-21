@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C2C Bitesize - Learning Modules</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="background-gradient"></div>
+    
+    <!-- Fixed logo area that stays in place -->
+    <div class="logo-container" id="logo-container">
+        <div class="logo">
+            <span class="logo-text">C2C</span>
+            <span class="logo-subtext">BITESIZE</span>
+        </div>
+    </div>
+    
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-button" id="mobile-menu-button">
+        <div class="hamburger-icon" id="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </button>
+    
+    <!-- Mobile Dropdown Menu -->
+    <div class="mobile-dropdown" id="mobile-dropdown">
+        <a href="index.html">Home</a>
+        <a href="modules.html" class="active">Learning Modules</a>
+        <a href="assessments.html">Assessments</a>
+        <!-- Module link will be added dynamically -->
+        <a href="#" id="mobile-breadcrumb" style="display: none;"></a>
+    </div>
+    
+    <!-- Floating navbar that moves on scroll -->
+    <div class="navbar-wrapper" id="navbar-wrapper">
+        <nav class="floating-nav" id="floating-nav">
+            <!-- Navbar with glowing border -->
+            <div class="nav-content">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="modules.html" class="active">Learning Modules</a></li>
+                    <li><a href="assessments.html">Assessments</a></li>
+                    <!-- Module link will be added dynamically -->
+                    <li id="breadcrumb-item" style="display: none;"><a href="#" id="breadcrumb-module"></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    
+    <main class="main-content">
+        <div id="modules-view" class="view-container">
+            <div class="section-header">
+                <div class="section-header-left">
+                    <h1 class="section-title funky-heading">LEARNING MODULES</h1>
+                    <p class="section-subtitle">Select a module to start your learning journey</p>
+                </div>
+                <div class="section-header-right">
+                    <span class="badge">Railway Training</span>
+                </div>
+            </div>
+            
+            <div class="module-grid" id="modules-list">
+                <!-- Modules will be loaded here -->
+            </div>
+        </div>
+        
+        <div id="methods-view" class="view-container study-methods">
+            <div class="section-header">
+                <div class="section-header-left">
+                    <h1 class="section-title funky-heading" id="selected-module-title">SELECTED MODULE</h1>
+                    <p class="section-subtitle" id="method-description">Select a study method to begin</p>
+                </div>
+                <div class="section-header-right">
+                    <span class="badge">Study Methods</span>
+                </div>
+            </div>
+            
+            <div class="method-grid" id="method-buttons">
+                <!-- Study methods will be loaded here -->
+            </div>
+        </div>
+        
+        <div id="content-view" class="view-container content-area">
+            <!-- Content will be loaded here -->
+        </div>
+    </main>
+    
+    <div class="decorative-element decorator-1"></div>
+    <div class="decorative-element decorator-2"></div>
+    
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>C2C Bitesize Learning Platform</p>
+            <p class="copyright">© 2025</p>
+        </div>
+    </footer>
+    
+    <script src="js/navigation.js" type="module"></script>
+    <script src="js/app.js" type="module"></script>
+</body>
+</html>
