@@ -96,7 +96,7 @@
       {
         "question": "What does a red and white square sign with 'warning limited clearance' indicate?",
         "answer": "No position of safety for the length of this structure. You must not attempt to pass while a train is approaching.",
-        "image": "data/modules/images/limited-clearance-waarning-sign.png",
+        "image": "data/modules/images/limited-clearance-warning-sign.png",
         "imageAlt": "Red and white limited clearance warning sign"
       },
       {
