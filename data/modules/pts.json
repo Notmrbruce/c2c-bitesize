@@ -501,6 +501,139 @@
         "explanation": "This statement is true. A Controller of Site Safety (COSS) is identified by their BLUE ARMBAND with COSS written in WHITE LETTERS.",
         "image": "data/modules/images/railway-safety/true-false_4.jpg",
         "imageAlt": "COSS with blue armband"
+      },
+      {
+        "statement": "The minimum safe distance from Overhead Line Equipment (OHL) is 1 meter.",
+        "isTrue": false,
+        "explanation": "This statement is false. The minimum safe distance from OHL is 2.75 meters (9 foot).",
+        "image": "data/modules/images/railway-safety/true-false_5.jpg",
+        "imageAlt": "Safety distance from OHL illustration"
+      },
+      {
+        "statement": "OHL carries 25,000 volts AC and should always be considered live.",
+        "isTrue": true,
+        "explanation": "This statement is true. OHL carries 25,000 volts AC and must be considered live at all times for safety.",
+        "image": "data/modules/images/railway-safety/true-false_6.jpg",
+        "imageAlt": "OHL warning sign"
+      },
+      {
+        "statement": "After an OHL tripping, there is a 5-minute delay before re-energisation.",
+        "isTrue": false,
+        "explanation": "This statement is false. After an OHL tripping, the system will try to re-energise IMMEDIATELY.",
+        "image": "data/modules/images/railway-safety/true-false_7.jpg",
+        "imageAlt": "OHL re-energisation warning sign"
+      },
+      {
+        "statement": "When crossing a line, it's acceptable to step on rails and sleepers if necessary.",
+        "isTrue": false,
+        "explanation": "This statement is false. When crossing a line, you should walk ballast to ballast and avoid stepping on sleepers, rails, or points.",
+        "image": "data/modules/images/railway-safety/true-false_8.jpg",
+        "imageAlt": "Proper track crossing technique"
+      },
+      {
+        "statement": "You can use a mobile phone on the operational railway in an emergency if no other communication is available.",
+        "isTrue": true,
+        "explanation": "This statement is true. You can use a mobile phone in an emergency if no other communication is available, but you must stay in a position of safety and not become distracted.",
+        "image": "data/modules/images/railway-safety/true-false_9.jpg",
+        "imageAlt": "Railway worker using mobile phone in position of safety"
+      },
+      {
+        "statement": "Trains always approach from the direction they are signalled.",
+        "isTrue": false,
+        "explanation": "This statement is false. Trains could be making a wrong direction move, operating under Single line working, be a runaway train, or an engineering train in a possession.",
+        "image": "data/modules/images/railway-safety/true-false_10.jpg",
+        "imageAlt": "Train moving in unexpected direction"
+      },
+      {
+        "statement": "When protecting the line because of collapsed OHL, detonators can be placed on any line.",
+        "isTrue": false,
+        "explanation": "This statement is false. If any OHL is touching rails, they could be live. Do not place detonators or track circuit clips on any lines you believe may be in contact with OHL.",
+        "image": "data/modules/images/railway-safety/true-false_11.jpg",
+        "imageAlt": "Fallen OHL on tracks with warning signs"
+      },
+      {
+        "statement": "The voltage of OHL is 25,000 volts DC.",
+        "isTrue": false,
+        "explanation": "This statement is false. OHL voltage is 25,000 volts AC, not DC.",
+        "image": "data/modules/images/railway-safety/true-false_12.jpg",
+        "imageAlt": "OHL warning sign showing AC voltage"
+      },
+      {
+        "statement": "After an OHL tripping, there will be a 5-minute wait before re-energisation.",
+        "isTrue": false,
+        "explanation": "This statement is false. After an OHL tripping, the system will try to re-energise IMMEDIATELY.",
+        "image": "data/modules/images/railway-safety/true-false_13.jpg",
+        "imageAlt": "OHL re-energisation warning notice"
+      },
+      {
+        "statement": "A COSS wears a white armband with blue lettering.",
+        "isTrue": false,
+        "explanation": "This statement is false. A COSS (Controller of Site Safety) wears a BLUE armband with WHITE lettering.",
+        "image": "data/modules/images/railway-safety/true-false_14.jpg",
+        "imageAlt": "COSS with correct blue armband and white lettering"
+      },
+      {
+        "statement": "When granted an emergency isolation, you can leave once your relief arrives without formally handing over.",
+        "isTrue": false,
+        "explanation": "This statement is false. When granted an emergency isolation and your relief arrives, you must contact the ECO, state who you are and that your relief has arrived, pass the phone to your relief, and DO NOT LEAVE before you are officially relieved.",
+        "image": "data/modules/images/railway-safety/true-false_15.jpg",
+        "imageAlt": "Proper handover procedure for isolation duty"
+      },
+      {
+        "statement": "The principles of Red Zone working involve trains still running with a Lookout providing protection.",
+        "isTrue": true,
+        "explanation": "This statement is true. In Red Zone working, trains are still running and a COSS will appoint a 'Lookout' to watch for trains approaching the work area.",
+        "image": "data/modules/images/railway-safety/true-false_16.jpg",
+        "imageAlt": "Red Zone working with Lookout"
+      },
+      {
+        "statement": "If crossing a line at a level crossing with gates open to road traffic, it's safe to assume no train is approaching.",
+        "isTrue": false,
+        "explanation": "This statement is false. Never assume no train is approaching, even if level crossing gates are open to road traffic. Barriers could be faulty, a train could have had a SPAD, or it could be a runaway train.",
+        "image": "data/modules/images/railway-safety/true-false_17.jpg",
+        "imageAlt": "Level crossing with open barriers but train approaching"
+      },
+      {
+        "statement": "A blue and white square sign means there is no position of safety anywhere in the vicinity.",
+        "isTrue": false,
+        "explanation": "This statement is false. A blue and white square sign with 'warning no refuges' means there is no position of safety for the length of this structure, however, there ARE positions of safety or refuges ON THE OPPOSITE SIDE of the railway line.",
+        "image": "data/modules/images/railway-safety/true-false_18.jpg",
+        "imageAlt": "Blue and white no refuges warning sign"
+      },
+      {
+        "statement": "The correct position of safety for speeds of 110mph is 1.25 meters (4 foot) from the nearest running line.",
+        "isTrue": false,
+        "explanation": "This statement is false. The position of safety for speeds of 110mph is 2 meters (6 foot 6 inches), as this applies for speeds between 101-125mph.",
+        "image": "data/modules/images/railway-safety/true-false_19.jpg",
+        "imageAlt": "Position of safety distances diagram"
+      },
+      {
+        "statement": "When using a signal post telephone with a red/white limited clearance sign, you should use your train as protection.",
+        "isTrue": true,
+        "explanation": "This statement is true. When using a signal post telephone with a red/white limited clearance sign, you should use your train as protection due to the limited clearance.",
+        "image": "data/modules/images/railway-safety/true-false_20.jpg",
+        "imageAlt": "Signal post telephone with limited clearance sign"
+      },
+      {
+        "statement": "Phones with a yellow circle can be used at any time for routine communications.",
+        "isTrue": false,
+        "explanation": "This statement is false. Phones with a yellow circle should only be used in an emergency.",
+        "image": "data/modules/images/railway-safety/true-false_21.jpg",
+        "imageAlt": "Telephone with yellow circle marking"
+      },
+      {
+        "statement": "If you sighted a trespasser on the railway, you should always try to stop them yourself before reporting.",
+        "isTrue": false,
+        "explanation": "This statement is false. If you sight a trespasser on the railway, report it immediately to the signaller. If on running lines, make an emergency group call.",
+        "image": "data/modules/images/railway-safety/true-false_22.jpg",
+        "imageAlt": "Reporting procedure for trespassers"
+      },
+      {
+        "statement": "A Green Zone 'Separated' arrangement requires at least 6 feet 6 inches between the site of work and the nearest running line.",
+        "isTrue": true,
+        "explanation": "This statement is true. A Green Zone 'Separated' arrangement requires at least 6 feet 6 inches (2 meters) between the site of work and the nearest running line, with a Site Warden appointed by the COSS/SWL to act as a human barrier.",
+        "image": "data/modules/images/railway-safety/true-false_23.jpg",
+        "imageAlt": "Green Zone Separated arrangement with measurements"
       }
     ],
     "time-trial": [
@@ -533,6 +666,156 @@
         "definition": "The space between 2 sets of running lines",
         "image": "data/modules/images/railway-safety/time-trial_4.jpg",
         "imageAlt": "10 foot area illustration"
+      },
+      {
+        "term": "Cess",
+        "definition": "The space between the running line and the boundary fence",
+        "image": "data/modules/images/railway-safety/time-trial_5.jpg",
+        "imageAlt": "Cess area illustration"
+      },
+      {
+        "term": "MAPS",
+        "definition": "Move to a position of safety, Acknowledge approaching train, Place tools down, Stay in position until train passes",
+        "image": "data/modules/images/railway-safety/time-trial_6.jpg",
+        "imageAlt": "MAPS procedure illustration"
+      },
+      {
+        "term": "COSS",
+        "definition": "Controller of Site Safety - wears BLUE ARMBAND with WHITE lettering",
+        "image": "data/modules/images/railway-safety/time-trial_7.jpg",
+        "imageAlt": "COSS with blue armband"
+      },
+      {
+        "term": "Lookout",
+        "definition": "Person who watches for approaching trains - wears WHITE ARMBAND with RED lettering",
+        "image": "data/modules/images/railway-safety/time-trial_8.jpg",
+        "imageAlt": "Lookout with white and red armband"
+      },
+      {
+        "term": "Site Warden",
+        "definition": "Person who acts as a human barrier - wears WHITE ARMBAND with BLUE lettering",
+        "image": "data/modules/images/railway-safety/time-trial_9.jpg",
+        "imageAlt": "Site Warden with white and blue armband"
+      },
+      {
+        "term": "Red Zone",
+        "definition": "Working arrangement where trains are still running with lookout protection",
+        "image": "data/modules/images/railway-safety/time-trial_10.jpg",
+        "imageAlt": "Red Zone working illustration"
+      },
+      {
+        "term": "Green Zone",
+        "definition": "Working arrangement where protection is in place - either Safeguarded, Fenced, or Separated",
+        "image": "data/modules/images/railway-safety/time-trial_11.jpg",
+        "imageAlt": "Green Zone working illustration"
+      },
+      {
+        "term": "OHL",
+        "definition": "Overhead Line Equipment - carries 25,000 volts AC and must be considered live at all times",
+        "image": "data/modules/images/railway-safety/time-trial_12.jpg",
+        "imageAlt": "OHL equipment"
+      },
+      {
+        "term": "Structure bond",
+        "definition": "Attached to bottom of structure and track to complete the circuit",
+        "image": "data/modules/images/railway-safety/time-trial_13.jpg",
+        "imageAlt": "Structure bond on OHL equipment"
+      },
+      {
+        "term": "Red bond",
+        "definition": "Structure bond with red cable - do not touch, if found unsecured report immediately",
+        "image": "data/modules/images/railway-safety/time-trial_14.jpg",
+        "imageAlt": "Red bond on railway equipment"
+      },
+      {
+        "term": "Catenary wire",
+        "definition": "Top wire of the OHL system that supports the contact wire",
+        "image": "data/modules/images/railway-safety/time-trial_15.jpg",
+        "imageAlt": "Catenary wire illustration"
+      },
+      {
+        "term": "Contact wire",
+        "definition": "Wire that the pantograph touches to draw electricity",
+        "image": "data/modules/images/railway-safety/time-trial_16.jpg",
+        "imageAlt": "Contact wire with pantograph"
+      },
+      {
+        "term": "ECO",
+        "definition": "Electrical Control Operator - located at Romford, manages electrical isolations",
+        "image": "data/modules/images/railway-safety/time-trial_17.jpg",
+        "imageAlt": "ECO control desk"
+      },
+      {
+        "term": "PICEI",
+        "definition": "Person In Charge of Electrical Isolation",
+        "image": "data/modules/images/railway-safety/time-trial_18.jpg",
+        "imageAlt": "PICEI performing duties"
+      },
+      {
+        "term": "Emergency isolation",
+        "definition": "Procedure to switch off power to OHL in an emergency situation by contacting ECO with structure plate ID",
+        "image": "data/modules/images/railway-safety/time-trial_19.jpg",
+        "imageAlt": "Emergency isolation procedure"
+      },
+      {
+        "term": "Limited clearance sign",
+        "definition": "Red and white square warning sign indicating no position of safety for the length of the structure",
+        "image": "data/modules/images/railway-safety/time-trial_20.jpg",
+        "imageAlt": "Limited clearance warning sign"
+      },
+      {
+        "term": "Position of safety distances",
+        "definition": "0-100mph: 1.25m (4ft); 101-125mph: 2m (6ft 6in); Over 125mph: no safe distance",
+        "image": "data/modules/images/railway-safety/time-trial_21.jpg",
+        "imageAlt": "Position of safety distance diagram"
+      },
+      {
+        "term": "Signal post telephone",
+        "definition": "White background with black diagonal stripes from top right to bottom left",
+        "image": "data/modules/images/railway-safety/time-trial_22.jpg",
+        "imageAlt": "Signal post telephone"
+      },
+      {
+        "term": "Lineside telephone",
+        "definition": "White background with black cross",
+        "image": "data/modules/images/railway-safety/time-trial_23.jpg",
+        "imageAlt": "Lineside telephone"
+      },
+      {
+        "term": "Yellow circle telephone",
+        "definition": "Telephone with yellow circle marking - only use in an emergency",
+        "image": "data/modules/images/railway-safety/time-trial_24.jpg",
+        "imageAlt": "Telephone with yellow circle"
+      },
+      {
+        "term": "Third rail",
+        "definition": "Rail that carries DC current on TFL infrastructure - electrocution hazard",
+        "image": "data/modules/images/railway-safety/time-trial_25.jpg",
+        "imageAlt": "Third rail on TFL infrastructure"
+      },
+      {
+        "term": "Emergency hand signals",
+        "definition": "Red flag, red light, light waved vigorously, or arms raised to stop train in emergency",
+        "image": "data/modules/images/railway-safety/time-trial_26.jpg",
+        "imageAlt": "Emergency hand signals demonstration"
+      },
+      {
+        "term": "Detonators",
+        "definition": "Devices placed on track to create loud bang when train passes over them - used for emergency warnings",
+        "image": "data/modules/images/railway-safety/time-trial_27.jpg",
+        "imageAlt": "Detonators for track protection"
+      },
+      {
+        "term": "Authorised walking route",
+        "definition": "Designated safe path for walking on railway infrastructure, information found in Health and Safety notice case",
+        "image": "data/modules/images/railway-safety/time-trial_28.jpg",
+        "imageAlt": "Authorised walking route signage"
+      },
+      {
+        "term": "Structure plate ID",
+        "definition": "Top letter (route), middle numbers (miles from London), bottom numbers (structure number in that mile)",
+        "image": "data/modules/images/railway-safety/time-trial_29.jpg",
+        "imageAlt": "OHL structure plate ID"
       }
     ]
   }
