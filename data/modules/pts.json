@@ -465,3 +465,75 @@
         "image": "data/modules/images/railway-safety/flashcards_75.jpg",
         "imageAlt": "Placing detonators for incident protection"
       }
+    ],
+    "true-false": [
+      {
+        "statement": "When on or near the line, you need to look up only once every 15 seconds.",
+        "isTrue": false,
+        "explanation": "This statement is false. You must look up every 5 seconds when 'on or near the line' to ensure you're aware of any approaching trains.",
+        "image": "data/modules/images/railway-safety/true-false_0.jpg",
+        "imageAlt": "Worker looking up on railway tracks"
+      },
+      {
+        "statement": "A position of safety must be reached at least 10 seconds before a train arrives.",
+        "isTrue": true,
+        "explanation": "This statement is true. You must be in a position of safety at least 10 seconds before a train arrives to ensure your safety.",
+        "image": "data/modules/images/railway-safety/true-false_1.jpg",
+        "imageAlt": "Person in position of safety as train approaches"
+      },
+      {
+        "statement": "When walking on the operational railway, you should walk in the 4 foot when possible.",
+        "isTrue": false,
+        "explanation": "This statement is false. You should walk in the CESS when possible, not in the 4 foot which is the running line itself.",
+        "image": "data/modules/images/railway-safety/true-false_2.jpg",
+        "imageAlt": "Person walking in cess area beside tracks"
+      },
+      {
+        "statement": "If you are caught between adjacent lines when a train approaches, you should lay face down in the 4 foot.",
+        "isTrue": false,
+        "explanation": "This statement is false. If caught between lines, you should lay face down in the 6 foot, 10 foot or CESS, but NEVER in the 4 foot (running line).",
+        "image": "data/modules/images/railway-safety/true-false_3.jpg",
+        "imageAlt": "Illustration of correct position between tracks"
+      },
+      {
+        "statement": "A COSS wears a blue armband with white lettering.",
+        "isTrue": true,
+        "explanation": "This statement is true. A Controller of Site Safety (COSS) is identified by their BLUE ARMBAND with COSS written in WHITE LETTERS.",
+        "image": "data/modules/images/railway-safety/true-false_4.jpg",
+        "imageAlt": "COSS with blue armband"
+      }
+    ],
+    "time-trial": [
+      {
+        "term": "On or near the line",
+        "definition": "On the line itself or within 3 meters (10 foot) of the running line with no fences or permanent structures between you and the running line",
+        "image": "data/modules/images/railway-safety/time-trial_0.jpg",
+        "imageAlt": "Illustration of 'on or near the line' zone"
+      },
+      {
+        "term": "Position of safety",
+        "definition": "At least the minimum required distance away from the passing train at the maximum line speed it is permitted to travel",
+        "image": "data/modules/images/railway-safety/time-trial_1.jpg",
+        "imageAlt": "Person in position of safety"
+      },
+      {
+        "term": "4 foot",
+        "definition": "The running line itself",
+        "image": "data/modules/images/railway-safety/time-trial_2.jpg",
+        "imageAlt": "4 foot area illustration"
+      },
+      {
+        "term": "6 foot",
+        "definition": "The space between the 2 running lines",
+        "image": "data/modules/images/railway-safety/time-trial_3.jpg",
+        "imageAlt": "6 foot area illustration"
+      },
+      {
+        "term": "10 foot",
+        "definition": "The space between 2 sets of running lines",
+        "image": "data/modules/images/railway-safety/time-trial_4.jpg",
+        "imageAlt": "10 foot area illustration"
+      }
+    ]
+  }
+}
