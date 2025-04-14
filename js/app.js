@@ -1,4 +1,4 @@
-// START OF FILE: js/app.js --- REPLACE ENTIRE FILE ---
+// START OF FILE: js/app.js --- ENSURE THIS IS THE VERY START ---
 
 import { loadModulesList, loadModuleData, getImagePath, checkImageExists } from './module-loader.js';
 
@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const methodsView = document.getElementById('methods-view');
     const contentView = document.getElementById('content-view');
     const modulesList = document.getElementById('modules-list');
-    const modulesLoading = document.getElementById('modules-loading');
     const selectedModuleTitle = document.getElementById('selected-module-title');
     const methodButtons = document.getElementById('method-buttons');
     const breadcrumbModule = document.getElementById('breadcrumb-module');
@@ -18,14 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // App state
     let currentModule = null;
-    let currentMethod = null; // NEW: Track current method
 
-    // Method descriptions and icons (ensure these keys match your JSON/methods array)
+    // Method descriptions and icons
     const methodInfo = {
-        'flashcards': { name: 'Flashcards', description: 'Flip through digital cards...', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M12 8v8"/><path d="M8 12h8"/></svg>'},
-        'quiz': { name: 'Quiz', description: 'Test your knowledge...', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>'},
-        'time-trial': { name: 'Time Trial', description: 'Race against the clock...', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'},
-        'true-false': { name: 'True/False', description: 'Determine truth values...', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'}
+        'flashcards': { description: 'Flip through digital cards to test your recall of key information. Tap or click to reveal the answer.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M12 8v8"/><path d="M8 12h8"/></svg>'},
+        'quiz': { description: 'Test your knowledge with multiple-choice questions and get immediate feedback on your answers.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>'},
+        'time-trial': { description: 'Race against the clock to match terms with their definitions. Challenge yourself to recall information quickly.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'},
+        'true-false': { description: 'Determine whether statements are true or false and learn the reasoning behind each answer.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'}
     };
 
     // Initialize the application
@@ -33,510 +31,699 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Core Functions ---
     async function init() {
-        if (modulesView) modulesView.classList.add('view-hidden');
-        if (methodsView) methodsView.classList.add('view-hidden');
-        if (contentView) contentView.classList.add('view-hidden');
         await loadModules();
-        showModulesView();
-        document.body.classList.add('loaded'); // Make body visible
+        modulesView.style.display = 'block';
+        methodsView.style.display = 'none';
+        contentView.style.display = 'none';
+        animateElements();
+    }
+
+    function animateElements() {
+        const animateElements = document.querySelectorAll('[data-animate]');
+        animateElements.forEach(el => el.classList.add('fade-in'));
     }
 
     async function loadModules() {
-        if (modulesLoading) modulesLoading.style.display = 'flex';
-        if (modulesList) modulesList.innerHTML = '';
         try {
             const modules = await loadModulesList();
-            if (modulesLoading) modulesLoading.style.display = 'none';
-            if (!modules || modules.length === 0) { if (modulesList) modulesList.innerHTML = '<p>No modules found.</p>'; return; }
-            modules.forEach(module => { if (modulesList) modulesList.appendChild(createModuleElement(module)); });
+            modulesList.innerHTML = '';
+             if (!modules || modules.length === 0) {
+                 modulesList.innerHTML = '<p>No learning modules found. Please check the data source.</p>';
+                 return;
+            }
+            modules.forEach(module => {
+                const moduleElement = createModuleElement(module);
+                modulesList.appendChild(moduleElement);
+            });
         } catch (error) {
             console.error('Error loading modules:', error);
-            if (modulesLoading) modulesLoading.style.display = 'none';
-            if (modulesList) modulesList.innerHTML = '<p>Error loading modules.</p>';
+            modulesList.innerHTML = '<p>Error loading modules. Please try again later.</p>';
         }
     }
 
     function createModuleElement(module) {
         const moduleElement = document.createElement('div');
         moduleElement.className = 'module-card';
-        moduleElement.innerHTML = `<h3 class="module-title">${module.title||'Untitled'}</h3><p class="module-desc">${module.description||''}</p>`;
+        moduleElement.innerHTML = `
+            <h3 class="module-title">${module.title || 'Untitled Module'}</h3>
+            <p class="module-desc">${module.description || 'No description available.'}</p>`;
         moduleElement.addEventListener('click', () => loadSelectedModule(module.id));
         return moduleElement;
     }
 
     async function loadSelectedModule(moduleId) {
-        // Show loading state? (Optional)
         try {
+            console.log(`Loading processed module data for ID: ${moduleId}`);
             const moduleData = await loadModuleData(moduleId);
             if (!moduleData || !moduleData.methods || moduleData.methods.length === 0) {
-                 alert(`Module '${moduleData?.title || moduleId}' has no study content.`); return;
+                 console.warn(`Module ${moduleId} has no available study methods after processing.`);
+                 alert(`The module '${moduleData.title || moduleId}' currently has no available study content.`);
+                 return;
             }
-            currentModule = moduleData; // Store the fully processed module data
+            console.log('Processed module data loaded:', moduleData);
+            currentModule = moduleData;
             showMethodsView(moduleData);
-        } catch (error) { alert(`Error loading content for ${moduleId}.`); showModulesView(); }
+        } catch (error) {
+            console.error(`Error loading processed module ${moduleId}:`, error);
+            alert(`Error loading module content for ${moduleId}. Please try again later.`);
+        }
     }
 
     // --- View Switching Functions ---
-    function showView(viewToShow) {
-        const views = [modulesView, methodsView, contentView];
-        views.forEach(view => { if (view) view.style.display = (view === viewToShow) ? 'block' : 'none'; }); // Simple display toggle
-        window.scrollTo({ top: 0, behavior: 'auto' }); // Changed to auto for faster switches
-    }
-
     function showModulesView() {
-        showView(modulesView);
-        currentModule = null; // Clear selected module
-        currentMethod = null; // Clear selected method
-        // Hide breadcrumbs
+        modulesView.style.display = 'block';
+        methodsView.style.display = 'none';
+        contentView.style.display = 'none';
         if (breadcrumbItem) breadcrumbItem.style.display = 'none';
         if (mobileBreadcrumb) mobileBreadcrumb.style.display = 'none';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function showMethodsView(moduleData) {
-        if (!moduleData || !selectedModuleTitle || !methodDescriptionElement || !methodButtons) return;
+        if (!moduleData || !selectedModuleTitle || !methodDescriptionElement || !methodButtons) {
+             console.error("Cannot show methods view - DOM elements missing or no module data.");
+             return;
+        }
         selectedModuleTitle.textContent = moduleData.title;
-        if (breadcrumbModule && breadcrumbItem && mobileBreadcrumb) { // Update Breadcrumbs
+        if (breadcrumbModule && breadcrumbItem && mobileBreadcrumb) {
             breadcrumbModule.textContent = moduleData.title;
             breadcrumbItem.style.display = 'block';
             mobileBreadcrumb.style.display = 'block';
             mobileBreadcrumb.textContent = moduleData.title;
-            const handler = (e) => { e.preventDefault(); showMethodsView(currentModule); };
+            const handler = (e) => {
+                 e.preventDefault();
+                 showMethodsView(currentModule); // Use currentModule
+            };
             breadcrumbModule.onclick = handler;
             mobileBreadcrumb.onclick = handler;
         }
-        createMethodButtons(moduleData); // Populate buttons
+        createMethodButtons(moduleData);
+        modulesView.style.display = 'none';
+        methodsView.style.display = 'block';
+        contentView.style.display = 'none';
         methodDescriptionElement.textContent = 'Select a study method to begin';
-        showView(methodsView); // Show this view
-        currentMethod = null; // Reset current method
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function createMethodButtons(moduleData) {
-        methodButtons.innerHTML = '';
-        if (!moduleData || !moduleData.methods || moduleData.methods.length === 0) { methodButtons.innerHTML = '<p>No study methods available.</p>'; return; }
+         methodButtons.innerHTML = '';
+         if (!moduleData || !moduleData.methods || moduleData.methods.length === 0) {
+             methodButtons.innerHTML = '<p>No study methods available for this module.</p>';
+             return;
+         }
         moduleData.methods.forEach(methodKey => {
-            const info = methodInfo[methodKey];
-            if (!info) { console.warn(`No method info found for key: ${methodKey}`); return; } // Skip if info missing
+            const info = methodInfo[methodKey] || { description: `Learn with ${methodKey}`, icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>' };
+            let methodName = methodKey.charAt(0).toUpperCase() + methodKey.slice(1).replace('-', ' ');
+            if (methodKey === 'true-false') methodName = 'True or False';
             const button = document.createElement('button');
             button.className = 'method-button';
             button.id = `${methodKey}-button`;
-            button.innerHTML = `<div class="method-icon">${info.icon}</div><div class="method-content"><div class="method-title">${info.name}</div><div class="method-desc">${info.description}</div></div>`;
-            button.addEventListener('click', () => loadStudyMethod(moduleData, methodKey)); // Load this method
+            button.innerHTML = `
+                <div class="method-icon">${info.icon}</div>
+                <div class="method-content">
+                    <div class="method-title">${methodName}</div>
+                    <div class="method-desc">${info.description}</div>
+                </div>`;
+            button.addEventListener('click', () => loadStudyMethod(moduleData, methodKey));
             methodButtons.appendChild(button);
         });
     }
 
-    // NEW: Helper to create the study method switcher HTML
-    function createMethodSwitcherHTML(moduleData, activeMethodKey) {
-        if (!moduleData || !moduleData.methods) return '';
-        let switcherHTML = '<div class="study-method-switcher">';
-        moduleData.methods.forEach(methodKey => {
-            const info = methodInfo[methodKey];
-            if (!info) return;
-            const isActive = methodKey === activeMethodKey;
-            switcherHTML += `
-                <button class="switcher-btn ${isActive ? 'active' : ''}" data-method="${methodKey}" title="${info.name}">
-                    <span class="method-icon">${info.icon}</span>
-                    <span class="switcher-label">${info.name}</span>
-                </button>`;
-        });
-        switcherHTML += '</div>';
-        return switcherHTML;
+    function loadStudyMethod(moduleData, method) {
+        contentView.innerHTML = '';
+        modulesView.style.display = 'none';
+        methodsView.style.display = 'none';
+        contentView.style.display = 'block';
+        contentView.classList.add('slide-up');
+        setTimeout(() => contentView.classList.remove('slide-up'), 500);
+
+        const methodContentData = moduleData.content ? moduleData.content[method] : null; // Check content exists
+
+        if (!methodContentData || !Array.isArray(methodContentData) || methodContentData.length === 0) {
+            console.warn(`No content found for method "${method}" in module "${moduleData.title}".`);
+            contentView.innerHTML = `<div class="content-container"><p>No content available for the "${method}" study method in this module.</p><button id="back-to-methods" class="btn">Back to Methods</button></div>`;
+             const backBtn = document.getElementById('back-to-methods');
+             if (backBtn) backBtn.addEventListener('click', () => showMethodsView(currentModule));
+             return;
+        }
+
+        // Call appropriate method loader
+        switch (method) {
+            case 'flashcards': loadFlashcards(moduleData.title, methodContentData); break;
+            case 'quiz': loadQuiz(moduleData.title, methodContentData); break;
+            case 'time-trial': initTimeTrialGame(moduleData.title, methodContentData); break;
+            case 'true-false': initTrueFalseQuestions(moduleData.title, methodContentData); break;
+            default:
+                console.error(`Study method "${method}" loading function not implemented.`);
+                contentView.innerHTML = `<div class="content-container"><p>The "${method}" study method is not ready yet.</p><button id="back-to-methods" class="btn">Back to Methods</button></div>`;
+                const backBtn = document.getElementById('back-to-methods');
+                if (backBtn) backBtn.addEventListener('click', () => showMethodsView(currentModule));
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // NEW: Helper to attach listeners to switcher buttons
-    function attachSwitcherListeners(moduleData) {
-        document.querySelectorAll('.switcher-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const methodKey = button.dataset.method;
-                // Don't reload if already on the active method
-                if (methodKey !== currentMethod) {
-                     loadStudyMethod(moduleData, methodKey);
-                }
-            });
-        });
-         // Add listener for the main "Back to Methods" button present in all study views
-         const backBtn = document.getElementById('back-to-methods');
-         if (backBtn) {
-             backBtn.addEventListener('click', () => {
-                 currentMethod = null; // Reset current method when going back
-                 showMethodsView(currentModule);
-             });
-         }
-    }
+    // --- Study Method Implementations (Including previous corrections) ---
 
-
-    // --- Study Method Loading ---
-    async function loadStudyMethod(moduleData, methodKey) {
-        currentMethod = methodKey; // Track the currently loaded method
-        contentView.innerHTML = `<div class="loading-indicator"><div class="spinner"></div></div>`;
-        showView(contentView);
-
-        const methodContentData = moduleData.content ? moduleData.content[methodKey] : null;
-
-        // Short delay to let loader show
-        setTimeout(async () => {
-            if (!methodContentData || !Array.isArray(methodContentData) || methodContentData.length === 0) {
-                contentView.innerHTML = `<div class="content-container"><p>No content available for "${methodInfo[methodKey]?.name || methodKey}".</p><button id="back-to-methods" class="btn">Back to Methods</button></div>`;
-                 attachSwitcherListeners(moduleData); // Still attach listener for back button
-                 return;
-            }
-
-             // ** Construct full content view HTML including the switcher **
-             let studyMethodHTML = '';
-             // Generate HTML based on method (we'll call the specific functions to get their inner content)
-             switch (methodKey) {
-                 case 'flashcards': studyMethodHTML = getFlashcardsHTML(moduleData.title, methodContentData); break;
-                 case 'quiz': studyMethodHTML = getQuizHTML(moduleData.title, methodContentData); break;
-                 case 'time-trial': studyMethodHTML = getTimeTrialHTML(moduleData.title, methodContentData); break;
-                 case 'true-false': studyMethodHTML = getTrueFalseHTML(moduleData.title, methodContentData); break;
-                 default: studyMethodHTML = `<p>Method ${methodKey} UI not implemented.</p>`;
-             }
-
-            // Prepend switcher, append Back button
-             contentView.innerHTML = `
-                 ${createMethodSwitcherHTML(moduleData, methodKey)}
-                 ${studyMethodHTML}
-                 <div style="text-align: center; margin-top: var(--spacing-lg);">
-                    <button id="back-to-methods" class="btn">Back to Methods</button>
-                 </div>`;
-
-            // ** Call initialization/logic function AFTER setting innerHTML **
-            try {
-                switch (methodKey) {
-                     case 'flashcards': await initFlashcardsLogic(methodContentData); break;
-                     case 'quiz': await initQuizLogic(moduleData.title, methodContentData); break; // Pass title if needed by results/review
-                    case 'time-trial': await initTimeTrialGameLogic(moduleData.title, methodContentData); break;
-                    case 'true-false': await initTrueFalseQuestionsLogic(moduleData.title, methodContentData); break;
-                }
-                 attachSwitcherListeners(moduleData); // Attach listeners AFTER elements exist
-             } catch(error) {
-                console.error(`Error initializing study method ${methodKey}:`, error);
-                 contentView.innerHTML = `<div class="content-container"><p>Error loading "${methodInfo[methodKey]?.name || methodKey}".</p><button id="back-to-methods" class="btn">Back to Methods</button></div>`;
-                 attachSwitcherListeners(moduleData);
-             }
-        }, 50);
-    }
-
-
-    // --- Specific Study Method HTML Generation and Logic Initialization ---
-    // Refactor original functions to return HTML string and have separate init logic function
-
-    function getFlashcardsHTML(moduleTitle, flashcardsData) {
-        return `
+    async function loadFlashcards(moduleTitle, flashcardsData) {
+        let currentCardIndex = 0;
+        contentView.innerHTML = `
             <div class="content-header">
                 <h2 class="content-title">${moduleTitle} - Flashcards</h2>
                 <span class="progress-indicator">Card <span id="current-card-number">1</span> of ${flashcardsData.length}</span>
             </div>
             <div class="content-container">
                 <div class="flashcard" id="current-flashcard">
-                     <div class="flashcard-question" id="flashcard-question-content"></div>
-                     <div class="flashcard-answer" id="flashcard-answer-content"></div>
+                    <div class="card-indicator">Click to flip</div>
+                    <div class="flashcard-question" id="flashcard-question-content"></div>
+                    <div class="flashcard-answer" id="flashcard-answer-content"></div>
                 </div>
                 <div id="flashcard-image-container" class="flashcard-image-container" style="display: none;">
-                    <img id="flashcard-image" src="" alt="" class="flashcard-image">
+                    <img id="flashcard-image" src="" alt="Flashcard image" class="flashcard-image">
                 </div>
-                 <div class="card-controls">
+                <div class="card-controls">
                     <button id="prev-card" class="btn">Previous</button>
-                    <button id="flip-card" class="btn btn-primary">Flip</button>
-                     <button id="next-card" class="btn">Next</button>
+                    <button id="flip-card" class="btn btn-primary">Flip Card</button>
+                    <button id="next-card" class="btn">Next</button>
                 </div>
-            </div>`;
-    }
-
-    async function initFlashcardsLogic(flashcardsData) {
-         let currentCardIndex = 0;
-         const flashcardElement = document.getElementById('current-flashcard');
-         const prevButton = document.getElementById('prev-card');
-         const nextButton = document.getElementById('next-card');
-         const flipButton = document.getElementById('flip-card');
-         const cardNumberElement = document.getElementById('current-card-number');
-         const imageContainer = document.getElementById('flashcard-image-container');
-         const imageElement = document.getElementById('flashcard-image');
-
-         const updateFlashcard = async () => {
-            if (!flashcardsData || currentCardIndex < 0 || currentCardIndex >= flashcardsData.length) return;
-            const card = flashcardsData[currentCardIndex];
-             document.getElementById('flashcard-question-content').textContent = card.question;
-             document.getElementById('flashcard-answer-content').textContent = card.answer;
-             if (cardNumberElement) cardNumberElement.textContent = currentCardIndex + 1;
-             if (flashcardElement) flashcardElement.classList.remove('flipped'); // Reset flip
-             const imagePath = card.image;
-             const imageExists = await checkImageExists(imagePath);
-            if (imageExists && imageContainer && imageElement) {
-                 imageElement.src = imagePath;
-                 imageElement.alt = card.imageAlt || `Image for card ${currentCardIndex + 1}`;
-                 imageContainer.style.display = (card.imageDisplayTiming !== "after-answer") ? 'block' : 'none';
-             } else if (imageContainer) {
-                 imageContainer.style.display = 'none';
-             }
-            if (prevButton) prevButton.disabled = currentCardIndex === 0;
-             if (nextButton) nextButton.disabled = currentCardIndex === flashcardsData.length - 1;
-         };
-
-         const toggleFlashcard = () => {
-            if (flashcardElement) flashcardElement.classList.toggle('flipped');
-             const card = flashcardsData[currentCardIndex];
-             // Check if image should be shown on flip
-            if (imageContainer && imageElement && imageElement.src && card.imageDisplayTiming === "after-answer") {
-                 imageContainer.style.display = flashcardElement.classList.contains('flipped') ? 'block' : 'none';
-             }
-         };
-
-         if (flashcardElement) flashcardElement.addEventListener('click', toggleFlashcard);
-         if (flipButton) flipButton.addEventListener('click', toggleFlashcard);
-         if (prevButton) prevButton.addEventListener('click', async () => { if (currentCardIndex > 0) { currentCardIndex--; await updateFlashcard(); } });
-         if (nextButton) nextButton.addEventListener('click', async () => { if (currentCardIndex < flashcardsData.length - 1) { currentCardIndex++; await updateFlashcard(); } });
-
-         await updateFlashcard(); // Initial load
-     }
-
-    // --- QUIZ HTML AND LOGIC ---
-     function getQuizHTML(moduleTitle, quizData) {
-         return `
-            <div class="content-header">
-                 <h2 class="content-title">${moduleTitle} - Quiz</h2>
-                 <span class="progress-indicator">Question <span id="current-question-number">1</span> of ${quizData.length}</span>
             </div>
-            <div class="content-container">
-                 <div class="quiz-container" id="quiz-container">
-                     <div class="quiz-question" id="quiz-question"></div>
-                     <div id="quiz-image-container" class="quiz-image-container" style="display: none;"><img id="quiz-image" src="" alt="" class="quiz-image"></div>
-                     <ul class="quiz-options" id="quiz-options"></ul>
-                     <div id="answer-feedback" class="true-false-feedback" style="display: none;"></div>
-                </div>
-                <div class="quiz-controls">
-                    <button id="prev-question" class="btn">Previous</button>
-                    <button id="next-question" class="btn">Next</button>
-                 </div>
-            </div>`;
-    }
+            <button id="back-to-methods" class="btn" style="margin-top: 1.5rem;">Back to Methods</button>`;
 
-    async function initQuizLogic(moduleTitle, quizData) {
-         let currentQuestionIndex = 0; let score = 0; let userAnswers = new Array(quizData.length).fill(null);
+        const flashcardElement = document.getElementById('current-flashcard');
+        const prevButton = document.getElementById('prev-card');
+        const nextButton = document.getElementById('next-card');
+        const flipButton = document.getElementById('flip-card');
+        const backButton = document.getElementById('back-to-methods');
+        const cardNumberElement = document.getElementById('current-card-number');
+        const imageContainer = document.getElementById('flashcard-image-container'); // Define here
+        const imageElement = document.getElementById('flashcard-image'); // Define here
 
-        const showQuizResults = () => { /* ... definition remains same, but uses local title/data vars ... */
-             const percentage = quizData.length > 0 ? Math.round((score / quizData.length) * 100) : 0;
-             // Overwrite the entire contentView, including the switcher, for results.
-             contentView.innerHTML = `
-                ${createMethodSwitcherHTML(currentModule, 'quiz')} {/* Regenerate switcher */}
-                 <div class="content-header"><h2 class="content-title">${moduleTitle} - Quiz Results</h2></div>
-                <div class="content-container"> <div class="quiz-results">
-                    <div class="quiz-score">${score} / ${quizData.length}</div> <div class="quiz-percentage">${percentage}%</div>
-                    ${score === quizData.length ? '<div class="quiz-perfect">Perfect Score!</div>': '<p>Review or retry!</p>'}
-                    <div class="quiz-actions"> <button id="review-quiz" class="btn btn-primary">Review</button> <button id="retry-quiz" class="btn">Retry</button> <button id="back-to-methods" class="btn">Methods</button> </div>
-                </div> </div>
-                 <div style="text-align: center; margin-top: var(--spacing-lg);"><button id="final-back-to-methods" class="btn">Back to Methods</button></div>`; // Separate Back button
-             attachSwitcherListeners(currentModule); // Re-attach switcher listeners
-             document.getElementById('review-quiz').addEventListener('click', () => showQuizReview(moduleTitle, quizData, userAnswers));
-             document.getElementById('retry-quiz').addEventListener('click', () => loadStudyMethod(currentModule, 'quiz'));
-             document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(currentModule));
-             document.getElementById('final-back-to-methods').addEventListener('click', () => showMethodsView(currentModule));
+        const updateFlashcard = async () => {
+            if (currentCardIndex < 0 || currentCardIndex >= flashcardsData.length) return;
+            const card = flashcardsData[currentCardIndex];
+            document.getElementById('flashcard-question-content').textContent = card.question;
+            document.getElementById('flashcard-answer-content').textContent = card.answer;
+            cardNumberElement.textContent = currentCardIndex + 1;
+            flashcardElement.classList.remove('flipped');
+            const imagePath = card.image;
+            const imageExists = await checkImageExists(imagePath);
+            if (imageExists && imageContainer && imageElement) {
+                imageElement.src = imagePath;
+                imageElement.alt = card.imageAlt || `Image for ${card.question}`;
+                imageContainer.style.display = (card.imageDisplayTiming !== "after-answer") ? 'block' : 'none';
+            } else if (imageContainer) {
+                imageContainer.style.display = 'none';
+            }
+            prevButton.disabled = currentCardIndex === 0;
+            nextButton.disabled = currentCardIndex === flashcardsData.length - 1;
         };
 
-        const showQuizReview = async (moduleTitle, quizData, userAnswers) => { /* ... definition remains same, renders review inside contentView ... */
-             // Overwrite contentView, including switcher
+        const toggleFlashcard = () => {
+            flashcardElement.classList.toggle('flipped');
+            const card = flashcardsData[currentCardIndex];
+            // Check imageElement existence before accessing src
+            if (imageContainer && imageElement && imageElement.src && card.imageDisplayTiming === "after-answer") {
+                imageContainer.style.display = flashcardElement.classList.contains('flipped') ? 'block' : 'none';
+            }
+        };
+
+        flashcardElement.addEventListener('click', toggleFlashcard);
+        flipButton.addEventListener('click', toggleFlashcard);
+        prevButton.addEventListener('click', async () => { if (currentCardIndex > 0) { currentCardIndex--; await updateFlashcard(); } });
+        nextButton.addEventListener('click', async () => { if (currentCardIndex < flashcardsData.length - 1) { currentCardIndex++; await updateFlashcard(); } });
+        backButton.addEventListener('click', () => showMethodsView(currentModule));
+        await updateFlashcard(); // Initial load
+    }
+
+    async function loadQuiz(moduleTitle, quizData) {
+         let currentQuestionIndex = 0;
+         let score = 0;
+         let userAnswers = new Array(quizData.length).fill(null);
+
+        const showQuizResults = () => {
+            const percentage = quizData.length > 0 ? Math.round((score / quizData.length) * 100) : 0;
             contentView.innerHTML = `
-                 ${createMethodSwitcherHTML(currentModule, 'quiz')}
-                <div class="content-header"><h2 class="content-title">${moduleTitle} - Quiz Review</h2></div>
+                <div class="content-header"><h2 class="content-title">${moduleTitle} - Quiz Results</h2></div>
+                <div class="content-container">
+                    <div class="quiz-results">
+                        <div class="quiz-score">${score} / ${quizData.length}</div><div class="quiz-percentage">${percentage}%</div>
+                        ${score === quizData.length ? '<div class="quiz-perfect">Perfect Score! 🎉</div>' : '<p>Review answers or try again!</p>'}
+                        <div class="quiz-actions">
+                            <button id="review-quiz" class="btn btn-primary">Review</button><button id="retry-quiz" class="btn">Retry</button><button id="back-to-methods" class="btn">Back to Methods</button>
+                        </div></div></div>`;
+            document.getElementById('review-quiz').addEventListener('click', showQuizReview);
+            document.getElementById('retry-quiz').addEventListener('click', () => loadQuiz(moduleTitle, quizData));
+            document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(currentModule));
+        };
+
+         const showQuizReview = async () => {
+            contentView.innerHTML = `
+                 <div class="content-header"><h2 class="content-title">${moduleTitle} - Quiz Review</h2></div>
                  <div class="content-container" id="review-container"></div>
-                <button id="back-to-results" class="btn">Back to Results</button>
-                <div style="text-align: center; margin-top: var(--spacing-lg);"><button id="final-back-to-methods" class="btn">Back to Methods</button></div>`;
-             attachSwitcherListeners(currentModule); // Re-attach switcher listeners
-             const reviewContainer = document.getElementById('review-container');
-             if (!reviewContainer) return;
-            for (let i = 0; i < quizData.length; i++) { /* ... rest of review rendering ... */
-                 const question = quizData[i]; const userAnswerIndex = userAnswers[i]; const isCorrect = userAnswerIndex === question.correctAnswer; const imagePath = question.image; const imageExists = await checkImageExists(imagePath);
-                 const reviewItem = document.createElement('div'); reviewItem.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
-                 reviewItem.innerHTML = `<div class="review-statement">${i + 1}. ${question.question}</div>${imageExists ? `<div class="review-image-container"><img src="${imagePath}" alt="${question.imageAlt||''}" class="review-image"></div>` : ''}<div class="review-details"><div class="review-answer">Yours: ${userAnswerIndex!==null?`<strong>${question.options[userAnswerIndex]}</strong>`:'Not answered'}</div><div class="review-answer">Correct: ${question.options[question.correctAnswer]}</div></div>`;
-                 reviewContainer.appendChild(reviewItem);
-            }
-            document.getElementById('back-to-results').addEventListener('click', showQuizResults);
-             document.getElementById('final-back-to-methods').addEventListener('click', () => showMethodsView(currentModule));
+                 <button id="back-to-results" class="btn">Back to Results</button>`;
+            const reviewContainer = document.getElementById('review-container');
+             for (let i = 0; i < quizData.length; i++) {
+                 const question = quizData[i];
+                 const userAnswerIndex = userAnswers[i];
+                 const isCorrect = userAnswerIndex === question.correctAnswer;
+                 const imagePath = question.image;
+                 const imageExists = await checkImageExists(imagePath);
+                 const reviewItem = document.createElement('div');
+                 reviewItem.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
+                 reviewItem.innerHTML = `
+                    <div class="review-statement">${i + 1}. ${question.question}</div>
+                    ${imageExists ? `<div class="review-image-container"><img src="${imagePath}" alt="${question.imageAlt || 'Review image'}" class="review-image"></div>` : ''}
+                    <div class="review-details">
+                        <div class="review-answer">Your answer: ${userAnswerIndex !== null ? `<strong>${question.options[userAnswerIndex]}</strong>` : 'Not answered'}</div>
+                        <div class="review-answer">Correct answer: ${question.options[question.correctAnswer]}</div>
+                    </div>`;
+                reviewContainer.appendChild(reviewItem);
+             }
+             document.getElementById('back-to-results').addEventListener('click', showQuizResults);
          };
 
-
-        const loadQuestion = async () => { // Function to render *just* the question part within the existing #content-view
+         const loadQuestion = async () => {
             if (currentQuestionIndex < 0 || currentQuestionIndex >= quizData.length) return;
-            const questionData = quizData[currentQuestionIndex];
-            const imagePath = questionData.image;
-            const imageExists = await checkImageExists(imagePath);
+             const questionData = quizData[currentQuestionIndex];
+             const imagePath = questionData.image;
+             const imageExists = await checkImageExists(imagePath);
+             contentView.innerHTML = `
+                 <div class="content-header">
+                     <h2 class="content-title">${moduleTitle} - Quiz</h2>
+                     <span class="progress-indicator">Question <span id="current-question-number">${currentQuestionIndex + 1}</span> of ${quizData.length}</span>
+                 </div>
+                 <div class="content-container">
+                     <div class="quiz-container" id="quiz-container">
+                         <div class="quiz-question">${questionData.question}</div>
+                         <div id="quiz-image-container" class="quiz-image-container" style="display: ${imageExists && questionData.imageDisplayTiming !== 'after-answer' ? 'block' : 'none'};">
+                            <img id="quiz-image" src="${imageExists ? imagePath : ''}" alt="${imageExists ? questionData.imageAlt || 'Quiz image' : ''}" class="quiz-image">
+                         </div>
+                         <ul class="quiz-options" id="quiz-options"></ul>
+                         <div id="answer-feedback" class="true-false-feedback" style="display: none;"></div>
+                     </div>
+                     <div class="quiz-controls">
+                        <button id="prev-question" class="btn" ${currentQuestionIndex === 0 ? 'disabled' : ''}>Previous</button>
+                        <button id="next-question" class="btn">${currentQuestionIndex === quizData.length - 1 ? 'Submit' : 'Next'}</button>
+                    </div>
+                 </div>
+                 <button id="back-to-methods" class="btn" style="margin-top: 1.5rem;">Back to Methods</button>`;
 
-             // ** Only update the content needed for the question **
-             const questionElement = document.getElementById('quiz-question');
-             const optionsElement = document.getElementById('quiz-options');
-             const feedbackElement = document.getElementById('answer-feedback');
-             const imageContainer = document.getElementById('quiz-image-container');
-             const imageElement = document.getElementById('quiz-image');
-             const currentQNumEl = document.getElementById('current-question-number');
-             const prevBtn = document.getElementById('prev-question');
-             const nextBtn = document.getElementById('next-question');
+            const optionsElement = document.getElementById('quiz-options');
+            const feedbackElement = document.getElementById('answer-feedback');
+            const imageContainer = document.getElementById('quiz-image-container');
+            const imageElement = document.getElementById('quiz-image'); // Get image element
 
-
-             if (currentQNumEl) currentQNumEl.textContent = currentQuestionIndex + 1;
-             if (questionElement) questionElement.textContent = questionData.question;
-             if (feedbackElement) { feedbackElement.style.display = 'none'; feedbackElement.innerHTML = ''; } // Reset feedback
-
-             // Handle image display
-             if (imageContainer && imageElement) {
-                 if (imageExists && questionData.imageDisplayTiming !== 'after-answer') {
-                     imageElement.src = imagePath;
-                     imageElement.alt = questionData.imageAlt || 'Quiz image';
-                     imageContainer.style.display = 'block';
-                 } else {
-                     imageContainer.style.display = 'none';
-                 }
-            }
-
-             // Handle options
-            if (optionsElement) {
-                optionsElement.innerHTML = ''; // Clear previous options
-                questionData.options.forEach((option, index) => {
-                    const optionElement = createOptionElement(option, index); // Use helper
-                    optionsElement.appendChild(optionElement);
-                 });
-            }
-
-            // Update Nav button states
-            if (prevBtn) prevBtn.disabled = currentQuestionIndex === 0;
-            if (nextBtn) nextBtn.textContent = (currentQuestionIndex === quizData.length - 1) ? 'Submit' : 'Next';
-         };
-
-        // Helper moved from global scope to be within initQuizLogic's closure
-         const createOptionElement = (optionText, index) => {
-            const optionElement = document.createElement('li');
-            optionElement.className = 'quiz-option';
-            optionElement.textContent = optionText;
-             const isAnswered = userAnswers[currentQuestionIndex] !== null;
-
-            if (isAnswered && userAnswers[currentQuestionIndex] === index) {
-                optionElement.classList.add('selected');
-            }
-            if(isAnswered) {
-                optionElement.style.pointerEvents = 'none'; // Disable if question already answered
-            } else {
-                 optionElement.addEventListener('click', async () => { // Only add listener if not answered
-                     if (userAnswers[currentQuestionIndex] !== null) return;
-                    document.querySelectorAll('#quiz-options .quiz-option').forEach(el => {
-                         el.classList.remove('selected'); el.style.pointerEvents = 'none';
-                    });
+            questionData.options.forEach((option, index) => {
+                const optionElement = document.createElement('li');
+                optionElement.className = 'quiz-option';
+                optionElement.textContent = option;
+                if(userAnswers[currentQuestionIndex] === index) { // Highlight previous selection
                     optionElement.classList.add('selected');
-                     userAnswers[currentQuestionIndex] = index;
-                    const questionData = quizData[currentQuestionIndex]; // Get current question data
-                    const isCorrect = index === questionData.correctAnswer;
-                    if (isCorrect) score++;
-                     const feedbackElement = document.getElementById('answer-feedback');
-                     const imageContainer = document.getElementById('quiz-image-container');
-                    const imageElement = document.getElementById('quiz-image');
-                    if (feedbackElement) {
+                     const isCorrect = userAnswers[currentQuestionIndex] === questionData.correctAnswer;
+                     feedbackElement.innerHTML = isCorrect ? '<div class="feedback-header">Correct!</div>' : `<div class="feedback-header">Incorrect! Correct: ${questionData.options[questionData.correctAnswer]}</div>`;
+                     feedbackElement.className = `true-false-feedback visible ${isCorrect ? 'feedback-correct' : 'feedback-incorrect'}`;
+                     feedbackElement.style.display = 'block';
+                     if(imageExists && questionData.imageDisplayTiming === 'after-answer' && imageContainer) imageContainer.style.display = 'block';
+                     optionsElement.querySelectorAll('.quiz-option').forEach(el => el.style.pointerEvents = 'none'); // Disable options
+                } else if (userAnswers[currentQuestionIndex] !== null) {
+                    optionElement.style.pointerEvents = 'none'; // Disable others if answered
+                 }
+
+                if(userAnswers[currentQuestionIndex] === null) { // Only add listener if not answered
+                    optionElement.addEventListener('click', async () => {
+                        if (userAnswers[currentQuestionIndex] !== null) return;
+                         document.querySelectorAll('.quiz-option').forEach(el => el.classList.remove('selected'));
+                         optionElement.classList.add('selected');
+                         userAnswers[currentQuestionIndex] = index;
+                         const isCorrect = index === questionData.correctAnswer;
+                         if (isCorrect) score++;
                          feedbackElement.innerHTML = isCorrect ? '<div class="feedback-header">Correct!</div>' : `<div class="feedback-header">Incorrect! Correct: ${questionData.options[questionData.correctAnswer]}</div>`;
                          feedbackElement.className = `true-false-feedback visible ${isCorrect ? 'feedback-correct' : 'feedback-incorrect'}`;
                          feedbackElement.style.display = 'block';
-                     }
-                     // Show image after answer
-                     const imagePath = questionData.image; const imageExists = await checkImageExists(imagePath);
-                     if (imageExists && questionData.imageDisplayTiming === 'after-answer' && imageContainer && imageElement) {
-                         imageElement.src = imagePath; imageElement.alt = questionData.imageAlt || 'Quiz image';
-                         imageContainer.style.display = 'block';
-                     }
-                });
-             }
-            return optionElement;
+                         if(imageExists && questionData.imageDisplayTiming === 'after-answer' && imageContainer) {
+                           imageContainer.style.display = 'block';
+                        }
+                         optionsElement.querySelectorAll('.quiz-option').forEach(el => el.style.pointerEvents = 'none');
+                    });
+                }
+                optionsElement.appendChild(optionElement);
+            });
+
+            // Add Nav listeners
+            document.getElementById('prev-question').addEventListener('click', async () => { if (currentQuestionIndex > 0) { currentQuestionIndex--; await loadQuestion(); } });
+            document.getElementById('next-question').addEventListener('click', async () => { if (currentQuestionIndex < quizData.length - 1) { currentQuestionIndex++; await loadQuestion(); } else { showQuizResults(); } });
+            document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(currentModule));
+         };
+        await loadQuestion(); // Initial load
+     }
+
+     async function initTimeTrialGame(moduleTitle, timeTrialData) {
+         let score = 0;
+         let currentRound = 0;
+         let timer;
+         let timeLeft = 7;
+         const totalRounds = timeTrialData.length;
+         let isRoundActive = false;
+
+        const updateTimerDisplay = () => {
+            const timeElement = document.getElementById('time-trial-time');
+            if (timeElement) {
+                timeElement.textContent = timeLeft + 's';
+                timeElement.classList.toggle('warning', timeLeft <= 3);
+            }
          };
 
-        await loadQuestion(); // Load first question automatically (needs the wrapper HTML set first)
-
-         // Attach main Nav listeners to the initial structure created by loadQuestion
-        const prevButton = document.getElementById('prev-question');
-        const nextButton = document.getElementById('next-question');
-        if (prevButton) prevButton.addEventListener('click', async () => { if (currentQuestionIndex > 0) { currentQuestionIndex--; await loadQuestion(); } });
-        if (nextButton) nextButton.addEventListener('click', async () => { if (currentQuestionIndex < quizData.length - 1) { currentQuestionIndex++; await loadQuestion(); } else { showQuizResults(); } });
-    }
-
-
-     async function initTimeTrialGameLogic(moduleTitle, timeTrialData) { /* ... Includes fixes from previous version ... */
-        let score = 0; let currentRound = 0; let timer; let timeLeft = 7; const totalRounds = timeTrialData.length; let isRoundActive = false;
-        const updateTimerDisplay = () => { const el=document.getElementById('time-trial-time'); if(el){el.textContent=timeLeft+'s';el.classList.toggle('warning',timeLeft<=3);} };
-        const endGame = () => { clearInterval(timer); isRoundActive = false; const pct=totalRounds>0?Math.round((score/totalRounds)*100):0;
-            // Need to generate result HTML inside contentView here
-             contentView.innerHTML = `${createMethodSwitcherHTML(currentModule,'time-trial')}<div class="content-header"><h2 class="content-title">${moduleTitle} - TT Results</h2></div><div class="content-container"><div class="time-trial-results"><div class="quiz-score">${score}/${totalRounds}</div><div class="quiz-percentage">${pct}%</div>${score === totalRounds ? '<div class="quiz-perfect">Perfect!</div>' : ''}<div class="quiz-actions"><button id="tt-replay" class="btn btn-primary">Retry</button><button id="back-to-methods" class="btn">Methods</button></div></div></div><div style="text-align:center;margin-top:1rem;"><button id="final-back" class="btn">Back to Methods</button></div>`;
-             attachSwitcherListeners(currentModule);
-             document.getElementById('tt-replay').addEventListener('click', () => loadStudyMethod(currentModule, 'time-trial'));
+        const endGame = () => {
+             clearInterval(timer);
+             isRoundActive = false;
+             const percentage = totalRounds > 0 ? Math.round((score / totalRounds) * 100) : 0;
+             contentView.innerHTML = `
+                 <div class="content-header"><h2 class="content-title">${moduleTitle} - Time Trial Results</h2></div>
+                 <div class="content-container">
+                     <div class="time-trial-results">
+                        <div class="quiz-score">${score} / ${totalRounds}</div><div class="quiz-percentage">${percentage}%</div>
+                         ${score === totalRounds ? '<div class="quiz-perfect">Perfect Score! 🎉</div>' : '<p>Keep practicing!</p>'}
+                         <div class="quiz-actions">
+                            <button id="time-trial-replay" class="btn btn-primary">Play Again</button>
+                             <button id="back-to-methods" class="btn">Back to Methods</button>
+                        </div></div></div>`;
+             document.getElementById('time-trial-replay').addEventListener('click', () => initTimeTrialGame(moduleTitle, timeTrialData));
              document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(currentModule));
-            document.getElementById('final-back').addEventListener('click', () => showMethodsView(currentModule));
          };
-        const timeOut = async () => { if (!isRoundActive) return; clearInterval(timer); isRoundActive = false; const item=timeTrialData[currentRound-1]; const fb=document.getElementById('time-trial-feedback'); const opts=document.querySelectorAll('.time-trial-option'); const next=document.getElementById('time-trial-next'); const imgC=document.getElementById('time-trial-image-container'); const imgE=document.getElementById('time-trial-image'); opts.forEach(o=>{o.disabled=true;if(o.dataset.term===item.term)o.classList.add('correct');}); if(fb)fb.innerHTML=`<div class="feedback-timeout">Time Out! Ans: ${item.term}</div>`; if(imgC&&imgE&&item.imageDisplayTiming==="after-answer"){const p=item.image;const ex=await checkImageExists(p);if(ex){imgE.src=p;imgE.alt=item.imageAlt||'';imgC.style.display='block';}} if(next){next.style.display='block'; if(currentRound>=totalRounds){next.textContent="Results"; next.onclick=endGame;} else {next.textContent="Next"; next.onclick=nextRound;}} };
-         const startTimer = () => { timeLeft=7; isRoundActive=true; updateTimerDisplay(); clearInterval(timer); timer=setInterval(()=>{if(!isRoundActive){clearInterval(timer);return;}timeLeft--;updateTimerDisplay();if(timeLeft<=0){timeOut();}},1000); };
-         const selectOption = async (selectedTerm) => { if(!isRoundActive)return; isRoundActive=false; clearInterval(timer); const item=timeTrialData[currentRound-1]; const correct=item.term; const isCorrect=selectedTerm===correct; const fb=document.getElementById('time-trial-feedback'); const opts=document.querySelectorAll('.time-trial-option'); const next=document.getElementById('time-trial-next'); const scoreEl=document.getElementById('time-trial-score'); const imgC=document.getElementById('time-trial-image-container'); const imgE=document.getElementById('time-trial-image'); opts.forEach(o=>{o.disabled=true;if(o.dataset.term===correct)o.classList.add('correct');if(o.dataset.term===selectedTerm&&!isCorrect)o.classList.add('incorrect');}); if(isCorrect){score++; if(scoreEl)scoreEl.textContent=score;} if(fb)fb.innerHTML=isCorrect?'<div class="fb-correct">Correct!</div>':`<div class="fb-incorrect">Incorrect! Ans: ${correct}</div>`; if(imgC&&imgE&&item.imageDisplayTiming==="after-answer"){const p=item.image; const ex=await checkImageExists(p);if(ex){imgE.src=p;imgE.alt=item.imageAlt||'';imgC.style.display='block';}} if(next){next.style.display='block'; if(currentRound>=totalRounds){next.textContent="Results"; next.onclick=endGame;} else {next.textContent="Next"; next.onclick=nextRound;}} };
-         const nextRound = async () => { if(currentRound>=totalRounds){endGame();return;} const item=timeTrialData[currentRound]; const defEl=document.getElementById('time-trial-definition'); const optsEl=document.getElementById('time-trial-options'); const fbEl=document.getElementById('time-trial-feedback'); const nextBtn=document.getElementById('time-trial-next'); const currEl=document.getElementById('time-trial-current'); const imgC=document.getElementById('time-trial-image-container'); const imgE=document.getElementById('time-trial-image'); if(fbEl)fbEl.innerHTML='';if(nextBtn)nextBtn.style.display='none';if(currEl)currEl.textContent=`${currentRound+1}/${totalRounds}`;if(defEl)defEl.textContent=item.definition; const imgPath=item.image;const imgExists=await checkImageExists(imgPath);if(imgC&&imgE){if(imgExists){imgE.src=imgPath;imgE.alt=item.imageAlt||'';imgC.style.display=(item.imageDisplayTiming!=="after-answer")?'block':'none';}else{imgC.style.display='none';}} const distractors=timeTrialData.map(i=>i.term).filter(t=>t!==item.term).sort(()=>0.5-Math.random()).slice(0,3);const terms=[item.term,...distractors].sort(()=>0.5-Math.random());if(optsEl){optsEl.innerHTML='';terms.forEach(t=>{const btn=document.createElement('button');btn.className='time-trial-option';btn.textContent=t;btn.dataset.term=t;btn.onclick=()=>selectOption(t);optsEl.appendChild(btn);});} currentRound++; startTimer(); }; // Use onclick assignment for simplicity
-        const startGame = () => { score=0;currentRound=0; const sEl=document.getElementById('time-trial-score'); const startScr=document.getElementById('time-trial-start-screen'); const gameScr=document.getElementById('time-trial-gameplay'); if(sEl)sEl.textContent='0'; if(startScr)startScr.style.display='none'; if(gameScr)gameScr.style.display='block'; nextRound(); };
-         // Call startGame on button click - listener attached when HTML is generated by loadStudyMethod
-     }
 
-    async function initTrueFalseQuestionsLogic(moduleTitle, trueFalseData) { /* ... Includes fixes ... */
-        let score = 0; let currentQuestionIndex = 0; let userAnswers = new Array(trueFalseData.length).fill(null); const totalQuestions = trueFalseData.length;
-         const showResults = () => { /* ... definition same, updates contentView ... */
-             const pct=totalQuestions>0?Math.round((score/totalQuestions)*100):0;
-             contentView.innerHTML = `${createMethodSwitcherHTML(currentModule, 'true-false')} <div class="content-header"><h2 class="content-title">${moduleTitle} - T/F Results</h2></div><div class="content-container"><div class="time-trial-results"><div class="quiz-score">${score}/${totalQuestions}</div><div class="quiz-percentage">${pct}%</div>${score===totalQuestions?'<div class="quiz-perfect">Perfect!</div>':''}<div class="quiz-actions"><button id="tf-review" class="btn btn-primary">Review</button><button id="tf-replay" class="btn">Retry</button><button id="back-to-methods" class="btn">Methods</button></div></div></div><div style="text-align:center;margin-top:1rem;"><button id="final-back" class="btn">Back to Methods</button></div>`;
-             attachSwitcherListeners(currentModule); document.getElementById('tf-review').addEventListener('click', () => showReview(moduleTitle, trueFalseData, userAnswers)); document.getElementById('tf-replay').addEventListener('click',()=>loadStudyMethod(currentModule, 'true-false')); document.getElementById('back-to-methods').addEventListener('click',()=>showMethodsView(currentModule)); document.getElementById('final-back').addEventListener('click',()=>showMethodsView(currentModule));
+         const timeOut = async () => { // Made async
+             if (!isRoundActive) return;
+             clearInterval(timer);
+             isRoundActive = false;
+             const currentItem = timeTrialData[currentRound - 1]; // Index correct here
+             const feedbackElement = document.getElementById('time-trial-feedback');
+             const options = document.querySelectorAll('.time-trial-option');
+             const nextButton = document.getElementById('time-trial-next');
+             const imageContainer = document.getElementById('time-trial-image-container');
+             const imageElement = document.getElementById('time-trial-image');
+
+             options.forEach(option => {
+                 option.disabled = true;
+                 if (option.dataset.term === currentItem.term) option.classList.add('correct');
+            });
+             if (feedbackElement) feedbackElement.innerHTML = `<div class="feedback-timeout">Time's up! Correct: ${currentItem.term}</div>`;
+
+            // Show image if applicable
+             if (imageContainer && imageElement && currentItem.imageDisplayTiming === "after-answer") {
+                  const imagePath = currentItem.image;
+                  const exists = await checkImageExists(imagePath); // await here
+                  if(exists) {
+                      imageElement.src = imagePath;
+                      imageElement.alt = currentItem.imageAlt || 'Image';
+                      imageContainer.style.display = 'block';
+                  }
+             }
+
+            if (nextButton) {
+                nextButton.style.display = 'block';
+                 if (currentRound >= totalRounds) {
+                     nextButton.textContent = "Show Results";
+                     nextButton.onclick = endGame;
+                 } else {
+                     nextButton.textContent = "Next Term";
+                     nextButton.onclick = nextRound; // Make sure this gets called
+                 }
+             }
          };
-         const showReview = async (moduleTitle, trueFalseData, userAnswers) => { /* ... definition same, updates contentView ... */
-            contentView.innerHTML = `${createMethodSwitcherHTML(currentModule, 'true-false')} <div class="content-header"><h2 class="content-title">${moduleTitle} - T/F Review</h2></div><div class="content-container" id="review-container"></div><button id="back-to-results" class="btn">Results</button><div style="text-align:center;margin-top:1rem;"><button id="final-back" class="btn">Back to Methods</button></div>`;
-            attachSwitcherListeners(currentModule); const reviewContainer=document.getElementById('review-container');
-            for(let i=0;i<trueFalseData.length;i++){const q=trueFalseData[i];const ans=userAnswers[i];const imgPath=q.image; const imgExists=await checkImageExists(imgPath); const item=document.createElement('div');item.className=`review-item ${ans&&ans.isCorrect?'correct':'incorrect'}`; item.innerHTML = `<div class="review-statement">${i+1}. ${q.statement}</div> ${imgExists?`<div class="r-img-c"><img src="${imgPath}" alt="${q.imageAlt||''}" class="r-img"></div>`:''} <div class="review-details"><div class="r-ans">Correct: <strong>${q.isTrue?'T':'F'}</strong></div> ${ans?`<div class="r-ans">Yours: <strong>${ans.userAnswer?'T':'F'}</strong></div>`:''} <div class="review-explanation">${q.explanation||''}</div></div>`; reviewContainer.appendChild(item);} // Simplified review HTML IDs
-             document.getElementById('back-to-results').addEventListener('click', showResults); document.getElementById('final-back').addEventListener('click',()=>showMethodsView(currentModule));
+
+         const startTimer = () => {
+            timeLeft = 7;
+            isRoundActive = true;
+             updateTimerDisplay();
+            clearInterval(timer);
+            timer = setInterval(() => {
+                if (!isRoundActive) { clearInterval(timer); return; }
+                 timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) { timeOut(); }
+             }, 1000);
         };
-        const nextQuestion = async () => { currentQuestionIndex++; if(currentQuestionIndex>=totalQuestions){showResults();}else{await loadQuestion();} };
-         const selectAnswer = async (userAnswer) => { /* ... Mostly same logic ... */
-            const questionData=trueFalseData[currentQuestionIndex]; const isCorrect=userAnswer===questionData.isTrue; if(isCorrect)score++; userAnswers[currentQuestionIndex]={userAnswer, isCorrect};
-            const trueBtn=document.getElementById('true-button');const falseBtn=document.getElementById('false-button'); const fbEl=document.getElementById('tf-feedback'); const nextBtn=document.getElementById('tf-next'); const imgC=document.getElementById('tf-img-c'); const imgE=document.getElementById('tf-img'); // Use simplified IDs
-            if(trueBtn)trueBtn.disabled=true; if(falseBtn)falseBtn.disabled=true; document.getElementById(userAnswer?'true-button':'false-button').classList.add('selected');
-             if(fbEl){ fbEl.innerHTML = `<div class="fb-hdr" style="color:${isCorrect?'var(--success)':'var(--error)'};">${isCorrect?'Correct!':'Incorrect!'}</div><div class="fb-cont">${questionData.explanation||''}</div>`; fbEl.className=`tf-fb visible ${isCorrect?'fb-correct':'fb-incorrect'}`; fbEl.style.display='block'; }
-            if(imgC&&imgE&&questionData.imageDisplayTiming==='after-answer'){const p=questionData.image;const ex=await checkImageExists(p);if(ex){imgE.src=p;imgE.alt=questionData.imageAlt||'';imgC.style.display='block';}}
-            if(nextBtn){nextBtn.style.display='block'; nextBtn.textContent=(currentQuestionIndex===totalQuestions-1)?"Results":"Next";}
+
+         const selectOption = async (selectedTerm) => {
+            if (!isRoundActive) return;
+            isRoundActive = false;
+            clearInterval(timer);
+
+             const currentItem = timeTrialData[currentRound - 1];
+             const correctTerm = currentItem.term;
+            const isCorrect = selectedTerm === correctTerm;
+            const feedbackElement = document.getElementById('time-trial-feedback');
+            const options = document.querySelectorAll('.time-trial-option');
+            const nextButton = document.getElementById('time-trial-next');
+            const scoreElement = document.getElementById('time-trial-score');
+            const imageContainer = document.getElementById('time-trial-image-container');
+            const imageElement = document.getElementById('time-trial-image');
+
+            options.forEach(option => {
+                 option.disabled = true;
+                 if (option.dataset.term === correctTerm) option.classList.add('correct');
+                 if (option.dataset.term === selectedTerm && !isCorrect) option.classList.add('incorrect');
+             });
+
+            if (isCorrect) { score++; if (scoreElement) scoreElement.textContent = score; }
+            if (feedbackElement) feedbackElement.innerHTML = isCorrect ? '<div class="feedback-correct">Correct!</div>' : `<div class="feedback-incorrect">Incorrect! Correct: ${correctTerm}</div>`;
+
+            // Show image if applicable
+             if (imageContainer && imageElement && currentItem.imageDisplayTiming === "after-answer") {
+                 const imagePath = currentItem.image;
+                 const imageExists = await checkImageExists(imagePath);
+                 if (imageExists) {
+                     imageElement.src = imagePath;
+                     imageElement.alt = currentItem.imageAlt || 'Image';
+                     imageContainer.style.display = 'block';
+                 }
+             }
+
+            if (nextButton) {
+                 nextButton.style.display = 'block';
+                 if (currentRound >= totalRounds) {
+                    nextButton.textContent = "Show Results";
+                    nextButton.onclick = endGame;
+                 } else {
+                     nextButton.textContent = "Next Term";
+                    nextButton.onclick = nextRound; // Assign nextRound click handler
+                 }
+            }
          };
-        const loadQuestion = async () => { /* ... Mostly same logic ... */
-            if(currentQuestionIndex<0||currentQuestionIndex>=totalQuestions)return; const qData=trueFalseData[currentQuestionIndex]; const imgPath=qData.image;const imgExists=await checkImageExists(imgPath);
-             // Set specific elements, assume wrapper exists from getTrueFalseHTML
-             const currentNumEl=document.getElementById('tf-current');const statementEl=document.getElementById('tf-statement');const trueBtn=document.getElementById('true-button');const falseBtn=document.getElementById('false-button');const fbEl=document.getElementById('tf-feedback');const nextBtn=document.getElementById('tf-next');const imgCont=document.getElementById('tf-img-c');const imgEl=document.getElementById('tf-img');
-             if(currentNumEl)currentNumEl.textContent=currentQuestionIndex+1;if(statementEl)statementEl.textContent=qData.statement;
-            if(trueBtn){trueBtn.disabled=false;trueBtn.classList.remove('selected');} if(falseBtn){falseBtn.disabled=false;falseBtn.classList.remove('selected');}
-            if(fbEl){fbEl.style.display='none';fbEl.innerHTML='';fbEl.className='tf-fb';} if(nextBtn)nextBtn.style.display='none';
-             if(imgCont&&imgEl){if(imgExists){imgEl.src=imgPath;imgEl.alt=qData.imageAlt||'';imgCont.style.display=(qData.imageDisplayTiming!=='after-answer')?'block':'none';}else{imgCont.style.display='none';}}
-        };
 
-        // Initial UI setup (provided by getTrueFalseHTML called by loadStudyMethod)
-         await loadQuestion(); // Call loadQuestion to populate the initial state
-         // Add listeners after elements are guaranteed to be in DOM by loadQuestion's first run
-         document.getElementById('true-button').addEventListener('click', () => selectAnswer(true));
-         document.getElementById('false-button').addEventListener('click', () => selectAnswer(false));
-         document.getElementById('tf-next').addEventListener('click', nextQuestion);
-     }
+         const nextRound = async () => {
+             // If it's trying to load beyond the last round, end the game
+             if (currentRound >= totalRounds) {
+                endGame();
+                return;
+             }
+             const currentItem = timeTrialData[currentRound];
+             const definitionElement = document.getElementById('time-trial-definition');
+             const optionsElement = document.getElementById('time-trial-options');
+             const feedbackElement = document.getElementById('time-trial-feedback');
+             const nextButton = document.getElementById('time-trial-next');
+             const currentElement = document.getElementById('time-trial-current');
+             const imageContainer = document.getElementById('time-trial-image-container');
+             const imageElement = document.getElementById('time-trial-image');
+
+             // Reset UI
+             if (feedbackElement) feedbackElement.innerHTML = '';
+             if (nextButton) nextButton.style.display = 'none';
+             if (currentElement) currentElement.textContent = `${currentRound + 1}/${totalRounds}`;
+             if (definitionElement) definitionElement.textContent = currentItem.definition;
+
+            // Image handling
+            const imagePath = currentItem.image;
+            const imageExists = await checkImageExists(imagePath);
+             if (imageContainer && imageElement) {
+                if (imageExists) {
+                    imageElement.src = imagePath;
+                    imageElement.alt = currentItem.imageAlt || `Image for ${currentItem.term}`;
+                    imageContainer.style.display = (currentItem.imageDisplayTiming !== "after-answer") ? 'block' : 'none';
+                } else {
+                     imageContainer.style.display = 'none';
+                }
+             }
+
+             // Generate Options
+             const distractors = timeTrialData.map(item => item.term).filter(term => term !== currentItem.term).sort(() => 0.5 - Math.random()).slice(0, 3);
+             const optionsTerms = [currentItem.term, ...distractors].sort(() => 0.5 - Math.random());
+
+             if (optionsElement) {
+                 optionsElement.innerHTML = '';
+                 optionsTerms.forEach(term => {
+                     const optionButton = document.createElement('button');
+                     optionButton.className = 'time-trial-option';
+                     optionButton.textContent = term;
+                     optionButton.dataset.term = term;
+                     optionButton.addEventListener('click', () => selectOption(term)); // Pass selected term
+                     optionsElement.appendChild(optionButton);
+                 });
+             }
+
+            currentRound++; // Increment AFTER setting up the current round
+             startTimer(); // Start timer for the NEW round
+         };
 
 
-     // HTML Generation function for True/False (called by loadStudyMethod)
-     function getTrueFalseHTML(moduleTitle, trueFalseData) {
-         const totalQuestions = trueFalseData.length;
-        return `
-            <div class="content-header">
-                <h2 class="content-title">${moduleTitle} - True/False</h2>
-                <span class="progress-indicator">Question <span id="tf-current">1</span> of ${totalQuestions}</span>
-            </div>
-            <div class="content-container">
-                 <div class="tf-container">
-                     <div class="tf-statement" id="tf-statement">Loading statement...</div>
-                     <div id="tf-img-c" class="tf-img-c" style="display:none;"><img id="tf-img" src="" alt="" class="tf-img"></div>
-                    <div class="true-false-options">
-                         <button id="true-button" class="btn btn-true">TRUE</button>
-                         <button id="false-button" class="btn btn-false">FALSE</button>
+        const startGame = () => {
+            score = 0;
+            currentRound = 0; // Reset round count
+             document.getElementById('time-trial-score').textContent = '0';
+            document.getElementById('time-trial-start-screen').style.display = 'none';
+            document.getElementById('time-trial-gameplay').style.display = 'block';
+             nextRound(); // Call nextRound to load the *first* round
+         };
+
+         // Initial UI Setup (cleaned)
+         contentView.innerHTML = `
+             <div class="content-header"><h2 class="content-title">${moduleTitle} - Time Trial</h2></div>
+             <div class="content-container">
+                <div class="time-trial-header"><div class="time-trial-info">
+                    <div class="info-item"><div class="info-label">Score</div><div class="info-value" id="time-trial-score">0</div></div>
+                    <div class="info-item"><div class="info-label">Time</div><div class="info-value time-value" id="time-trial-time">7s</div></div>
+                    <div class="info-item"><div class="info-label">Question</div><div class="info-value" id="time-trial-current">0/${totalRounds}</div></div>
+                </div></div>
+                 <div id="time-trial-gameplay" style="display: none;">
+                    <div class="time-trial-definition" id="time-trial-definition"></div>
+                    <div id="time-trial-image-container" class="time-trial-image-container" style="display: none;"><img id="time-trial-image" src="" alt="Time trial image" class="time-trial-image"></div>
+                    <div class="time-trial-options" id="time-trial-options"></div>
+                    <div class="time-trial-feedback" id="time-trial-feedback" style="min-height: 40px;"></div>
+                     <div class="time-trial-controls" style="margin-top: 1rem; display: flex; justify-content: center;">
+                        <button id="time-trial-next" class="btn btn-primary" style="display: none;">Next Term</button>
                      </div>
-                     <div class="tf-fb" id="tf-feedback" style="display:none;"></div>
                 </div>
-                 <div class="quiz-controls" style="justify-content: flex-end;">
-                     <button id="tf-next" class="btn btn-primary" style="display: none;">Next Question</button>
+                 <div id="time-trial-start-screen" class="text-center" style="padding: 2rem 0;">
+                     <p style="margin-bottom: 1.5rem;">Match the definition to the correct term within 7 seconds!</p>
+                     <button id="time-trial-start" class="btn btn-primary btn-large">Start Game</button>
                  </div>
-             </div>`;
-             // Note: Back to Methods button is added *outside* this by loadStudyMethod
+            </div>
+            <button id="back-to-methods" class="btn" style="margin-top: 1.5rem;">Back to Methods</button>`;
+
+        document.getElementById('time-trial-start').addEventListener('click', startGame);
+        document.getElementById('back-to-methods').addEventListener('click', () => { clearInterval(timer); showMethodsView(currentModule); });
+        // Listener for 'Next' is now set within selectOption/timeOut
      }
 
 
-}); // --- END OF FILE: js/app.js ---
+     async function initTrueFalseQuestions(moduleTitle, trueFalseData) { // Takes adapted data
+        let score = 0;
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(trueFalseData.length).fill(null);
+         const totalQuestions = trueFalseData.length;
+
+        const showResults = () => { /* ... (definition remains the same) ... */
+            const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+            contentView.innerHTML = `
+               <div class="content-header"><h2 class="content-title">${moduleTitle} - True or False Results</h2></div>
+                <div class="content-container">
+                    <div class="time-trial-results">
+                        <div class="quiz-score">${score} / ${totalQuestions}</div><div class="quiz-percentage">${percentage}%</div>
+                        ${score === totalQuestions ? '<div class="quiz-perfect">Perfect Score! 🎉</div>' : '<p>Review your answers!</p>'}
+                        <div class="quiz-actions">
+                            <button id="true-false-review" class="btn btn-primary">Review</button>
+                             <button id="true-false-replay" class="btn">Retry</button>
+                             <button id="back-to-methods" class="btn">Back to Methods</button>
+                         </div></div></div>`;
+            document.getElementById('true-false-review').addEventListener('click', showReview);
+            document.getElementById('true-false-replay').addEventListener('click', () => initTrueFalseQuestions(moduleTitle, trueFalseData));
+            document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(currentModule));
+        };
+
+         const showReview = async () => { /* ... (definition remains the same) ... */
+             contentView.innerHTML = `
+                <div class="content-header"><h2 class="content-title">${moduleTitle} - True or False Review</h2></div>
+                 <div class="content-container" id="review-container"></div>
+                <button id="back-to-results" class="btn">Back to Results</button>`;
+            const reviewContainer = document.getElementById('review-container');
+            for (let i = 0; i < trueFalseData.length; i++) {
+                 const question = trueFalseData[i];
+                 const answerRecord = userAnswers[i];
+                const imagePath = question.image;
+                 const imageExists = await checkImageExists(imagePath);
+                 const reviewItem = document.createElement('div');
+                 reviewItem.className = `review-item ${answerRecord && answerRecord.isCorrect ? 'correct' : 'incorrect'}`;
+                 reviewItem.innerHTML = `
+                    <div class="review-statement">${i + 1}. ${question.statement}</div>
+                     ${imageExists ? `<div class="review-image-container"><img src="${imagePath}" alt="${question.imageAlt || 'Review image'}" class="review-image"></div>` : ''}
+                     <div class="review-details">
+                         <div class="review-answer">Correct: <strong>${question.isTrue ? 'TRUE' : 'FALSE'}</strong></div>
+                         ${answerRecord ? `<div class="review-answer">Your answer: <strong>${answerRecord.userAnswer ? 'TRUE' : 'FALSE'}</strong></div>` : '<div class="review-answer">Not answered</div>'}
+                         <div class="review-explanation">${question.explanation || ''}</div></div>`;
+                reviewContainer.appendChild(reviewItem);
+             }
+             document.getElementById('back-to-results').addEventListener('click', showResults);
+         };
+
+         const nextQuestion = async () => {
+             currentQuestionIndex++;
+             if (currentQuestionIndex >= totalQuestions) { showResults(); } else { await loadQuestion(); }
+        };
+
+         const selectAnswer = async (userAnswer) => {
+            const questionData = trueFalseData[currentQuestionIndex];
+            const isCorrect = userAnswer === questionData.isTrue;
+            if (isCorrect) score++;
+            userAnswers[currentQuestionIndex] = { userAnswer, isCorrect };
+            const trueBtn = document.getElementById('true-button');
+            const falseBtn = document.getElementById('false-button');
+            const feedbackEl = document.getElementById('true-false-feedback');
+            const nextBtn = document.getElementById('true-false-next');
+            const imageContainer = document.getElementById('true-false-image-container');
+            const imageElement = document.getElementById('true-false-image');
+
+            if(trueBtn) trueBtn.disabled = true;
+            if(falseBtn) falseBtn.disabled = true;
+            if(userAnswer) trueBtn.classList.add('selected'); else falseBtn.classList.add('selected');
+
+             if (feedbackEl) {
+                 feedbackEl.innerHTML = `<div class="feedback-header" style="color: ${isCorrect ? 'var(--accent)' : 'red'};">${isCorrect ? 'Correct!' : 'Incorrect!'}</div><div class="feedback-content">${questionData.explanation || ''}</div>`;
+                feedbackEl.className = `true-false-feedback visible ${isCorrect ? 'feedback-correct' : 'feedback-incorrect'}`;
+                feedbackEl.style.display = 'block';
+             }
+            if (imageContainer && imageElement && questionData.imageDisplayTiming === 'after-answer') {
+                const imagePath = questionData.image;
+                const imageExists = await checkImageExists(imagePath);
+                 if(imageExists) { imageElement.src = imagePath; imageElement.alt = questionData.imageAlt || ''; imageContainer.style.display = 'block'; }
+            }
+            if (nextBtn) {
+                 nextBtn.style.display = 'block';
+                 nextBtn.textContent = (currentQuestionIndex === totalQuestions - 1) ? "Show Results" : "Next Question";
+            }
+         };
+
+         const loadQuestion = async () => {
+            if (currentQuestionIndex < 0 || currentQuestionIndex >= totalQuestions) return;
+            const questionData = trueFalseData[currentQuestionIndex];
+            const imagePath = questionData.image;
+             const imageExists = await checkImageExists(imagePath);
+            contentView.innerHTML = `
+                 <div class="content-header">
+                     <h2 class="content-title">${moduleTitle} - True or False</h2>
+                     <span class="progress-indicator">Question <span id="true-false-current">${currentQuestionIndex + 1}</span> of ${totalQuestions}</span>
+                </div>
+                <div class="content-container">
+                    <div class="true-false-container">
+                         <div class="true-false-statement" id="true-false-statement">${questionData.statement}</div>
+                         <div id="true-false-image-container" class="true-false-image-container" style="display: ${imageExists && questionData.imageDisplayTiming !== 'after-answer' ? 'block' : 'none'};">
+                             <img id="true-false-image" src="${imageExists ? imagePath : ''}" alt="${imageExists ? questionData.imageAlt || 'Image' : ''}" class="true-false-image">
+                        </div>
+                        <div class="true-false-options">
+                             <button id="true-button" class="btn btn-true">TRUE</button>
+                            <button id="false-button" class="btn btn-false">FALSE</button>
+                        </div>
+                         <div class="true-false-feedback" id="true-false-feedback" style="display: none;"></div>
+                    </div>
+                     <div class="quiz-controls" style="justify-content: flex-end;">
+                         <button id="true-false-next" class="btn btn-primary" style="display: none;">Next Question</button>
+                    </div>
+                </div>
+                <button id="back-to-methods" class="btn" style="margin-top: 1.5rem;">Back to Methods</button>`;
+            document.getElementById('true-button').addEventListener('click', () => selectAnswer(true));
+            document.getElementById('false-button').addEventListener('click', () => selectAnswer(false));
+            document.getElementById('true-false-next').addEventListener('click', nextQuestion);
+            document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(currentModule));
+         };
+        await loadQuestion(); // Initial load
+     }
+
+}); // --- END OF FILE: js/app.js --- DO NOT ADD CODE AFTER THIS LINE ---
