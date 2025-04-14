@@ -2,7 +2,7 @@
   "id": "policies-module",
   "title": "Driver Knowledge - Policies",
   "description": "Covers company policies related to drugs & alcohol, working hours, sickness reporting, errors/violations, mobile phone use, personal electrical equipment, MFA, and Care First.",
-  "version": "8.4",
+  "version": "unified",
   "knowledgeUnits": [
     {
       "id": "drugs-alcohol-policy",
