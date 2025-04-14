@@ -301,12 +301,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const cardNumberElement = document.getElementById('current-card-number');
         
         flashcardElement.addEventListener('click', () => {
-            flashcardElement.classList.toggle('flipped');
+            toggleFlashcard();
         });
         
         flipButton.addEventListener('click', () => {
-            flashcardElement.classList.toggle('flipped');
+            toggleFlashcard();
         });
+        
+        function toggleFlashcard() {
+            flashcardElement.classList.toggle('flipped');
+            
+            // Handle image display timing
+            const card = flashcardsData[currentCardIndex];
+            if (card.imageDisplayTiming === "after-answer") {
+                const imageContainer = document.getElementById('flashcard-image-container');
+                if (flashcardElement.classList.contains('flipped')) {
+                    // Show image when card is flipped to answer
+                    if (imageContainer.style.display === 'none') {
+                        imageContainer.style.display = 'block';
+                    }
+                } else {
+                    // Hide image when card is flipped back to question
+                    imageContainer.style.display = 'none';
+                }
+            }
+        }
         
         prevButton.addEventListener('click', () => {
             if (currentCardIndex > 0) {
@@ -353,7 +372,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     const imagePath = hasDirectImage ? card.image : standardPath;
                     imageElement.src = imagePath;
                     imageElement.alt = card.imageAlt || `Image for ${card.question}`;
-                    imageContainer.style.display = 'block';
+                    
+                    // Handle image display timing
+                    if (card.imageDisplayTiming === "after-answer") {
+                        // Hide image initially, will be shown when card is flipped
+                        imageContainer.style.display = 'none';
+                    } else {
+                        // Default behavior - show image with question
+                        imageContainer.style.display = 'block';
+                    }
                 } else {
                     imageContainer.style.display = 'none';
                 }
@@ -483,12 +510,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     const imagePath = hasDirectImage ? questionData.image : standardPath;
                     imageElement.src = imagePath;
                     imageElement.alt = questionData.imageAlt || `Image for question ${currentQuestionIndex + 1}`;
-                    imageContainer.style.display = 'block';
+                    
+                    // Handle image display timing
+                    if (questionData.imageDisplayTiming === "after-answer") {
+                        // Hide image initially, will be shown after answer is selected
+                        imageContainer.style.display = 'none';
+                        // Store the image availability for later
+                        imageContainer.dataset.hasImage = 'true';
+                    } else {
+                        // Default behavior - show image with question
+                        imageContainer.style.display = 'block';
+                    }
                 } else {
                     imageContainer.style.display = 'none';
+                    imageContainer.dataset.hasImage = 'false';
                 }
             } else {
                 imageContainer.style.display = 'none';
+                imageContainer.dataset.hasImage = 'false';
             }
             
             // Update question number
@@ -502,6 +541,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (userAnswers[currentQuestionIndex] === index) {
                     optionElement.classList.add('selected');
+                    
+                    // If answer was already selected and image should show after answer, show it
+                    if (questionData.imageDisplayTiming === "after-answer" && 
+                        imageContainer.dataset.hasImage === 'true') {
+                        imageContainer.style.display = 'block';
+                    }
                 }
                 
                 optionElement.addEventListener('click', () => {
@@ -513,6 +558,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Save user's answer
                     userAnswers[currentQuestionIndex] = index;
+                    
+                    // If image should be displayed after answer and image exists, show it now
+                    if (questionData.imageDisplayTiming === "after-answer" && 
+                        imageContainer.dataset.hasImage === 'true') {
+                        imageContainer.style.display = 'block';
+                    }
                 });
                 
                 optionsElement.appendChild(optionElement);
@@ -597,9 +648,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const userAnswer = userAnswers[index] !== null ? userAnswers[index] : -1;
                 const isCorrect = userAnswer === question.correctAnswer;
                 
-                const questionElement = document.createElement('div');
-                questionElement.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
-                
                 // Check for image
                 let imageHtml = '';
                 if (question.image || moduleData.id) {
@@ -618,7 +666,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
                 
-                questionElement.innerHTML = `
+                const reviewItem = document.createElement('div');
+                reviewItem.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
+                
+                reviewItem.innerHTML = `
                     <div class="review-statement">${index + 1}. ${question.question}</div>
                     ${imageHtml}
                     <div class="review-details">
@@ -627,7 +678,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
                 
-                reviewElement.appendChild(questionElement);
+                reviewElement.appendChild(reviewItem);
             }
             
             document.getElementById('back-to-results').addEventListener('click', showQuizResults);
@@ -770,12 +821,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     const imagePath = hasDirectImage ? currentItem.image : standardPath;
                     imageElement.src = imagePath;
                     imageElement.alt = currentItem.imageAlt || `Image for ${currentItem.term}`;
-                    imageContainer.style.display = 'block';
+                    
+                    // Handle image display timing
+                    if (currentItem.imageDisplayTiming === "after-answer") {
+                        // For time trial, we'll store this info but only show the image after selection
+                        imageContainer.style.display = 'none';
+                        imageContainer.dataset.hasImage = 'true';
+                    } else {
+                        // Default behavior - show image with definition
+                        imageContainer.style.display = 'block';
+                    }
                 } else {
                     imageContainer.style.display = 'none';
+                    imageContainer.dataset.hasImage = 'false';
                 }
             } else {
                 imageContainer.style.display = 'none';
+                imageContainer.dataset.hasImage = 'false';
             }
             
             // Generate options
@@ -842,6 +904,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Show next button
             nextButton.style.display = 'block';
             
+            // If image should be shown after answer and exists, show it now
+            if (shuffledData[currentRound - 1].imageDisplayTiming === "after-answer" && 
+                imageContainer.dataset.hasImage === 'true') {
+                imageContainer.style.display = 'block';
+            }
+            
             // Auto-advance if it's the last question
             if (currentRound >= timeTrialData.length) {
                 setTimeout(endGame, 1500);
@@ -884,6 +952,12 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Show next button
             nextButton.style.display = 'block';
+            
+            // If image should be shown after answer and exists, show it now
+            if (currentItem.imageDisplayTiming === "after-answer" && 
+                imageContainer.dataset.hasImage === 'true') {
+                imageContainer.style.display = 'block';
+            }
             
             // Auto-advance if it's the last question
             if (currentRound >= timeTrialData.length) {
@@ -1015,12 +1089,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     const imagePath = hasDirectImage ? questionData.image : standardPath;
                     imageElement.src = imagePath;
                     imageElement.alt = questionData.imageAlt || `Image for statement ${currentQuestionIndex + 1}`;
-                    imageContainer.style.display = 'block';
+                    
+                    // Handle image display timing
+                    if (questionData.imageDisplayTiming === "after-answer") {
+                        // Hide image initially
+                        imageContainer.style.display = 'none';
+                        imageContainer.dataset.hasImage = 'true';
+                    } else {
+                        // Default behavior - show image with statement
+                        imageContainer.style.display = 'block';
+                    }
                 } else {
                     imageContainer.style.display = 'none';
+                    imageContainer.dataset.hasImage = 'false';
                 }
             } else {
                 imageContainer.style.display = 'none';
+                imageContainer.dataset.hasImage = 'false';
             }
             
             // Update progress
@@ -1070,6 +1155,12 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Show next button
             nextButton.style.display = 'block';
+            
+            // If image should be shown after answer and exists, show it now
+            if (questionData.imageDisplayTiming === "after-answer" && 
+                imageContainer.dataset.hasImage === 'true') {
+                imageContainer.style.display = 'block';
+            }
             
             // Save user's answer
             userAnswers[currentQuestionIndex] = {
