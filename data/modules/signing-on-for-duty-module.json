@@ -1,0 +1,83 @@
+{
+  "id": "signing-on-for-duty-module",
+  "title": "Signing On For Duty",
+  "description": "Covers procedures and checks required when signing on for duty in person.",
+  "version": "unified",
+  "knowledgeUnits": [
+    {
+      "id": "forgot-lost-licence",
+      "concept": "What action would you take if you forget / lose your safety critical licence?",
+      "definition": "Contact depot manager ASAP. Arrange for a photocopy to be sent to your signing on point if forgotten. Arrange for replacement if lost. Must not drive without a valid licence with you.",
+      "distractor1": "You can drive as long as you report it lost within 24 hours.",
+      "distractor2": "A verbal confirmation from the manager is sufficient to drive.",
+      "distractor3": "Sign on as normal and arrange for the licence later.",
+      "isTrue": true,
+      "explanation": "Possession of a valid safety-critical licence is mandatory for driving. If forgotten, a temporary photocopy must be obtained before driving. If lost, a replacement process must be initiated, and driving is not permitted without the licence.",
+      "image": "placeholder.jpg",
+      "imageAlt": "Placeholder image",
+      "imageDisplayTiming": "after-answer",
+      "difficulty": 1,
+      "tags": ["signing on", "licence", "pts card", "procedure", "safety critical", "rules"]
+    },
+    {
+      "id": "check-relevant-publications",
+      "concept": "What relevant publications need checking when signing on?",
+      "definition": "Check STN, AW, W.O.N, P.O.N etc.",
+      "distractor1": "Only check the Weekly Operating Notice (WON).",
+      "distractor2": "Check the rule book updates page.",
+      "distractor3": "Only Altered Workings (AW) need to be checked.",
+      "isTrue": true,
+      "explanation": "When signing on, drivers must check for any new or relevant updates in the Special Traffic Notices (STN), Altered Workings (AW), Weekly Operating Notices (WON), and Periodical Operating Notices (PON).",
+      "image": "placeholder.jpg",
+      "imageAlt": "Placeholder image",
+      "imageDisplayTiming": "after-answer",
+      "difficulty": 1,
+      "tags": ["signing on", "publications", "notices", "won", "pon", "stn", "aw", "checks"]
+    },
+    {
+      "id": "check-notice-cases",
+      "concept": "What notice cases need to be checked?",
+      "definition": "Check late notice case, Train crew notice case, Roster notice case, Incident notice case and Low adhesion notice case.",
+      "distractor1": "Only the Roster notice case and Late notice case.",
+      "distractor2": "Only the Incident notice case if there was a recent event.",
+      "distractor3": "Check the main notice board for general company updates.",
+      "isTrue": true,
+      "explanation": "A thorough check of all relevant notice cases is required at sign-on, including Late Notices, Train Crew Notices, Roster information, Incident reports, and Low Adhesion updates.",
+      "image": "placeholder.jpg",
+      "imageAlt": "Placeholder image",
+      "imageDisplayTiming": "after-answer",
+      "difficulty": 1,
+      "tags": ["signing on", "notices", "checks", "information", "safety"]
+    },
+    {
+      "id": "readiness-statement-understanding",
+      "concept": "What is your understanding of the statement for readiness for duty?",
+      "definition": "Signing confirms compliance with D&A policy, fitness to drive, correct uniform, possession of relevant publications/licence, read notices, possession of equipment, signed for traction/route, and possession of spare glasses (if applicable).",
+      "distractor1": "It confirms you have arrived at the depot on time.",
+      "distractor2": "It's mainly a declaration that you have read the rule book.",
+      "distractor3": "It confirms you have checked the train you will be driving.",
+      "isTrue": true,
+      "explanation": "The readiness statement is a formal declaration covering multiple critical aspects: fitness (D&A, rest), compliance (uniform, equipment, publications, licence, notices), and competence (traction/route sign-off).",
+      "image": "placeholder.jpg",
+      "imageAlt": "Placeholder image",
+      "imageDisplayTiming": "after-answer",
+      "difficulty": 1,
+      "tags": ["signing on", "readiness", "declaration", "fitness", "compliance", "safety"]
+    },
+    {
+      "id": "check-personal-equipment",
+      "concept": "What checks are needed for personal equipment?",
+      "definition": "Check you have your keys, watch, iPad (working), hand lamp (working) etc.",
+      "distractor1": "Ensure your mobile phone is fully charged.",
+      "distractor2": "Check the expiry date on your PTS card.",
+      "distractor3": "Verify your uniform is clean and tidy.",
+      "isTrue": true,
+      "explanation": "Before starting duty, drivers must check they have all necessary personal equipment and that key items like the watch, iPad (if used for duty), and hand lamp are functioning correctly.",
+      "image": "placeholder.jpg",
+      "imageAlt": "Placeholder image",
+      "imageDisplayTiming": "after-answer",
+      "difficulty": 1,
+      "tags": ["signing on", "equipment", "ppe", "checks", "preparation"]
+    }
+  ]
+}

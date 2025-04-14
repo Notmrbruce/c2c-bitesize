@@ -1,0 +1,53 @@
+{
+  "id": "leaving-duty-module",
+  "title": "Leaving Duty",
+  "description": "Covers requirements and procedures at the end of a duty, including reports and checking future rosters.",
+  "version": "unified",
+  "knowledgeUnits": [
+    {
+      "id": "end-of-duty-reports",
+      "concept": "At the end of your duty what reports are you required to complete and why?",
+      "definition": "Complete defective DOO reports, driver report forms (e.g., RT3185 for right side failure), service delay reports, unit defect fault book. Hand in/submit via iPad. Reports ensure issues are documented for investigation/repair/safety.",
+      "distractor1": "Only complete reports if a major incident occurred.",
+      "distractor2": "Verbal reports to the next driver are sufficient.",
+      "distractor3": "Complete a timesheet detailing hours worked.",
+      "isTrue": true,
+      "explanation": "Various reports are required at the end of duty to formally document any equipment defects (DOO, unit faults), operational issues (delays), or specific incidents (like signalling irregularities) for safety, maintenance, and performance monitoring.",
+      "image": "placeholder.jpg",
+      "imageAlt": "Placeholder image",
+      "imageDisplayTiming": "after-answer",
+      "difficulty": 1,
+      "tags": ["leaving duty", "reports", "documentation", "doo", "defects", "delays", "safety", "procedure"]
+    },
+    {
+      "id": "submitting-reports-methods",
+      "concept": "What are the different ways of submitting reports?",
+      "definition": "Contact signaller (for immediate issues), contact SDC, fax forms to depot manager, leave message on delay hotline, use RC Forms app on iPad.",
+      "distractor1": "Only via paper forms handed to the manager.",
+      "distractor2": "Exclusively through the RC Forms app on iPad.",
+      "distractor3": "Via email to the central reporting office.",
+      "isTrue": true,
+      "explanation": "Reports can be submitted through various channels depending on urgency and type: direct contact (signaller/SDC), traditional methods (fax, delay hotline message), or digitally using the RC Forms app on the company iPad.",
+      "image": "placeholder.jpg",
+      "imageAlt": "Placeholder image",
+      "imageDisplayTiming": "after-answer",
+      "difficulty": 1,
+      "tags": ["leaving duty", "reports", "submission", "methods", "ipad", "communication"]
+    },
+    {
+      "id": "check-next-duty",
+      "concept": "What should you check regarding your next turn of duty before leaving?",
+      "definition": "Check your rostered duty and the daily sheet before leaving. If daily sheets not displayed or off for days, call depot manager. RC time app on iPad also displays shifts.",
+      "distractor1": "Assume your roster is unchanged unless notified.",
+      "distractor2": "Check the weekly roster posted at the start of the week.",
+      "distractor3": "Wait for a text message confirming your next shift.",
+      "isTrue": true,
+      "explanation": "Before leaving duty, it's crucial to confirm your next rostered shift details by checking the physical roster/daily sheets or the RC time app. If information is missing, contact the depot manager.",
+      "image": "placeholder.jpg",
+      "imageAlt": "Placeholder image",
+      "imageDisplayTiming": "after-answer",
+      "difficulty": 1,
+      "tags": ["leaving duty", "roster", "planning", "checks", "ipad", "communication"]
+    }
+  ]
+}

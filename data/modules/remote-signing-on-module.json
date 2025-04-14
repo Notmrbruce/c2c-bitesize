@@ -1,0 +1,53 @@
+{
+  "id": "remote-signing-on-module",
+  "title": "Remote Signing On",
+  "description": "Covers the procedures for signing on for duty remotely, handling communication issues, and receiving notices.",
+  "version": "unified",
+  "knowledgeUnits": [
+    {
+      "id": "remote-sign-on-procedure",
+      "concept": "How do you sign on remotely?",
+      "definition": "Check notice cases, read/sign readiness statement. Call depot manager using provided phone/number (0330 109 8325/8326). State name, location, duty signing on for. Confirm possession of Altered Workings (AW) and correct publications.",
+      "distractor1": "Send a text message to the depot manager with your duty number.",
+      "distractor2": "Log in via a web portal using your employee ID.",
+      "distractor3": "Report to the nearest station master to sign on.",
+      "isTrue": true,
+      "explanation": "Remote signing on involves checking notices, confirming readiness, and then phoning the depot manager, providing specific details (name, location, duty), and confirming possession of necessary documents like AWs and publications.",
+      "image": "placeholder.jpg",
+      "imageAlt": "Placeholder image",
+      "imageDisplayTiming": "after-answer",
+      "difficulty": 1,
+      "tags": ["signing on", "remote", "procedure", "communication", "duty"]
+    },
+    {
+      "id": "remote-sign-on-unable-to-contact",
+      "concept": "What action would you take if unable to contact the depot manager for remote sign on?",
+      "definition": "Call control / SDC (Service Delivery Centre) on 0330 109 8352 or 0330 109 8353.",
+      "distractor1": "Wait 15 minutes and try calling the depot manager again.",
+      "distractor2": "Proceed to the depot to sign on in person.",
+      "distractor3": "Assume permission is granted and start the duty.",
+      "isTrue": true,
+      "explanation": "If the depot manager cannot be reached for remote sign-on, the backup procedure is to contact Control / SDC directly using the specified numbers.",
+      "image": "placeholder.jpg",
+      "imageAlt": "Placeholder image",
+      "imageDisplayTiming": "after-answer",
+      "difficulty": 1,
+      "tags": ["signing on", "remote", "procedure", "communication", "contingency", "sdc", "control"]
+    },
+    {
+      "id": "remote-receiving-notices",
+      "concept": "How do you receive your notices when signing on remotely?",
+      "definition": "Sign for WON's, PON's and STN's and pick them up at the signing on points. They can also be downloaded and viewed on the iPad via the RC Documents app.",
+      "distractor1": "Notices are read out over the phone by the depot manager.",
+      "distractor2": "Notices are sent via email after signing on.",
+      "distractor3": "Notices are only available physically at the main depot.",
+      "isTrue": true,
+      "explanation": "Even when signing on remotely, drivers are responsible for obtaining relevant notices (WON, PON, STN). These can be collected physically from signing-on points or accessed digitally via the company-provided iPad app.",
+      "image": "placeholder.jpg",
+      "imageAlt": "Placeholder image",
+      "imageDisplayTiming": "after-answer",
+      "difficulty": 1,
+      "tags": ["signing on", "remote", "notices", "publications", "procedure", "ipad"]
+    }
+  ]
+}
