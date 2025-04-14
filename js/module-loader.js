@@ -1,6 +1,6 @@
 /**
  * Module loader for C2C Bitesize
- * Handles loading module data from JSON files
+ * Handles loading module data from JSON files with support for unified format
  */
 
 // Base paths for data
@@ -39,11 +39,172 @@ export async function loadModuleData(moduleId) {
         
         const data = await response.json();
         console.log(`Successfully loaded module: ${moduleId}`);
-        return data;
+        
+        // Process the module data based on its format
+        return processModuleData(data);
     } catch (error) {
         console.error(`Error loading module '${moduleId}':`, error);
         throw error;
     }
+}
+
+/**
+ * Process module data based on its format (unified or legacy)
+ * @param {Object} moduleData - The loaded module data
+ * @returns {Object} Processed module data with consistent format
+ */
+function processModuleData(moduleData) {
+    // Check if this is using the unified format
+    if (moduleData.version === "unified" && moduleData.knowledgeUnits) {
+        console.log("Processing unified format module");
+        
+        // Create content object with adapted data for each method
+        const methods = ["flashcards", "quiz", "time-trial", "true-false"];
+        const content = {};
+        
+        // Only include methods that have data
+        const availableMethods = [];
+        
+        methods.forEach(method => {
+            // Generate content for this method from the knowledge units
+            const methodContent = adaptToMethod(moduleData.knowledgeUnits, method);
+            
+            // Only include the method if it has content
+            if (methodContent && methodContent.length > 0) {
+                content[method] = methodContent;
+                availableMethods.push(method);
+            }
+        });
+        
+        // Return a module object in the expected format
+        return {
+            id: moduleData.id,
+            title: moduleData.title,
+            description: moduleData.description,
+            methods: availableMethods,
+            content: content
+        };
+    }
+    
+    // If it's already in the expected format, return as is
+    return moduleData;
+}
+
+/**
+ * Adapt knowledge units to a specific method format
+ * @param {Array} knowledgeUnits - Array of knowledge units
+ * @param {string} method - The study method to adapt for
+ * @returns {Array} Formatted data for the specified method
+ */
+function adaptToMethod(knowledgeUnits, method) {
+    switch (method) {
+        case "flashcards":
+            return adaptToFlashcards(knowledgeUnits);
+        case "quiz":
+            return adaptToQuiz(knowledgeUnits);
+        case "time-trial":
+            return adaptToTimeTrial(knowledgeUnits);
+        case "true-false":
+            return adaptToTrueFalse(knowledgeUnits);
+        default:
+            console.warn(`Unknown method: ${method}`);
+            return [];
+    }
+}
+
+/**
+ * Adapt knowledge units to flashcard format
+ * @param {Array} knowledgeUnits - Array of knowledge units
+ * @returns {Array} Formatted flashcard data
+ */
+export function adaptToFlashcards(knowledgeUnits) {
+    return knowledgeUnits.map(unit => ({
+        question: unit.concept,
+        answer: unit.definition,
+        image: unit.image,
+        imageAlt: unit.imageAlt
+    }));
+}
+
+/**
+ * Adapt knowledge units to quiz format
+ * @param {Array} knowledgeUnits - Array of knowledge units
+ * @returns {Array} Formatted quiz data
+ */
+export function adaptToQuiz(knowledgeUnits) {
+    return knowledgeUnits.map(unit => {
+        // Create array of options with correct answer and distractors
+        const options = [
+            unit.definition,
+            unit.distractor1,
+            unit.distractor2,
+            unit.distractor3
+        ];
+        
+        // Shuffle options to randomize position of correct answer
+        const shuffledOptions = [...options].sort(() => Math.random() - 0.5);
+        
+        return {
+            question: unit.concept,
+            options: shuffledOptions,
+            correctAnswer: shuffledOptions.indexOf(unit.definition),
+            image: unit.image,
+            imageAlt: unit.imageAlt
+        };
+    });
+}
+
+/**
+ * Adapt knowledge units to time trial format
+ * @param {Array} knowledgeUnits - Array of knowledge units
+ * @returns {Array} Formatted time trial data
+ */
+export function adaptToTimeTrial(knowledgeUnits) {
+    return knowledgeUnits.map(unit => ({
+        term: unit.concept,
+        definition: unit.definition,
+        image: unit.image,
+        imageAlt: unit.imageAlt
+    }));
+}
+
+/**
+ * Adapt knowledge units to true/false format
+ * @param {Array} knowledgeUnits - Array of knowledge units
+ * @returns {Array} Formatted true/false data
+ */
+export function adaptToTrueFalse(knowledgeUnits) {
+    // Create two types of items from each knowledge unit:
+    // 1. True statements using the correct definition
+    // 2. False statements using one of the distractors
+    
+    const statements = [];
+    
+    knowledgeUnits.forEach(unit => {
+        // Add the true statement
+        statements.push({
+            statement: `${unit.concept.replace(/\?$/, '')} means ${unit.definition}`,
+            isTrue: true,
+            explanation: unit.explanation,
+            image: unit.image,
+            imageAlt: unit.imageAlt
+        });
+        
+        // Randomly select one of the distractors for a false statement
+        const distractors = [unit.distractor1, unit.distractor2, unit.distractor3];
+        const selectedDistractor = distractors[Math.floor(Math.random() * distractors.length)];
+        
+        statements.push({
+            statement: `${unit.concept.replace(/\?$/, '')} means ${selectedDistractor}`,
+            isTrue: false,
+            explanation: unit.explanation,
+            image: unit.image,
+            imageAlt: unit.imageAlt
+        });
+    });
+    
+    // Shuffle and limit to a reasonable number (e.g., 20 statements)
+    return statements.sort(() => Math.random() - 0.5).slice(0, 20);
 }
 
 /**
