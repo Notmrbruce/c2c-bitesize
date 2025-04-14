@@ -1,0 +1,68 @@
+{
+  "id": "medical-requirements-module",
+  "title": "Medical Requirements",
+  "description": "Covers medical standards for drivers, including requirements for glasses/lenses, medication procedures, drug screening, and medical frequency.",
+  "version": "unified",
+  "knowledgeUnits": [
+    {
+      "id": "glasses-lenses-sunglasses",
+      "concept": "What are the requirements for wearing glasses, contact lenses, and sunglasses?",
+      "definition": "Must have a spare pair of glasses if required. Sunglasses must be railway approved. Contact lenses must be suitable for the maximum turn of duty.",
+      "distractor1": "Only one pair of glasses is needed if they are shatterproof.",
+      "distractor2": "Any type of sunglasses is permitted as long as they reduce glare.",
+      "distractor3": "Contact lenses are not permitted for safety-critical roles.",
+      "isTrue": true,
+      "explanation": "Vision standards require drivers who need glasses to carry a spare pair. Any sunglasses worn must meet railway approval standards (often related to tint/category). Contact lenses are allowed but must be suitable for wearing throughout the entire shift duration.",
+      "image": "placeholder.jpg",
+      "imageAlt": "Placeholder image",
+      "imageDisplayTiming": "after-answer",
+      "difficulty": 1,
+      "tags": ["medical", "vision", "glasses", "contact lenses", "sunglasses", "standards"]
+    },
+    {
+      "id": "medication-procedure",
+      "concept": "What is the procedure when required to take prescribed or over-the-counter medicine?",
+      "definition": "Show medication advice card to pharmacist/doctor, state safety-critical role, ask about side effects/policy breach. Inform depot manager ASAP about prescribed drugs for Medigold check. Report before duty, not at sign-on.",
+      "distractor1": "Only report medication if it explicitly states 'may cause drowsiness'.",
+      "distractor2": "Inform the depot manager only if you feel side effects after taking the medicine.",
+      "distractor3": "Over-the-counter medicine does not need to be reported.",
+      "isTrue": true,
+      "explanation": "When taking any medication, drivers must check with the prescriber/pharmacist about suitability for their safety-critical role. Crucially, prescribed medication must be reported to the depot manager immediately (before duty) so occupational health (Medigold) can assess fitness to work.",
+      "image": "placeholder.jpg",
+      "imageAlt": "Placeholder image",
+      "imageDisplayTiming": "after-answer",
+      "difficulty": 1,
+      "tags": ["medical", "medication", "reporting", "procedure", "safety", "policy"]
+    },
+    {
+      "id": "drug-screening-reasons",
+      "concept": "Why would you be asked to undergo drug screening?",
+      "definition": "Random (part of a percentage testing program), For Cause (after an incident), or Behavioural (suspicion of being under the influence).",
+      "distractor1": "Only required annually as part of the medical.",
+      "distractor2": "Only if involved in a major accident causing injury.",
+      "distractor3": "Routinely required before every shift.",
+      "isTrue": true,
+      "explanation": "Drug screening can be requested for three main reasons: randomly as part of company policy, 'for cause' following a safety incident to rule out influence, or due to specific behavioural concerns indicating potential impairment.",
+      "image": "placeholder.jpg",
+      "imageAlt": "Placeholder image",
+      "imageDisplayTiming": "after-answer",
+      "difficulty": 1,
+      "tags": ["medical", "drugs", "alcohol", "screening", "testing", "policy"]
+    },
+    {
+      "id": "medical-frequency",
+      "concept": "How often would you be required to attend a medical?",
+      "definition": "Up to 55 years: every 3 years. Over 55 years: every year.",
+      "distractor1": "Every 5 years regardless of age.",
+      "distractor2": "Annually for all drivers.",
+      "distractor3": "Every 3 years up to age 60, then annually.",
+      "isTrue": true,
+      "explanation": "Periodic medical examinations are required to ensure ongoing fitness. The frequency increases with age: drivers attend every 3 years up to age 55, and then annually thereafter.",
+      "image": "placeholder.jpg",
+      "imageAlt": "Placeholder image",
+      "imageDisplayTiming": "after-answer",
+      "difficulty": 1,
+      "tags": ["medical", "examination", "frequency", "standards", "fitness"]
+    }
+  ]
+}
