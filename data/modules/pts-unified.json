@@ -240,7 +240,6 @@
       "explanation": "A COSS (Controller of Site Safety) establishes a safe system of work for railway operations, ensuring compliance with safety protocols and protecting all workers at the site.",
       "image": "data/modules/images/railway-safety/flashcards_17.jpg",
       "imageAlt": "COSS supervising work on railway",
-      "imageDisplayTiming": "after-question",
       "difficulty": 1,
       "tags": ["safety", "roles", "responsibilities"]
     },
@@ -255,6 +254,7 @@
       "explanation": "A Controller of Site Safety (COSS) is identified by their BLUE ARMBAND with COSS written in WHITE LETTERS, making them easily recognizable on site.",
       "image": "data/modules/images/COSS.webp",
       "imageAlt": "COSS with blue armband",
+      "imageDisplayTiming": "after-answer",
       "difficulty": 1,
       "tags": ["safety", "identification", "roles"]
     },
