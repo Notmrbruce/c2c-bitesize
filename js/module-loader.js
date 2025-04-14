@@ -122,7 +122,8 @@ export function adaptToFlashcards(knowledgeUnits) {
         question: unit.concept,
         answer: unit.definition,
         image: unit.image,
-        imageAlt: unit.imageAlt
+        imageAlt: unit.imageAlt,
+        imageDisplayTiming: unit.imageDisplayTiming || "with-question" // Default to showing with question
     }));
 }
 
@@ -149,7 +150,8 @@ export function adaptToQuiz(knowledgeUnits) {
             options: shuffledOptions,
             correctAnswer: shuffledOptions.indexOf(unit.definition),
             image: unit.image,
-            imageAlt: unit.imageAlt
+            imageAlt: unit.imageAlt,
+            imageDisplayTiming: unit.imageDisplayTiming || "with-question" // Default to showing with question
         };
     });
 }
@@ -164,7 +166,8 @@ export function adaptToTimeTrial(knowledgeUnits) {
         term: unit.concept,
         definition: unit.definition,
         image: unit.image,
-        imageAlt: unit.imageAlt
+        imageAlt: unit.imageAlt,
+        imageDisplayTiming: unit.imageDisplayTiming || "with-question" // Default to showing with question
     }));
 }
 
@@ -187,7 +190,8 @@ export function adaptToTrueFalse(knowledgeUnits) {
             isTrue: true,
             explanation: unit.explanation,
             image: unit.image,
-            imageAlt: unit.imageAlt
+            imageAlt: unit.imageAlt,
+            imageDisplayTiming: unit.imageDisplayTiming || "with-question" // Default to showing with question
         });
         
         // Randomly select one of the distractors for a false statement
@@ -199,7 +203,8 @@ export function adaptToTrueFalse(knowledgeUnits) {
             isTrue: false,
             explanation: unit.explanation,
             image: unit.image,
-            imageAlt: unit.imageAlt
+            imageAlt: unit.imageAlt,
+            imageDisplayTiming: unit.imageDisplayTiming || "with-question" // Default to showing with question
         });
     });
     
