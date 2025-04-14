@@ -35,12 +35,12 @@
     "description": "Essential protocols for handling accidents, incidents, suspicious activities, and maintaining operational safety"
   },
   {
-    "id": "publications",
+    "id": "publications-module",
     "title": "Publications",
     "description": "Essential operational publications, their contents, and when they should be consulted by staff"
   },
   {
-    "id": "notices",
+    "id": "notices-module",
     "title": "Notices",
     "description": "Various notice cases, their contents, importance, and durations"
   },
