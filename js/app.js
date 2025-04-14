@@ -397,160 +397,188 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    async function loadQuiz(moduleData) {
-        const quizData = moduleData.content.quiz;
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let userAnswers = [];
+// This code should replace the loadQuiz function in js/app.js
+
+async function loadQuiz(moduleData) {
+    const quizData = moduleData.content.quiz;
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let userAnswers = [];
+    
+    // Initialize user answers array
+    quizData.forEach(() => userAnswers.push(null));
+    
+    // Create quiz container
+    contentView.innerHTML = `
+        <div class="content-header">
+            <h2 class="content-title">${moduleData.title} - Quiz</h2>
+            <span class="progress-indicator">Question <span id="current-question-number">1</span> of ${quizData.length}</span>
+        </div>
         
-        // Initialize user answers array
-        quizData.forEach(() => userAnswers.push(null));
-        
-        // Create quiz container
-        contentView.innerHTML = `
-            <div class="content-header">
-                <h2 class="content-title">${moduleData.title} - Quiz</h2>
-                <span class="progress-indicator">Question <span id="current-question-number">1</span> of ${quizData.length}</span>
+        <div class="content-container">
+            <div class="quiz-container" id="quiz-container">
+                <div class="quiz-question" id="quiz-question"></div>
+                <div id="quiz-image-container" class="quiz-image-container" style="display: none;">
+                    <img id="quiz-image" src="" alt="Quiz question image" class="quiz-image">
+                </div>
+                <ul class="quiz-options" id="quiz-options"></ul>
+                <div id="answer-feedback" class="true-false-feedback" style="display: none;"></div>
             </div>
             
-            <div class="content-container">
-                <div class="quiz-container" id="quiz-container">
-                    <div class="quiz-question" id="quiz-question"></div>
-                    <div id="quiz-image-container" class="quiz-image-container" style="display: none;">
-                        <img id="quiz-image" src="" alt="Quiz question image" class="quiz-image">
-                    </div>
-                    <ul class="quiz-options" id="quiz-options"></ul>
-                </div>
+            <div class="quiz-controls">
+                <button id="prev-question" class="btn">
+                    <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                    Previous
+                </button>
                 
-                <div class="quiz-controls">
-                    <button id="prev-question" class="btn">
-                        <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M15 18l-6-6 6-6"/>
-                        </svg>
-                        Previous
-                    </button>
-                    
-                    <button id="next-question" class="btn">
-                        Next
-                        <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 18l6-6-6-6"/>
-                        </svg>
-                    </button>
-                    
-                    <button id="submit-quiz" class="btn btn-primary" style="display: none;">Submit Quiz</button>
-                </div>
+                <button id="next-question" class="btn">
+                    Next
+                    <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+                
+                <button id="submit-quiz" class="btn btn-primary" style="display: none;">Submit Quiz</button>
             </div>
-            
-            <button id="back-to-methods" class="btn">
-                <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M19 12H5"/>
-                    <path d="M12 19l-7-7 7-7"/>
-                </svg>
-                Back to Methods
-            </button>
-        `;
+        </div>
         
-        // Add event listeners
-        const prevButton = document.getElementById('prev-question');
-        const nextButton = document.getElementById('next-question');
-        const submitButton = document.getElementById('submit-quiz');
-        const backButton = document.getElementById('back-to-methods');
-        const questionNumberElement = document.getElementById('current-question-number');
-        
-        prevButton.addEventListener('click', () => {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                loadQuestion();
-            }
-        });
-        
-        nextButton.addEventListener('click', () => {
-            if (currentQuestionIndex < quizData.length - 1) {
-                currentQuestionIndex++;
-                loadQuestion();
-            }
-        });
-        
-        submitButton.addEventListener('click', () => {
-            if (userAnswers.includes(null)) {
-                if (confirm("You haven't answered all questions. Are you sure you want to submit?")) {
-                    showQuizResults();
-                }
-            } else {
+        <button id="back-to-methods" class="btn">
+            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5"/>
+                <path d="M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Methods
+        </button>
+    `;
+    
+    // Add event listeners
+    const prevButton = document.getElementById('prev-question');
+    const nextButton = document.getElementById('next-question');
+    const submitButton = document.getElementById('submit-quiz');
+    const backButton = document.getElementById('back-to-methods');
+    const questionNumberElement = document.getElementById('current-question-number');
+    
+    prevButton.addEventListener('click', () => {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            loadQuestion();
+        }
+    });
+    
+    nextButton.addEventListener('click', () => {
+        if (currentQuestionIndex < quizData.length - 1) {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+    });
+    
+    submitButton.addEventListener('click', () => {
+        if (userAnswers.includes(null)) {
+            if (confirm("You haven't answered all questions. Are you sure you want to submit?")) {
                 showQuizResults();
             }
-        });
+        } else {
+            showQuizResults();
+        }
+    });
+    
+    backButton.addEventListener('click', () => {
+        if (confirm("Are you sure you want to exit the quiz? Your progress will be lost.")) {
+            showMethodsView(moduleData);
+        }
+    });
+    
+    // Load first question
+    await loadQuestion();
+    
+    async function loadQuestion() {
+        const questionData = quizData[currentQuestionIndex];
+        const questionElement = document.getElementById('quiz-question');
+        const optionsElement = document.getElementById('quiz-options');
+        const imageContainer = document.getElementById('quiz-image-container');
+        const imageElement = document.getElementById('quiz-image');
+        const feedbackElement = document.getElementById('answer-feedback');
         
-        backButton.addEventListener('click', () => {
-            if (confirm("Are you sure you want to exit the quiz? Your progress will be lost.")) {
-                showMethodsView(moduleData);
-            }
-        });
+        questionElement.textContent = `${currentQuestionIndex + 1}. ${questionData.question}`;
         
-        // Load first question
-        await loadQuestion();
+        // Reset feedback
+        feedbackElement.style.display = 'none';
+        feedbackElement.innerHTML = '';
         
-        async function loadQuestion() {
-            const questionData = quizData[currentQuestionIndex];
-            const questionElement = document.getElementById('quiz-question');
-            const optionsElement = document.getElementById('quiz-options');
-            const imageContainer = document.getElementById('quiz-image-container');
-            const imageElement = document.getElementById('quiz-image');
+        // Check for image
+        if (questionData.image || moduleData.id) {
+            // Try direct image path first, then fallback to standard path
+            const hasDirectImage = questionData.image ? await checkImageExists(questionData.image) : false;
+            const standardPath = getImagePath(moduleData.id, 'quiz', currentQuestionIndex);
+            const hasStandardImage = await checkImageExists(standardPath);
             
-            questionElement.textContent = `${currentQuestionIndex + 1}. ${questionData.question}`;
-            
-            // Check for image
-            if (questionData.image || moduleData.id) {
-                // Try direct image path first, then fallback to standard path
-                const hasDirectImage = questionData.image ? await checkImageExists(questionData.image) : false;
-                const standardPath = getImagePath(moduleData.id, 'quiz', currentQuestionIndex);
-                const hasStandardImage = await checkImageExists(standardPath);
+            if (hasDirectImage || hasStandardImage) {
+                const imagePath = hasDirectImage ? questionData.image : standardPath;
+                imageElement.src = imagePath;
+                imageElement.alt = questionData.imageAlt || `Image for question ${currentQuestionIndex + 1}`;
                 
-                if (hasDirectImage || hasStandardImage) {
-                    const imagePath = hasDirectImage ? questionData.image : standardPath;
-                    imageElement.src = imagePath;
-                    imageElement.alt = questionData.imageAlt || `Image for question ${currentQuestionIndex + 1}`;
-                    
-                    // Handle image display timing
-                    if (questionData.imageDisplayTiming === "after-answer") {
-                        // Hide image initially, will be shown after answer is selected
-                        imageContainer.style.display = 'none';
-                        // Store the image availability for later
-                        imageContainer.dataset.hasImage = 'true';
-                    } else {
-                        // Default behavior - show image with question
-                        imageContainer.style.display = 'block';
-                    }
-                } else {
+                // Handle image display timing
+                if (questionData.imageDisplayTiming === "after-answer") {
+                    // Hide image initially, will be shown after answer is selected
                     imageContainer.style.display = 'none';
-                    imageContainer.dataset.hasImage = 'false';
+                    // Store the image availability for later
+                    imageContainer.dataset.hasImage = 'true';
+                } else {
+                    // Default behavior - show image with question
+                    imageContainer.style.display = 'block';
                 }
             } else {
                 imageContainer.style.display = 'none';
                 imageContainer.dataset.hasImage = 'false';
             }
+        } else {
+            imageContainer.style.display = 'none';
+            imageContainer.dataset.hasImage = 'false';
+        }
+        
+        // Update question number
+        questionNumberElement.textContent = currentQuestionIndex + 1;
+        
+        optionsElement.innerHTML = '';
+        questionData.options.forEach((option, index) => {
+            const optionElement = document.createElement('li');
+            optionElement.className = 'quiz-option';
+            optionElement.textContent = option;
             
-            // Update question number
-            questionNumberElement.textContent = currentQuestionIndex + 1;
+            // Check if this question was already answered
+            const userAnswer = userAnswers[currentQuestionIndex];
             
-            optionsElement.innerHTML = '';
-            questionData.options.forEach((option, index) => {
-                const optionElement = document.createElement('li');
-                optionElement.className = 'quiz-option';
-                optionElement.textContent = option;
+            if (userAnswer === index) {
+                optionElement.classList.add('selected');
                 
-                if (userAnswers[currentQuestionIndex] === index) {
-                    optionElement.classList.add('selected');
-                    
-                    // If answer was already selected and image should show after answer, show it
-                    if (questionData.imageDisplayTiming === "after-answer" && 
-                        imageContainer.dataset.hasImage === 'true') {
-                        imageContainer.style.display = 'block';
-                    }
+                // If already answered, disable all options
+                optionElement.style.pointerEvents = 'none';
+                
+                // If answer was already selected and image should show after answer, show it
+                if (questionData.imageDisplayTiming === "after-answer" && 
+                    imageContainer.dataset.hasImage === 'true') {
+                    imageContainer.style.display = 'block';
                 }
                 
+                // Show feedback if this question was answered
+                const isCorrect = userAnswer === questionData.correctAnswer;
+                feedbackElement.innerHTML = isCorrect 
+                    ? '<div class="feedback-header">Correct!</div>'
+                    : `<div class="feedback-header">Incorrect!</div>
+                       <div class="feedback-content">The correct answer is: ${questionData.options[questionData.correctAnswer]}</div>`;
+                feedbackElement.classList.add(isCorrect ? 'feedback-correct' : 'feedback-incorrect');
+                feedbackElement.style.display = 'block';
+            } else if (userAnswer !== null) {
+                // If question was answered but this wasn't the selected option
+                optionElement.style.pointerEvents = 'none';
+            }
+            
+            // Only add click handler if question hasn't been answered yet
+            if (userAnswer === null) {
                 optionElement.addEventListener('click', () => {
-                    // Clear previous selection
+                    // Clear previous selection visually
                     document.querySelectorAll('.quiz-option').forEach(el => el.classList.remove('selected'));
                     
                     // Select this option
@@ -559,131 +587,148 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Save user's answer
                     userAnswers[currentQuestionIndex] = index;
                     
+                    // Determine if answer is correct
+                    const isCorrect = index === questionData.correctAnswer;
+                    
+                    // Show feedback
+                    feedbackElement.innerHTML = isCorrect 
+                        ? '<div class="feedback-header">Correct!</div>'
+                        : `<div class="feedback-header">Incorrect!</div>
+                           <div class="feedback-content">The correct answer is: ${questionData.options[questionData.correctAnswer]}</div>`;
+                    feedbackElement.classList.add(isCorrect ? 'feedback-correct' : 'feedback-incorrect');
+                    feedbackElement.style.display = 'block';
+                    
                     // If image should be displayed after answer and image exists, show it now
                     if (questionData.imageDisplayTiming === "after-answer" && 
                         imageContainer.dataset.hasImage === 'true') {
                         imageContainer.style.display = 'block';
                     }
-                });
-                
-                optionsElement.appendChild(optionElement);
-            });
-            
-            // Update button states
-            prevButton.disabled = currentQuestionIndex === 0;
-            
-            // Show/hide appropriate buttons
-            if (currentQuestionIndex === quizData.length - 1) {
-                nextButton.style.display = 'none';
-                submitButton.style.display = 'block';
-            } else {
-                nextButton.style.display = 'block';
-                submitButton.style.display = 'none';
-            }
-        }
-        
-        function showQuizResults() {
-            // Calculate score
-            score = 0;
-            userAnswers.forEach((answer, index) => {
-                if (answer === quizData[index].correctAnswer) {
-                    score++;
-                }
-            });
-            
-            const percentage = Math.round((score / quizData.length) * 100);
-            
-            // Display results
-            contentView.innerHTML = `
-                <div class="content-header">
-                    <h2 class="content-title">${moduleData.title} - Quiz Results</h2>
-                </div>
-                
-                <div class="content-container">
-                    <div class="quiz-results">
-                        <div class="quiz-score">${score} / ${quizData.length}</div>
-                        <div class="quiz-percentage">${percentage}%</div>
-                        ${score === quizData.length ? 
-                            '<div class="quiz-perfect">Perfect Score! 🎉</div>' : 
-                            '<p>Keep learning to improve your score!</p>'}
-                        
-                        <div class="quiz-actions">
-                            <button id="review-quiz" class="btn btn-primary">Review Answers</button>
-                            <button id="retry-quiz" class="btn">Try Again</button>
-                            <button id="back-to-methods" class="btn">Back to Methods</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // Add event listeners
-            document.getElementById('review-quiz').addEventListener('click', showQuizReview);
-            document.getElementById('retry-quiz').addEventListener('click', () => loadQuiz(moduleData));
-            document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(moduleData));
-        }
-        
-        async function showQuizReview() {
-            contentView.innerHTML = `
-                <div class="content-header">
-                    <h2 class="content-title">${moduleData.title} - Quiz Review</h2>
-                </div>
-                
-                <div class="content-container">
-                    <div id="quiz-review"></div>
-                </div>
-                
-                <button id="back-to-results" class="btn">
-                    <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M19 12H5"/>
-                        <path d="M12 19l-7-7 7-7"/>
-                    </svg>
-                    Back to Results
-                </button>
-            `;
-            
-            const reviewElement = document.getElementById('quiz-review');
-            
-            for (let index = 0; index < quizData.length; index++) {
-                const question = quizData[index];
-                const userAnswer = userAnswers[index] !== null ? userAnswers[index] : -1;
-                const isCorrect = userAnswer === question.correctAnswer;
-                
-                // Check for image
-                let imageHtml = '';
-                if (question.image || moduleData.id) {
-                    // Try direct image path first, then fallback to standard path
-                    const hasDirectImage = question.image ? await checkImageExists(question.image) : false;
-                    const standardPath = getImagePath(moduleData.id, 'quiz', index);
-                    const hasStandardImage = await checkImageExists(standardPath);
                     
-                    if (hasDirectImage || hasStandardImage) {
-                        const imagePath = hasDirectImage ? question.image : standardPath;
-                        imageHtml = `
-                            <div class="review-image-container">
-                                <img src="${imagePath}" alt="${question.imageAlt || `Image for question ${index + 1}`}" class="review-image">
-                            </div>
-                        `;
-                    }
-                }
-                
-                const reviewItem = document.createElement('div');
-                reviewItem.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
-                
-                reviewItem.innerHTML = `
-                    <div class="review-statement">${index + 1}. ${question.question}</div>
-                    ${imageHtml}
-                    <div class="review-details">
-                        <div class="review-answer">Your answer: ${userAnswer >= 0 ? question.options[userAnswer] : 'Not answered'}</div>
-                        <div class="review-answer">Correct answer: ${question.options[question.correctAnswer]}</div>
-                    </div>
-                `;
-                
-                reviewElement.appendChild(reviewItem);
+                    // Disable all options after selection to prevent changing answer
+                    document.querySelectorAll('.quiz-option').forEach(el => {
+                        el.style.pointerEvents = 'none';
+                    });
+                });
             }
             
-            document.getElementById('back-to-results').addEventListener('click', showQuizResults);
+            optionsElement.appendChild(optionElement);
+        });
+        
+        // Update button states
+        prevButton.disabled = currentQuestionIndex === 0;
+        
+        // Show/hide appropriate buttons
+        if (currentQuestionIndex === quizData.length - 1) {
+            nextButton.style.display = 'none';
+            submitButton.style.display = 'block';
+        } else {
+            nextButton.style.display = 'block';
+            submitButton.style.display = 'none';
         }
     }
+    
+    function showQuizResults() {
+        // Calculate score
+        score = 0;
+        userAnswers.forEach((answer, index) => {
+            if (answer === quizData[index].correctAnswer) {
+                score++;
+            }
+        });
+        
+        const percentage = Math.round((score / quizData.length) * 100);
+        
+        // Display results
+        contentView.innerHTML = `
+            <div class="content-header">
+                <h2 class="content-title">${moduleData.title} - Quiz Results</h2>
+            </div>
+            
+            <div class="content-container">
+                <div class="quiz-results">
+                    <div class="quiz-score">${score} / ${quizData.length}</div>
+                    <div class="quiz-percentage">${percentage}%</div>
+                    ${score === quizData.length ? 
+                        '<div class="quiz-perfect">Perfect Score! 🎉</div>' : 
+                        '<p>Keep learning to improve your score!</p>'}
+                    
+                    <div class="quiz-actions">
+                        <button id="review-quiz" class="btn btn-primary">Review Answers</button>
+                        <button id="retry-quiz" class="btn">Try Again</button>
+                        <button id="back-to-methods" class="btn">Back to Methods</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Add event listeners
+        document.getElementById('review-quiz').addEventListener('click', showQuizReview);
+        document.getElementById('retry-quiz').addEventListener('click', () => loadQuiz(moduleData));
+        document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(moduleData));
+    }
+    
+    async function showQuizReview() {
+        contentView.innerHTML = `
+            <div class="content-header">
+                <h2 class="content-title">${moduleData.title} - Quiz Review</h2>
+            </div>
+            
+            <div class="content-container">
+                <div id="quiz-review"></div>
+            </div>
+            
+            <button id="back-to-results" class="btn">
+                <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5"/>
+                    <path d="M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Results
+            </button>
+        `;
+        
+        const reviewElement = document.getElementById('quiz-review');
+        
+        for (let index = 0; index < quizData.length; index++) {
+            const question = quizData[index];
+            const userAnswer = userAnswers[index] !== null ? userAnswers[index] : -1;
+            const isCorrect = userAnswer === question.correctAnswer;
+            
+            // Check for image
+            let imageHtml = '';
+            if (question.image || moduleData.id) {
+                // Try direct image path first, then fallback to standard path
+                const hasDirectImage = question.image ? await checkImageExists(question.image) : false;
+                const standardPath = getImagePath(moduleData.id, 'quiz', index);
+                const hasStandardImage = await checkImageExists(standardPath);
+                
+                if (hasDirectImage || hasStandardImage) {
+                    const imagePath = hasDirectImage ? question.image : standardPath;
+                    imageHtml = `
+                        <div class="review-image-container">
+                            <img src="${imagePath}" alt="${question.imageAlt || `Image for question ${index + 1}`}" class="review-image">
+                        </div>
+                    `;
+                }
+            }
+            
+            const reviewItem = document.createElement('div');
+            reviewItem.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
+            
+            reviewItem.innerHTML = `
+                <div class="review-statement">${index + 1}. ${question.question}</div>
+                ${imageHtml}
+                <div class="review-details">
+                    <div class="review-answer">Your answer: ${userAnswer >= 0 ? question.options[userAnswer] : 'Not answered'}</div>
+                    <div class="review-answer">Correct answer: ${question.options[question.correctAnswer]}</div>
+                </div>
+            `;
+            
+            reviewElement.appendChild(reviewItem);
+        }
+        
+        document.getElementById('back-to-results').addEventListener('click', showQuizResults);
+    }
+}
     
     // Time Trial Game Implementation
     async function initTimeTrialGame(moduleData) {
