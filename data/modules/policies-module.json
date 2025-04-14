@@ -4,7 +4,6 @@
   "description": "Essential company policies covering driver conduct, fitness, working practices, and support systems.",
   "version": "unified",
   "knowledgeUnits": [
-    // --- Drugs & Alcohol ---
     {
       "id": "alcohol-abstinence-period",
       "concept": "What is the minimum alcohol-free period required before duty?",
@@ -95,7 +94,6 @@
       "difficulty": 1,
       "tags": ["policy", "alcohol", "reporting", "conviction", "procedure", "safety", "driving"]
     },
-    // --- Working Hours ---
     {
       "id": "hours-shift-max",
       "concept": "What is the maximum duration allowed for a single working shift?",
@@ -156,7 +154,6 @@
       "difficulty": 1,
       "tags": ["policy", "hours", "rostering", "fatigue", "safety", "rules", "consecutive"]
     },
-    // --- Sickness Reporting ---
     {
       "id": "sickness-reporting-when",
       "concept": "When should sickness absence be reported?",
@@ -172,7 +169,6 @@
       "difficulty": 1,
       "tags": ["policy", "sickness", "reporting", "procedure", "timeliness"]
     },
-    // --- Rules & Conduct ---
      {
       "id": "rules-purpose",
       "concept": "Why do railways have extensive rules and regulations?",
@@ -218,7 +214,6 @@
       "difficulty": 1,
       "tags": ["policy", "definitions", "violation", "rules", "intent"]
     },
-     // --- Mobile Phones / Equipment ---
      {
       "id": "phone-personal-cab",
       "concept": "What must be done with personal mobile phones in an active driving cab?",
@@ -264,7 +259,6 @@
       "difficulty": 1,
       "tags": ["policy", "electrical equipment", "distraction", "safety", "rules", "cab", "prohibited"]
     },
-    // --- Attendance & Support ---
     {
       "id": "mfa-purpose",
       "concept": "What is the purpose of the Managing for Attendance (MFA) policy?",
