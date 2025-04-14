@@ -211,6 +211,7 @@
       "explanation": "A red and white squares sign with 'warning limited clearance' indicates there is no position of safety for the entire length of this structure, and you must not attempt to pass this area while a train is approaching.",
       "image": "data/modules/images/limited-clearance-warning-sign.png",
       "imageAlt": "Red and white limited clearance warning sign",
+      "imageDisplayTiming": "with-question",
       "difficulty": 1,
       "tags": ["safety", "signage", "warning-signs"]
     },
@@ -239,6 +240,7 @@
       "explanation": "A COSS (Controller of Site Safety) establishes a safe system of work for railway operations, ensuring compliance with safety protocols and protecting all workers at the site.",
       "image": "data/modules/images/railway-safety/flashcards_17.jpg",
       "imageAlt": "COSS supervising work on railway",
+      "imageDisplayTiming": "after-question",
       "difficulty": 1,
       "tags": ["safety", "roles", "responsibilities"]
     },
