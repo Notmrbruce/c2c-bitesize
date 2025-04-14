@@ -1,9 +1,8 @@
 // Main application script
-// MODIFIED: Updated import statement
 import { loadModulesList, loadModuleData, getImagePath, checkImageExists } from './module-loader.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // DOM Elements (remain mostly the same)
+    // DOM Elements
     const modulesView = document.getElementById('modules-view');
     const methodsView = document.getElementById('methods-view');
     const contentView = document.getElementById('content-view');
@@ -13,13 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const breadcrumbModule = document.getElementById('breadcrumb-module');
     const breadcrumbItem = document.getElementById('breadcrumb-item');
     const mobileBreadcrumb = document.getElementById('mobile-breadcrumb');
-    const methodDescriptionElement = document.getElementById('method-description'); // Make sure this exists
+    const methodDescriptionElement = document.getElementById('method-description');
 
     // App state
     let currentModule = null;
 
     // Method descriptions and icons (remain the same)
-     const methodInfo = {
+    const methodInfo = {
         'flashcards': { description: 'Flip through digital cards to test your recall of key information. Tap or click to reveal the answer.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M12 8v8"/><path d="M8 12h8"/></svg>'},
         'quiz': { description: 'Test your knowledge with multiple-choice questions and get immediate feedback on your answers.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>'},
         'time-trial': { description: 'Race against the clock to match terms with their definitions. Challenge yourself to recall information quickly.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'},
@@ -29,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize the application
     init();
 
-    // Functions
+    // --- Core Functions ---
     async function init() {
         await loadModules();
         modulesView.style.display = 'block';
@@ -47,12 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const modules = await loadModulesList();
             modulesList.innerHTML = ''; // Clear existing
-
              if (!modules || modules.length === 0) {
                  modulesList.innerHTML = '<p>No learning modules found. Please check the data source.</p>';
                  return;
             }
-
             modules.forEach(module => {
                 const moduleElement = createModuleElement(module);
                 modulesList.appendChild(moduleElement);
@@ -68,28 +65,22 @@ document.addEventListener('DOMContentLoaded', () => {
         moduleElement.className = 'module-card';
         moduleElement.innerHTML = `
             <h3 class="module-title">${module.title || 'Untitled Module'}</h3>
-            <p class="module-desc">${module.description || 'No description available.'}</p>
-        `;
+            <p class="module-desc">${module.description || 'No description available.'}</p>`;
         moduleElement.addEventListener('click', () => loadSelectedModule(module.id));
         return moduleElement;
     }
 
-    // MODIFIED: Loads data using loadModuleData, which now includes processing
     async function loadSelectedModule(moduleId) {
         try {
             console.log(`Loading processed module data for ID: ${moduleId}`);
-            // loadModuleData now returns the processed data in the format app.js expects
             const moduleData = await loadModuleData(moduleId);
-
             if (!moduleData || !moduleData.methods || moduleData.methods.length === 0) {
                  console.warn(`Module ${moduleId} has no available study methods after processing.`);
-                 // Optionally show a message to the user
                  alert(`The module '${moduleData.title}' currently has no available study content.`);
-                 return; // Don't proceed to show methods view if empty
+                 return;
             }
-
             console.log('Processed module data loaded:', moduleData);
-            currentModule = moduleData; // Store the processed data
+            currentModule = moduleData;
             showMethodsView(moduleData);
         } catch (error) {
             console.error(`Error loading processed module ${moduleId}:`, error);
@@ -97,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- View Switching Functions ---
     function showModulesView() {
         modulesView.style.display = 'block';
         methodsView.style.display = 'none';
@@ -112,23 +104,18 @@ document.addEventListener('DOMContentLoaded', () => {
              return;
         }
         selectedModuleTitle.textContent = moduleData.title;
-
         if (breadcrumbModule && breadcrumbItem && mobileBreadcrumb) {
             breadcrumbModule.textContent = moduleData.title;
             breadcrumbItem.style.display = 'block';
             mobileBreadcrumb.style.display = 'block';
             mobileBreadcrumb.textContent = moduleData.title;
-
-            // Update breadcrumb handlers
             const handler = (e) => {
                  e.preventDefault();
-                 // Pass the *already processed* currentModule data
                  showMethodsView(currentModule);
             };
             breadcrumbModule.onclick = handler;
             mobileBreadcrumb.onclick = handler;
         }
-
         createMethodButtons(moduleData);
         modulesView.style.display = 'none';
         methodsView.style.display = 'block';
@@ -138,22 +125,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createMethodButtons(moduleData) {
-         methodButtons.innerHTML = ''; // Clear existing
-
-        // Check if moduleData and methods exist
+         methodButtons.innerHTML = '';
          if (!moduleData || !moduleData.methods || moduleData.methods.length === 0) {
              methodButtons.innerHTML = '<p>No study methods available for this module.</p>';
              return;
          }
-
         moduleData.methods.forEach(methodKey => {
-            const info = methodInfo[methodKey] || {
-                description: `Learn with ${methodKey}`,
-                icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>'
-            };
+            const info = methodInfo[methodKey] || { description: `Learn with ${methodKey}`, icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>' };
             let methodName = methodKey.charAt(0).toUpperCase() + methodKey.slice(1).replace('-', ' ');
             if (methodKey === 'true-false') methodName = 'True or False';
-
             const button = document.createElement('button');
             button.className = 'method-button';
             button.id = `${methodKey}-button`;
@@ -162,45 +142,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="method-content">
                     <div class="method-title">${methodName}</div>
                     <div class="method-desc">${info.description}</div>
-                </div>
-            `;
+                </div>`;
             button.addEventListener('click', () => loadStudyMethod(moduleData, methodKey));
             methodButtons.appendChild(button);
         });
     }
 
     function loadStudyMethod(moduleData, method) {
-        contentView.innerHTML = ''; // Clear previous
+        contentView.innerHTML = '';
         modulesView.style.display = 'none';
         methodsView.style.display = 'none';
         contentView.style.display = 'block';
-        contentView.classList.add('slide-up'); // Add animation class
-        setTimeout(() => contentView.classList.remove('slide-up'), 500); // Remove after animation
+        contentView.classList.add('slide-up');
+        setTimeout(() => contentView.classList.remove('slide-up'), 500);
 
-        // Use the already processed content for the selected method
         const methodContentData = moduleData.content[method];
-
         if (!methodContentData || methodContentData.length === 0) {
             contentView.innerHTML = `<div class="content-container"><p>No content available for the "${method}" method in this module.</p><button id="back-to-methods" class="btn">Back to Methods</button></div>`;
-             // Add listener for the back button here
              const backBtn = document.getElementById('back-to-methods');
-             if (backBtn) backBtn.addEventListener('click', () => showMethodsView(moduleData));
+             if (backBtn) backBtn.addEventListener('click', () => showMethodsView(currentModule)); // Use currentModule
              return;
         }
 
+        // Use correct 'this' binding or ensure currentModule is accessible if needed in methods
         switch (method) {
-            case 'flashcards':
-                loadFlashcards(moduleData.title, methodContentData); // Pass adapted data
-                break;
-            case 'quiz':
-                loadQuiz(moduleData.title, methodContentData); // Pass adapted data
-                break;
-            case 'time-trial':
-                initTimeTrialGame(moduleData.title, methodContentData); // Pass adapted data
-                break;
-            case 'true-false':
-                initTrueFalseQuestions(moduleData.title, methodContentData); // Pass adapted data
-                break;
+            case 'flashcards': loadFlashcards(moduleData.title, methodContentData); break;
+            case 'quiz': loadQuiz(moduleData.title, methodContentData); break;
+            case 'time-trial': initTimeTrialGame(moduleData.title, methodContentData); break;
+            case 'true-false': initTrueFalseQuestions(moduleData.title, methodContentData); break;
             default:
                 contentView.innerHTML = `<div class="content-container"><p>Study method "${method}" is not implemented yet.</p><button id="back-to-methods" class="btn">Back to Methods</button></div>`;
                 const backBtn = document.getElementById('back-to-methods');
@@ -209,11 +178,10 @@ document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // MODIFIED: Updated function signatures and image handling for all study methods
+    // --- Study Method Implementations ---
 
     async function loadFlashcards(moduleTitle, flashcardsData) {
         let currentCardIndex = 0;
-
         contentView.innerHTML = `
             <div class="content-header">
                 <h2 class="content-title">${moduleTitle} - Flashcards</h2>
@@ -234,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button id="next-card" class="btn">Next</button>
                 </div>
             </div>
-            <button id="back-to-methods" class="btn">Back to Methods</button>`;
+            <button id="back-to-methods" class="btn" style="margin-top: 1.5rem;">Back to Methods</button>`; // Added margin
 
         const flashcardElement = document.getElementById('current-flashcard');
         const prevButton = document.getElementById('prev-card');
@@ -243,31 +211,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const backButton = document.getElementById('back-to-methods');
         const cardNumberElement = document.getElementById('current-card-number');
 
-        const updateFlashcard = async () => { // Made async for checkImageExists
-            if (currentCardIndex < 0 || currentCardIndex >= flashcardsData.length) return; // Bounds check
-
+        const updateFlashcard = async () => {
+            if (currentCardIndex < 0 || currentCardIndex >= flashcardsData.length) return;
             const card = flashcardsData[currentCardIndex];
             document.getElementById('flashcard-question-content').textContent = card.question;
             document.getElementById('flashcard-answer-content').textContent = card.answer;
             cardNumberElement.textContent = currentCardIndex + 1;
-            flashcardElement.classList.remove('flipped'); // Reset flip
-
+            flashcardElement.classList.remove('flipped');
             const imageContainer = document.getElementById('flashcard-image-container');
             const imageElement = document.getElementById('flashcard-image');
-
-            // MODIFIED: Simplified image check logic
-            const imagePath = card.image; // Use path directly from processed data
-            const imageExists = await checkImageExists(imagePath); // Check existence
-
+            const imagePath = card.image;
+            const imageExists = await checkImageExists(imagePath);
             if (imageExists) {
                 imageElement.src = imagePath;
                 imageElement.alt = card.imageAlt || `Image for ${card.question}`;
-                // Display based on timing rule
                 imageContainer.style.display = (card.imageDisplayTiming !== "after-answer") ? 'block' : 'none';
             } else {
                 imageContainer.style.display = 'none';
             }
-
             prevButton.disabled = currentCardIndex === 0;
             nextButton.disabled = currentCardIndex === flashcardsData.length - 1;
         };
@@ -276,8 +237,9 @@ document.addEventListener('DOMContentLoaded', () => {
             flashcardElement.classList.toggle('flipped');
             const card = flashcardsData[currentCardIndex];
             const imageContainer = document.getElementById('flashcard-image-container');
-            // Show image on flip *if* timing is 'after-answer' and image exists
-             if (card.imageDisplayTiming === "after-answer" && imageContainer.style.backgroundImage !== 'none') { // Check if image exists indirectly
+            const imageElement = document.getElementById('flashcard-image');
+            // Check if image actually exists before trying to show/hide on flip
+            if (imageElement.src && imageElement.src !== window.location.href && card.imageDisplayTiming === "after-answer") {
                 imageContainer.style.display = flashcardElement.classList.contains('flipped') ? 'block' : 'none';
             }
         };
@@ -285,92 +247,76 @@ document.addEventListener('DOMContentLoaded', () => {
         flashcardElement.addEventListener('click', toggleFlashcard);
         flipButton.addEventListener('click', toggleFlashcard);
         prevButton.addEventListener('click', async () => {
-            if (currentCardIndex > 0) {
-                currentCardIndex--;
-                await updateFlashcard(); // Await image checks
-            }
+            if (currentCardIndex > 0) { currentCardIndex--; await updateFlashcard(); }
         });
         nextButton.addEventListener('click', async () => {
-            if (currentCardIndex < flashcardsData.length - 1) {
-                currentCardIndex++;
-                await updateFlashcard(); // Await image checks
-            }
+            if (currentCardIndex < flashcardsData.length - 1) { currentCardIndex++; await updateFlashcard(); }
         });
-        backButton.addEventListener('click', () => showMethodsView(currentModule));
-
+        backButton.addEventListener('click', () => showMethodsView(currentModule)); // Use stored module
         await updateFlashcard(); // Initial load
     }
 
-     async function loadQuiz(moduleTitle, quizData) { // Takes adapted data
-         let currentQuestionIndex = 0;
-         let score = 0;
-         let userAnswers = new Array(quizData.length).fill(null); // Use length of quizData
+    async function loadQuiz(moduleTitle, quizData) {
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
 
-         // Function to display results (moved inside for scope)
-         const showQuizResults = () => {
-            const percentage = Math.round((score / quizData.length) * 100);
-            contentView.innerHTML = `
+        const showQuizResults = () => { /* Definition remains the same */
+           const percentage = quizData.length > 0 ? Math.round((score / quizData.length) * 100) : 0;
+           contentView.innerHTML = `
+               <div class="content-header">
+                   <h2 class="content-title">${moduleTitle} - Quiz Results</h2>
+               </div>
+               <div class="content-container">
+                   <div class="quiz-results">
+                       <div class="quiz-score">${score} / ${quizData.length}</div>
+                       <div class="quiz-percentage">${percentage}%</div>
+                       ${score === quizData.length ? '<div class="quiz-perfect">Perfect Score! 🎉</div>' : '<p>Review your answers or try again!</p>'}
+                       <div class="quiz-actions">
+                           <button id="review-quiz" class="btn btn-primary">Review Answers</button>
+                           <button id="retry-quiz" class="btn">Try Again</button>
+                           <button id="back-to-methods" class="btn">Back to Methods</button>
+                       </div>
+                   </div>
+               </div>`;
+            document.getElementById('review-quiz').addEventListener('click', showQuizReview);
+            document.getElementById('retry-quiz').addEventListener('click', () => loadQuiz(moduleTitle, quizData));
+            document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(currentModule));
+        };
+
+        const showQuizReview = async () => { /* Definition remains the same */
+           contentView.innerHTML = `
                 <div class="content-header">
-                    <h2 class="content-title">${moduleTitle} - Quiz Results</h2>
+                    <h2 class="content-title">${moduleTitle} - Quiz Review</h2>
                 </div>
-                <div class="content-container">
-                    <div class="quiz-results">
-                        <div class="quiz-score">${score} / ${quizData.length}</div>
-                        <div class="quiz-percentage">${percentage}%</div>
-                         ${score === quizData.length ? '<div class="quiz-perfect">Perfect Score! 🎉</div>' : '<p>Review your answers or try again!</p>'}
-                        <div class="quiz-actions">
-                             <button id="review-quiz" class="btn btn-primary">Review Answers</button>
-                             <button id="retry-quiz" class="btn">Try Again</button>
-                             <button id="back-to-methods" class="btn">Back to Methods</button>
-                        </div>
-                    </div>
-                </div>`;
-
-             document.getElementById('review-quiz').addEventListener('click', showQuizReview); // Re-add listener
-             document.getElementById('retry-quiz').addEventListener('click', () => loadQuiz(moduleTitle, quizData)); // Re-add listener
-             document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(currentModule)); // Re-add listener
-        };
-
-         // Function to display review (moved inside for scope)
-         const showQuizReview = async () => {
-             contentView.innerHTML = `
-                 <div class="content-header">
-                     <h2 class="content-title">${moduleTitle} - Quiz Review</h2>
-                 </div>
-                 <div class="content-container">
-                     <div id="quiz-review"></div>
-                 </div>
-                 <button id="back-to-results" class="btn">Back to Results</button>`;
-
-            const reviewElement = document.getElementById('quiz-review');
+                <div class="content-container" id="review-container"></div>
+                <button id="back-to-results" class="btn">Back to Results</button>`;
+            const reviewContainer = document.getElementById('review-container');
             for (let i = 0; i < quizData.length; i++) {
-                 const question = quizData[i];
-                 const userAnswerIndex = userAnswers[i];
-                 const isCorrect = userAnswerIndex === question.correctAnswer;
-                 const imagePath = question.image; // Use processed image path
-                 const imageExists = await checkImageExists(imagePath);
-
-                 const reviewItem = document.createElement('div');
-                 reviewItem.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
-                 reviewItem.innerHTML = `
-                    <div class="review-statement">${i + 1}. ${question.question}</div>
-                    ${imageExists ? `<div class="review-image-container"><img src="${imagePath}" alt="${question.imageAlt || 'Review image'}" class="review-image"></div>` : ''}
-                    <div class="review-details">
-                         <div class="review-answer">Your answer: ${userAnswerIndex !== null ? question.options[userAnswerIndex] : 'Not answered'}</div>
-                         <div class="review-answer">Correct answer: ${question.options[question.correctAnswer]}</div>
-                         </div>`; // Removed explanation display as it's not in quiz format
-                 reviewElement.appendChild(reviewItem);
+                const question = quizData[i];
+                const userAnswerIndex = userAnswers[i];
+                const isCorrect = userAnswerIndex === question.correctAnswer;
+                const imagePath = question.image;
+                const imageExists = await checkImageExists(imagePath);
+                const reviewItem = document.createElement('div');
+                reviewItem.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
+                reviewItem.innerHTML = `
+                   <div class="review-statement">${i + 1}. ${question.question}</div>
+                   ${imageExists ? `<div class="review-image-container"><img src="${imagePath}" alt="${question.imageAlt || 'Review image'}" class="review-image"></div>` : ''}
+                   <div class="review-details">
+                       <div class="review-answer">Your answer: ${userAnswerIndex !== null ? `<strong>${question.options[userAnswerIndex]}</strong>` : 'Not answered'}</div>
+                       <div class="review-answer">Correct answer: ${question.options[question.correctAnswer]}</div>
+                   </div>`;
+                reviewContainer.appendChild(reviewItem);
             }
-             document.getElementById('back-to-results').addEventListener('click', showQuizResults); // Re-add listener
+            document.getElementById('back-to-results').addEventListener('click', showQuizResults);
         };
 
-         const loadQuestion = async () => { // Made async for image check
-            if (currentQuestionIndex < 0 || currentQuestionIndex >= quizData.length) return; // Bounds check
-
+        const loadQuestion = async () => {
+            if (currentQuestionIndex < 0 || currentQuestionIndex >= quizData.length) return;
             const questionData = quizData[currentQuestionIndex];
-            const imagePath = questionData.image; // Use processed path
+            const imagePath = questionData.image;
             const imageExists = await checkImageExists(imagePath);
-
             contentView.innerHTML = `
                 <div class="content-header">
                     <h2 class="content-title">${moduleTitle} - Quiz</h2>
@@ -380,190 +326,181 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="quiz-container" id="quiz-container">
                         <div class="quiz-question">${questionData.question}</div>
                         <div id="quiz-image-container" class="quiz-image-container" style="display: ${imageExists && questionData.imageDisplayTiming !== 'after-answer' ? 'block' : 'none'};">
-                             <img id="quiz-image" src="${imageExists ? imagePath : ''}" alt="${imageExists ? questionData.imageAlt || 'Quiz image' : ''}" class="quiz-image">
+                           <img id="quiz-image" src="${imageExists ? imagePath : ''}" alt="${imageExists ? questionData.imageAlt || 'Quiz image' : ''}" class="quiz-image">
                         </div>
                         <ul class="quiz-options" id="quiz-options"></ul>
                         <div id="answer-feedback" class="true-false-feedback" style="display: none;"></div>
                     </div>
                     <div class="quiz-controls">
-                         <button id="prev-question" class="btn" ${currentQuestionIndex === 0 ? 'disabled' : ''}>Previous</button>
-                         <button id="next-question" class="btn">${currentQuestionIndex === quizData.length - 1 ? 'Submit' : 'Next'}</button>
-                     </div>
+                       <button id="prev-question" class="btn" ${currentQuestionIndex === 0 ? 'disabled' : ''}>Previous</button>
+                       <button id="next-question" class="btn">${currentQuestionIndex === quizData.length - 1 ? 'Submit' : 'Next'}</button>
+                   </div>
                 </div>
-                <button id="back-to-methods" class="btn">Back to Methods</button>`;
+                <button id="back-to-methods" class="btn" style="margin-top: 1.5rem;">Back to Methods</button>`; // Added margin
 
             const optionsElement = document.getElementById('quiz-options');
             const feedbackElement = document.getElementById('answer-feedback');
             const imageContainer = document.getElementById('quiz-image-container');
+            const imageElement = document.getElementById('quiz-image'); // Get image element ref
 
-             questionData.options.forEach((option, index) => {
-                 const optionElement = document.createElement('li');
-                 optionElement.className = 'quiz-option';
-                 optionElement.textContent = option;
-
-                // Check if this option was the user's answer for this question
-                const isSelected = userAnswers[currentQuestionIndex] === index;
-                if(isSelected) {
+            questionData.options.forEach((option, index) => {
+                const optionElement = document.createElement('li');
+                optionElement.className = 'quiz-option';
+                optionElement.textContent = option;
+                if(userAnswers[currentQuestionIndex] === index) {
                     optionElement.classList.add('selected');
-                     // If already answered, show feedback and potentially image
-                     if (userAnswers[currentQuestionIndex] !== null) {
+                     if (userAnswers[currentQuestionIndex] !== null) { // Only show feedback if answered
                          const isCorrect = userAnswers[currentQuestionIndex] === questionData.correctAnswer;
                          feedbackElement.innerHTML = isCorrect ? '<div class="feedback-header">Correct!</div>' : `<div class="feedback-header">Incorrect! Correct: ${questionData.options[questionData.correctAnswer]}</div>`;
-                         feedbackElement.classList.add(isCorrect ? 'feedback-correct' : 'feedback-incorrect');
+                         feedbackElement.className = `true-false-feedback visible ${isCorrect ? 'feedback-correct' : 'feedback-incorrect'}`; // Set class directly
                          feedbackElement.style.display = 'block';
                          if(imageExists && questionData.imageDisplayTiming === 'after-answer') imageContainer.style.display = 'block';
-                         optionsElement.querySelectorAll('.quiz-option').forEach(el => el.style.pointerEvents = 'none'); // Disable all
+                         optionsElement.querySelectorAll('.quiz-option').forEach(el => el.style.pointerEvents = 'none');
                     }
                  } else if (userAnswers[currentQuestionIndex] !== null) {
-                    // Disable other options if question already answered
-                    optionElement.style.pointerEvents = 'none';
+                    optionElement.style.pointerEvents = 'none'; // Disable others if answered
                  }
-
-                // Add click listener only if not already answered
                 if(userAnswers[currentQuestionIndex] === null) {
-                    optionElement.addEventListener('click', () => {
-                        if (userAnswers[currentQuestionIndex] !== null) return; // Prevent re-answering
-
+                    optionElement.addEventListener('click', async () => { // Make async
+                        if (userAnswers[currentQuestionIndex] !== null) return;
                         document.querySelectorAll('.quiz-option').forEach(el => el.classList.remove('selected'));
                         optionElement.classList.add('selected');
                         userAnswers[currentQuestionIndex] = index;
                         const isCorrect = index === questionData.correctAnswer;
-                        if (isCorrect) score++; // Increment score immediately
-
+                        if (isCorrect) score++;
                          feedbackElement.innerHTML = isCorrect ? '<div class="feedback-header">Correct!</div>' : `<div class="feedback-header">Incorrect! Correct: ${questionData.options[questionData.correctAnswer]}</div>`;
-                         feedbackElement.classList.add(isCorrect ? 'feedback-correct' : 'feedback-incorrect');
+                         feedbackElement.className = `true-false-feedback visible ${isCorrect ? 'feedback-correct' : 'feedback-incorrect'}`; // Set class directly
                          feedbackElement.style.display = 'block';
-                         if(imageExists && questionData.imageDisplayTiming === 'after-answer') imageContainer.style.display = 'block';
 
-                         // Disable options after answering
+                         // Show image after answer if needed
+                        if(imageExists && questionData.imageDisplayTiming === 'after-answer' && imageContainer) {
+                           imageContainer.style.display = 'block';
+                        }
+
                          optionsElement.querySelectorAll('.quiz-option').forEach(el => el.style.pointerEvents = 'none');
                     });
                  }
-                 optionsElement.appendChild(optionElement);
+                optionsElement.appendChild(optionElement);
             });
-
-            // Add Nav button listeners
-            document.getElementById('prev-question').addEventListener('click', async () => {
-                if (currentQuestionIndex > 0) {
-                    currentQuestionIndex--;
-                    await loadQuestion();
-                }
-            });
-            document.getElementById('next-question').addEventListener('click', async () => {
-                 if (currentQuestionIndex < quizData.length - 1) {
-                    currentQuestionIndex++;
-                    await loadQuestion();
-                } else {
-                    showQuizResults(); // Last question reached
-                }
-            });
+            document.getElementById('prev-question').addEventListener('click', async () => { if (currentQuestionIndex > 0) { currentQuestionIndex--; await loadQuestion(); } });
+            document.getElementById('next-question').addEventListener('click', async () => { if (currentQuestionIndex < quizData.length - 1) { currentQuestionIndex++; await loadQuestion(); } else { showQuizResults(); } });
             document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(currentModule));
          };
-
-         await loadQuestion(); // Load the first question
+        await loadQuestion(); // Initial load
      }
 
-    async function initTimeTrialGame(moduleTitle, timeTrialData) { // Takes adapted data
+    async function initTimeTrialGame(moduleTitle, timeTrialData) {
         let score = 0;
-        let currentRound = 0;
+        let currentRound = 0; // Use round instead of index
         let timer;
-        let timeLeft = 7; // Reset time for each round
-        const totalRounds = timeTrialData.length; // Use length of adapted data
+        let timeLeft = 7;
+        const totalRounds = timeTrialData.length;
+        let isRoundActive = false; // Flag to prevent multiple answers
 
-        const updateTimerDisplay = () => {
-            const timeElement = document.getElementById('time-trial-time');
-            if(timeElement) {
-                timeElement.textContent = timeLeft + 's';
-                timeElement.classList.toggle('warning', timeLeft <= 3);
+        const updateTimerDisplay = () => { /* Definition remains the same */
+           const timeElement = document.getElementById('time-trial-time');
+           if(timeElement) {
+               timeElement.textContent = timeLeft + 's';
+               timeElement.classList.toggle('warning', timeLeft <= 3);
+           }
+        };
+
+        const endGame = () => { /* Definition remains the same */
+           clearInterval(timer);
+           isRoundActive = false;
+           const percentage = totalRounds > 0 ? Math.round((score / totalRounds) * 100) : 0;
+           contentView.innerHTML = `
+               <div class="content-header">
+                   <h2 class="content-title">${moduleTitle} - Time Trial Results</h2>
+               </div>
+               <div class="content-container">
+                   <div class="time-trial-results">
+                       <div class="quiz-score">${score} / ${totalRounds}</div>
+                       <div class="quiz-percentage">${percentage}%</div>
+                       ${score === totalRounds ? '<div class="quiz-perfect">Perfect Score! 🎉</div>' : '<p>Keep practicing!</p>'}
+                       <div class="quiz-actions">
+                           <button id="time-trial-replay" class="btn btn-primary">Play Again</button>
+                           <button id="back-to-methods" class="btn">Back to Methods</button>
+                       </div>
+                   </div>
+               </div>`;
+           document.getElementById('time-trial-replay').addEventListener('click', () => initTimeTrialGame(moduleTitle, timeTrialData));
+           document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(currentModule));
+        };
+
+        const timeOut = () => { /* Modified slightly for correctness */
+           if (!isRoundActive) return; // Prevent running if round ended
+           clearInterval(timer);
+           isRoundActive = false;
+           const currentItem = timeTrialData[currentRound - 1]; // currentRound is already incremented
+           const feedbackElement = document.getElementById('time-trial-feedback');
+           const options = document.querySelectorAll('.time-trial-option');
+           const nextButton = document.getElementById('time-trial-next');
+           const imageContainer = document.getElementById('time-trial-image-container');
+           const imageElement = document.getElementById('time-trial-image');
+
+           options.forEach(option => {
+               option.disabled = true;
+               if (option.dataset.term === currentItem.term) option.classList.add('correct');
+           });
+           if (feedbackElement) feedbackElement.innerHTML = `<div class="feedback-timeout">Time's up! Correct: ${currentItem.term}</div>`;
+           if (nextButton) nextButton.style.display = 'block';
+
+            // Show image if applicable
+            if (imageContainer && imageElement && currentItem.imageDisplayTiming === "after-answer") {
+                 const imagePath = currentItem.image;
+                 checkImageExists(imagePath).then(exists => {
+                      if(exists) {
+                           imageElement.src = imagePath;
+                           imageElement.alt = currentItem.imageAlt || 'Image';
+                           imageContainer.style.display = 'block';
+                      }
+                 });
             }
-        };
 
-        const endGame = () => {
-             clearInterval(timer); // Stop any running timer
-             const percentage = Math.round((score / totalRounds) * 100);
-             contentView.innerHTML = `
-                 <div class="content-header">
-                     <h2 class="content-title">${moduleTitle} - Time Trial Results</h2>
-                 </div>
-                 <div class="content-container">
-                     <div class="time-trial-results">
-                         <div class="quiz-score">${score} / ${totalRounds}</div>
-                         <div class="quiz-percentage">${percentage}%</div>
-                         ${score === totalRounds ? '<div class="quiz-perfect">Perfect Score! 🎉</div>' : '<p>Keep practicing to improve your speed!</p>'}
-                         <div class="quiz-actions">
-                             <button id="time-trial-replay" class="btn btn-primary">Play Again</button>
-                             <button id="back-to-methods" class="btn">Back to Methods</button>
-                         </div>
-                     </div>
-                 </div>`;
-            document.getElementById('time-trial-replay').addEventListener('click', () => initTimeTrialGame(moduleTitle, timeTrialData));
-            document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(currentModule));
-        };
+            if (currentRound >= totalRounds) { // Check before showing next button sometimes
+                setTimeout(endGame, 1500); // Auto end after timeout on last round
+           }
+       };
 
-        const timeOut = () => {
+
+        const startTimer = () => {
+            timeLeft = 7;
+            isRoundActive = true;
+            updateTimerDisplay();
             clearInterval(timer);
-            const currentItem = timeTrialData[currentRound - 1]; // Use currentRound-1 as it's incremented before check
+            timer = setInterval(() => {
+                if (!isRoundActive) { // Stop timer if round ended by selection
+                     clearInterval(timer);
+                     return;
+                 }
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) {
+                    timeOut();
+                }
+            }, 1000);
+        };
+
+         const selectOption = async (selectedTerm) => { // Now only takes selectedTerm
+            if (!isRoundActive) return; // Prevent multiple clicks
+            isRoundActive = false; // Mark round as ended
+            clearInterval(timer);
+
+            const currentItem = timeTrialData[currentRound - 1]; // currentRound already incremented
+             const correctTerm = currentItem.term; // Get correct term for this round
+            const isCorrect = selectedTerm === correctTerm;
             const feedbackElement = document.getElementById('time-trial-feedback');
             const options = document.querySelectorAll('.time-trial-option');
             const nextButton = document.getElementById('time-trial-next');
-             const imageContainer = document.getElementById('time-trial-image-container');
-             const imageElement = document.getElementById('time-trial-image');
-
-
-            options.forEach(option => {
-                option.disabled = true;
-                 if (option.dataset.term === currentItem.term) option.classList.add('correct');
-             });
-            if (feedbackElement) feedbackElement.innerHTML = `<div class="feedback-timeout">Time's up! Correct: ${currentItem.term}</div>`;
-            if (nextButton) nextButton.style.display = 'block';
-
-             // Handle image display if time ran out
-             if (imageContainer && imageElement && currentItem.imageDisplayTiming === "after-answer") {
-                  const imagePath = currentItem.image;
-                  checkImageExists(imagePath).then(exists => {
-                       if(exists) {
-                            imageElement.src = imagePath;
-                           imageElement.alt = currentItem.imageAlt || 'Image';
-                           imageContainer.style.display = 'block';
-                       }
-                  });
-             }
-
-             // Auto-end if last round
-            if (currentRound >= totalRounds) {
-                 setTimeout(endGame, 1500);
-            }
-         };
-
-        const startTimer = () => {
-             timeLeft = 7; // Reset timer
-             updateTimerDisplay();
-             clearInterval(timer); // Clear previous timer
-             timer = setInterval(() => {
-                 timeLeft--;
-                 updateTimerDisplay();
-                 if (timeLeft <= 0) {
-                     timeOut();
-                 }
-             }, 1000);
-        };
-
-
-        const selectOption = async (selectedTerm, correctTerm) => { // Make async
-            clearInterval(timer);
-             const isCorrect = selectedTerm === correctTerm;
-             const feedbackElement = document.getElementById('time-trial-feedback');
-             const options = document.querySelectorAll('.time-trial-option');
-             const nextButton = document.getElementById('time-trial-next');
-             const scoreElement = document.getElementById('time-trial-score');
-             const imageContainer = document.getElementById('time-trial-image-container');
-             const imageElement = document.getElementById('time-trial-image');
-             const currentItem = timeTrialData[currentRound-1]; // Item related to this selection
+            const scoreElement = document.getElementById('time-trial-score');
+            const imageContainer = document.getElementById('time-trial-image-container');
+            const imageElement = document.getElementById('time-trial-image');
 
             options.forEach(option => {
                 option.disabled = true;
-                 if (option.dataset.term === correctTerm) option.classList.add('correct');
-                 if (option.dataset.term === selectedTerm && !isCorrect) option.classList.add('incorrect');
+                if (option.dataset.term === correctTerm) option.classList.add('correct');
+                if (option.dataset.term === selectedTerm && !isCorrect) option.classList.add('incorrect');
             });
 
              if (isCorrect) {
@@ -573,32 +510,37 @@ document.addEventListener('DOMContentLoaded', () => {
              } else {
                  if(feedbackElement) feedbackElement.innerHTML = `<div class="feedback-incorrect">Incorrect! Correct: ${correctTerm}</div>`;
              }
-             if(nextButton) nextButton.style.display = 'block';
-
-             // Handle image display after answer
-             if (imageContainer && imageElement && currentItem.imageDisplayTiming === "after-answer") {
-                  const imagePath = currentItem.image;
-                  const imageExists = await checkImageExists(imagePath); // Check existence
-                  if(imageExists) {
-                       imageElement.src = imagePath;
-                       imageElement.alt = currentItem.imageAlt || 'Image';
-                       imageContainer.style.display = 'block';
-                  }
+             if(nextButton) {
+                 nextButton.style.display = 'block'; // Show the button
+                 nextButton.onclick = nextRound; // ** Crucial: Attach/reattach listener **
              }
 
-             // Auto-end if last question
-             if (currentRound >= totalRounds) {
-                 setTimeout(endGame, 1500);
+             // Show image if applicable
+             if (imageContainer && imageElement && currentItem.imageDisplayTiming === "after-answer") {
+                 const imagePath = currentItem.image;
+                 const imageExists = await checkImageExists(imagePath);
+                 if(imageExists) {
+                     imageElement.src = imagePath;
+                     imageElement.alt = currentItem.imageAlt || 'Image';
+                     imageContainer.style.display = 'block';
+                 }
+            }
+
+             // End game if last round
+            if (currentRound >= totalRounds) {
+                if(nextButton) nextButton.textContent = "Show Results"; // Change button text
+                 nextButton.onclick = endGame; // Make button go to end game
             }
         };
 
-        const nextRound = async () => { // Make async
-            if (currentRound >= totalRounds) {
-                endGame();
-                return;
-            }
 
-            const currentItem = timeTrialData[currentRound];
+         const nextRound = async () => { // Combined start/next logic
+            if (currentRound >= totalRounds) {
+                endGame(); // Should not happen if button directs to endGame, but safety check
+                return;
+             }
+
+             const currentItem = timeTrialData[currentRound];
             const definitionElement = document.getElementById('time-trial-definition');
             const optionsElement = document.getElementById('time-trial-options');
             const feedbackElement = document.getElementById('time-trial-feedback');
@@ -608,265 +550,279 @@ document.addEventListener('DOMContentLoaded', () => {
             const imageElement = document.getElementById('time-trial-image');
 
 
+             // Reset UI elements
             if(feedbackElement) feedbackElement.innerHTML = '';
-            if(nextButton) nextButton.style.display = 'none';
+             if(nextButton) nextButton.style.display = 'none'; // Hide until answer/timeout
             if(currentElement) currentElement.textContent = `${currentRound + 1}/${totalRounds}`;
-            if(definitionElement) definitionElement.textContent = currentItem.definition;
+             if(definitionElement) definitionElement.textContent = currentItem.definition;
 
-
-             // Handle image display (shown with definition unless specified otherwise)
-            const imagePath = currentItem.image;
-            const imageExists = await checkImageExists(imagePath);
+             // Image handling
+             const imagePath = currentItem.image;
+             const imageExists = await checkImageExists(imagePath);
             if (imageContainer && imageElement) {
-                 if (imageExists) {
+                if (imageExists) {
                     imageElement.src = imagePath;
                      imageElement.alt = currentItem.imageAlt || `Image for ${currentItem.term}`;
-                    imageContainer.style.display = (currentItem.imageDisplayTiming !== "after-answer") ? 'block' : 'none';
-                 } else {
-                    imageContainer.style.display = 'none';
-                 }
-            }
+                     imageContainer.style.display = (currentItem.imageDisplayTiming !== "after-answer") ? 'block' : 'none'; // Show with question unless told otherwise
+                } else {
+                     imageContainer.style.display = 'none'; // Hide if no image
+                }
+             }
 
-             // Generate options (ensure correct item isn't duplicated)
-             const distractors = timeTrialData
-                .map(item => item.term) // Get all terms
-                .filter(term => term !== currentItem.term) // Filter out correct term
-                .sort(() => 0.5 - Math.random()) // Shuffle
-                .slice(0, 3); // Take 3 distractors
+             // Generate options
+            const distractors = timeTrialData.map(item => item.term).filter(term => term !== currentItem.term).sort(() => 0.5 - Math.random()).slice(0, 3);
+            const options = [currentItem.term, ...distractors].sort(() => 0.5 - Math.random());
 
-            const options = [currentItem.term, ...distractors].sort(() => 0.5 - Math.random()); // Combine and shuffle
-
-
-            if(optionsElement) {
-                optionsElement.innerHTML = '';
-                options.forEach(term => {
+             if(optionsElement) {
+                optionsElement.innerHTML = ''; // Clear old options
+                 options.forEach(term => {
                     const optionButton = document.createElement('button');
                     optionButton.className = 'time-trial-option';
                     optionButton.textContent = term;
-                    optionButton.dataset.term = term; // Store term for checking
-                    optionButton.addEventListener('click', () => selectOption(term, currentItem.term));
+                    optionButton.dataset.term = term;
+                     optionButton.addEventListener('click', () => selectOption(term)); // Pass only selected term
                     optionsElement.appendChild(optionButton);
                 });
             }
 
-            currentRound++; // Increment for next call
-             startTimer(); // Start timer for the new round
+            currentRound++; // Increment round *after* setting up the current round
+             startTimer(); // Start the timer for *this* round
         };
 
-        const startGame = () => {
+         const startGame = () => { // Starts the process
             score = 0;
-            currentRound = 0;
-            document.getElementById('time-trial-score').textContent = '0';
-            document.getElementById('time-trial-start-screen').style.display = 'none';
-            document.getElementById('time-trial-gameplay').style.display = 'block';
-            nextRound(); // Load first round
+            currentRound = 0; // Reset round counter
+             document.getElementById('time-trial-score').textContent = '0';
+             document.getElementById('time-trial-start-screen').style.display = 'none'; // Hide start screen
+            document.getElementById('time-trial-gameplay').style.display = 'block'; // Show game area
+             nextRound(); // Load the first round
         };
 
-         // Setup initial UI
-        contentView.innerHTML = `
-             <div class="content-header">
-                 <h2 class="content-title">${moduleTitle} - Time Trial</h2>
-             </div>
-             <div class="content-container">
-                 <div class="time-trial-header">
-                     <div class="time-trial-info">
+         // Initial UI setup for Time Trial
+         contentView.innerHTML = `
+            <div class="content-header">
+                <h2 class="content-title">${moduleTitle} - Time Trial</h2>
+            </div>
+            <div class="content-container">
+                <div class="time-trial-header">
+                    <div class="time-trial-info">
                         <div class="info-item"><div class="info-label">Score</div><div class="info-value" id="time-trial-score">0</div></div>
                         <div class="info-item"><div class="info-label">Time</div><div class="info-value time-value" id="time-trial-time">7s</div></div>
-                         <div class="info-item"><div class="info-label">Question</div><div class="info-value" id="time-trial-current">0/${totalRounds}</div></div>
+                        <div class="info-item"><div class="info-label">Question</div><div class="info-value" id="time-trial-current">0/${totalRounds}</div></div>
                     </div>
                 </div>
-                <div id="time-trial-gameplay" style="display: none;">
-                     <div class="time-trial-definition" id="time-trial-definition"></div>
+                 <div id="time-trial-gameplay" style="display: none;"> {/* Starts hidden */}
+                     <div class="time-trial-definition" id="time-trial-definition">Definition goes here...</div>
                       <div id="time-trial-image-container" class="time-trial-image-container" style="display: none;">
                           <img id="time-trial-image" src="" alt="Time trial image" class="time-trial-image">
                       </div>
-                     <div class="time-trial-options" id="time-trial-options"></div>
-                     <div class="time-trial-feedback" id="time-trial-feedback" style="min-height: 40px;"></div> {/* Added min-height */}
-                     <div class="time-trial-controls" style="margin-top: 1rem;"> {/* Added margin */}
-                          <button id="time-trial-next" class="btn btn-primary" style="display: none;">Next Term</button>
-                     </div>
+                     <div class="time-trial-options" id="time-trial-options">Options will load here...</div>
+                    <div class="time-trial-feedback" id="time-trial-feedback" style="min-height: 40px;"></div> {/* Maintain space */}
+                    <div class="time-trial-controls" style="margin-top: 1rem; display: flex; justify-content: center;"> {/* Centered Next button */}
+                          <button id="time-trial-next" class="btn btn-primary" style="display: none;">Next Term</button> {/* Listener attached dynamically */}
+                    </div>
                  </div>
-                 <div id="time-trial-start-screen" class="text-center" style="padding: 2rem 0;"> {/* Added padding */}
-                     <p style="margin-bottom: 1.5rem;">Match the term to the definition within 7 seconds!</p> {/* Added margin */}
-                    <button id="time-trial-start" class="btn btn-primary btn-large">Start Game</button>
-                 </div>
-             </div>
-            <button id="back-to-methods" class="btn" style="margin-top: 1.5rem;">Back to Methods</button>`; // Added margin
+                 <div id="time-trial-start-screen" class="text-center" style="padding: 2rem 0;"> {/* Corrected start screen */}
+                    <p style="margin-bottom: 1.5rem;">Match the definition to the correct term within 7 seconds!</p>
+                     <button id="time-trial-start" class="btn btn-primary btn-large">Start Game</button>
+                </div>
+            </div>
+            <button id="back-to-methods" class="btn" style="margin-top: 1.5rem;">Back to Methods</button>`; // Back button outside content container
 
-        document.getElementById('time-trial-start').addEventListener('click', startGame);
-        document.getElementById('back-to-methods').addEventListener('click', () => {
-            clearInterval(timer); // Ensure timer stops on exit
-            showMethodsView(currentModule);
+         document.getElementById('time-trial-start').addEventListener('click', startGame);
+         document.getElementById('back-to-methods').addEventListener('click', () => {
+            clearInterval(timer); // Stop timer if exiting
+             showMethodsView(currentModule);
          });
-         // Need to re-attach listener for next button *inside* nextRound/selectOption/timeOut where it's displayed
-         const setupNextButtonListener = () => {
-             const nextBtn = document.getElementById('time-trial-next');
-             if(nextBtn) nextBtn.addEventListener('click', nextRound);
-         }
-         // Call setup function initially (or better, call it when button displayed) - modification needed in selectOption/timeOut
-         // Modifying selectOption and timeOut to call this:
-         const originalSelectOption = selectOption;
-         selectOption = async (selected, correct) => {
-              await originalSelectOption(selected, correct);
-              setupNextButtonListener();
-         }
-          const originalTimeOut = timeOut;
-          timeOut = () => {
-               originalTimeOut();
-               setupNextButtonListener();
-          }
+         // **Crucially, the 'Next' button listener is added in the selectOption/timeOut functions when the button is shown**
     }
 
     async function initTrueFalseQuestions(moduleTitle, trueFalseData) { // Takes adapted data
         let score = 0;
         let currentQuestionIndex = 0;
-        let userAnswers = []; // Stores { userAnswer: boolean, isCorrect: boolean }
+        let userAnswers = new Array(trueFalseData.length).fill(null); // Store results
+        const totalQuestions = trueFalseData.length;
 
-        const totalQuestions = trueFalseData.length; // Use length of adapted data
-
-        const showResults = () => {
-            const percentage = Math.round((score / totalQuestions) * 100);
+        const showResults = () => { /* Definition remains the same */
+            const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
             contentView.innerHTML = `
-                <div class="content-header">
+               <div class="content-header">
                     <h2 class="content-title">${moduleTitle} - True or False Results</h2>
-                </div>
+               </div>
                 <div class="content-container">
                     <div class="time-trial-results">
-                         <div class="quiz-score">${score} / ${totalQuestions}</div>
+                        <div class="quiz-score">${score} / ${totalQuestions}</div>
                         <div class="quiz-percentage">${percentage}%</div>
-                        ${score === totalQuestions ? '<div class="quiz-perfect">Perfect Score! 🎉</div>' : '<p>Review your answers or try again!</p>'}
+                        ${score === totalQuestions ? '<div class="quiz-perfect">Perfect Score! 🎉</div>' : '<p>Keep learning!</p>'}
                         <div class="quiz-actions">
-                             <button id="true-false-review" class="btn btn-primary">Review Answers</button>
+                            <button id="true-false-review" class="btn btn-primary">Review Answers</button>
                              <button id="true-false-replay" class="btn">Try Again</button>
-                             <button id="back-to-methods" class="btn">Back to Methods</button>
+                            <button id="back-to-methods" class="btn">Back to Methods</button>
                          </div>
-                    </div>
+                     </div>
                 </div>`;
+            document.getElementById('true-false-review').addEventListener('click', showReview);
+            document.getElementById('true-false-replay').addEventListener('click', () => initTrueFalseQuestions(moduleTitle, trueFalseData));
+            document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(currentModule));
+        };
 
-             document.getElementById('true-false-review').addEventListener('click', showReview); // Re-add
-             document.getElementById('true-false-replay').addEventListener('click', () => initTrueFalseQuestions(moduleTitle, trueFalseData)); // Re-add
-             document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(currentModule)); // Re-add
-         };
-
-         const showReview = async () => {
-            contentView.innerHTML = `
-                 <div class="content-header">
-                     <h2 class="content-title">${moduleTitle} - True or False Review</h2>
+        const showReview = async () => { /* Definition remains the same */
+           contentView.innerHTML = `
+                <div class="content-header">
+                    <h2 class="content-title">${moduleTitle} - True or False Review</h2>
                 </div>
                 <div class="content-container" id="review-container"></div>
-                <button id="back-to-results" class="btn">Back to Results</button>`;
-
+                 <button id="back-to-results" class="btn">Back to Results</button>`;
             const reviewContainer = document.getElementById('review-container');
             for (let i = 0; i < trueFalseData.length; i++) {
-                const question = trueFalseData[i];
-                const answerRecord = userAnswers[i]; // Contains userAnswer and isCorrect
-                const imagePath = question.image; // Use processed path
-                const imageExists = await checkImageExists(imagePath);
-
+                 const question = trueFalseData[i];
+                const answerRecord = userAnswers[i];
+                 const imagePath = question.image;
+                 const imageExists = await checkImageExists(imagePath);
                 const reviewItem = document.createElement('div');
-                 reviewItem.className = `review-item ${answerRecord && answerRecord.isCorrect ? 'correct' : 'incorrect'}`; // Check answerRecord exists
+                reviewItem.className = `review-item ${answerRecord && answerRecord.isCorrect ? 'correct' : 'incorrect'}`;
                 reviewItem.innerHTML = `
                     <div class="review-statement">${i + 1}. ${question.statement}</div>
-                    ${imageExists ? `<div class="review-image-container"><img src="${imagePath}" alt="${question.imageAlt || 'Review image'}" class="review-image"></div>` : ''}
-                    <div class="review-details">
+                     ${imageExists ? `<div class="review-image-container"><img src="${imagePath}" alt="${question.imageAlt || 'Review image'}" class="review-image"></div>` : ''}
+                     <div class="review-details">
                          <div class="review-answer">Correct answer: <strong>${question.isTrue ? 'TRUE' : 'FALSE'}</strong></div>
-                         ${answerRecord ? `<div class="review-answer">Your answer: <strong>${answerRecord.userAnswer ? 'TRUE' : 'FALSE'}</strong></div>` : '<div class="review-answer">Your answer: Not answered</div>'}
+                        ${answerRecord ? `<div class="review-answer">Your answer: <strong>${answerRecord.userAnswer ? 'TRUE' : 'FALSE'}</strong></div>` : '<div class="review-answer">Your answer: Not answered</div>'}
                          <div class="review-explanation">${question.explanation || 'No explanation provided.'}</div>
                     </div>`;
                  reviewContainer.appendChild(reviewItem);
             }
-             document.getElementById('back-to-results').addEventListener('click', showResults); // Re-add listener
-         };
+             document.getElementById('back-to-results').addEventListener('click', showResults);
+        };
 
          const nextQuestion = async () => {
             currentQuestionIndex++;
-            if (currentQuestionIndex >= totalQuestions) {
+             if (currentQuestionIndex >= totalQuestions) {
                 showResults();
-            } else {
-                await loadQuestion(); // Await the async loadQuestion
-            }
-         };
+             } else {
+                 await loadQuestion();
+             }
+        };
 
-         const selectAnswer = async (userAnswer) => { // Make async
-             const questionData = trueFalseData[currentQuestionIndex];
-             const isCorrect = userAnswer === questionData.isTrue;
+         const selectAnswer = async (userAnswer) => {
+            const questionData = trueFalseData[currentQuestionIndex];
+            const isCorrect = userAnswer === questionData.isTrue;
              if (isCorrect) score++;
+            userAnswers[currentQuestionIndex] = { userAnswer, isCorrect }; // Store answer and correctness
 
-            userAnswers[currentQuestionIndex] = { userAnswer, isCorrect }; // Store result
+            // Disable T/F buttons
+             document.getElementById('true-button').disabled = true;
+             document.getElementById('false-button').disabled = true;
+             // Highlight selected
+             document.getElementById(userAnswer ? 'true-button' : 'false-button').classList.add('selected');
 
-            // Update UI
-            document.getElementById('true-button').disabled = true;
-            document.getElementById('false-button').disabled = true;
-            document.getElementById(userAnswer ? 'true-button' : 'false-button').classList.add('selected');
-
-             const feedbackElement = document.getElementById('true-false-feedback');
+            const feedbackElement = document.getElementById('true-false-feedback');
+            const nextButton = document.getElementById('true-false-next');
              const imageContainer = document.getElementById('true-false-image-container');
              const imageElement = document.getElementById('true-false-image');
-             const nextButton = document.getElementById('true-false-next');
+
 
              if(feedbackElement) {
                  feedbackElement.innerHTML = `
-                     <div class="feedback-header">${isCorrect ? 'Correct!' : 'Incorrect!'}</div>
-                     <div class="feedback-content">${questionData.explanation || ''}</div>`; // Use explanation
-                 feedbackElement.classList.add('visible');
-             }
+                     <div class="feedback-header" style="color: ${isCorrect ? 'rgba(16, 185, 129, 1)' : 'rgba(239, 68, 68, 1)'};">${isCorrect ? 'Correct!' : 'Incorrect!'}</div>
+                    <div class="feedback-content">${questionData.explanation || ''}</div>`;
+                feedbackElement.classList.add('visible');
+                 // Add correct/incorrect class for border color
+                 feedbackElement.className = `true-false-feedback visible ${isCorrect ? 'feedback-correct' : 'feedback-incorrect'}`;
+                 feedbackElement.style.display = 'block'; // Ensure it's visible
+            }
 
-             // Handle image display after answer
-             if(imageContainer && imageElement && questionData.imageDisplayTiming === 'after-answer') {
+            // Show image after answer if needed
+            if (imageContainer && imageElement && questionData.imageDisplayTiming === "after-answer") {
                  const imagePath = questionData.image;
-                 const imageExists = await checkImageExists(imagePath); // Check again just in case
+                 const imageExists = await checkImageExists(imagePath);
                  if(imageExists) {
                      imageElement.src = imagePath;
                      imageElement.alt = questionData.imageAlt || 'Image';
                      imageContainer.style.display = 'block';
                  }
-             }
+            }
 
-
-             if(nextButton) nextButton.style.display = 'block';
+            if(nextButton) {
+                nextButton.style.display = 'block'; // Show Next button
+                if(currentQuestionIndex === totalQuestions - 1) {
+                     nextButton.textContent = "Show Results"; // Change text on last question
+                 } else {
+                    nextButton.textContent = "Next Question";
+                 }
+            }
          };
 
 
-         const loadQuestion = async () => { // Made async for image checks
-            if (currentQuestionIndex < 0 || currentQuestionIndex >= totalQuestions) return; // Bounds
-
+        const loadQuestion = async () => {
+            if (currentQuestionIndex < 0 || currentQuestionIndex >= totalQuestions) return;
             const questionData = trueFalseData[currentQuestionIndex];
-            const imagePath = questionData.image; // Use processed path
-            const imageExists = await checkImageExists(imagePath); // Check existence
+            const imagePath = questionData.image;
+             const imageExists = await checkImageExists(imagePath);
 
-             contentView.innerHTML = `
-                <div class="content-header">
-                    <h2 class="content-title">${moduleTitle} - True or False</h2>
-                    <span class="progress-indicator">Question <span id="true-false-current">${currentQuestionIndex + 1}</span> of ${totalQuestions}</span>
-                </div>
-                <div class="content-container">
-                     <div class="true-false-container">
-                        <div class="true-false-statement" id="true-false-statement">${questionData.statement}</div>
-                        <div id="true-false-image-container" class="true-false-image-container" style="display: ${imageExists && questionData.imageDisplayTiming !== 'after-answer' ? 'block' : 'none'};">
-                             <img id="true-false-image" src="${imageExists ? imagePath : ''}" alt="${imageExists ? questionData.imageAlt || 'Image' : ''}" class="true-false-image">
-                        </div>
-                         <div class="true-false-options">
-                            <button id="true-button" class="btn btn-true">TRUE</button>
-                             <button id="false-button" class="btn btn-false">FALSE</button>
-                         </div>
-                         <div class="true-false-feedback" id="true-false-feedback"></div> {/* Ensure visibility class is removed */}
-                    </div>
-                     <div class="quiz-controls" style="justify-content: flex-end;"> {/* Align next button to right */}
-                        <button id="true-false-next" class="btn btn-primary" style="display: none;">Next Question</button>
-                     </div>
-                </div>
-                <button id="back-to-methods" class="btn">Back to Methods</button>`;
-
-             // Re-attach listeners for the new buttons
-            document.getElementById('true-button').addEventListener('click', () => selectAnswer(true));
-            document.getElementById('false-button').addEventListener('click', () => selectAnswer(false));
+             // Removed innerHTML rewrite, target elements specifically
+             const currentEl = document.getElementById('true-false-current');
+             const statementEl = document.getElementById('true-false-statement');
+             const trueBtn = document.getElementById('true-button');
+             const falseBtn = document.getElementById('false-button');
+             const feedbackEl = document.getElementById('true-false-feedback');
              const nextBtn = document.getElementById('true-false-next');
-            if(nextBtn) nextBtn.addEventListener('click', nextQuestion); // Attach here
-            document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(currentModule));
+             const imageContainer = document.getElementById('true-false-image-container');
+             const imageElement = document.getElementById('true-false-image');
+
+
+             if (currentEl) currentEl.textContent = currentQuestionIndex + 1;
+             if (statementEl) statementEl.textContent = questionData.statement;
+
+            // Reset buttons and feedback
+             if (trueBtn) { trueBtn.disabled = false; trueBtn.classList.remove('selected'); }
+             if (falseBtn) { falseBtn.disabled = false; falseBtn.classList.remove('selected'); }
+             if (feedbackEl) { feedbackEl.classList.remove('visible', 'feedback-correct', 'feedback-incorrect'); feedbackEl.style.display = 'none'; feedbackEl.innerHTML=''; }
+             if (nextBtn) { nextBtn.style.display = 'none'; nextBtn.textContent="Next Question"; }
+
+            // Handle image display
+             if (imageContainer && imageElement) {
+                if (imageExists) {
+                    imageElement.src = imagePath;
+                     imageElement.alt = questionData.imageAlt || `Image for statement ${currentQuestionIndex + 1}`;
+                     imageContainer.style.display = (questionData.imageDisplayTiming !== "after-answer") ? 'block' : 'none';
+                } else {
+                     imageContainer.style.display = 'none';
+                }
+             }
         };
 
+         // Initial UI Setup
+         contentView.innerHTML = `
+            <div class="content-header">
+                <h2 class="content-title">${moduleTitle} - True or False</h2>
+                <span class="progress-indicator">Question <span id="true-false-current">1</span> of ${totalQuestions}</span>
+            </div>
+             <div class="content-container">
+                <div class="true-false-container">
+                    <div class="true-false-statement" id="true-false-statement">Loading statement...</div>
+                     <div id="true-false-image-container" class="true-false-image-container" style="display: none;">
+                         <img id="true-false-image" src="" alt="True/False question image" class="true-false-image">
+                    </div>
+                    <div class="true-false-options">
+                        <button id="true-button" class="btn btn-true">TRUE</button>
+                        <button id="false-button" class="btn btn-false">FALSE</button>
+                     </div>
+                     <div class="true-false-feedback" id="true-false-feedback"></div>
+                </div>
+                 <div class="quiz-controls" style="justify-content: flex-end;">
+                     <button id="true-false-next" class="btn btn-primary" style="display: none;">Next Question</button>
+                 </div>
+             </div>
+             <button id="back-to-methods" class="btn" style="margin-top: 1.5rem;">Back to Methods</button>`;
 
-        await loadQuestion(); // Load the first question
+         // Re-attach listeners after setting innerHTML
+        document.getElementById('true-button').addEventListener('click', () => selectAnswer(true));
+        document.getElementById('false-button').addEventListener('click', () => selectAnswer(false));
+        document.getElementById('true-false-next').addEventListener('click', nextQuestion); // Listener for next
+        document.getElementById('back-to-methods').addEventListener('click', () => showMethodsView(currentModule));
+
+
+        await loadQuestion(); // Load first question
      }
 
 
