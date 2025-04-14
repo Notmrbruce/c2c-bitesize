@@ -15,17 +15,22 @@
     "description": "Requirements for attending duty including documents, equipment, fitness standards, and roster management"
   },
   {
-    "id": "signing-on-for-duty",
+    "id": "remote-signing-on-module",
+    "title": "Remote Signing On",
+    "description": "Covers the procedures for signing on for duty remotely, handling communication issues, and receiving notices."
+  },
+  {
+    "id": "signing-on-for-duty-module",
     "title": "Signing On For Duty",
     "description": "Procedures for signing on including safety critical license requirements, document checks, and readiness statement"
   },
   {
-    "id": "leaving-duty",
+    "id": "leaving-duty-module",
     "title": "Leaving Duty",
     "description": "Procedures for ending your shift including reports submission and checking next duty"
   },
   {
-    "id": "safety-security",
+    "id": "safety-security-module",
     "title": "Safety and Security",
     "description": "Essential protocols for handling accidents, incidents, suspicious activities, and maintaining operational safety"
   },
